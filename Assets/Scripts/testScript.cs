@@ -6,6 +6,7 @@ public class testScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        // IAN WUZ HERE ̿̿ ̿̿ ̿̿ ̿'̿'\̵͇̿̿\з= ( ▀ ͜͞ʖ▀) =ε/̵͇̿̿/’̿’̿ ̿ ̿̿ ̿̿ ̿̿
         GetComponent<Renderer>().material.color = Color.red;
 	}
 	
