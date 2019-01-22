@@ -10,7 +10,7 @@ public class BallScript : MonoBehaviour
     void Start()
     {
         startLeft=true;
-        vel=new Vector3(-0.1f,0,0);
+        vel=new Vector3(-0.1f,0,-.1f);
     }
 
     // Update is called once per frame
@@ -21,5 +21,10 @@ public class BallScript : MonoBehaviour
         {
             transform.position=new Vector3(0f,0.5f,0f);
         }
+        if(transform.position.z>5f||transform.position.z<-5f)
+        {
+            vel=new Vector3(vel.z,0,-vel.x);
+        }
+        
     }
 }
