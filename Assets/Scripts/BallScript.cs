@@ -15,7 +15,7 @@ public class BallScript : MonoBehaviour
     void Start()
     {
         startLeft=true;
-        vel=new Vector3(-0.1f,0,-.1f);
+        vel=new Vector3(-0.2f,0,-.2f);
         score1=0;
         score2=0;
         SetCountText(player1Text,score1);
@@ -27,23 +27,23 @@ public class BallScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(transform.position.x>8.8f||transform.position.x<-8.8f)
-        {
-            checkCollision();
-        }
-         if(transform.position.x>9.5f)
-        {
-            score1++;
-            SetCountText(player1ext,score1);
-            transform.position=new Vector3(0f,0.5f,0f);
-            vel=new Vector3(-0.1f,0,-.1f);
-        }
-        if(transform.position.x<-9.5f)
+        if(transform.position.x<-10f)
         {
             score2++;
             SetCountText(player2Text,score2);
             transform.position=new Vector3(0f,0.5f,0f);
-            vel=new Vector3(-0.1f,0,-.1f);
+            vel=new Vector3(-0.2f,0,-.2f);
+        }
+        else if(transform.position.x>10f)
+        {
+            score1++;
+            SetCountText(player1Text,score1);
+            transform.position=new Vector3(0f,0.5f,0f);
+            vel=new Vector3(0.2f,0,.2f);
+        }
+       else if(transform.position.x>9.2f||transform.position.x<-9.2f)
+        {
+            checkCollision();
         }
         else if(transform.position.z>5f||transform.position.z<-5f)
         {
@@ -58,29 +58,26 @@ public class BallScript : MonoBehaviour
     }
     void checkCollision()
     {
-         if(transform.position.x>8.8f)
+         if(transform.position.x>9.2f)
          {
              float dist=player2.transform.position.z-transform.position.z;
-             if(dist<.75f||dist>-.75f)
+             if(dist<.75f&&dist>-.75f)
              {
-                 float ballX=-.141f*Mathf.Cos((dist*100)*Mathf.PI/180);
-                 float ballZ=.141f*-Mathf.Sin((dist*100)*Mathf.PI/180);
+                 float ballX=-.282f*Mathf.Cos((dist*100)*Mathf.PI/180);
+                 float ballZ=.282f*-Mathf.Sin((dist*100)*Mathf.PI/180);
                  vel=new Vector3(ballX,0,ballZ);
              }
          }
-        else if(transform.position.x<-8.8f)
+        else if(transform.position.x<-9.2f)
          {
              float dist=player1.transform.position.z-transform.position.z;
-             if(dist<.75f||dist>-.75f)
+            Debug.Log(dist);
+             if(dist<.75f&&dist>-.75f)
              {
-                 float ballX=.141f*Mathf.Cos((dist*100)*Mathf.PI/180);
-                 float ballZ=.141f*-Mathf.Sin((dist*100)*Mathf.PI/180);
+                 float ballX=.282f*Mathf.Cos((dist*100)*Mathf.PI/180);
+                 float ballZ=.282f*-Mathf.Sin((dist*100)*Mathf.PI/180);
                  vel=new Vector3(ballX,0,ballZ);
              }
          }
-        else
-        {
-             transform.position=new Vector3(0f,0.5f,0f);
-        }
     }
 }
