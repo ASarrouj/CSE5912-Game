@@ -823,7 +823,7 @@ GameObject:
   - component: {fileID: 2473560466201026474}
   - component: {fileID: 9181940124744254650}
   m_Layer: 0
-  m_Name: SceneChanger
+  m_Name: FadeIn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
