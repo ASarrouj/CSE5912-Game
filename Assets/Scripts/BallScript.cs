@@ -12,6 +12,7 @@ public class BallScript : MonoBehaviour
     public Text player1Text;
     public Text player2Text;
     Vector3 vel;
+    private AudioSource source;
     void Start()
     {
         startLeft=true;
@@ -22,6 +23,7 @@ public class BallScript : MonoBehaviour
         SetCountText(player2Text,score2);
         player1=GameObject.Find("Player1");
         player2=GameObject.Find("Player2");
+        source = gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -65,6 +67,7 @@ public class BallScript : MonoBehaviour
                  float ballX=-.282f*Mathf.Cos((dist*100)*Mathf.PI/180);
                  float ballZ=.282f*-Mathf.Sin((dist*100)*Mathf.PI/180);
                  vel=new Vector3(ballX,0,ballZ);
+                 source.Play();
              }
          }
         else if(transform.position.x<-9.2f)
@@ -76,6 +79,7 @@ public class BallScript : MonoBehaviour
                  float ballX=.282f*Mathf.Cos((dist*100)*Mathf.PI/180);
                  float ballZ=.282f*-Mathf.Sin((dist*100)*Mathf.PI/180);
                  vel=new Vector3(ballX,0,ballZ);
+                 source.Play();
              }
          }
     }
