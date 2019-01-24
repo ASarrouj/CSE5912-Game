@@ -15,11 +15,13 @@ public class ButtonAction : MonoBehaviour
     void OnMouseUp() {
         if (!ignore) {
             ignore = true;
-            TakeAction();
+            StartCoroutine(TakeAction());
         }
     }
 
-    public void TakeAction() {
+    IEnumerator TakeAction() {
+        source.PlayOneShot(soundEffect);
+        yield return new WaitForSeconds(0.2f);
         ignore = true;
         switch (action) {
             case Action.Play:
@@ -29,7 +31,7 @@ public class ButtonAction : MonoBehaviour
                 QuitGame();
                 break;
             case Action.Options:
-                SceneManager.LoadScene(4);
+                SceneManager.LoadScene(5);
                 break;
             case Action.Credit:
                 CreditScreen();
@@ -40,10 +42,10 @@ public class ButtonAction : MonoBehaviour
             default:
                 break;
         }
+        yield return null;
     }
 
     IEnumerator Play() {
-        source.PlayOneShot(soundEffect);
         GameObject blackScreen = GameObject.CreatePrimitive(PrimitiveType.Plane);
         blackScreen.transform.SetPositionAndRotation(new Vector3(0, 0, -5), Quaternion.Euler(270, 0, 0));
         blackScreen.transform.localScale = new Vector3(1.8f, 1, 1.2f);
@@ -65,18 +67,15 @@ public class ButtonAction : MonoBehaviour
     }
 
     private void QuitGame() {
-        source.PlayOneShot(soundEffect);
         Application.Quit();
     }
 
     private void CreditScreen() {
-        source.PlayOneShot(soundEffect);
         GameStateManager.QuickLoadState(4);
     }
 
     private void ReturnToMain()
     {
-        source.PlayOneShot(soundEffect);
         GameStateManager.QuickLoadState(2);
     }
 

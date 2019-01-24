@@ -24,7 +24,8 @@ public class EventManager : MonoBehaviour
         ignore = false;
         scrollTimer = 0f;
         currentButton = 0;
-        SetButton(currentButton);       
+        SetButton(currentButton); 
+        buttons[0].GetComponent<Renderer>().material.color = selectColor;
         source = GetComponent<AudioSource>();
     }
 
@@ -57,7 +58,7 @@ public class EventManager : MonoBehaviour
                     break;
                 }
             }
-            return;
+            //return;
         } else if (hor > 0 || vert > 0) {
             ScrollPrev();
         } else if (hor < 0 || vert < 0) {

@@ -552,7 +552,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0977ba542b87664d94915aef1def05d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action: 2
+  action: 3
   soundEffect: {fileID: 0}
   source: {fileID: 0}
 --- !u!1 &673921407
@@ -1218,7 +1218,7 @@ MonoBehaviour:
   m_Script: {fileID: -619905303, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 613635185}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!82 &1696318862
