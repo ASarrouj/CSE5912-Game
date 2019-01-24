@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
 
-public class EventManager : MonoBehaviour
+public class MenuManager : MonoBehaviour
 {
     public AudioClip menuSound;
     public GameObject[] buttons;
