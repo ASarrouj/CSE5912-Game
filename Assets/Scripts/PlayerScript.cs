@@ -4,22 +4,37 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
+    private bool pause;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        pause = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey(KeyCode.S)&&transform.position.z>-5f)
+        if (!pause)
         {
-            transform.Translate(0,0,-.15f);
+            if (Input.GetKey(KeyCode.S) && transform.position.z > -5f)
+            {
+                transform.Translate(0, 0, -.15f);
+            }
+            else if (Input.GetKey(KeyCode.W) && transform.position.z < 5f)
+            {
+                transform.Translate(0, 0, .15f);
+            }
         }
-        else if(Input.GetKey(KeyCode.W)&&transform.position.z<5f)
-        {
-            transform.Translate(0,0,.15f);
-        }
+    }
+
+    public void Halt()
+    {
+        pause = true;
+    }
+
+    public void Resume()
+    {
+        pause = false;
     }
 }
