@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class ButtonAction : MonoBehaviour
 {
-    public enum Action { Play, Quit };
+    public enum Action { Play, Quit, Credit, Return};
     public Action action;
     public AudioClip soundEffect;
     public AudioSource source;
@@ -27,6 +27,12 @@ public class ButtonAction : MonoBehaviour
                 break;
             case Action.Quit:
                 QuitGame();
+                break;
+            case Action.Credit:
+                CreditScreen();
+                break;
+            case Action.Return:
+                ReturnToMain();
                 break;
             default:
                 break;
@@ -59,4 +65,16 @@ public class ButtonAction : MonoBehaviour
         source.PlayOneShot(soundEffect);
         Application.Quit();
     }
+
+    private void CreditScreen() {
+        source.PlayOneShot(soundEffect);
+        GameStateManager.QuickLoadState(4);
+    }
+
+    private void ReturnToMain()
+    {
+        source.PlayOneShot(soundEffect);
+        GameStateManager.QuickLoadState(2);
+    }
+
 }

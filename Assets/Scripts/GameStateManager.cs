@@ -1,16 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameStateManager : MonoBehaviour
 {
-    //num = 0: StartState
-    //num = 1: Loading State
-    //num = 2: Main Menu State
-    //num = 3: Play Pong State
+    //num = 0: Start Scene
+    //num = 1: Loading Scene
+    //num = 2: Main Menu Scene
+    //num = 3: Play Pong Scene
+    //num = 4: Credit Scene
     public static void LoadState(int num) {
 
         LoadingScreenManager.LoadScene(num);
+
+    }
+
+    public static void QuickLoadState(int num)
+    {
+
+        SceneManager.LoadScene(num);
 
     }
 
