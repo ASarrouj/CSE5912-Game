@@ -10,6 +10,7 @@ public class GameStateManager : MonoBehaviour
     //num = 2: Main Menu Scene
     //num = 3: Play Pong Scene
     //num = 4: Credit Scene
+    //num = 5: Options Menu
     public static void LoadState(int num) {
 
         LoadingScreenManager.LoadScene(num);
