@@ -457,8 +457,8 @@ MonoBehaviour:
   loadingText: {fileID: 878516609}
   progressBar: {fileID: 159574696}
   fadeOverlay: {fileID: 200209375}
-  waitOnLoadEnd: 2
-  fadeDuration: 1
+  waitOnLoadEnd: 0.25
+  fadeDuration: 0.25
   loadSceneMode: 0
   loadThreadPriority: 0
   audioListener: {fileID: 0}
