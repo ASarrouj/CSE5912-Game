@@ -15,20 +15,28 @@ public class EventManager : MonoBehaviour
     private float hor;
     private float vert;
     private int currentButton;
-    private bool ignore = false;
+    private bool ignore;
+    private float scrollTimer;
 
     // Start is called before the first frame update
     void Start()
     {
+        ignore = false;
+        scrollTimer = 0f;
         currentButton = 0;
-        SetButton(currentButton);       
+        SetButton(currentButton); 
+        buttons[0].GetComponent<Renderer>().material.color = selectColor;
         source = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!ignore) {
+        if (scrollTimer > 0) {
+            scrollTimer -= Time.deltaTime;
+        }
+
+        if (!ignore && scrollTimer <= 0f) {
             hor = Input.GetAxis("Horizontal");
             vert = Input.GetAxis("Vertical");
             HandleButtonSelection();
@@ -50,7 +58,7 @@ public class EventManager : MonoBehaviour
                     break;
                 }
             }
-            return;
+            //return;
         } else if (hor > 0 || vert > 0) {
             ScrollPrev();
         } else if (hor < 0 || vert < 0) {
@@ -71,6 +79,7 @@ public class EventManager : MonoBehaviour
             SetButton(currentButton);
             source.PlayOneShot(menuSound);
         }
+        scrollTimer = 0.25f;
     }
 
     private void ScrollPrev() {
@@ -79,6 +88,7 @@ public class EventManager : MonoBehaviour
             SetButton(currentButton);
             source.PlayOneShot(menuSound);
         }
+        scrollTimer = 0.25f;
     }
 
     private void SetButton(int index) {

@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class ButtonAction : MonoBehaviour
 {
-    public enum Action { Play, Quit };
+    public enum Action { Play, Quit, Credit, Return, Options};
     public Action action;
     public AudioClip soundEffect;
     public AudioSource source;
@@ -15,11 +15,13 @@ public class ButtonAction : MonoBehaviour
     void OnMouseUp() {
         if (!ignore) {
             ignore = true;
-            TakeAction();
+            StartCoroutine(TakeAction());
         }
     }
 
-    public void TakeAction() {
+    IEnumerator TakeAction() {
+        source.PlayOneShot(soundEffect);
+        yield return new WaitForSeconds(0.2f);
         ignore = true;
         switch (action) {
             case Action.Play:
@@ -28,13 +30,22 @@ public class ButtonAction : MonoBehaviour
             case Action.Quit:
                 QuitGame();
                 break;
+            case Action.Options:
+                SceneManager.LoadScene(5);
+                break;
+            case Action.Credit:
+                CreditScreen();
+                break;
+            case Action.Return:
+                ReturnToMain();
+                break;
             default:
                 break;
         }
+        yield return null;
     }
 
     IEnumerator Play() {
-        source.PlayOneShot(soundEffect);
         GameObject blackScreen = GameObject.CreatePrimitive(PrimitiveType.Plane);
         blackScreen.transform.SetPositionAndRotation(new Vector3(0, 0, -5), Quaternion.Euler(270, 0, 0));
         blackScreen.transform.localScale = new Vector3(1.8f, 1, 1.2f);
@@ -56,7 +67,16 @@ public class ButtonAction : MonoBehaviour
     }
 
     private void QuitGame() {
-        source.PlayOneShot(soundEffect);
         Application.Quit();
     }
+
+    private void CreditScreen() {
+        GameStateManager.QuickLoadState(4);
+    }
+
+    private void ReturnToMain()
+    {
+        GameStateManager.QuickLoadState(2);
+    }
+
 }
