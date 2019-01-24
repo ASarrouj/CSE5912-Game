@@ -8,6 +8,7 @@ public class Mouseover : MonoBehaviour
     public AudioClip menuSound;
     public Color selectColor = Color.red;
     public Color defaultColor = Color.white;
+    public bool isMenuButton;
 
     private Renderer r;
     private AudioSource source;
@@ -25,7 +26,7 @@ public class Mouseover : MonoBehaviour
         source.PlayOneShot(menuSound);
 
         foreach (Transform child in transform.parent) {
-            if (child != transform) {
+            if (child != transform && child.tag == "MenuButton") {
                 child.GetComponent<Renderer>().material.color = defaultColor;
             }
         }

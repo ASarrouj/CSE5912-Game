@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: 613635192}
   m_Layer: 0
   m_Name: Quit
-  m_TagString: Untagged
+  m_TagString: MenuButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -222,6 +222,7 @@ MonoBehaviour:
   menuSound: {fileID: 8300000, guid: 12fd7266c93f78146b48d555fd36b062, type: 3}
   selectColor: {r: 1, g: 0, b: 0, a: 1}
   defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  isMenuButton: 0
 --- !u!65 &613635190
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -475,7 +476,7 @@ GameObject:
   - component: {fileID: 932455179}
   m_Layer: 0
   m_Name: Play
-  m_TagString: Untagged
+  m_TagString: MenuButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -568,6 +569,7 @@ MonoBehaviour:
   menuSound: {fileID: 8300000, guid: 12fd7266c93f78146b48d555fd36b062, type: 3}
   selectColor: {r: 1, g: 0, b: 0, a: 1}
   defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  isMenuButton: 0
 --- !u!65 &932455177
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -836,7 +838,7 @@ GameObject:
   - component: {fileID: 1319182923}
   m_Layer: 0
   m_Name: Options
-  m_TagString: Untagged
+  m_TagString: MenuButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -994,6 +996,7 @@ MonoBehaviour:
   menuSound: {fileID: 8300000, guid: ae895284d4e799241a8e595604663643, type: 3}
   selectColor: {r: 1, g: 0, b: 0, a: 1}
   defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  isMenuButton: 0
 --- !u!102 &1319182927
 TextMesh:
   serializedVersion: 3
@@ -1541,7 +1544,7 @@ GameObject:
   - component: {fileID: 1994346040}
   m_Layer: 0
   m_Name: Credits
-  m_TagString: Untagged
+  m_TagString: MenuButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1699,6 +1702,7 @@ MonoBehaviour:
   menuSound: {fileID: 8300000, guid: 12fd7266c93f78146b48d555fd36b062, type: 3}
   selectColor: {r: 1, g: 0, b: 0, a: 1}
   defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  isMenuButton: 0
 --- !u!102 &1994346044
 TextMesh:
   serializedVersion: 3
