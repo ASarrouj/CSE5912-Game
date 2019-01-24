@@ -67,7 +67,18 @@ public class LoadingScreenManager : MonoBehaviour
 
             if (Mathf.Approximately(operation.progress, lastProgress) == false)
             {
-                progressBar.fillAmount = operation.progress;
+                if (levelNum != 0 && levelNum != 2 && levelNum != 3)
+                {
+                    progressBar.fillAmount = operation.progress;
+                }
+                else
+                {
+                    for (float i = 0f; i <= 2; i += Time.deltaTime)
+                    {
+                        progressBar.fillAmount = i / 2;
+                        yield return null;
+                    }
+                }
                 lastProgress = operation.progress;
             }
         }
