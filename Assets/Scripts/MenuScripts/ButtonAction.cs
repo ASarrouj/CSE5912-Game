@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class ButtonAction : MonoBehaviour
 {
-    public enum Action { Play, Quit };
+    public enum Action { Play, Quit, Back, Options };
     public Action action;
     public AudioClip soundEffect;
     public AudioSource source;
@@ -27,6 +27,12 @@ public class ButtonAction : MonoBehaviour
                 break;
             case Action.Quit:
                 QuitGame();
+                break;
+            case Action.Back:
+                SceneManager.LoadScene(2);
+                break;
+            case Action.Options:
+                SceneManager.LoadScene(4);
                 break;
             default:
                 break;
