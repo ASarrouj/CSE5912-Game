@@ -8,7 +8,6 @@ public class Mouseover : MonoBehaviour
     public AudioClip menuSound;
     public Color selectColor = Color.red;
     public Color defaultColor = Color.white;
-    public bool isMenuButton;
 
     private Renderer r;
     private AudioSource source;

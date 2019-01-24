@@ -431,7 +431,6 @@ MonoBehaviour:
   menuSound: {fileID: 8300000, guid: 12fd7266c93f78146b48d555fd36b062, type: 3}
   selectColor: {r: 1, g: 0, b: 0, a: 1}
   defaultColor: {r: 1, g: 1, b: 1, a: 1}
-  isMenuButton: 0
 --- !u!65 &613635190
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -454,7 +453,8 @@ AudioSource:
   m_GameObject: {fileID: 613635185}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 6e5612a7ea4bb9645bc08fa3b72f4cd8,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
