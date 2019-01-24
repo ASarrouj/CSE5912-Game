@@ -64,7 +64,6 @@ public class BallScript : MonoBehaviour
             transform.position=new Vector3(transform.position.x,transform.position.y,-5.0f); 
         }
         transform.Translate(vel);
-        
     }
     void SetCountText(Text change,int score)
     {
