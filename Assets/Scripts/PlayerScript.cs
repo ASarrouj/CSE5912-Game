@@ -15,11 +15,11 @@ public class PlayerScript : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.S)&&transform.position.z>-5f)
         {
-            transform.Translate(0,0,-.1f);
+            transform.Translate(0,0,-.15f);
         }
         else if(Input.GetKey(KeyCode.W)&&transform.position.z<5f)
         {
-            transform.Translate(0,0,.1f);
+            transform.Translate(0,0,.15f);
         }
     }
 }
