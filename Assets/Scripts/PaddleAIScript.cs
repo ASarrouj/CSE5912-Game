@@ -11,7 +11,7 @@ public class PaddleAIScript : MonoBehaviour
     void Start()
     {
         ball = GameObject.Find("Sphere").transform;
-        speed = 1.0f;
+        speed = 0.25f;
     }
 
     // Update is called once per frame
@@ -22,5 +22,14 @@ public class PaddleAIScript : MonoBehaviour
         movement.y = 0.0f;
 
         transform.Translate(movement * speed);
+        CheckInput();
+    }
+
+    void CheckInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            transform.position = new Vector3(9, 1, 0);
+        }
     }
 }
