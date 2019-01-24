@@ -15,6 +15,8 @@ public class BallScript : MonoBehaviour
     Vector3 vel;
     private AudioSource source;
     public AudioClip bounce;
+    private bool pause;
+
     void Start()
     {
         speed = 0.2f;
@@ -26,35 +28,39 @@ public class BallScript : MonoBehaviour
         player1=GameObject.Find("Player1");
         player2=GameObject.Find("Player2");
         source = gameObject.GetComponent<AudioSource>();
+        pause = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(transform.position.x<-10f)
+        if (!pause)
         {
-            score2++;
-            SetCountText(player2Text,score2);
-            Respawn();
+            if (transform.position.x < -10f)
+            {
+                score2++;
+                SetCountText(player2Text, score2);
+                Respawn();
+            }
+            else if (transform.position.x > 10f)
+            {
+                score1++;
+                SetCountText(player1Text, score1);
+                Respawn();
+            }
+            else if (transform.position.x > 9.2f || transform.position.x < -9.2f)
+            {
+                checkCollision();
+            }
+            else if ((transform.position.z > 5f && vel.z > 0) || (transform.position.z < -5f && vel.z < 0))
+            {
+                vel = new Vector3(vel.x, 0, -vel.z);
+                source.PlayOneShot(bounce);
+            }
+            transform.Translate(vel.normalized * speed);
+            CheckInput();
+            Debug.Log(speed);
         }
-        else if(transform.position.x>10f)
-        {
-            score1++;
-            SetCountText(player1Text,score1);
-            Respawn();
-        }
-       else if(transform.position.x>9.2f||transform.position.x<-9.2f)
-        {
-            checkCollision();
-        }
-        else if((transform.position.z>5f && vel.z > 0) || (transform.position.z<-5f && vel.z < 0))
-        {
-            vel=new Vector3(vel.x,0,-vel.z);
-            source.PlayOneShot(bounce);
-        }
-        transform.Translate(vel.normalized * speed);
-        CheckInput();
-        Debug.Log(speed);
     }
     void SetCountText(Text change,int score)
     {
@@ -118,5 +124,15 @@ public class BallScript : MonoBehaviour
         {
             Respawn();
         }
+    }
+
+    public void Halt()
+    {
+        pause = true;
+    }
+
+    public void Resume()
+    {
+        pause = false;
     }
 }
