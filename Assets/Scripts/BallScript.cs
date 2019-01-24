@@ -14,7 +14,8 @@ public class BallScript : MonoBehaviour
     public Text player2Text;
     Vector3 vel;
     private AudioSource source;
-    public AudioClip bounce;
+    public AudioClip bounce; 
+    public AudioClip score;
     private bool pause;
 
     void Start()
@@ -40,12 +41,14 @@ public class BallScript : MonoBehaviour
             {
                 score2++;
                 SetCountText(player2Text, score2);
+                source.PlayOneShot(score);
                 Respawn();
             }
             else if (transform.position.x > 10f)
             {
                 score1++;
                 SetCountText(player1Text, score1);
+                source.PlayOneShot(score);
                 Respawn();
             }
             else if (transform.position.x > 9.2f || transform.position.x < -9.2f)
