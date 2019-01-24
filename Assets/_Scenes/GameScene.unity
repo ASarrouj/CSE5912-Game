@@ -295,6 +295,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player1Text: {fileID: 592935674}
   player2Text: {fileID: 1681927784}
+  bounce: {fileID: 8300000, guid: 208d5578dc1c2594587989cbc7f14c9f, type: 3}
 --- !u!135 &688005724
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -377,9 +378,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 208d5578dc1c2594587989cbc7f14c9f, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.641
   m_Pitch: 1
   Loop: 0
   Mute: 0

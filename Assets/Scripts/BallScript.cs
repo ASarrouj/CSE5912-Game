@@ -90,6 +90,7 @@ public class BallScript : MonoBehaviour
     {
         vel = Vector3.zero;
         transform.position = new Vector3(0f, 0.5f, 0f);
+        CancelInvoke("SetVelocity");
         Invoke("SetVelocity", 1.5f);
     }
 
