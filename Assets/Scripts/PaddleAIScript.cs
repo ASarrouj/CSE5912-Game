@@ -6,12 +6,10 @@ public class PaddleAIScript : MonoBehaviour
 {
     private Transform ball;
     private float speed;
-    private Rigidbody rb;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
         ball = GameObject.Find("Sphere").transform;
         speed = 1.0f;
     }
