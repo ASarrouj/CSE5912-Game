@@ -18,7 +18,7 @@ public class ScreenCap : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Screenshot")) {
+        if (Input.GetKeyDown(KeyCode.F1)) {
             if (count == 0) {
                 System.IO.Directory.CreateDirectory(path);
             }
