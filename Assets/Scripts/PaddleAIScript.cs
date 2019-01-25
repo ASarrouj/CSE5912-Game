@@ -7,6 +7,7 @@ public class PaddleAIScript : MonoBehaviour
     private Transform ball;
     private float speed;
     private bool pause;
+    public Light spot;
 
     // Start is called before the first frame update
     void Start()
@@ -18,7 +19,8 @@ public class PaddleAIScript : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {        
+        spot.transform.position=transform.position+new Vector3(0,10f,0);
         if (!pause)
         {
             Vector3 movement = (ball.position - transform.position).normalized;

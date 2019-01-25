@@ -16,6 +16,7 @@ public class BallScript : MonoBehaviour
     private AudioSource source;
     public AudioClip bounce;
     private bool pause;
+    public Light spot;
 
     void Start()
     {
@@ -34,6 +35,7 @@ public class BallScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        spot.transform.position=transform.position+new Vector3(0,10f,0);
         if (!pause)
         {
             if (transform.position.x < -10f)
