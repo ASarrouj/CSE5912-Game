@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -516,6 +516,7 @@ MonoBehaviour:
   player2Text: {fileID: 1681927784}
   bounce: {fileID: 8300000, guid: 208d5578dc1c2594587989cbc7f14c9f, type: 3}
   spot: {fileID: 1761131440}
+  score: {fileID: 8300000, guid: 021ef61d606284a1f9e8907ad1dd9719, type: 3}
 --- !u!135 &688005724
 SphereCollider:
   m_ObjectHideFlags: 0

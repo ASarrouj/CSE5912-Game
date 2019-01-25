@@ -23,6 +23,7 @@ public class PauseGame : MonoBehaviour
                 pauseText.SetActive(false);
                 Resume();
                 paused = false;
+
             }
             else
             {
@@ -31,6 +32,9 @@ public class PauseGame : MonoBehaviour
                 paused = true;
             }
         }
+        if (Input.GetKeyDown(KeyCode.Q))
+        { GameStateManager.LoadState(2); }
+
     }
 
     private void Halt()
