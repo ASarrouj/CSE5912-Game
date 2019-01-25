@@ -11,6 +11,7 @@ public class ScreenCap : MonoBehaviour
     void Start()
     {
         count = 0;
+        System.IO.Directory.CreateDirectory("Screenshots");
         path = "Screenshots/" + System.DateTime.Now.Ticks + "/";
     }
 

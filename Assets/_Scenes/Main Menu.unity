@@ -345,7 +345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   action: 1
-  soundEffect: {fileID: 8300000, guid: e7c684a05a7db9140a507eb4b3151b91, type: 3}
+  soundEffect: {fileID: 8300000, guid: 0e9e71eb1e33bbf4bb64ba1ec4a696ee, type: 3}
   source: {fileID: 1281394236}
 --- !u!1 &673921407
 GameObject:
@@ -692,7 +692,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   action: 0
-  soundEffect: {fileID: 8300000, guid: 9d1ad8488f9f63d4e98429f16cdf525e, type: 3}
+  soundEffect: {fileID: 8300000, guid: 75b6fd52f05460d47a89035a2f11bd33, type: 3}
   source: {fileID: 1281394236}
 --- !u!1 &1281394235
 GameObject:
@@ -722,7 +722,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 6e5612a7ea4bb9645bc08fa3b72f4cd8,
     type: 2}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 8eaf7708a4c6b3b49a79518beea7c893, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
