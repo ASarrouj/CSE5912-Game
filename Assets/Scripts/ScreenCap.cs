@@ -12,13 +12,15 @@ public class ScreenCap : MonoBehaviour
     {
         count = 0;
         path = "Screenshots/" + System.DateTime.Now.Ticks + "/";
-        System.IO.Directory.CreateDirectory(path);
     }
 
     // Update is called once per frame
     void Update()
     {
         if (Input.GetButtonDown("Screenshot")) {
+            if (count == 0) {
+                System.IO.Directory.CreateDirectory(path);
+            }
             count++;
             ScreenCapture.CaptureScreenshot(path + "screenshot" + count + ".png");
         }
