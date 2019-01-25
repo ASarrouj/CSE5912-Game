@@ -8,11 +8,11 @@ public class BallScript : MonoBehaviour
     // Start is called before the first frame update
     bool startLeft;
     GameObject player1,player2;
-    int score1,score2;
+    public int score1,score2;
     private float speed;
     public Text player1Text;
     public Text player2Text;
-    Vector3 vel;
+    public Vector3 vel;
     private AudioSource source;
     public AudioClip bounce; 
     public AudioClip score;
@@ -65,6 +65,13 @@ public class BallScript : MonoBehaviour
             Debug.Log(speed);
         }
     }
+
+    public void updateScoreTexts()
+    {
+        SetCountText(player1Text, score1);
+        SetCountText(player2Text, score2);
+    }
+
     void SetCountText(Text change,int score)
     {
         change.text="Score: "+score;
