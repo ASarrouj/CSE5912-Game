@@ -32,7 +32,7 @@ public class PaddleAIScript : MonoBehaviour
 
     void CheckInput()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space))
         {
             transform.position = new Vector3(9, 1, 0);
         }
