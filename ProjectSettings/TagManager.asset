@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - MenuButton
+  - Target
   layers:
   - Default
   - TransparentFX
