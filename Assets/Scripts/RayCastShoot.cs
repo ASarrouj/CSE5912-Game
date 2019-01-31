@@ -15,7 +15,7 @@ public class RayCastShoot : MonoBehaviour
     void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
-        gunCamera = GetComponentInParent<Camera>(); 
+        gunCamera = GetComponentInParent<Camera>();
     }
     
     // Update is called once per frame
