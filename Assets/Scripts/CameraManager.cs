@@ -5,7 +5,8 @@ using UnityEngine;
 public class CameraManager : MonoBehaviour
 {
 
-    private Vector3 offset;
+    private Vector3 offsetPos;
+    private Quaternion offsetRot;
     private float transitionTime;
     private const float transitionMaxTime = 4.0f;
     private const float DT = 0.01f;
@@ -29,18 +30,24 @@ public class CameraManager : MonoBehaviour
     public void FollowMech(Transform mechTransform)
     {
         PrepareInterp();
+        offsetPos = -5 * mechTransform.forward + 3 * mechTransform.up; // Forward multiplier determines distance behind, up for above
+        offsetRot = Quaternion.Euler(30, 0, 0); // X value determines level of downward tilt
         targetTransform = mechTransform;
     }
 
     public void AttachToWeapon(Transform weaponTransform)
     {
         PrepareInterp();
+        offsetPos = Vector3.zero;
+        offsetRot = Quaternion.identity;
         targetTransform = weaponTransform;
     }
 
     public void ResetPosition()
     {
         PrepareInterp();
+        offsetPos = Vector3.zero;
+        offsetRot = Quaternion.identity;
         targetTransform = GameObject.Find("DebugCameraPos").transform;
     }
 
@@ -53,8 +60,8 @@ public class CameraManager : MonoBehaviour
 
     private void InterpolatePosition()
     {
-        transform.position = transform.position + ComputeArcLengthFromTime(transitionTime) * (targetTransform.position - transform.position);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetTransform.rotation, ComputeArcLengthFromTime(transitionTime));
+        transform.position = Vector3.Lerp(transform.position, targetTransform.position + offsetPos, ComputeArcLengthFromTime(transitionTime));
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetTransform.rotation * offsetRot, ComputeArcLengthFromTime(transitionTime));
 
         if (transitionTime == transitionMaxTime)
         {
