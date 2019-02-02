@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RayCastShoot : MonoBehaviour
+public class RayCastShoot : MonoBehaviour , IWeapon
 {
     public float fireRate = 0.25f;
     public float range = 50;
@@ -10,6 +11,7 @@ public class RayCastShoot : MonoBehaviour
 
     private Camera gunCamera;
     private LineRenderer lineRenderer;
+    private WaitForSeconds shotLength = new WaitForSeconds(0.07f);
     private float nextFireTime;
 
     void Awake()
@@ -17,21 +19,32 @@ public class RayCastShoot : MonoBehaviour
         lineRenderer = GetComponent<LineRenderer>();
         gunCamera = GetComponentInParent<Camera>();
     }
-    
-    // Update is called once per frame
-    void Update()
+
+    void IWeapon.Shoot()
     {
         RaycastHit hit;
         Vector3 rayOrigin = gunCamera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
-
-        if (Input.GetButtonDown("Fire1") && Time.time > nextFireTime)
+        if (Time.time > nextFireTime)
         {
             nextFireTime = Time.time + fireRate;
-            
+
             if (Physics.Raycast(rayOrigin, gunCamera.transform.forward, out hit, range))
             {
                 hit.collider.gameObject.GetComponent<Renderer>().material.color = Color.red;
+                lineRenderer.SetPosition(0, gunEnd.position);
+                lineRenderer.SetPosition(1, hit.point);
             }
+
+            StartCoroutine(ShotEffect());
         }
+
+
+    }
+
+    private IEnumerator ShotEffect()
+    {
+        lineRenderer.enabled = true;
+        yield return shotLength;
+        lineRenderer.enabled = false;
     }
 }

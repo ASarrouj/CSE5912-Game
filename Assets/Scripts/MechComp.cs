@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MechComp : MonoBehaviour
 {
-    public IWeapon[] guns;
+    public GameObject[] guns;
     public Transform[] positions;
 
     // Update is called once per frame
@@ -13,7 +13,7 @@ public class MechComp : MonoBehaviour
         
     }
 
-    public void AttachGun(IWeapon gun, int location)
+    public void AttachGun(GameObject gun, int location)
     {
         if(location < guns.Length)
         {
