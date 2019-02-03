@@ -20,7 +20,7 @@ public class RayCastShoot : MonoBehaviour , IWeapon
     void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
-        gunCamera = GetComponentInParent<Camera>();
+        gunCamera = GetComponentInChildren<Camera>();
     }
 
     void IWeapon.Shoot()
