@@ -6,14 +6,14 @@ public class CameraInputTest : MonoBehaviour
 {
 
     private CameraManager camManager;
-    private Transform mech1, mech2;
+    private GameObject mech1, mech2;
 
     // Start is called before the first frame update
     void Start()
     {
         camManager = GameObject.Find("Main Camera").GetComponent<CameraManager>();
-        mech1 = GameObject.Find("MechTesting").transform;
-        mech2 = GameObject.Find("MechTesting (1)").transform;
+        mech1 = GameObject.Find("MechTesting");
+        mech2 = GameObject.Find("MechTesting (1)");
     }
 
     // Update is called once per frame
