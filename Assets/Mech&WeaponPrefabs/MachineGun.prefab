@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5863196659231249070}
   - component: {fileID: 5863196659231249061}
   m_Layer: 0
-  m_Name: Gun
+  m_Name: MachineGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,9 +30,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5863196659231249069}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 3, z: -8}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalRotation: {x: -0, y: -0.98624873, z: -0, w: 0.16526794}
+  m_LocalPosition: {x: -0.6519812, y: 0.375, z: 21.009253}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5863196659734900410}
   - {fileID: 5863196660628264627}
@@ -297,8 +297,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5863196659734900409}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 3.8333328}
-  m_LocalScale: {x: 1, y: 3.3333347, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 3.3}
+  m_LocalScale: {x: 1, y: 3, z: 1}
   m_Children:
   - {fileID: 5863196659633628858}
   m_Father: {fileID: 5863196659231249060}
@@ -557,11 +557,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 479570, guid: ba8d7f7d02a92d9429a17beba429f0ff, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.057
+      value: 0.909
       objectReference: {fileID: 0}
     - target: {fileID: 479570, guid: ba8d7f7d02a92d9429a17beba429f0ff, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.326
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 479570, guid: ba8d7f7d02a92d9429a17beba429f0ff, type: 3}
       propertyPath: m_LocalRotation.x
