@@ -5,7 +5,7 @@ using UnityEngine;
 public class MechComp : MonoBehaviour
 {
     public GameObject[] guns;
-    public Transform[] positions;
+    public GameObject[] positions;
 
     // Update is called once per frame
     void Update()
@@ -18,8 +18,7 @@ public class MechComp : MonoBehaviour
         if(location < guns.Length)
         {
             guns[location] = gun;
-            guns[location].transform.position = positions[location].transform.position;
-            guns[location].transform.rotation = positions[location].transform.rotation;
+            guns[location].transform.SetParent(positions[location].transform, false);
         }
         else
         {
