@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class MechMovement : MonoBehaviour
+public class MechMovement : NetworkBehaviour
 {
     private int moveSpeed;
     private int rotateSpeed;
@@ -17,6 +18,11 @@ public class MechMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!isLocalPlayer)
+        {
+            return;
+        }
+
         if (Input.GetKeyDown(KeyCode.UpArrow) && moveSpeed<3)
         {
             moveSpeed++;
