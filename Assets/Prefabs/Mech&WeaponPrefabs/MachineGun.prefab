@@ -14,8 +14,6 @@ GameObject:
   - component: {fileID: 5863196659231249065}
   - component: {fileID: 5863196659231249064}
   - component: {fileID: 5863196659231249071}
-  - component: {fileID: 5863196659231249070}
-  - component: {fileID: 5863196659231249061}
   m_Layer: 0
   m_Name: MachineGun
   m_TagString: Untagged
@@ -237,38 +235,6 @@ MonoBehaviour:
   gunSmoke: {fileID: 0}
   hitEffectPool: {fileID: 0}
   muzzleFlash: {fileID: 5863196659633982870}
---- !u!114 &5863196659231249070
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5863196659231249069}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c744bb1127940d4b8569a231b55038c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  axes: 0
-  sensitivityX: 15
-  sensitivityY: 15
-  minimumX: -360
-  maximumX: 360
-  minimumY: -60
-  maximumY: 60
-  frameCounter: 20
---- !u!114 &5863196659231249061
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5863196659231249069}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e611160d11d4154da7d0819da4ea52e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5863196659734900409
 GameObject:
   m_ObjectHideFlags: 0
