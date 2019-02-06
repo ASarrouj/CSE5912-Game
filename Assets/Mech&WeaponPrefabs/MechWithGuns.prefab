@@ -431,6 +431,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1602537170223099638, guid: 65e241151fb70054e99d549799cb7f4a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65e241151fb70054e99d549799cb7f4a, type: 3}
 --- !u!4 &4599139759321927998 stripped
@@ -446,6 +451,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3919535911611017821}
     m_Modifications:
+    - target: {fileID: 5863196659231249069, guid: 121d28b267e612148aa96d23c9810e3d,
+        type: 3}
+      propertyPath: m_Name
+      value: MachineGun
+      objectReference: {fileID: 0}
     - target: {fileID: 5863196659231249060, guid: 121d28b267e612148aa96d23c9810e3d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -516,10 +526,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.1
       objectReference: {fileID: 0}
-    - target: {fileID: 5863196659231249069, guid: 121d28b267e612148aa96d23c9810e3d,
+    - target: {fileID: 5863196660628264626, guid: 121d28b267e612148aa96d23c9810e3d,
         type: 3}
-      propertyPath: m_Name
-      value: MachineGun
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 121d28b267e612148aa96d23c9810e3d, type: 3}
@@ -594,6 +604,11 @@ PrefabInstance:
     - target: {fileID: 1602537170490582859, guid: 65e241151fb70054e99d549799cb7f4a,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1602537170223099638, guid: 65e241151fb70054e99d549799cb7f4a,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
