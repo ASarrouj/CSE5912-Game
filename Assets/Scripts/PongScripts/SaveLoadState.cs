@@ -41,7 +41,7 @@ public class SaveLoadState : MonoBehaviour
         if (anything_saved && Input.GetKey(KeyCode.Alpha2))
         {
             ball.GetComponent<BallScript>().score1 = player_score;
-            AI_score = ball.GetComponent<BallScript>().score2 = AI_score;
+            ball.GetComponent<BallScript>().score2 = AI_score;
 
             ball.GetComponent<BallScript>().vel = ball_vel;
             ball.transform.position = ball_pos;
