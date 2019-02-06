@@ -195,6 +195,7 @@ GameObject:
   - component: {fileID: 6443078395105314596}
   - component: {fileID: 8531752692862956334}
   - component: {fileID: 3586578857379363312}
+  - component: {fileID: 5883972643583522908}
   m_Layer: 0
   m_Name: MechTesting
   m_TagString: Mech
@@ -210,7 +211,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7100257039912496040}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.8, z: 0}
   m_LocalScale: {x: 2, y: 1.5, z: 4}
   m_Children:
   - {fileID: 5658219443739818322}
@@ -314,3 +315,16 @@ MonoBehaviour:
   - {fileID: 152055968606264682}
   - {fileID: 3543959563269492080}
   - {fileID: 2891715957620295022}
+  self: {fileID: 7100257039912496040}
+--- !u!114 &5883972643583522908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7100257039912496040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0428557a720721644a21357ce5e4744e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
