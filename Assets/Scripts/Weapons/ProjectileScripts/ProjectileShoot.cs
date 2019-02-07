@@ -19,17 +19,17 @@ public class ProjectileShoot : MonoBehaviour, IWeapon {
 
     void Update()
     {
-        Plot(bulletSpawn.transform.forward,projectileForce*transform.forward,.05f,10f);
+        Plot(bulletSpawn.transform.forward,projectileForce*transform.forward,0f,10f);
     }
      public void Plot (Vector3 start, Vector3 startVelocity, float time, float maxTime) {
-     Vector3 prev = start;
+     Vector3 previous = start;
      for (int i=1;;i++) {
          float t = time*i;
          if (t > maxTime) break;
          Vector3 pos = PlotTrajectoryAtTime (start, startVelocity, t);
-         if (Physics.Linecast (prev,pos)) break;
-         Debug.DrawLine (prev,pos,Color.red);
-         prev = pos;
+         if (Physics.Linecast (previous,pos)) break;
+         Debug.DrawLine (previous,pos,Color.red);
+         previous = pos;
      }
  }
   public Vector3 PlotTrajectoryAtTime (Vector3 start, Vector3 startVelocity, float time) {
