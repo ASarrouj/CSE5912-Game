@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShootInputArtillery : MonoBehaviour
+public class ShootInput2 : MonoBehaviour
 {
     public GameObject currentGun;
 
