@@ -6,7 +6,6 @@ public class CameraInputTest : MonoBehaviour
 {
 
     private CameraManager camManager;
-    private GameObject mech1, mech2;
 
     // Start is called before the first frame update
     void Start()

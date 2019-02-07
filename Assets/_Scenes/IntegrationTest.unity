@@ -124,6 +124,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MachineGun1
       objectReference: {fileID: 0}
+    - target: {fileID: 5863196659231249069, guid: 121d28b267e612148aa96d23c9810e3d,
+        type: 3}
+      propertyPath: m_TagString
+      value: Weapon
+      objectReference: {fileID: 0}
     - target: {fileID: 5863196659231249060, guid: 121d28b267e612148aa96d23c9810e3d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -351,6 +356,7 @@ GameObject:
   - component: {fileID: 271361660}
   - component: {fileID: 271361659}
   - component: {fileID: 271361661}
+  - component: {fileID: 271361662}
   m_Layer: 0
   m_Name: InputManager
   m_TagString: Untagged
@@ -406,6 +412,18 @@ MonoBehaviour:
   minimumY: -60
   maximumY: 60
   frameCounter: 20
+--- !u!114 &271361662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 271361658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91035f5a78cd31f4fb7040ea824559dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &482315379
 GameObject:
   m_ObjectHideFlags: 0
@@ -417,6 +435,7 @@ GameObject:
   - component: {fileID: 482315382}
   - component: {fileID: 482315381}
   - component: {fileID: 482315380}
+  - component: {fileID: 482315383}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -488,6 +507,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &482315383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482315379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d55e0bca807753143a219f4ccfe1ea4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &598707688
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1337,6 +1368,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MachineGun2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5863196659231249069, guid: 121d28b267e612148aa96d23c9810e3d,
+        type: 3}
+      propertyPath: m_TagString
+      value: Weapon
       objectReference: {fileID: 0}
     - target: {fileID: 5863196659231249060, guid: 121d28b267e612148aa96d23c9810e3d,
         type: 3}
