@@ -12,6 +12,10 @@ public class MechMovement : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (!mech)
+        {
+            mech = gameObject;
+        }
         moveSpeed = 0;
         rotateSpeed = 0;
     }

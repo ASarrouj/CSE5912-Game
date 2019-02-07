@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8413345022708477440}
   - component: {fileID: 4113777234318946852}
   - component: {fileID: 5876038404251394511}
+  - component: {fileID: 3219836417163534188}
   m_Layer: 0
   m_Name: NewMechWithGuns
   m_TagString: Mech
@@ -92,6 +93,19 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
+--- !u!114 &3219836417163534188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 521016686472392782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53fe0a229e1e167478cc616b6bccd206, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mech: {fileID: 0}
 --- !u!1 &3791383091976833672
 GameObject:
   m_ObjectHideFlags: 0
@@ -388,6 +402,11 @@ PrefabInstance:
     - target: {fileID: 5863196659231249060, guid: a0f8b867772214a439c9b2a2bd3a3657,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5863196660628264626, guid: a0f8b867772214a439c9b2a2bd3a3657,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
