@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -263,6 +263,75 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1976623068
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8040684502524610846, guid: 313bfec5e922fe14d9d99f3799cb6b9e,
+        type: 3}
+      propertyPath: m_Name
+      value: SoundManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 8040684502524610816, guid: 313bfec5e922fe14d9d99f3799cb6b9e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.07766509
+      objectReference: {fileID: 0}
+    - target: {fileID: 8040684502524610816, guid: 313bfec5e922fe14d9d99f3799cb6b9e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.265165
+      objectReference: {fileID: 0}
+    - target: {fileID: 8040684502524610816, guid: 313bfec5e922fe14d9d99f3799cb6b9e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.2250001
+      objectReference: {fileID: 0}
+    - target: {fileID: 8040684502524610816, guid: 313bfec5e922fe14d9d99f3799cb6b9e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8040684502524610816, guid: 313bfec5e922fe14d9d99f3799cb6b9e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8040684502524610816, guid: 313bfec5e922fe14d9d99f3799cb6b9e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8040684502524610816, guid: 313bfec5e922fe14d9d99f3799cb6b9e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8040684502524610816, guid: 313bfec5e922fe14d9d99f3799cb6b9e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8040684502524610816, guid: 313bfec5e922fe14d9d99f3799cb6b9e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8040684502524610816, guid: 313bfec5e922fe14d9d99f3799cb6b9e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8040684502524610816, guid: 313bfec5e922fe14d9d99f3799cb6b9e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 313bfec5e922fe14d9d99f3799cb6b9e, type: 3}
 --- !u!1 &3791383091976833672 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3791383091976833672, guid: c252754bf9fd2f34080cbe7857660ca4,
@@ -310,6 +379,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: startMech
+      objectReference: {fileID: 0}
+    - target: {fileID: 3791383091976833672, guid: c252754bf9fd2f34080cbe7857660ca4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8413345022708477440, guid: c252754bf9fd2f34080cbe7857660ca4,
         type: 3}
@@ -365,11 +439,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3791383091976833672, guid: c252754bf9fd2f34080cbe7857660ca4,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3842893654040518599, guid: c252754bf9fd2f34080cbe7857660ca4,
         type: 3}

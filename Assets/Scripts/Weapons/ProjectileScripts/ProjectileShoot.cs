@@ -17,7 +17,24 @@ public class ProjectileShoot : MonoBehaviour, IWeapon {
         gunCamera = GetComponentInParent<Camera>();
     }
 
-    
+    void Update()
+    {
+        Plot(bulletSpawn.transform.forward,projectileForce*transform.forward,.05f,10f);
+    }
+     public void Plot (Vector3 start, Vector3 startVelocity, float time, float maxTime) {
+     Vector3 prev = start;
+     for (int i=1;;i++) {
+         float t = time*i;
+         if (t > maxTime) break;
+         Vector3 pos = PlotTrajectoryAtTime (start, startVelocity, t);
+         if (Physics.Linecast (prev,pos)) break;
+         Debug.DrawLine (prev,pos,Color.red);
+         prev = pos;
+     }
+ }
+  public Vector3 PlotTrajectoryAtTime (Vector3 start, Vector3 startVelocity, float time) {
+     return start + startVelocity*time + Physics.gravity*time*time*0.5f;
+ }
     // Update is called once per frame
     void IWeapon.Shoot()
     {
