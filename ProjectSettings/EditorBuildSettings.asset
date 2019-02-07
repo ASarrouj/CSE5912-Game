@@ -5,25 +5,25 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/PongScenes/StartScene.unity
     guid: 29e9cb3407b25445bb05b843356403a6
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/PongScenes/LoadingScene.unity
     guid: eb4be2232406d450b9f50f0091d45538
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/PongScenes/Main Menu.unity
     guid: 09d79d9c0ae236c4c93018223345b9b6
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/PongScenes/GameScene.unity
     guid: 58f28e0a892413e4f9fe550a73c3e7f5
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/PongScenes/CreditScene.unity
     guid: e23d91f26f3ae40c8baf867f929bdbb7
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/PongScenes/Options.unity
     guid: 8fa43360ee443ed48bec5e1294a97567
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/MechBuilding.unity
     guid: eb577e97d49e53b4dba7da1a337ac5db
   - enabled: 1

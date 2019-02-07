@@ -1,11 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
 
-[RequireComponent(typeof(LineRenderer))]
-
-public class MechMovement : NetworkBehaviour
+[RequireComponent(typeof (LineRenderer))]
+public class MoveTest : MonoBehaviour
 {
     LineRenderer lr;
     private int moveSpeed;
@@ -14,16 +12,16 @@ public class MechMovement : NetworkBehaviour
     GameObject future;
     private float nextActionTime = 0.0f;
     public float period = 1f;
-    public GameObject mech;
 
+    private void Awake()
+    {
+       
+
+    }
     // Start is called before the first frame update
     void Start()
     {
-        if (!mech)
-        {
-            mech = gameObject;
-        }
-        lr = mech.GetComponent<LineRenderer>();
+        lr = GetComponent<LineRenderer>();
         moveSpeed = 0;
         rotateSpeed = 0;
     }
@@ -31,16 +29,11 @@ public class MechMovement : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isLocalPlayer)
-        {
-            return;
-        }
-
-        if (Input.GetKeyDown(KeyCode.UpArrow) && moveSpeed<3)
+        if (Input.GetKeyDown(KeyCode.UpArrow) && moveSpeed < 3)
         {
             moveSpeed++;
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow) && moveSpeed >-1)
+        if (Input.GetKeyDown(KeyCode.DownArrow) && moveSpeed > -1)
         {
             moveSpeed--;
         }
@@ -71,15 +64,15 @@ public class MechMovement : NetworkBehaviour
         {
             rotateSpeed = 0;
         }
-
         if (Time.time > nextActionTime)
         {
             nextActionTime += period;
             RenderPath();
         }
+        
+        transform.Translate(0, 0, Time.deltaTime * moveSpeed, Space.Self);
+        transform.Rotate(0, Time.deltaTime * rotateSpeed, 0, Space.Self);
 
-        mech.transform.Translate(0, 0, Time.deltaTime * moveSpeed, Space.Self);
-        mech.transform.Rotate(0, Time.deltaTime * rotateSpeed, 0, Space.Self);
     }
 
     void RenderPath()
@@ -93,8 +86,8 @@ public class MechMovement : NetworkBehaviour
         Vector3[] PathArray = new Vector3[pathLength];
 
         future = new GameObject();
-        future.transform.position = mech.transform.position;
-        future.transform.rotation = mech.transform.rotation;
+        future.transform.position = transform.position;
+        future.transform.rotation = transform.rotation;
 
         for (int i = 0; i < pathLength; i++)
         {
@@ -107,9 +100,9 @@ public class MechMovement : NetworkBehaviour
 
     Vector3 CalculatePathPoint(int frame)
     {
-        future.transform.Rotate(0, Time.deltaTime * rotateSpeed, 0, Space.Self);
-        future.transform.Translate(0, 0, Time.deltaTime * moveSpeed, Space.Self);
-        Vector3 futurePos = future.transform.position;
-        return futurePos;
+       future.transform.Rotate(0, Time.deltaTime * rotateSpeed, 0, Space.Self);
+       future.transform.Translate(0, 0, Time.deltaTime * moveSpeed, Space.Self);
+       Vector3 futurePos = future.transform.position;
+       return futurePos;
     }
 }
