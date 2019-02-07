@@ -63,7 +63,7 @@ public class ButtonAction : MonoBehaviour
             m.color = Color.Lerp(Color.clear, Color.black, i / 3);
             yield return null;
         }
-        GameStateManager.LoadState(3);
+        GameStateManager.LoadState(6);
     }
 
     private void QuitGame() {

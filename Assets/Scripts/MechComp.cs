@@ -5,7 +5,8 @@ using UnityEngine;
 public class MechComp : MonoBehaviour
 {
     public GameObject[] guns;
-    public Transform[] positions;
+    public GameObject[] positions;
+    public GameObject self;
 
     // Update is called once per frame
     void Update()
@@ -18,12 +19,16 @@ public class MechComp : MonoBehaviour
         if(location < guns.Length)
         {
             guns[location] = gun;
-            guns[location].transform.position = positions[location].transform.position;
-            guns[location].transform.rotation = positions[location].transform.rotation;
+            guns[location].transform.SetParent(positions[location].transform, false);
         }
         else
         {
             print("This location is not available on the mech.");
         }
+    }
+
+    public void EndOfMatch()
+    {
+        Destroy(self);
     }
 }

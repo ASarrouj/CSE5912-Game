@@ -6,6 +6,8 @@ TagManager:
   tags:
   - MenuButton
   - Target
+  - Mech
+  - Weapon
   layers:
   - Default
   - TransparentFX
@@ -19,7 +21,7 @@ TagManager:
   - Structure
   - PlayerObject
   - Projectile
-  - 
+  - Weapon
   - 
   - 
   - Roof
