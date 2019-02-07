@@ -6,6 +6,7 @@ public class MechComp : MonoBehaviour
 {
     public GameObject[] guns;
     public GameObject[] positions;
+    public GameObject self;
 
     // Update is called once per frame
     void Update()
@@ -24,5 +25,10 @@ public class MechComp : MonoBehaviour
         {
             print("This location is not available on the mech.");
         }
+    }
+
+    public void EndOfMatch()
+    {
+        Destroy(self);
     }
 }
