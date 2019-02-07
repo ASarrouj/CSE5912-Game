@@ -7,6 +7,7 @@ public class MechMovement : NetworkBehaviour
 {
     private int moveSpeed;
     private int rotateSpeed;
+    public GameObject mech;
 
     // Start is called before the first frame update
     void Start()
@@ -58,7 +59,7 @@ public class MechMovement : NetworkBehaviour
         {
             rotateSpeed = 0;
         }
-        transform.Translate(0, 0, Time.deltaTime * moveSpeed, Space.Self);
-        transform.Rotate(0, Time.deltaTime * rotateSpeed, 0, Space.Self);
+        mech.transform.Translate(0, 0, Time.deltaTime * moveSpeed, Space.Self);
+        mech.transform.Rotate(0, Time.deltaTime * rotateSpeed, 0, Space.Self);
     }
 }

@@ -12,6 +12,7 @@ public class CameraManager : MonoBehaviour
     private bool interpolating;
     private GameObject targetObject;
     private UIManager uiManager;
+    private InputManager inputManager;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +20,7 @@ public class CameraManager : MonoBehaviour
         interpolating = false;
         transitionTime = 0.0f;
         uiManager = GameObject.Find("UI").GetComponent<UIManager>();
+        inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
     }
 
     // Update is called once per frame
@@ -78,6 +80,7 @@ public class CameraManager : MonoBehaviour
             interpolating = false;
             transform.parent = targetObject.transform;
             uiManager.ShowHud(targetObject);
+            inputManager.EnableInput(targetObject);
         }
 
         transitionTime += DT;
