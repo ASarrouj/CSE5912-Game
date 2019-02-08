@@ -443,6 +443,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2873287902834951428}
     m_Modifications:
+    - target: {fileID: 5863196659231249069, guid: a0f8b867772214a439c9b2a2bd3a3657,
+        type: 3}
+      propertyPath: m_Name
+      value: MachineGun
+      objectReference: {fileID: 0}
     - target: {fileID: 5863196659231249060, guid: a0f8b867772214a439c9b2a2bd3a3657,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -498,17 +503,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5863196659231249069, guid: a0f8b867772214a439c9b2a2bd3a3657,
-        type: 3}
-      propertyPath: m_Name
-      value: MachineGun
-      objectReference: {fileID: 0}
     - target: {fileID: 5863196660628264626, guid: a0f8b867772214a439c9b2a2bd3a3657,
         type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5863196660628264589, guid: a0f8b867772214a439c9b2a2bd3a3657,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5863196660628264588, guid: a0f8b867772214a439c9b2a2bd3a3657,
         type: 3}
       propertyPath: m_Enabled
       value: 0
