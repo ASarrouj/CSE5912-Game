@@ -37,7 +37,7 @@ public class InputManager : MonoBehaviour
                 if (Input.GetKeyDown(weaponInputs[i]))
                 {
                     DisableInput();
-                    camManager.AttachToWeapon(weapons[i]);
+                    //camManager.AttachToWeapon(weapons[i]);
                 }
             }
         }

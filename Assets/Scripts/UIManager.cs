@@ -5,16 +5,19 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
 
-    private GameObject currentHud, MechHud, WeaponHud;
+    private GameObject MechHUD, SwitcherHUD, NavHUD;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        MechHud = GameObject.Find("MechHud");
-        MechHud.SetActive(false);
-        //WeaponHud = GameObject.Find();
-        //WeaponHud.SetActive(false);
-        currentHud = MechHud;
+        MechHUD = GameObject.Find("MechHUD");
+        SwitcherHUD = GameObject.Find("SwitcherHUD");
+        NavHUD = GameObject.Find("NavHUD");
+
+        MechHUD.SetActive(false);
+        SwitcherHUD.SetActive(false);
+        NavHUD.SetActive(false);
     }
 
     // Update is called once per frame
@@ -23,22 +26,24 @@ public class UIManager : MonoBehaviour
         
     }
 
-    public void ShowHud(GameObject targetObject)
+    public void navigationUI()
     {
-        if (targetObject.tag == "Mech")
-        {
-            currentHud = MechHud;
-            currentHud.SetActive(true);
-        }
-        else if (targetObject.tag == "Weapon")
-        {
-            currentHud = WeaponHud;
-            currentHud.SetActive(true);
-        }
+        MechHUD.SetActive(true);
+        SwitcherHUD.SetActive(true);
+        NavHUD.SetActive(true);
     }
 
-    public void ClearHud()
+    public void gunUI()
     {
-        currentHud.SetActive(false);
+        MechHUD.SetActive(true);
+        SwitcherHUD.SetActive(true);
+        NavHUD.SetActive(false);
+    }
+
+    public void noUI()
+    {
+        MechHUD.SetActive(false);
+        SwitcherHUD.SetActive(false);
+        NavHUD.SetActive(false);
     }
 }

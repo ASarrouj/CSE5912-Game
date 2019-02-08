@@ -8,19 +8,19 @@ public class CameraManager : MonoBehaviour
     private Quaternion offsetRot, originalRot;
     private float transitionTime;
     private const float transitionMaxTime = 0.5f;
-    private const float DT = 0.01f;
+    private const float DT = 0.005f;
     private bool interpolating;
     private GameObject targetObject;
     private UIManager uiManager;
     private InputManager inputManager;
+    private Action doneCallback;
 
     // Start is called before the first frame update
     void Start()
     {
         interpolating = false;
         transitionTime = 0.0f;
-        uiManager = GameObject.Find("UI").GetComponent<UIManager>();
-        inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
+        doneCallback = null;
     }
 
     // Update is called once per frame
@@ -28,6 +28,11 @@ public class CameraManager : MonoBehaviour
     {
         if (interpolating)
             InterpolatePosition();
+        else if (doneCallback != null)
+        {
+            doneCallback();
+            doneCallback = null;
+        }
     }
 
     public void FollowMech(GameObject mechObject)
@@ -35,13 +40,13 @@ public class CameraManager : MonoBehaviour
         if (targetObject != mechObject)
         {
             PrepareInterp();
-            offsetPos = -5 * mechObject.transform.forward + 3 * mechObject.transform.up; // Forward multiplier determines distance behind, up for above
+            offsetPos = -10 * mechObject.transform.forward + 5 * mechObject.transform.up; // Forward multiplier determines distance behind, up for above
             offsetRot = Quaternion.Euler(30, 0, 0); // X value determines level of downward tilt
             targetObject = mechObject;
         }
     }
 
-    public void AttachToWeapon(GameObject weaponObject)
+    public void AttachToWeapon(GameObject weaponObject, Action cb)
     {
         if (targetObject != weaponObject)
         {
@@ -50,6 +55,8 @@ public class CameraManager : MonoBehaviour
             offsetRot = Quaternion.identity;
             targetObject = weaponObject;
         }
+
+        doneCallback = cb;
     }
 
     public void ResetPosition()
@@ -67,7 +74,6 @@ public class CameraManager : MonoBehaviour
         interpolating = true;
         transitionTime = 0.0f;
         transform.parent = null;
-        uiManager.ClearHud();
     }
 
     private void InterpolatePosition()
@@ -79,8 +85,6 @@ public class CameraManager : MonoBehaviour
         {
             interpolating = false;
             transform.parent = targetObject.transform;
-            uiManager.ShowHud(targetObject);
-            inputManager.EnableInput(targetObject);
         }
 
         transitionTime += DT;
