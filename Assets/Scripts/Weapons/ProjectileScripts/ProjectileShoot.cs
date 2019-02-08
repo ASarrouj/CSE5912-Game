@@ -6,7 +6,7 @@ public class ProjectileShoot : MonoBehaviour, IWeapon {
     public Rigidbody projectile;
     public Transform bulletSpawn;
     public GameObject smoke;
-    public float projectileForce = 500f;
+    public float projectileForce = 5000f;
     public float fireRate = 1f;
 
     private float nextFireTime;
@@ -19,7 +19,7 @@ public class ProjectileShoot : MonoBehaviour, IWeapon {
 
     void Update()
     {
-        Plot(bulletSpawn.transform.forward,projectileForce*transform.forward,0f,10f);
+        Plot(bulletSpawn.transform.position,projectileForce*transform.forward,.1f,3f);
     }
      public void Plot (Vector3 start, Vector3 startVelocity, float time, float maxTime) {
      Vector3 previous = start;
@@ -28,6 +28,7 @@ public class ProjectileShoot : MonoBehaviour, IWeapon {
          if (t > maxTime) break;
          Vector3 pos = PlotTrajectoryAtTime (start, startVelocity, t);
          if (Physics.Linecast (previous,pos)) break;
+          Debug.Log(pos);
          Debug.DrawLine (previous,pos,Color.red);
          previous = pos;
      }
@@ -35,13 +36,12 @@ public class ProjectileShoot : MonoBehaviour, IWeapon {
   public Vector3 PlotTrajectoryAtTime (Vector3 start, Vector3 startVelocity, float time) {
      return start + startVelocity*time + Physics.gravity*time*time*0.5f;
  }
-    // Update is called once per frame
     void IWeapon.Shoot()
     {
         if (Input.GetButtonDown ("Fire1") && Time.time > nextFireTime) 
         {
             Rigidbody cloneRb = Instantiate (projectile, bulletSpawn.position, Quaternion.identity) as Rigidbody;
-            cloneRb.AddForce(bulletSpawn.transform.forward * projectileForce);
+            cloneRb.AddForce(bulletSpawn.transform.forward * projectileForce,ForceMode.Impulse);
             Instantiate(smoke,bulletSpawn.position,bulletSpawn.rotation);
             nextFireTime = Time.time + fireRate;
         }
