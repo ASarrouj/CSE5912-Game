@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEditor;
 
 public class ProjectileShoot : MonoBehaviour, IWeapon {
 
     public Rigidbody projectile;
     public Transform bulletSpawn;
     public GameObject smoke;
+    public LineRenderer line;
     public float projectileForce = 5000f;
     public float fireRate = 1f;
 
@@ -19,23 +21,25 @@ public class ProjectileShoot : MonoBehaviour, IWeapon {
 
     void Update()
     {
-        Plot(bulletSpawn.transform.position,projectileForce*transform.forward,.1f,3f);
+        Plot(bulletSpawn.transform.position,projectileForce*bulletSpawn.transform.forward,.1f,3f);
+        
     }
      public void Plot (Vector3 start, Vector3 startVelocity, float time, float maxTime) {
-     Vector3 previous = start;
+         Vector3[] positions=new Vector3[Mathf.RoundToInt(maxTime/time)+1];
+         line.SetVertexCount(positions.Length);
+     positions[0] = start;
      for (int i=1;;i++) {
          float t = time*i;
          if (t > maxTime) break;
          Vector3 pos = PlotTrajectoryAtTime (start, startVelocity, t);
-         if (Physics.Linecast (previous,pos)) break;
-          Debug.Log(pos);
-         Debug.DrawLine (previous,pos,Color.red);
-         previous = pos;
+         positions[i]=pos;
      }
+     line.SetPositions(positions);
  }
   public Vector3 PlotTrajectoryAtTime (Vector3 start, Vector3 startVelocity, float time) {
      return start + startVelocity*time + Physics.gravity*time*time*0.5f;
  }
+
     void IWeapon.Shoot()
     {
         if (Input.GetButtonDown ("Fire1") && Time.time > nextFireTime) 
