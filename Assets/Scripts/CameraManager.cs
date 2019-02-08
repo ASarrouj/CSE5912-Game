@@ -8,7 +8,7 @@ public class CameraManager : MonoBehaviour
     private Quaternion offsetRot, originalRot;
     private float transitionTime;
     private const float transitionMaxTime = 0.5f;
-    private const float DT = 0.01f;
+    private const float DT = 0.005f;
     private bool interpolating;
     private GameObject targetObject;
     private UIManager uiManager;
