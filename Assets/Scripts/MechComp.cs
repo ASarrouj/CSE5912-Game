@@ -7,6 +7,13 @@ public class MechComp : MonoBehaviour
     public GameObject[] guns;
     public GameObject[] positions;
     public GameObject self;
+    public int moveSpeed, rotateSpeed;
+
+    void Start()
+    {
+        moveSpeed = 0;
+        rotateSpeed = 0;
+    }
 
     // Update is called once per frame
     void Update()

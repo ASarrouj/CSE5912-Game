@@ -1,44 +1,40 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class InputManager : MonoBehaviour
+public class PlayerInput : NetworkBehaviour
 {
     private CameraManager camManager;
-    private List<KeyCode> weaponInputs;
+    private IInputState inputState;
+    public List<KeyCode> weaponInputs;
     private GameObject playerMech;
-    private List<GameObject> weapons;
+    public List<GameObject> weapons;
     private ShootInput shootControls;
     private SmoothMouseLook lookControls;
     private MechMovement mechMovementControls;
 
     void Start()
     {
-        camManager = GameObject.Find("Main Camera").GetComponent<CameraManager>();
+        camManager = transform.Find("PlayerCamera").GetComponent<CameraManager>();
+        camManager.SetInput(this);
+        PrepareMechPerspec();
         weaponInputs = new List<KeyCode> { KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4 };
         weapons = new List<GameObject>();
-        shootControls = GetComponent<ShootInput>();
-        lookControls = GetComponent<SmoothMouseLook>();
-        mechMovementControls = GetComponent<MechMovement>();
+        //shootControls = GetComponent<ShootInput>();
+        //lookControls = GetComponent<SmoothMouseLook>();
+        //mechMovementControls = GetComponent<MechMovement>();
     }
 
     void Update()
     {
-        if (playerMech != null)
+        if (isLocalPlayer)
         {
+            inputState.Update();
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 DisableInput();
                 camManager.FollowMech(playerMech);
-            }
-
-            for (int i = 0; i < weapons.Count; i++)
-            {
-                if (Input.GetKeyDown(weaponInputs[i]))
-                {
-                    DisableInput();
-                    //camManager.AttachToWeapon(weapons[i]);
-                }
             }
         }
         else
@@ -53,11 +49,13 @@ public class InputManager : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha3))
+        /*
+        if (Input.GetKeyDown(KeyCode.Alpha9))
         {
             DisableInput();
             camManager.ResetPosition();
         }
+        */
     }
 
     public void EnableInput(GameObject currentObject)
@@ -75,10 +73,34 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    public void PrepareMechPerspec()
+    {
+        DisableInput();
+        camManager.FollowMech(transform.gameObject);
+    }
+
+    public void PrepareWeaponPerspec(GameObject weapon)
+    {
+        DisableInput();
+        camManager.AttachToWeapon(weapon);
+    }
+
+    public void FinalizeInterp(GameObject currentObject)
+    {
+        if (currentObject.tag == "Player")
+        {
+            inputState = new MechState(transform);
+        }
+        else if (currentObject.tag == "Weapon")
+        {
+            shootControls.currentGun = currentObject.gameObject;
+            shootControls.enabled = true;
+            lookControls.enabled = true;
+        }
+    }
+
     public void DisableInput()
     {
-        shootControls.enabled = false;
-        lookControls.enabled = false;
-        mechMovementControls.enabled = false;
+        inputState = new DisabledState();
     }
 }

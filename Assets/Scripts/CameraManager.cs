@@ -12,51 +12,41 @@ public class CameraManager : MonoBehaviour
     private bool interpolating;
     private GameObject targetObject;
     private UIManager uiManager;
-    private InputManager inputManager;
-    private Action doneCallback;
+    private PlayerInput playerInput;
 
     // Start is called before the first frame update
     void Start()
     {
         interpolating = false;
         transitionTime = 0.0f;
-        doneCallback = null;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (interpolating)
             InterpolatePosition();
-        else if (doneCallback != null)
-        {
-            doneCallback();
-            doneCallback = null;
-        }
+    }
+
+    public void SetInput(PlayerInput input)
+    {
+        playerInput = input;
     }
 
     public void FollowMech(GameObject mechObject)
     {
-        if (targetObject != mechObject)
-        {
-            PrepareInterp();
-            offsetPos = -10 * mechObject.transform.forward + 5 * mechObject.transform.up; // Forward multiplier determines distance behind, up for above
-            offsetRot = Quaternion.Euler(30, 0, 0); // X value determines level of downward tilt
-            targetObject = mechObject;
-        }
+        PrepareInterp();
+        offsetPos = -10 * mechObject.transform.forward + 5 * mechObject.transform.up; // Forward multiplier determines distance behind, up for above
+        offsetRot = Quaternion.Euler(30, 0, 0); // X value determines level of downward tilt
+        targetObject = mechObject;
     }
 
-    public void AttachToWeapon(GameObject weaponObject, Action cb)
+    public void AttachToWeapon(GameObject weaponObject)
     {
-        if (targetObject != weaponObject)
-        {
-            PrepareInterp();
-            offsetPos = Vector3.zero;
-            offsetRot = Quaternion.identity;
-            targetObject = weaponObject;
-        }
-
-        doneCallback = cb;
+        PrepareInterp();
+        offsetPos = Vector3.zero;
+        offsetRot = Quaternion.identity;
+        targetObject = weaponObject;
     }
 
     public void ResetPosition()
@@ -85,6 +75,7 @@ public class CameraManager : MonoBehaviour
         {
             interpolating = false;
             transform.parent = targetObject.transform;
+            playerInput.FinalizeInterp(targetObject);
         }
 
         transitionTime += DT;

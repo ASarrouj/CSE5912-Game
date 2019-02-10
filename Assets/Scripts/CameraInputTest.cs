@@ -20,49 +20,17 @@ public class CameraInputTest : MonoBehaviour
         MM = GameObject.Find("InputManager").GetComponent<MechMovement>();
         mainCam = GameObject.Find("Main Camera");
         currentCam = mainCam.GetComponent<Camera>();
-        mech = null;
+        mech = transform.parent.gameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!mech)
-        {
-            GameObject[] mechs = GameObject.FindGameObjectsWithTag("Mech");
-            if(mechs.Length == 1)
-            {
-                mech = mechs[0];
-            }
-            else if (mechs == null && mechs.Length == 2)
-            {
-                mech = mechs[1];
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            MM.takeInput = false;
-            UIMan.noUI();
-            if (currentCam != mainCam)
-            {
-                currentCam.enabled = false;
-                currentCam = mainCam.GetComponent<Camera>();
-                currentCam.enabled = true;
-            }
-            mech.GetComponent<PathPredictor>().enabled = false;
-            mech.GetComponent<LineRenderer>().enabled = false;
-
-            camManager.ResetPosition();
-        }
-
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            if (currentCam != mainCam)
-            {
-                currentCam.enabled = false;
-                currentCam = mainCam.GetComponent<Camera>();
-                currentCam.enabled = true;
-            }
+            currentCam.enabled = false;
+            currentCam = mainCam.GetComponent<Camera>();
+            currentCam.enabled = true;
 
             UIMan.navigationUI();
             MM.mech = mech;
@@ -82,6 +50,22 @@ public class CameraInputTest : MonoBehaviour
                 currentCam.enabled = true;
             }
 
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                MM.takeInput = false;
+                UIMan.noUI();
+                if (currentCam != mainCam)
+                {
+                    currentCam.enabled = false;
+                    currentCam = mainCam.GetComponent<Camera>();
+                    currentCam.enabled = true;
+                }
+                mech.GetComponent<PathPredictor>().enabled = false;
+                mech.GetComponent<LineRenderer>().enabled = false;
+
+                camManager.ResetPosition();
+            }
+
             MM.takeInput = false;
             mech.GetComponent<PathPredictor>().enabled = false;
             mech.GetComponent<LineRenderer>().enabled = false;
@@ -91,7 +75,7 @@ public class CameraInputTest : MonoBehaviour
             GameObject gunCam = mg.transform.Find("GunCamera").gameObject;
 
             UIMan.gunUI();
-            camManager.AttachToWeapon(gunCam, weaponCameraCallback);
+            camManager.AttachToWeapon(gunCam);
         }
     }
 
