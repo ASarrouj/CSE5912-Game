@@ -10,7 +10,7 @@ public class CameraInputTest : MonoBehaviour
     private MechMovement MM;
     private GameObject mainCam;
     private Camera currentCam;
-    private GameObject mech;
+    private Transform mech;
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +20,7 @@ public class CameraInputTest : MonoBehaviour
         MM = GameObject.Find("InputManager").GetComponent<MechMovement>();
         mainCam = GameObject.Find("Main Camera");
         currentCam = mainCam.GetComponent<Camera>();
-        mech = transform.parent.gameObject;
+        mech = transform.parent;
     }
 
     // Update is called once per frame
@@ -33,7 +33,7 @@ public class CameraInputTest : MonoBehaviour
             currentCam.enabled = true;
 
             UIMan.navigationUI();
-            MM.mech = mech;
+            //MM.mech = mech;
             MM.takeInput = true;
             mech.GetComponent<LineRenderer>().enabled = true;
             mech.GetComponent<PathPredictor>().enabled = true;
@@ -75,7 +75,7 @@ public class CameraInputTest : MonoBehaviour
             GameObject gunCam = mg.transform.Find("GunCamera").gameObject;
 
             UIMan.gunUI();
-            camManager.AttachToWeapon(gunCam);
+            //camManager.AttachToWeapon(gunCam);
         }
     }
 

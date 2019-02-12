@@ -6,7 +6,7 @@ public class MechState : IInputState
 {
     private PlayerInput playerInput;
     private List<KeyCode> weaponInputs;
-    private List<GameObject> weapons;
+    private List<Transform> weapons;
     private MoveTest mechStats;
 
     public MechState(Transform playerTransform)
@@ -24,6 +24,7 @@ public class MechState : IInputState
         {
             if (Input.GetKeyDown(weaponInputs[i]))
             {
+                playerInput.lastKeyPress = weaponInputs[i];
                 playerInput.PrepareWeaponPerspec(weapons[i]);
             }
         }

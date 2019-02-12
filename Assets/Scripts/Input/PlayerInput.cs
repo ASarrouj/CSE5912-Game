@@ -8,8 +8,9 @@ public class PlayerInput : NetworkBehaviour
     private CameraManager camManager;
     private IInputState inputState;
     public List<KeyCode> weaponInputs;
-    private GameObject playerMech;
-    public List<GameObject> weapons;
+    public KeyCode lastKeyPress;
+    private Transform playerMech;
+    public List<Transform> weapons;
     private ShootInput shootControls;
     private SmoothMouseLook lookControls;
     private MechMovement mechMovementControls;
@@ -18,9 +19,15 @@ public class PlayerInput : NetworkBehaviour
     {
         camManager = transform.Find("PlayerCamera").GetComponent<CameraManager>();
         camManager.SetInput(this);
+
+        // Begin game by interpolating to mech
         PrepareMechPerspec();
+
         weaponInputs = new List<KeyCode> { KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4 };
-        weapons = new List<GameObject>();
+        weapons = new List<Transform>();
+        playerMech = transform.Find("NewMechWithGuns");
+        weapons.Add(playerMech.Find("FrontGun").GetChild(0));
+        weapons.Add(playerMech.Find("LeftGun").GetChild(0));
         //shootControls = GetComponent<ShootInput>();
         //lookControls = GetComponent<SmoothMouseLook>();
         //mechMovementControls = GetComponent<MechMovement>();
@@ -31,71 +38,30 @@ public class PlayerInput : NetworkBehaviour
         if (isLocalPlayer)
         {
             inputState.Update();
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                DisableInput();
-                camManager.FollowMech(playerMech);
-            }
-        }
-        else
-        {
-            if ((playerMech = GameObject.FindWithTag("Mech")) != null)
-            {
-                foreach (Transform child in transform)
-                {
-                    if (child.gameObject.tag == "Weapon")
-                        weapons.Add(child.gameObject);
-                }
-            }
-        }
-
-        /*
-        if (Input.GetKeyDown(KeyCode.Alpha9))
-        {
-            DisableInput();
-            camManager.ResetPosition();
-        }
-        */
-    }
-
-    public void EnableInput(GameObject currentObject)
-    {
-        if (currentObject.tag == "Mech")
-        {
-            mechMovementControls.mech = currentObject;
-            mechMovementControls.enabled = true;
-        }
-        else if (currentObject.tag == "Weapon")
-        {
-            shootControls.currentGun = currentObject;
-            shootControls.enabled = true;
-            lookControls.enabled = true;
         }
     }
 
     public void PrepareMechPerspec()
     {
         DisableInput();
-        camManager.FollowMech(transform.gameObject);
+        camManager.FollowMech(transform);
     }
 
-    public void PrepareWeaponPerspec(GameObject weapon)
+    public void PrepareWeaponPerspec(Transform weapon)
     {
         DisableInput();
         camManager.AttachToWeapon(weapon);
     }
 
-    public void FinalizeInterp(GameObject currentObject)
+    public void EnableInput(Transform currentTransform)
     {
-        if (currentObject.tag == "Player")
+        if (currentTransform.tag == "Player")
         {
             inputState = new MechState(transform);
         }
-        else if (currentObject.tag == "Weapon")
+        else if (currentTransform.tag == "Weapon")
         {
-            shootControls.currentGun = currentObject.gameObject;
-            shootControls.enabled = true;
-            lookControls.enabled = true;
+            inputState = new WeaponState(transform, lastKeyPress);
         }
     }
 

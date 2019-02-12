@@ -10,14 +10,13 @@ public class CameraManager : MonoBehaviour
     private const float transitionMaxTime = 0.5f;
     private const float DT = 0.005f;
     private bool interpolating;
-    private GameObject targetObject;
+    private Transform target;
     private UIManager uiManager;
     private PlayerInput playerInput;
 
     // Start is called before the first frame update
     void Start()
     {
-        interpolating = false;
         transitionTime = 0.0f;
     }
 
@@ -33,20 +32,20 @@ public class CameraManager : MonoBehaviour
         playerInput = input;
     }
 
-    public void FollowMech(GameObject mechObject)
+    public void FollowMech(Transform mech)
     {
         PrepareInterp();
-        offsetPos = -10 * mechObject.transform.forward + 5 * mechObject.transform.up; // Forward multiplier determines distance behind, up for above
+        offsetPos = -10 * mech.forward + 5 * mech.up; // Forward multiplier determines distance behind, up for above
         offsetRot = Quaternion.Euler(30, 0, 0); // X value determines level of downward tilt
-        targetObject = mechObject;
+        target = mech;
     }
 
-    public void AttachToWeapon(GameObject weaponObject)
+    public void AttachToWeapon(Transform weapon)
     {
         PrepareInterp();
         offsetPos = Vector3.zero;
         offsetRot = Quaternion.identity;
-        targetObject = weaponObject;
+        target = weapon;
     }
 
     public void ResetPosition()
@@ -54,7 +53,7 @@ public class CameraManager : MonoBehaviour
         PrepareInterp();
         offsetPos = Vector3.zero;
         offsetRot = Quaternion.identity;
-        targetObject = GameObject.Find("DebugCameraPos");
+        target = GameObject.Find("DebugCameraPos").transform;
     }
 
     private void PrepareInterp()
@@ -68,14 +67,14 @@ public class CameraManager : MonoBehaviour
 
     private void InterpolatePosition()
     {
-        transform.position = Vector3.Lerp(originalPos, targetObject.transform.position + offsetPos, ComputeArcLengthFromTime(transitionTime));
-        transform.rotation = Quaternion.Slerp(originalRot, targetObject.transform.rotation * offsetRot, ComputeArcLengthFromTime(transitionTime));
+        transform.position = Vector3.Lerp(originalPos, target.position + offsetPos, ComputeArcLengthFromTime(transitionTime));
+        transform.rotation = Quaternion.Slerp(originalRot, target.rotation * offsetRot, ComputeArcLengthFromTime(transitionTime));
 
         if (transitionTime >= transitionMaxTime)
         {
             interpolating = false;
-            transform.parent = targetObject.transform;
-            playerInput.FinalizeInterp(targetObject);
+            transform.parent = target.transform;
+            playerInput.EnableInput(target);
         }
 
         transitionTime += DT;
