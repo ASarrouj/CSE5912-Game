@@ -12,8 +12,6 @@ public class PlayerInput : NetworkBehaviour
     private Transform playerMech;
     public List<Transform> weapons;
     private ShootInput shootControls;
-    private SmoothMouseLook lookControls;
-    private MechMovement mechMovementControls;
 
     void Start()
     {
@@ -36,8 +34,6 @@ public class PlayerInput : NetworkBehaviour
             weapons.Add(playerMech.Find("FrontGun").GetChild(0));
             weapons.Add(playerMech.Find("LeftGun").GetChild(0));
             //shootControls = GetComponent<ShootInput>();
-            //lookControls = GetComponent<SmoothMouseLook>();
-            //mechMovementControls = GetComponent<MechMovement>();
         }
     }
 
