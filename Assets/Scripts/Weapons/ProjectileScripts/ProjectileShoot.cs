@@ -7,7 +7,7 @@ public class ProjectileShoot : MonoBehaviour, IWeapon
 
     public Rigidbody projectile;
     public Transform bulletSpawn;
-    public GameObject smoke;
+    public ParticleSystem smoke;
     public LineRenderer line;
     public ObjectPooler roundPool;
     public float projectileForce = 5000f;
@@ -15,16 +15,20 @@ public class ProjectileShoot : MonoBehaviour, IWeapon
 
     private float nextFireTime;
     private Camera gunCamera;
+    private AudioSource source;
+    private WaitForSeconds shotLength = new WaitForSeconds(0.1f);
 
     void Awake()
     {
         gunCamera = transform.parent.Find("PlayerCamera").GetComponent<Camera>();
+        source = GetComponent<AudioSource>();
     }
 
     void Update()
     {
         Plot(bulletSpawn.transform.position, projectileForce * bulletSpawn.transform.forward, .1f, 3f);
     }
+
     public void Plot(Vector3 start, Vector3 startVelocity, float time, float maxTime)
     {
         Vector3[] positions = new Vector3[Mathf.RoundToInt(maxTime / time) + 1];
@@ -39,6 +43,7 @@ public class ProjectileShoot : MonoBehaviour, IWeapon
         }
         line.SetPositions(positions);
     }
+
     public Vector3 PlotTrajectoryAtTime(Vector3 start, Vector3 startVelocity, float time)
     {
         return start + startVelocity * time + Physics.gravity * time * time * 0.5f;
@@ -46,11 +51,19 @@ public class ProjectileShoot : MonoBehaviour, IWeapon
 
     void IWeapon.Shoot()
     {
+        nextFireTime = Time.time + fireRate;
+
         GameObject projectile = roundPool.GetObject();
         projectile.transform.position = bulletSpawn.position;
         projectile.transform.rotation = Quaternion.identity;
         projectile.GetComponent<Rigidbody>().AddForce(bulletSpawn.transform.forward * projectileForce, ForceMode.Impulse);
-        Instantiate(smoke, bulletSpawn.position, bulletSpawn.rotation);
-        nextFireTime = Time.time + fireRate;
+        StartCoroutine(ShotEffect());
+    }
+
+    private IEnumerator ShotEffect()
+    {
+        smoke.Play();
+        source.Play();
+        yield return shotLength;
     }
 }
