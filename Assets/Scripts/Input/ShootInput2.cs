@@ -13,16 +13,16 @@ public class ShootInput2 : MonoBehaviour
     private void Awake()
     {
         gunBehavior = currentGun.GetComponent<IWeapon>();
-        source=GetComponent<AudioSource>();
+        source = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
-       if (Input.GetButton("Fire1"))
+        if (Input.GetButton("Fire1"))
         {
             gunBehavior.Shoot();
-            source.PlayOneShot(aud,.3f);
+            source.PlayOneShot(aud, .3f);
         }
     }
 }
