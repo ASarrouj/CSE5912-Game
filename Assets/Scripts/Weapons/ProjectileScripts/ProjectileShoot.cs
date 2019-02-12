@@ -2,7 +2,8 @@
 using System.Collections;
 using UnityEditor;
 
-public class ProjectileShoot : MonoBehaviour, IWeapon {
+public class ProjectileShoot : MonoBehaviour, IWeapon
+{
 
     public Rigidbody projectile;
     public Transform bulletSpawn;
@@ -16,13 +17,12 @@ public class ProjectileShoot : MonoBehaviour, IWeapon {
 
     void Awake()
     {
-        gunCamera = GetComponentInParent<Camera>();
+        gunCamera = transform.parent.Find("PlayerCamera").GetComponent<Camera>();
     }
 
     void Update()
     {
         Plot(bulletSpawn.transform.position,projectileForce*bulletSpawn.transform.forward,.1f,3f);
-        
     }
      public void Plot (Vector3 start, Vector3 startVelocity, float time, float maxTime) {
          Vector3[] positions=new Vector3[Mathf.RoundToInt(maxTime/time)+1];

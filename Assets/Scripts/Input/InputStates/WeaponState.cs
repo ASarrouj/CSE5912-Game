@@ -4,38 +4,42 @@ using UnityEngine;
 
 public class WeaponState : IInputState
 {
-
+    private Transform weapon;
     private PlayerInput playerInput;
-    private List<KeyCode> weaponInputs;
-    private List<Transform> weapons;
+    private List<KeyCode> otherWeaponInputs;
+    private List<Transform> otherWeapons;
     private int lastPressIndex;
+    private SmoothMouseLook mouseInput;
 
     public WeaponState(Transform playerTransform, KeyCode lastKeyPress)
     {
         playerInput = playerTransform.GetComponent<PlayerInput>();
 
         lastPressIndex = playerInput.weaponInputs.IndexOf(lastKeyPress);
-        weaponInputs = new List<KeyCode>(playerInput.weaponInputs);
-        weaponInputs.Remove(lastKeyPress);
-        weapons = new List<Transform>(playerInput.weapons);
-        weapons.RemoveAt(lastPressIndex);
+        otherWeaponInputs = new List<KeyCode>(playerInput.weaponInputs);
+        otherWeaponInputs.Remove(lastKeyPress);
+        otherWeapons = new List<Transform>(playerInput.weapons);
+        otherWeapons.RemoveAt(lastPressIndex);
+
+        mouseInput = new SmoothMouseLook(playerInput.weapons[lastPressIndex]);
     }
 
     public void Update()
     {
-        Debug.Log("weapon");
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             playerInput.PrepareMechPerspec();
         }
 
-        for (int i = 0; i < weapons.Count; i++)
+        for (int i = 0; i < otherWeapons.Count; i++)
         {
-            if (Input.GetKeyDown(weaponInputs[i]))
+            if (Input.GetKeyDown(otherWeaponInputs[i]))
             {
-                playerInput.lastKeyPress = weaponInputs[i];
-                playerInput.PrepareWeaponPerspec(weapons[i]);
+                playerInput.lastKeyPress = otherWeaponInputs[i];
+                playerInput.PrepareWeaponPerspec(otherWeapons[i]);
             }
         }
+
+        mouseInput.Update();
     }
 }

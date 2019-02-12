@@ -3,14 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 
 [AddComponentMenu("Camera-Control/Smooth Mouse Look")]
-public class SmoothMouseLook : MonoBehaviour
+public class SmoothMouseLook
 {
-
     public enum RotationAxes { MouseXAndY = 0, MouseX = 1, MouseY = 2 }
     public RotationAxes axes = RotationAxes.MouseXAndY;
     public float sensitivityX = 15F;
     public float sensitivityY = 15F;
-    public GameObject weapon;
+    public Transform weapon;
 
     public float minimumX = -360F;
     public float maximumX = 360F;
@@ -31,7 +30,16 @@ public class SmoothMouseLook : MonoBehaviour
 
     Quaternion originalRotation;
 
-    void Update()
+    public SmoothMouseLook(Transform weapon)
+    {
+        this.weapon = weapon;
+        Rigidbody rb = weapon.GetComponent<Rigidbody>();
+        if (rb)
+            rb.freezeRotation = true;
+        originalRotation = weapon.localRotation;
+    }
+
+    public void Update()
     {
         if (axes == RotationAxes.MouseXAndY)
         {
@@ -71,7 +79,7 @@ public class SmoothMouseLook : MonoBehaviour
             Quaternion yQuaternion = Quaternion.AngleAxis(rotAverageY, Vector3.left);
             Quaternion xQuaternion = Quaternion.AngleAxis(rotAverageX, Vector3.up);
 
-            weapon.transform.localRotation = originalRotation * xQuaternion * yQuaternion;
+            weapon.localRotation = originalRotation * xQuaternion * yQuaternion;
         }
         else if (axes == RotationAxes.MouseX)
         {
@@ -94,7 +102,7 @@ public class SmoothMouseLook : MonoBehaviour
             rotAverageX = ClampAngle(rotAverageX, minimumX, maximumX);
 
             Quaternion xQuaternion = Quaternion.AngleAxis(rotAverageX, Vector3.up);
-            weapon.transform.localRotation = originalRotation * xQuaternion;
+            weapon.localRotation = originalRotation * xQuaternion;
         }
         else
         {
@@ -117,16 +125,8 @@ public class SmoothMouseLook : MonoBehaviour
             rotAverageY = ClampAngle(rotAverageY, minimumY, maximumY);
 
             Quaternion yQuaternion = Quaternion.AngleAxis(rotAverageY, Vector3.left);
-            weapon.transform.localRotation = originalRotation * yQuaternion;
+            weapon.localRotation = originalRotation * yQuaternion;
         }
-    }
-
-    void Start()
-    {
-        Rigidbody rb = weapon.GetComponent<Rigidbody>();
-        if (rb)
-            rb.freezeRotation = true;
-        originalRotation = transform.localRotation;
     }
 
     public static float ClampAngle(float angle, float min, float max)

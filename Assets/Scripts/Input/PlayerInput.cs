@@ -17,20 +17,28 @@ public class PlayerInput : NetworkBehaviour
 
     void Start()
     {
-        camManager = transform.Find("PlayerCamera").GetComponent<CameraManager>();
-        camManager.SetInput(this);
+        if (!isLocalPlayer)
+        {
+            transform.Find("UI").gameObject.SetActive(false);
+            transform.Find("PlayerCamera").gameObject.SetActive(false);
+        }
+        else
+        {
+            camManager = transform.Find("PlayerCamera").GetComponent<CameraManager>();
+            camManager.SetInput(this);
 
-        // Begin game by interpolating to mech
-        PrepareMechPerspec();
+            // Begin game by interpolating to mech
+            PrepareMechPerspec();
 
-        weaponInputs = new List<KeyCode> { KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4 };
-        weapons = new List<Transform>();
-        playerMech = transform.Find("NewMechWithGuns");
-        weapons.Add(playerMech.Find("FrontGun").GetChild(0));
-        weapons.Add(playerMech.Find("LeftGun").GetChild(0));
-        //shootControls = GetComponent<ShootInput>();
-        //lookControls = GetComponent<SmoothMouseLook>();
-        //mechMovementControls = GetComponent<MechMovement>();
+            weaponInputs = new List<KeyCode> { KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4 };
+            weapons = new List<Transform>();
+            playerMech = transform.Find("NewMechWithGuns");
+            weapons.Add(playerMech.Find("FrontGun").GetChild(0));
+            weapons.Add(playerMech.Find("LeftGun").GetChild(0));
+            //shootControls = GetComponent<ShootInput>();
+            //lookControls = GetComponent<SmoothMouseLook>();
+            //mechMovementControls = GetComponent<MechMovement>();
+        }
     }
 
     void Update()
