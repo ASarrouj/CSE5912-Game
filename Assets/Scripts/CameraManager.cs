@@ -7,56 +7,45 @@ public class CameraManager : MonoBehaviour
     private Vector3 offsetPos, originalPos;
     private Quaternion offsetRot, originalRot;
     private float transitionTime;
-    private const float transitionMaxTime = 0.5f;
+    private const float transitionMaxTime = 0.2f;
     private const float DT = 0.005f;
     private bool interpolating;
-    private GameObject targetObject;
+    private Transform target;
     private UIManager uiManager;
-    private InputManager inputManager;
-    private Action doneCallback;
+    private PlayerInput playerInput;
 
     // Start is called before the first frame update
     void Start()
     {
-        interpolating = false;
         transitionTime = 0.0f;
-        doneCallback = null;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (interpolating)
             InterpolatePosition();
-        else if (doneCallback != null)
-        {
-            doneCallback();
-            doneCallback = null;
-        }
     }
 
-    public void FollowMech(GameObject mechObject)
+    public void SetInput(PlayerInput input)
     {
-        if (targetObject != mechObject)
-        {
-            PrepareInterp();
-            offsetPos = -10 * mechObject.transform.forward + 5 * mechObject.transform.up; // Forward multiplier determines distance behind, up for above
-            offsetRot = Quaternion.Euler(30, 0, 0); // X value determines level of downward tilt
-            targetObject = mechObject;
-        }
+        playerInput = input;
     }
 
-    public void AttachToWeapon(GameObject weaponObject, Action cb)
+    public void FollowMech(Transform player)
     {
-        if (targetObject != weaponObject)
-        {
-            PrepareInterp();
-            offsetPos = Vector3.zero;
-            offsetRot = Quaternion.identity;
-            targetObject = weaponObject;
-        }
+        PrepareInterp();
+        offsetPos = new Vector3(-10, 5, -2); // X multiplier determines distance behind, Y for above, Z for right
+        offsetRot = Quaternion.Euler(30, 0, 0); // X value determines level of downward tilt
+        target = player;
+    }
 
-        doneCallback = cb;
+    public void AttachToWeapon(Transform weapon)
+    {
+        PrepareInterp();
+        offsetPos = new Vector3(0, 1, 0); // X multiplier determines distance behind, Y for above
+        offsetRot = Quaternion.identity;
+        target = weapon;
     }
 
     public void ResetPosition()
@@ -64,7 +53,7 @@ public class CameraManager : MonoBehaviour
         PrepareInterp();
         offsetPos = Vector3.zero;
         offsetRot = Quaternion.identity;
-        targetObject = GameObject.Find("DebugCameraPos");
+        target = GameObject.Find("DebugCameraPos").transform;
     }
 
     private void PrepareInterp()
@@ -78,13 +67,14 @@ public class CameraManager : MonoBehaviour
 
     private void InterpolatePosition()
     {
-        transform.position = Vector3.Lerp(originalPos, targetObject.transform.position + offsetPos, ComputeArcLengthFromTime(transitionTime));
-        transform.rotation = Quaternion.Slerp(originalRot, targetObject.transform.rotation * offsetRot, ComputeArcLengthFromTime(transitionTime));
+        transform.position = Vector3.Lerp(originalPos, target.position + (offsetPos.x * target.forward + offsetPos.y * target.up + offsetPos.z * target.right), ComputeArcLengthFromTime(transitionTime));
+        transform.rotation = Quaternion.Slerp(originalRot, target.rotation * offsetRot, ComputeArcLengthFromTime(transitionTime));
 
         if (transitionTime >= transitionMaxTime)
         {
             interpolating = false;
-            transform.parent = targetObject.transform;
+            transform.parent = target.transform;
+            playerInput.EnableInput(target);
         }
 
         transitionTime += DT;

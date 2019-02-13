@@ -6,8 +6,8 @@ using UnityEngine;
 public class MoveTest : MonoBehaviour
 {
     LineRenderer lr;
-    private int moveSpeed;
-    private int rotateSpeed;
+    public int moveSpeed;
+    public int rotateSpeed;
     public int pathLength = 6000;
     GameObject future;
     private float nextActionTime = 0.0f;
@@ -29,41 +29,6 @@ public class MoveTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow) && moveSpeed < 3)
-        {
-            moveSpeed++;
-        }
-        if (Input.GetKeyDown(KeyCode.DownArrow) && moveSpeed > -1)
-        {
-            moveSpeed--;
-        }
-        if (Input.GetKeyDown(KeyCode.LeftArrow) && moveSpeed != 0 && rotateSpeed >= -30 && rotateSpeed <= 30)
-        {
-            if (moveSpeed > 0 && rotateSpeed > -30)
-            {
-                rotateSpeed -= 5;
-            }
-            else if (moveSpeed < 0 && rotateSpeed < 30)
-            {
-                rotateSpeed += 5;
-            }
-
-        }
-        if (Input.GetKeyDown(KeyCode.RightArrow) && moveSpeed != 0 && rotateSpeed <= 30 && rotateSpeed >= -30)
-        {
-            if (moveSpeed > 0 && rotateSpeed < 30)
-            {
-                rotateSpeed += 5;
-            }
-            else if (moveSpeed < 0 && rotateSpeed > -30)
-            {
-                rotateSpeed -= 5;
-            }
-        }
-        if (moveSpeed == 0)
-        {
-            rotateSpeed = 0;
-        }
         if (Time.time > nextActionTime)
         {
             nextActionTime += period;
