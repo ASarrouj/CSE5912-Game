@@ -4,17 +4,12 @@ using UnityEngine;
 
 public class ObjectPooler : MonoBehaviour
 {
-    public static ObjectPooler current;
     public GameObject pooledObject;
     public int pooledAmount = 10;
     public bool willGrow = true;
 
-    List<GameObject> objects;
-
-    private void Awake()
-    {
-        current = this;
-    }
+    private List<GameObject> objects;
+    
 
     private void Start()
     {
