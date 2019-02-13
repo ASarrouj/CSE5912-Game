@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 5863196659231249069}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 5863196659734900410}
   m_Father: {fileID: 0}
@@ -232,8 +232,6 @@ MonoBehaviour:
   range: 50
   gunEnd: {fileID: 5863196659633628858}
   gunSmoke: {fileID: 198000011441735220, guid: 85a8865d1bf4a63478038fae23776de8, type: 3}
-  hitEffectPool: {fileID: 7250349405900229758, guid: 3cb0e55bc643d1f4195eaf86081af508,
-    type: 3}
   muzzleFlash: {fileID: 5863196659633982870}
 --- !u!1 &5863196659734900409
 GameObject:
