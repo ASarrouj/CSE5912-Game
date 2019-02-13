@@ -4,15 +4,13 @@ using UnityEditor;
 
 public class ProjectileShoot : MonoBehaviour, IWeapon
 {
-
-    public Rigidbody projectile;
     public Transform bulletSpawn;
     public ParticleSystem smoke;
-    public LineRenderer line;
     public ObjectPooler roundPool;
     public float projectileForce = 5000f;
     public float fireRate = 1f;
 
+    private LineRenderer line;
     private float nextFireTime;
     private Camera gunCamera;
     private AudioSource source;
@@ -22,6 +20,7 @@ public class ProjectileShoot : MonoBehaviour, IWeapon
     {
         gunCamera = transform.parent.Find("PlayerCamera").GetComponent<Camera>();
         source = GetComponent<AudioSource>();
+        line = GetComponent<LineRenderer>();
     }
 
     void Update()
@@ -32,7 +31,7 @@ public class ProjectileShoot : MonoBehaviour, IWeapon
     public void Plot(Vector3 start, Vector3 startVelocity, float time, float maxTime)
     {
         Vector3[] positions = new Vector3[Mathf.RoundToInt(maxTime / time) + 1];
-        line.SetVertexCount(positions.Length);
+        line.positionCount = positions.Length;
         positions[0] = start;
         for (int i = 1; ; i++)
         {

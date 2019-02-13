@@ -231,8 +231,9 @@ MonoBehaviour:
   fireRate: 0.1
   range: 50
   gunEnd: {fileID: 5863196659633628858}
-  gunSmoke: {fileID: 0}
-  hitEffectPool: {fileID: 0}
+  gunSmoke: {fileID: 198000011441735220, guid: 85a8865d1bf4a63478038fae23776de8, type: 3}
+  hitEffectPool: {fileID: 7250349405900229758, guid: 3cb0e55bc643d1f4195eaf86081af508,
+    type: 3}
   muzzleFlash: {fileID: 5863196659633982870}
 --- !u!1 &5863196659734900409
 GameObject:
