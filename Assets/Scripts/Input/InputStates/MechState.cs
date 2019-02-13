@@ -8,6 +8,7 @@ public class MechState : IInputState
     private List<KeyCode> weaponInputs;
     private List<Transform> weapons;
     private MoveTest mechStats;
+    private int maxSpeed, speedStep;
 
     public MechState(Transform playerTransform)
     {
@@ -16,6 +17,9 @@ public class MechState : IInputState
         weaponInputs = playerInput.weaponInputs;
         weapons = playerInput.weapons;
         mechStats = playerInput.transform.GetComponent<MoveTest>();
+
+        speedStep = 4;
+        maxSpeed = 12;
     }
 
     public void Update()
@@ -29,13 +33,13 @@ public class MechState : IInputState
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.UpArrow) && mechStats.moveSpeed < 3)
+        if (Input.GetKeyDown(KeyCode.UpArrow) && mechStats.moveSpeed < maxSpeed)
         {
-            mechStats.moveSpeed++;
+            mechStats.moveSpeed += speedStep;
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow) && mechStats.moveSpeed > -1)
+        if (Input.GetKeyDown(KeyCode.DownArrow) && mechStats.moveSpeed > -4)
         {
-            mechStats.moveSpeed--;
+            mechStats.moveSpeed -= speedStep;
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow) && mechStats.moveSpeed != 0 && mechStats.rotateSpeed >= -30 && mechStats.rotateSpeed <= 30)
         {

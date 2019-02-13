@@ -7,7 +7,7 @@ public class CameraManager : MonoBehaviour
     private Vector3 offsetPos, originalPos;
     private Quaternion offsetRot, originalRot;
     private float transitionTime;
-    private const float transitionMaxTime = 0.5f;
+    private const float transitionMaxTime = 0.2f;
     private const float DT = 0.005f;
     private bool interpolating;
     private Transform target;
@@ -32,18 +32,18 @@ public class CameraManager : MonoBehaviour
         playerInput = input;
     }
 
-    public void FollowMech(Transform mech)
+    public void FollowMech(Transform player)
     {
         PrepareInterp();
-        offsetPos = -10 * mech.forward + 5 * mech.up; // Forward multiplier determines distance behind, up for above
+        offsetPos = new Vector3(-10, 5, -2); // X multiplier determines distance behind, Y for above, Z for right
         offsetRot = Quaternion.Euler(30, 0, 0); // X value determines level of downward tilt
-        target = mech;
+        target = player;
     }
 
     public void AttachToWeapon(Transform weapon)
     {
         PrepareInterp();
-        offsetPos = Vector3.zero;
+        offsetPos = new Vector3(0, 1, 0); // X multiplier determines distance behind, Y for above
         offsetRot = Quaternion.identity;
         target = weapon;
     }
@@ -67,7 +67,7 @@ public class CameraManager : MonoBehaviour
 
     private void InterpolatePosition()
     {
-        transform.position = Vector3.Lerp(originalPos, target.position + offsetPos, ComputeArcLengthFromTime(transitionTime));
+        transform.position = Vector3.Lerp(originalPos, target.position + (offsetPos.x * target.forward + offsetPos.y * target.up + offsetPos.z * target.right), ComputeArcLengthFromTime(transitionTime));
         transform.rotation = Quaternion.Slerp(originalRot, target.rotation * offsetRot, ComputeArcLengthFromTime(transitionTime));
 
         if (transitionTime >= transitionMaxTime)
