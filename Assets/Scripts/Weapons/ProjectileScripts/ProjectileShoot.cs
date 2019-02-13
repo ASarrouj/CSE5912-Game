@@ -18,7 +18,7 @@ public class ProjectileShoot : MonoBehaviour, IWeapon
 
     void Awake()
     {
-        gunCamera = transform.parent.Find("PlayerCamera").GetComponent<Camera>();
+        gunCamera = GameObject.Find("PlayerCamera").GetComponent<Camera>();
         source = GetComponent<AudioSource>();
         line = GetComponent<LineRenderer>();
     }
