@@ -6,13 +6,13 @@ public class ProjectileShoot : MonoBehaviour, IWeapon
 {
     public Transform bulletSpawn;
     public ParticleSystem smoke;
-    public ObjectPooler roundPool;
     public float projectileForce = 5000f;
     public float fireRate = 1f;
 
     private LineRenderer line;
     private float nextFireTime;
     private Camera gunCamera;
+    private ObjectPooler roundPool;
     private AudioSource source;
     private WaitForSeconds shotLength = new WaitForSeconds(0.1f);
 
@@ -21,6 +21,7 @@ public class ProjectileShoot : MonoBehaviour, IWeapon
         gunCamera = GameObject.Find("PlayerCamera").GetComponent<Camera>();
         source = GetComponent<AudioSource>();
         line = GetComponent<LineRenderer>();
+        roundPool = GameObject.Find("ArtProjectilePool").GetComponent<ObjectPooler>();
     }
 
     void Update()

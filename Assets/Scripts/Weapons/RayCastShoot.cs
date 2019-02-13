@@ -9,10 +9,10 @@ public class RayCastShoot : MonoBehaviour, IWeapon
     public float range = 50;
     public Transform gunEnd;
     public ParticleSystem gunSmoke;
-    public ObjectPooler hitEffectPool;
     public GameObject muzzleFlash;
 
     private Camera gunCamera;
+    private ObjectPooler hitEffectPool;
     private LineRenderer lineRenderer;
     private WaitForSeconds shotLength = new WaitForSeconds(0.05f);
     private float nextFireTime;
@@ -21,11 +21,7 @@ public class RayCastShoot : MonoBehaviour, IWeapon
     {
         lineRenderer = GetComponent<LineRenderer>();
         gunCamera = GameObject.Find("PlayerCamera").GetComponent<Camera>();
-    }
-
-    private void Start()
-    {
-        hitEffectPool = ObjectPooler.current;
+        hitEffectPool = GameObject.Find("MGImpactPool").GetComponent<ObjectPooler>();
     }
 
     void IWeapon.Shoot()
