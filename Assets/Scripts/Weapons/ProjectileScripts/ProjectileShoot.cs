@@ -8,6 +8,8 @@ public class ProjectileShoot : MonoBehaviour, IWeapon
     public ParticleSystem smoke;
     public float projectileForce = 5000f;
     public float fireRate = 1f;
+    bool cameraOn;
+    bool disabled;
 
     private LineRenderer line;
     private float nextFireTime;
