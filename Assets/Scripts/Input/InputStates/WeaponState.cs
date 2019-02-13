@@ -22,6 +22,7 @@ public class WeaponState : IInputState
         otherWeapons.RemoveAt(lastPressIndex);
 
         mouseInput = new SmoothMouseLook(playerInput.weapons[lastPressIndex]);
+        mouseInput.SetClamping(-60, 60, -30, 30);
     }
 
     public void Update()

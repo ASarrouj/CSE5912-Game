@@ -145,4 +145,12 @@ public class SmoothMouseLook
         }
         return Mathf.Clamp(angle, min, max);
     }
+
+    public void SetClamping(float xMin, float xMax, float yMin, float yMax)
+    {
+        minimumX = xMin;
+        minimumY = yMin;
+        maximumX = xMax;
+        maximumY = yMax;
+    }
 }

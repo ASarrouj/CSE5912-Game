@@ -64,5 +64,6 @@ public class ProjectileShoot : MonoBehaviour, IWeapon
         smoke.Play();
         source.Play();
         yield return shotLength;
+
     }
 }
