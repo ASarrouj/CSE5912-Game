@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEditor;
 
-public class ProjectileShoot : MonoBehaviour, IWeapon {
+public class ProjectileShoot : MonoBehaviour, IWeapon{
 
     public Rigidbody projectile;
     public Transform bulletSpawn;
@@ -10,6 +10,8 @@ public class ProjectileShoot : MonoBehaviour, IWeapon {
     public LineRenderer line;
     public float projectileForce = 5000f;
     public float fireRate = 1f;
+    bool cameraOn;
+    bool disabled;
 
     private float nextFireTime;
     private Camera gunCamera;
@@ -17,6 +19,7 @@ public class ProjectileShoot : MonoBehaviour, IWeapon {
     void Awake()
     {
         gunCamera = GetComponentInParent<Camera>();
+        disabled=false;
     }
 
     void Update()
