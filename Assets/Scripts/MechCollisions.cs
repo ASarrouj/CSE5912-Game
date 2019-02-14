@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MechCollisions : MonoBehaviour
 {
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,10 +19,6 @@ public class MechCollisions : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-            Debug.Log("ok");
-            /*foreach (ContactPoint contact in collision.contacts)
-            {
-                Debug.DrawRay(contact.point, contact.normal, Color.red);
-            }*/
+        // Play Sound
     }
 }
