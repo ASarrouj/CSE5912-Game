@@ -8,19 +8,15 @@ public class ProjectileShoot : MonoBehaviour, IWeapon
     public ParticleSystem smoke;
     public float projectileForce = 5000f;
     public float fireRate = 1f;
-    bool cameraOn;
-    bool disabled;
 
     private LineRenderer line;
     private float nextFireTime;
-    private Camera gunCamera;
     private ObjectPooler roundPool;
     private AudioSource source;
     private WaitForSeconds shotLength = new WaitForSeconds(0.1f);
 
-    void Awake()
+    void OnEnable()
     {
-        gunCamera = GameObject.Find("PlayerCamera").GetComponent<Camera>();
         source = GetComponent<AudioSource>();
         line = GetComponent<LineRenderer>();
         roundPool = GameObject.Find("ArtProjectilePool").GetComponent<ObjectPooler>();
@@ -29,6 +25,11 @@ public class ProjectileShoot : MonoBehaviour, IWeapon
     void Update()
     {
         Plot(bulletSpawn.transform.position, projectileForce * bulletSpawn.transform.forward, .1f, 3f);
+    }
+
+    public void ToggleActive()
+    {
+        this.enabled = !this.enabled;
     }
 
     public void Plot(Vector3 start, Vector3 startVelocity, float time, float maxTime)

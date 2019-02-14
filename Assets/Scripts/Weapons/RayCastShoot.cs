@@ -17,7 +17,7 @@ public class RayCastShoot : MonoBehaviour, IWeapon
     private WaitForSeconds shotLength = new WaitForSeconds(0.05f);
     private float nextFireTime;
 
-    void Awake()
+    void OnEnable()
     {
         lineRenderer = GetComponent<LineRenderer>();
         gunCamera = GameObject.Find("PlayerCamera").GetComponent<Camera>();
@@ -54,6 +54,11 @@ public class RayCastShoot : MonoBehaviour, IWeapon
         }
 
 
+    }
+
+    public void ToggleActive()
+    {
+        this.enabled = !this.enabled;
     }
 
     private IEnumerator ShotEffect()

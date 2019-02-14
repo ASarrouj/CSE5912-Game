@@ -11,7 +11,6 @@ public class PlayerInput : NetworkBehaviour
     public KeyCode lastKeyPress;
     private Transform playerMech;
     public List<Transform> weapons;
-    private ShootInput shootControls;
 
     void Start()
     {

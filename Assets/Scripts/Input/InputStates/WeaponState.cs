@@ -19,6 +19,7 @@ public class WeaponState : IInputState
         lastPressIndex = playerInput.weaponInputs.IndexOf(lastKeyPress);
         weapon = playerInput.weapons[lastPressIndex];
         shootInput = weapon.GetComponent<IWeapon>();
+        shootInput.ToggleActive();
         otherWeaponInputs = new List<KeyCode>(playerInput.weaponInputs);
         otherWeaponInputs.Remove(lastKeyPress);
         otherWeapons = new List<Transform>(playerInput.weapons);
@@ -32,6 +33,7 @@ public class WeaponState : IInputState
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
+            shootInput.ToggleActive();
             playerInput.PrepareMechPerspec();
         }
 
@@ -39,6 +41,7 @@ public class WeaponState : IInputState
         {
             if (Input.GetKeyDown(otherWeaponInputs[i]))
             {
+                shootInput.ToggleActive();
                 playerInput.lastKeyPress = otherWeaponInputs[i];
                 playerInput.PrepareWeaponPerspec(otherWeapons[i]);
             }
