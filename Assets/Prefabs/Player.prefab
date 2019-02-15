@@ -249,6 +249,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cada16193e07f9247b8b82085e3d2b61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &1399714903223172193
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1643188926908715275}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.0447314, y: 2.0253448, z: 4.0242486}
+  m_Center: {x: -0.024356484, y: 0.011796951, z: -0.018841982}
+--- !u!65 &2983403979719593020
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1643188926908715275}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 3.0401032, y: 0.8271265, z: 4.4162903}
+  m_Center: {x: -0.00062024593, y: -1.0868716, z: 0.012693882}
 --- !u!136 &8448949539113038976
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -353,6 +379,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Weapon
+      objectReference: {fileID: 0}
+    - target: {fileID: 3884020808461821422, guid: c252754bf9fd2f34080cbe7857660ca4,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 262316372863664156, guid: c252754bf9fd2f34080cbe7857660ca4, type: 3}
