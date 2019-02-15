@@ -6,13 +6,13 @@ public class WeaponState : IInputState
 {
     private Transform weapon;
     private PlayerInput playerInput;
-    private List<KeyCode> otherWeaponInputs;
+    private List<string> otherWeaponInputs;
     private List<Transform> otherWeapons;
     private int lastPressIndex;
     private SmoothMouseLook mouseInput;
     private IWeapon shootInput;
 
-    public WeaponState(Transform playerTransform, KeyCode lastKeyPress)
+    public WeaponState(Transform playerTransform, string lastKeyPress)
     {
         playerInput = playerTransform.GetComponent<PlayerInput>();
 
@@ -20,7 +20,7 @@ public class WeaponState : IInputState
         weapon = playerInput.weapons[lastPressIndex];
         shootInput = weapon.GetComponent<IWeapon>();
         shootInput.ToggleActive();
-        otherWeaponInputs = new List<KeyCode>(playerInput.weaponInputs);
+        otherWeaponInputs = new List<string>(playerInput.weaponInputs);
         otherWeaponInputs.Remove(lastKeyPress);
         otherWeapons = new List<Transform>(playerInput.weapons);
         otherWeapons.RemoveAt(lastPressIndex);
@@ -31,7 +31,7 @@ public class WeaponState : IInputState
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetButtonDown("Perspective1"))
         {
             shootInput.ToggleActive();
             playerInput.PrepareMechPerspec();
@@ -39,7 +39,7 @@ public class WeaponState : IInputState
 
         for (int i = 0; i < otherWeapons.Count; i++)
         {
-            if (Input.GetKeyDown(otherWeaponInputs[i]))
+            if (Input.GetButtonDown(otherWeaponInputs[i]))
             {
                 shootInput.ToggleActive();
                 playerInput.lastKeyPress = otherWeaponInputs[i];

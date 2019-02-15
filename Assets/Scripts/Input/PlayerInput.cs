@@ -7,8 +7,8 @@ public class PlayerInput : NetworkBehaviour
 {
     private CameraManager camManager;
     private IInputState inputState;
-    public List<KeyCode> weaponInputs;
-    public KeyCode lastKeyPress;
+    public List<string> weaponInputs;
+    public string lastKeyPress;
     private Transform playerMech;
     public List<Transform> weapons;
 
@@ -27,7 +27,7 @@ public class PlayerInput : NetworkBehaviour
             // Begin game by interpolating to mech
             PrepareMechPerspec();
 
-            weaponInputs = new List<KeyCode> { KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4 };
+            weaponInputs = new List<string> { "Perspective2", "Perspective3", "Perspective4"};
             weapons = new List<Transform>();
             playerMech = transform.Find("NewMechWithGuns");
             weapons.Add(playerMech.Find("FrontGun").GetChild(0));
