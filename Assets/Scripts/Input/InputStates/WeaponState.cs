@@ -8,22 +8,22 @@ public class WeaponState : IInputState
     private PlayerInput playerInput;
     private List<string> otherWeaponInputs;
     private List<Transform> otherWeapons;
-    private int lastPressIndex;
+    private int lastKeyIndex;
     private SmoothMouseLook mouseInput;
     private IWeapon shootInput;
 
-    public WeaponState(Transform playerTransform, string lastKeyPress)
+    public WeaponState(Transform playerTransform)
     {
         playerInput = playerTransform.GetComponent<PlayerInput>();
 
-        lastPressIndex = playerInput.weaponInputs.IndexOf(lastKeyPress);
-        weapon = playerInput.weapons[lastPressIndex];
+        lastKeyIndex = playerInput.lastKeyIndex;
+        weapon = playerInput.weapons[lastKeyIndex];
         shootInput = weapon.GetComponent<IWeapon>();
         shootInput.ToggleActive();
         otherWeaponInputs = new List<string>(playerInput.weaponInputs);
-        otherWeaponInputs.Remove(lastKeyPress);
+        otherWeaponInputs.RemoveAt(lastKeyIndex);
         otherWeapons = new List<Transform>(playerInput.weapons);
-        otherWeapons.RemoveAt(lastPressIndex);
+        otherWeapons.RemoveAt(lastKeyIndex);
 
         mouseInput = new SmoothMouseLook(weapon);
         mouseInput.SetClamping(-60, 60, -30, 30);
@@ -42,7 +42,6 @@ public class WeaponState : IInputState
             if (Input.GetButtonDown(otherWeaponInputs[i]))
             {
                 shootInput.ToggleActive();
-                playerInput.lastKeyPress = otherWeaponInputs[i];
                 playerInput.PrepareWeaponPerspec(otherWeapons[i]);
             }
         }

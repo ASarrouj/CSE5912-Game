@@ -218,7 +218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91035f5a78cd31f4fb7040ea824559dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponInputs: 
+  weaponInputs: []
   lastKeyPress: 0
   weapons: []
 --- !u!54 &3227839355828598611
@@ -517,6 +517,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9000866545905077510, guid: 0fbde40f9e97d4e4585ca461db1ce3fb,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -425
+      objectReference: {fileID: 0}
+    - target: {fileID: 9000866546238240087, guid: 0fbde40f9e97d4e4585ca461db1ce3fb,
+        type: 3}
+      propertyPath: m_Name
+      value: SlotImage
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0fbde40f9e97d4e4585ca461db1ce3fb, type: 3}

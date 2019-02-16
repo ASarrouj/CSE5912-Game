@@ -28,7 +28,6 @@ public class MechState : IInputState
         {
             if (Input.GetButtonDown(weaponInputs[i]))
             {
-                playerInput.lastKeyPress = weaponInputs[i];
                 playerInput.PrepareWeaponPerspec(weapons[i]);
             }
         }
