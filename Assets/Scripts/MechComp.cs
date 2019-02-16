@@ -8,11 +8,13 @@ public class MechComp : MonoBehaviour
     public GameObject[] positions;
     public GameObject self;
     public int moveSpeed, rotateSpeed;
+    public int health;
 
     void Start()
     {
         moveSpeed = 0;
         rotateSpeed = 0;
+        health = 100;
     }
 
     // Update is called once per frame
