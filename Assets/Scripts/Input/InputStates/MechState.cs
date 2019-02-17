@@ -64,7 +64,7 @@ public class MechState : IInputState
             }
         }
 
-        if (mechStats.moveSpeed == 0 || Input.GetButtonDown("Right Shift"))
+        if (mechStats.moveSpeed == 0 || Input.GetButtonDown("Shift"))
         {
             mechStats.rotateSpeed = 0;
         }
