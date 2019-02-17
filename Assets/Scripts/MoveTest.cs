@@ -7,11 +7,11 @@ public class MoveTest : MonoBehaviour
 {
     LineRenderer lr;
     public int moveSpeed;
-    public int rotateSpeed;
-    public int pathLength = 6000;
+    public float rotateSpeed;
+    public int pathLength = 600;
     GameObject future;
     private float nextActionTime = 0.0f;
-    public float period = 1f;
+    public float period = 0.1f;
 
     private void Awake()
     {

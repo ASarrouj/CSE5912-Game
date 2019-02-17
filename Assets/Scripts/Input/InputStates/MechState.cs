@@ -40,33 +40,35 @@ public class MechState : IInputState
         {
             mechStats.moveSpeed -= speedStep;
         }
-        if (Input.GetButtonDown("Left") && mechStats.moveSpeed != 0 && mechStats.rotateSpeed >= -30 && mechStats.rotateSpeed <= 30)
+        if (Input.GetButton("Left") && mechStats.moveSpeed != 0 && mechStats.rotateSpeed >= -30 && mechStats.rotateSpeed <= 30)
         {
             if (mechStats.moveSpeed > 0 && mechStats.rotateSpeed > -30)
             {
-                mechStats.rotateSpeed -= 5;
+                mechStats.rotateSpeed -= 1f;
             }
             else if (mechStats.moveSpeed < 0 && mechStats.rotateSpeed < 30)
             {
-                mechStats.rotateSpeed += 5;
+                mechStats.rotateSpeed += 1f;
             }
 
         }
-        if (Input.GetButtonDown("Right") && mechStats.moveSpeed != 0 && mechStats.rotateSpeed <= 30 && mechStats.rotateSpeed >= -30)
+        if (Input.GetButton("Right") && mechStats.moveSpeed != 0 && mechStats.rotateSpeed <= 30 && mechStats.rotateSpeed >= -30)
         {
             if (mechStats.moveSpeed > 0 && mechStats.rotateSpeed < 30)
             {
-                mechStats.rotateSpeed += 5;
+                mechStats.rotateSpeed += 1f;
             }
             else if (mechStats.moveSpeed < 0 && mechStats.rotateSpeed > -30)
             {
-                mechStats.rotateSpeed -= 5;
+                mechStats.rotateSpeed -= 1f;
             }
         }
 
-        if (mechStats.moveSpeed == 0)
+        if (mechStats.moveSpeed == 0 || Input.GetButtonDown("Right Shift"))
         {
             mechStats.rotateSpeed = 0;
         }
+
+
     }
 }
