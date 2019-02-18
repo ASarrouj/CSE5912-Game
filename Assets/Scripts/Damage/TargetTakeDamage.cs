@@ -9,5 +9,9 @@ public class TargetTakeDamage : MonoBehaviour, IDamagable
     {
         this.gameObject.GetComponent<Renderer>().material.color = Color.red;
         health-=dmgAmount;
+        if (health<0)
+        {
+            health=0;
+        }
     }
 }
