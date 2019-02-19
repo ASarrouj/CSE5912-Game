@@ -24,9 +24,9 @@ public class CaptureManager : MonoBehaviour
             System.IO.Directory.CreateDirectory(screenshotDirectory);
             pictureCount = 0;
             videoCap = gameObject.AddComponent<CaptureFromScreen>();
-            //videoCap._useMediaFoundationH264 = true;
+            videoCap._useMediaFoundationH264 = true;
             videoCap._outputFolderPath = videoDirectory;
-            videoCap._autoFilenameExtension = "avi";
+            videoCap._autoFilenameExtension = "mp4";
         } else if (obj != gameObject) {
             Destroy(gameObject);
         }
