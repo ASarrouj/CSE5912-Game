@@ -32,12 +32,14 @@ public class UIManager : MonoBehaviour
     {
         slotImages.Add(Instantiate(slotImageTemplate, SwitcherHUD.transform));
         slotImages[0].GetComponent<RectTransform>().anchoredPosition = slotPos;
+        slotImages[0].transform.GetChild(0).GetComponent<Text>().text = "1";
         slotPos += slotPosDelta;
 
         for (int i = 1; i < input.weapons.Count + 1; i++)
         {
             slotImages.Add(Instantiate(slotImageTemplate, SwitcherHUD.transform));
             slotImages[i].GetComponent<RectTransform>().anchoredPosition = slotPos;
+            slotImages[i].transform.GetChild(0).GetComponent<Text>().text = (i + 1).ToString();
             slotPos += slotPosDelta;
         }
     }

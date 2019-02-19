@@ -11,6 +11,7 @@ public class WeaponState : IInputState
     private int lastKeyIndex;
     private SmoothMouseLook mouseInput;
     private IWeapon shootInput;
+    private Quaternion originalRotation;
 
     public WeaponState(Transform playerTransform)
     {
@@ -24,6 +25,7 @@ public class WeaponState : IInputState
         otherWeaponInputs.RemoveAt(lastKeyIndex);
         otherWeapons = new List<Transform>(playerInput.weapons);
         otherWeapons.RemoveAt(lastKeyIndex);
+        originalRotation = weapon.localRotation;
 
         mouseInput = new SmoothMouseLook(weapon);
         mouseInput.SetClamping(-60, 60, -30, 30);
@@ -31,8 +33,11 @@ public class WeaponState : IInputState
 
     public void Update()
     {
+        bool updateMouse = true;
         if (Input.GetButtonDown("Perspective1"))
         {
+            updateMouse = false;
+            weapon.localRotation = Quaternion.identity;
             shootInput.ToggleActive();
             playerInput.PrepareMechPerspec();
         }
@@ -41,6 +46,8 @@ public class WeaponState : IInputState
         {
             if (Input.GetButtonDown(otherWeaponInputs[i]))
             {
+                updateMouse = false;
+                weapon.localRotation = originalRotation;
                 shootInput.ToggleActive();
                 playerInput.PrepareWeaponPerspec(otherWeapons[i]);
             }
@@ -51,6 +58,9 @@ public class WeaponState : IInputState
             shootInput.Shoot();
         }
 
-        mouseInput.Update();
+        if (updateMouse)
+        {
+            mouseInput.Update();
+        }
     }
 }
