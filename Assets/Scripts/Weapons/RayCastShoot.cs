@@ -42,6 +42,14 @@ public class RayCastShoot : MonoBehaviour, IWeapon
                     }
                     hit.collider.gameObject.GetComponent<TargetTakeDamage>().Damage(1);
                 }
+                if (hit.collider.gameObject.tag == "Mech")
+                {
+                    if (hit.rigidbody != null)
+                    {
+                        hit.rigidbody.AddForce(-hit.normal * 100f);
+                    }
+                    hit.collider.gameObject.GetComponent<MechTakeDamage>().Damage(1);
+                }
                 lineRenderer.SetPosition(0, gunEnd.position);
                 lineRenderer.SetPosition(1, hit.point);
                 GameObject hitEffect = hitEffectPool.GetObject();
