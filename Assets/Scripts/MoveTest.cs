@@ -12,11 +12,16 @@ public class MoveTest : MonoBehaviour
     GameObject future;
     private float nextActionTime = 0.0f;
     public float period = 0.1f;
+    public Vector3 com;
+    public Rigidbody rb;
 
     private void Awake()
     {
-       
+        com = new Vector3(0,-1,0);
+        rb = GetComponent<Rigidbody>();
+        rb.centerOfMass = com;
 
+        Physics.gravity = new Vector3(0, -10f, 0);
     }
     // Start is called before the first frame update
     void Start()
