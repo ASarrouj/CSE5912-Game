@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.8870692, g: 0.9153472, b: 0.95037574, a: 1}
+  m_IndirectSpecularColor: {r: 0.8873858, g: 0.91536963, b: 0.9507486, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -241,6 +241,10 @@ PrefabInstance:
     - target: {fileID: 100002, guid: bd57d6306d5e02545b68a97f9a0cfde2, type: 3}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: bd57d6306d5e02545b68a97f9a0cfde2, type: 3}
+      propertyPath: m_TagString
+      value: Building
       objectReference: {fileID: 0}
     - target: {fileID: 100004, guid: bd57d6306d5e02545b68a97f9a0cfde2, type: 3}
       propertyPath: m_Layer
@@ -722,6 +726,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Building_17 (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 4c4b91d425026d64d987b9d3227ba28c, type: 3}
+      propertyPath: m_TagString
+      value: Building
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4c4b91d425026d64d987b9d3227ba28c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6
@@ -912,6 +920,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 4c4b91d425026d64d987b9d3227ba28c, type: 3}
       propertyPath: m_Name
       value: Building_17 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 4c4b91d425026d64d987b9d3227ba28c, type: 3}
+      propertyPath: m_TagString
+      value: Building
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4c4b91d425026d64d987b9d3227ba28c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1134,6 +1146,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: f901cad70c5f4d44f81baa38be3bb51a, type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: f901cad70c5f4d44f81baa38be3bb51a, type: 3}
+      propertyPath: m_TagString
+      value: Building
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f901cad70c5f4d44f81baa38be3bb51a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1553,6 +1569,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: f901cad70c5f4d44f81baa38be3bb51a, type: 3}
+      propertyPath: m_TagString
+      value: Building
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f901cad70c5f4d44f81baa38be3bb51a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -58.9
@@ -1900,6 +1920,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Building_17 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 4c4b91d425026d64d987b9d3227ba28c, type: 3}
+      propertyPath: m_TagString
+      value: Building
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4c4b91d425026d64d987b9d3227ba28c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10
@@ -1962,6 +1986,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 4c4b91d425026d64d987b9d3227ba28c, type: 3}
       propertyPath: m_Name
       value: Building_17 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 4c4b91d425026d64d987b9d3227ba28c, type: 3}
+      propertyPath: m_TagString
+      value: Building
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4c4b91d425026d64d987b9d3227ba28c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3401,6 +3429,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: bd57d6306d5e02545b68a97f9a0cfde2, type: 3}
+      propertyPath: m_TagString
+      value: Building
+      objectReference: {fileID: 0}
     - target: {fileID: 100004, guid: bd57d6306d5e02545b68a97f9a0cfde2, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -3540,7 +3572,7 @@ GameObject:
   - component: {fileID: 377923086}
   m_Layer: 0
   m_Name: BusStation_Building
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3939,6 +3971,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: e642f6b8c9a64d541aa36935a352c0c1, type: 3}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e642f6b8c9a64d541aa36935a352c0c1, type: 3}
+      propertyPath: m_TagString
+      value: Building
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e642f6b8c9a64d541aa36935a352c0c1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4686,6 +4722,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e642f6b8c9a64d541aa36935a352c0c1, type: 3}
+      propertyPath: m_TagString
+      value: Building
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e642f6b8c9a64d541aa36935a352c0c1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -143.7
@@ -5155,6 +5195,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Building_17 (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 4c4b91d425026d64d987b9d3227ba28c, type: 3}
+      propertyPath: m_TagString
+      value: Building
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4c4b91d425026d64d987b9d3227ba28c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10
@@ -5199,6 +5243,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: e642f6b8c9a64d541aa36935a352c0c1, type: 3}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e642f6b8c9a64d541aa36935a352c0c1, type: 3}
+      propertyPath: m_TagString
+      value: Building
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e642f6b8c9a64d541aa36935a352c0c1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5354,6 +5402,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 4c4b91d425026d64d987b9d3227ba28c, type: 3}
       propertyPath: m_Name
       value: Building_17 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 4c4b91d425026d64d987b9d3227ba28c, type: 3}
+      propertyPath: m_TagString
+      value: Building
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4c4b91d425026d64d987b9d3227ba28c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5626,6 +5678,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Building_20
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 3a1b354834b501e4d99b166a131ae43d, type: 3}
+      propertyPath: m_TagString
+      value: Building
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 3a1b354834b501e4d99b166a131ae43d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -193.8
@@ -5747,6 +5803,25 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 699700600}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &588825615 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100002, guid: bd57d6306d5e02545b68a97f9a0cfde2,
+    type: 3}
+  m_PrefabInstance: {fileID: 33858851}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &588825616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 588825615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f3e25accf4a5e248abb4a7bbe938c13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
 --- !u!4 &589353657 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 9be611d5e5467d0468755115bdfc6780,
@@ -6672,6 +6747,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 81ce9519f7afe18428bb236bc8e1a45a, type: 3}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 81ce9519f7afe18428bb236bc8e1a45a, type: 3}
+      propertyPath: m_TagString
+      value: Building
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 81ce9519f7afe18428bb236bc8e1a45a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8722,6 +8801,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e642f6b8c9a64d541aa36935a352c0c1, type: 3}
+      propertyPath: m_TagString
+      value: Building
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e642f6b8c9a64d541aa36935a352c0c1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -9378,6 +9461,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 7a56d9478d3251648bff462842e510a7, type: 3}
+      propertyPath: m_TagString
+      value: Building
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 7a56d9478d3251648bff462842e510a7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -68.16
@@ -9502,6 +9589,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e405ef916557bf247b24ee4c5e4c29f1, type: 3}
+      propertyPath: m_TagString
+      value: Building
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e405ef916557bf247b24ee4c5e4c29f1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -59
@@ -9623,6 +9714,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: e642f6b8c9a64d541aa36935a352c0c1, type: 3}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e642f6b8c9a64d541aa36935a352c0c1, type: 3}
+      propertyPath: m_TagString
+      value: Building
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e642f6b8c9a64d541aa36935a352c0c1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10378,6 +10473,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e642f6b8c9a64d541aa36935a352c0c1, type: 3}
+      propertyPath: m_TagString
+      value: Building
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e642f6b8c9a64d541aa36935a352c0c1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9.964095
@@ -10562,6 +10661,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 7a56d9478d3251648bff462842e510a7, type: 3}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 7a56d9478d3251648bff462842e510a7, type: 3}
+      propertyPath: m_TagString
+      value: Building
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 7a56d9478d3251648bff462842e510a7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10817,6 +10920,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Building_19 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 2866a9a236d6fa9449c325d460789be9, type: 3}
+      propertyPath: m_TagString
+      value: Building
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 2866a9a236d6fa9449c325d460789be9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -201
@@ -10880,6 +10987,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: c72c2f5fd97b0e54995eadb2674ce721, type: 3}
+      propertyPath: m_TagString
+      value: Building
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c72c2f5fd97b0e54995eadb2674ce721, type: 3}
       propertyPath: m_LocalPosition.x
       value: -243.4
@@ -10928,6 +11039,25 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1118604456}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1120557415 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100002, guid: bd57d6306d5e02545b68a97f9a0cfde2,
+    type: 3}
+  m_PrefabInstance: {fileID: 351862992}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1120557416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1120557415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f3e25accf4a5e248abb4a7bbe938c13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
 --- !u!4 &1123780681 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 9be611d5e5467d0468755115bdfc6780,
@@ -11008,6 +11138,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 450880375}
     m_Modifications:
+    - target: {fileID: 100000, guid: 4c4b91d425026d64d987b9d3227ba28c, type: 3}
+      propertyPath: m_TagString
+      value: Building
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4c4b91d425026d64d987b9d3227ba28c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6
@@ -11812,6 +11946,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Building_11
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: cc093a076b3dcf747abde15060c90f1b, type: 3}
+      propertyPath: m_TagString
+      value: Building
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: cc093a076b3dcf747abde15060c90f1b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -59.09999
@@ -11999,6 +12137,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 450880375}
     m_Modifications:
+    - target: {fileID: 100000, guid: 034e3c5200aa7db4c85ca18fdaf267eb, type: 3}
+      propertyPath: m_TagString
+      value: Building
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 034e3c5200aa7db4c85ca18fdaf267eb, type: 3}
       propertyPath: m_LocalPosition.x
       value: -54.7
@@ -12191,6 +12333,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 450880375}
     m_Modifications:
+    - target: {fileID: 100000, guid: d1b054cf7d0b2a04bbba06e8339981be, type: 3}
+      propertyPath: m_TagString
+      value: Building
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d1b054cf7d0b2a04bbba06e8339981be, type: 3}
       propertyPath: m_LocalPosition.x
       value: -87.8
@@ -12352,6 +12498,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 4c4b91d425026d64d987b9d3227ba28c, type: 3}
       propertyPath: m_Name
       value: Building_17 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 4c4b91d425026d64d987b9d3227ba28c, type: 3}
+      propertyPath: m_TagString
+      value: Building
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4c4b91d425026d64d987b9d3227ba28c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12531,6 +12681,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 2866a9a236d6fa9449c325d460789be9, type: 3}
       propertyPath: m_Name
       value: Building_19 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 2866a9a236d6fa9449c325d460789be9, type: 3}
+      propertyPath: m_TagString
+      value: Building
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 2866a9a236d6fa9449c325d460789be9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13874,6 +14028,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: c72c2f5fd97b0e54995eadb2674ce721, type: 3}
+      propertyPath: m_TagString
+      value: Building
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c72c2f5fd97b0e54995eadb2674ce721, type: 3}
       propertyPath: m_LocalPosition.x
       value: -257.4
@@ -13932,6 +14090,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 4c4b91d425026d64d987b9d3227ba28c, type: 3}
       propertyPath: m_Name
       value: Building_17 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 4c4b91d425026d64d987b9d3227ba28c, type: 3}
+      propertyPath: m_TagString
+      value: Building
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4c4b91d425026d64d987b9d3227ba28c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14196,6 +14358,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 450880375}
     m_Modifications:
+    - target: {fileID: 100000, guid: 2866a9a236d6fa9449c325d460789be9, type: 3}
+      propertyPath: m_TagString
+      value: Building
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 2866a9a236d6fa9449c325d460789be9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -225.1
@@ -14551,6 +14717,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: e405ef916557bf247b24ee4c5e4c29f1, type: 3}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e405ef916557bf247b24ee4c5e4c29f1, type: 3}
+      propertyPath: m_TagString
+      value: Building
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e405ef916557bf247b24ee4c5e4c29f1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -15578,6 +15748,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Building_19 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 2866a9a236d6fa9449c325d460789be9, type: 3}
+      propertyPath: m_TagString
+      value: Building
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 2866a9a236d6fa9449c325d460789be9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -189.2
@@ -16204,6 +16378,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e642f6b8c9a64d541aa36935a352c0c1, type: 3}
+      propertyPath: m_TagString
+      value: Building
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e642f6b8c9a64d541aa36935a352c0c1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -16552,6 +16730,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: da5837010eac617439718e3173f540e5, type: 3}
+      propertyPath: m_TagString
+      value: Building
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: da5837010eac617439718e3173f540e5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -257.4
@@ -16783,6 +16965,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 450880375}
     m_Modifications:
+    - target: {fileID: 100000, guid: cc093a076b3dcf747abde15060c90f1b, type: 3}
+      propertyPath: m_TagString
+      value: Building
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: cc093a076b3dcf747abde15060c90f1b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -199.8
@@ -18070,6 +18256,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 81ce9519f7afe18428bb236bc8e1a45a, type: 3}
+      propertyPath: m_TagString
+      value: Building
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 81ce9519f7afe18428bb236bc8e1a45a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -94.8
@@ -18597,6 +18787,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 450880375}
     m_Modifications:
+    - target: {fileID: 100000, guid: 3d7864a1741730345add12dcf4e2aae8, type: 3}
+      propertyPath: m_TagString
+      value: Building
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 3d7864a1741730345add12dcf4e2aae8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -104.3
@@ -18725,6 +18919,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 450880375}
     m_Modifications:
+    - target: {fileID: 100000, guid: 4c4b91d425026d64d987b9d3227ba28c, type: 3}
+      propertyPath: m_TagString
+      value: Building
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4c4b91d425026d64d987b9d3227ba28c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6
@@ -19320,6 +19518,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Building_17
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 4c4b91d425026d64d987b9d3227ba28c, type: 3}
+      propertyPath: m_TagString
+      value: Building
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4c4b91d425026d64d987b9d3227ba28c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 14.500015
@@ -19894,6 +20096,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 450880375}
     m_Modifications:
+    - target: {fileID: 100000, guid: d1b054cf7d0b2a04bbba06e8339981be, type: 3}
+      propertyPath: m_TagString
+      value: Building
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d1b054cf7d0b2a04bbba06e8339981be, type: 3}
       propertyPath: m_LocalPosition.x
       value: -105.5
@@ -20563,6 +20769,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 450880375}
     m_Modifications:
+    - target: {fileID: 100000, guid: 81ef2c02280004846b847fb8aca0dd3e, type: 3}
+      propertyPath: m_TagString
+      value: Building
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 81ef2c02280004846b847fb8aca0dd3e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -159.1
@@ -21163,6 +21373,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 450880375}
     m_Modifications:
+    - target: {fileID: 100000, guid: 7e0ff4061532adf40acb689d99a7792c, type: 3}
+      propertyPath: m_TagString
+      value: Building
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 7e0ff4061532adf40acb689d99a7792c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -73.8
@@ -21230,6 +21444,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e642f6b8c9a64d541aa36935a352c0c1, type: 3}
+      propertyPath: m_TagString
+      value: Building
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e642f6b8c9a64d541aa36935a352c0c1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.047576
@@ -21290,6 +21508,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 2866a9a236d6fa9449c325d460789be9, type: 3}
       propertyPath: m_Name
       value: Building_19 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 2866a9a236d6fa9449c325d460789be9, type: 3}
+      propertyPath: m_TagString
+      value: Building
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 2866a9a236d6fa9449c325d460789be9, type: 3}
       propertyPath: m_LocalPosition.x

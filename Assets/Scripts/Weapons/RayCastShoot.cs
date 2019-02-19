@@ -40,7 +40,11 @@ public class RayCastShoot : MonoBehaviour, IWeapon
                     {
                         hit.rigidbody.AddForce(-hit.normal * 100f);
                     }
-                    hit.collider.gameObject.GetComponent<TargetTakeDamage>().Damage(1);
+                    hit.collider.gameObject.GetComponent<TargetTakeDamage>().Damage(10);
+                }
+                if (hit.collider.gameObject.tag == "Building")
+                {
+                    hit.collider.gameObject.GetComponent<TargetTakeDamage>().Damage(10);
                 }
                 if (hit.collider.gameObject.tag == "Mech")
                 {
@@ -48,7 +52,7 @@ public class RayCastShoot : MonoBehaviour, IWeapon
                     {
                         hit.rigidbody.AddForce(-hit.normal * 100f);
                     }
-                    hit.collider.gameObject.GetComponent<MechTakeDamage>().Damage(1);
+                    hit.collider.gameObject.GetComponent<MechTakeDamage>().Damage(10);
                 }
                 lineRenderer.SetPosition(0, gunEnd.position);
                 lineRenderer.SetPosition(1, hit.point);
