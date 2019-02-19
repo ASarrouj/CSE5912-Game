@@ -12,8 +12,8 @@ public class MoveTest : MonoBehaviour
     GameObject future;
     private float nextActionTime = 0.0f;
     public float period = 0.1f;
-    public Vector3 com;
-    public Rigidbody rb;
+    private Vector3 com;
+    private Rigidbody rb;
 
     private void Awake()
     {
