@@ -5,8 +5,6 @@ using UnityEngine;
 public class TargetTakeDamage : MonoBehaviour, IDamagable
 {
     public int health;
-    public enum Hitbox { FrontHitbox, LeftHitbox, RightHitbox }
-    public Hitbox hitboxType;
     public void Damage(int dmgAmount)
     {
 
