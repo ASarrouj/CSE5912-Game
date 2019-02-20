@@ -14,6 +14,7 @@ public class MoveTest : MonoBehaviour
     public float period = 0.1f;
     private Vector3 com;
     private Rigidbody rb;
+    private AudioSource engineSound;
 
     private void Awake()
     {
@@ -27,6 +28,7 @@ public class MoveTest : MonoBehaviour
     void Start()
     {
         lr = GetComponent<LineRenderer>();
+        engineSound = GetComponent<AudioSource>();
         moveSpeed = 0;
         rotateSpeed = 0;
     }
@@ -42,6 +44,15 @@ public class MoveTest : MonoBehaviour
         
         transform.Translate(0, 0, Time.deltaTime * moveSpeed, Space.Self);
         transform.Rotate(0, Time.deltaTime * rotateSpeed, 0, Space.Self);
+
+        if (moveSpeed != 0)
+        {
+            engineSound.enabled = true;
+        }
+        else
+        {
+            engineSound.enabled = false;
+        }
 
     }
 
