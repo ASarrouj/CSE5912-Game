@@ -518,6 +518,36 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2791865709358068480, guid: 4ce40eb0d1da14be68c087e6a485b60e,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 2791865709358068480, guid: 4ce40eb0d1da14be68c087e6a485b60e,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 6054757630439068111, guid: 4ce40eb0d1da14be68c087e6a485b60e,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.0047169924
+      objectReference: {fileID: 0}
+    - target: {fileID: 6054757630439068111, guid: 4ce40eb0d1da14be68c087e6a485b60e,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6054757630439068111, guid: 4ce40eb0d1da14be68c087e6a485b60e,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.12511331
+      objectReference: {fileID: 0}
+    - target: {fileID: 6054757630439068111, guid: 4ce40eb0d1da14be68c087e6a485b60e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ce40eb0d1da14be68c087e6a485b60e, type: 3}
 --- !u!224 &9000866544922908467 stripped

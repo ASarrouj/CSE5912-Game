@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     private GameObject MechHUD, SwitcherHUD, NavHUD;
-    private RectTransform SlotHighlightTransform;
+    private RectTransform slotHighlightTransform;
     private List<GameObject> slotImages;
     public GameObject slotImageTemplate;
     private Vector3 slotPos, slotPosDelta;
@@ -17,10 +17,10 @@ public class UIManager : MonoBehaviour
         MechHUD = transform.Find("MechHUD").gameObject;
         SwitcherHUD = transform.Find("SwitcherHUD").gameObject;
         NavHUD = transform.Find("NavHUD").gameObject;
-        SlotHighlightTransform = SwitcherHUD.transform.GetChild(0).GetComponent<RectTransform>();
+        slotHighlightTransform = SwitcherHUD.transform.GetChild(0).GetComponent<RectTransform>();
 
         slotImages = new List<GameObject>();
-        slotPos = SlotHighlightTransform.anchoredPosition;
+        slotPos = slotHighlightTransform.anchoredPosition;
         slotPosDelta = new Vector3(80, 0, 0);
 
         MechHUD.SetActive(false);
@@ -64,7 +64,7 @@ public class UIManager : MonoBehaviour
     public void ChangeSlotHighlight(int index)
     {
         index += 1;
-        SlotHighlightTransform.anchoredPosition = slotImages[index].GetComponent<RectTransform>().anchoredPosition;
+        slotHighlightTransform.anchoredPosition = slotImages[index].GetComponent<RectTransform>().anchoredPosition;
         DisableDynamicUI();
     }
 
