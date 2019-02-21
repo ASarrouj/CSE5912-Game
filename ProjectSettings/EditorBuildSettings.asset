@@ -18,10 +18,10 @@ EditorBuildSettings:
     path: Assets/_Scenes/PongScenes/GameScene.unity
     guid: 58f28e0a892413e4f9fe550a73c3e7f5
   - enabled: 1
-    path: Assets/_Scenes/PongScenes/CreditScene.unity
+    path: Assets/_Scenes/PongScenes/Credit.unity
     guid: e23d91f26f3ae40c8baf867f929bdbb7
   - enabled: 1
-    path: Assets/_Scenes/PongScenes/Options.unity
+    path: Assets/_Scenes/PongScenes/Option.unity
     guid: 8fa43360ee443ed48bec5e1294a97567
   - enabled: 0
     path: Assets/_Scenes/MechBuilding.unity
