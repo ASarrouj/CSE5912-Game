@@ -16,20 +16,28 @@ public class ProjectileCollider : MonoBehaviour
 
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision collision)
     {
-        if (other.gameObject.CompareTag("Target"))
+        if (collision.gameObject.CompareTag("Target"))
         {
-            other.gameObject.GetComponent<TargetTakeDamage>().Damage(damage);
+            collision.gameObject.GetComponent<TargetTakeDamage>().Damage(damage);
             Instantiate(explosion,transform.position, transform.rotation);
             GameObject sound=GameObject.Find("SoundManager");
             AudioSource source=sound.GetComponent<AudioSource>();
             source.PlayOneShot(clip,1f);
             Destroy(gameObject);
         }
-        if (other.gameObject.CompareTag("Mech"))
+        if (collision.gameObject.CompareTag("Mech"))
         {
-            other.gameObject.GetComponent<TargetTakeDamage>().Damage(damage);
+            collision.gameObject.GetComponent<TargetTakeDamage>().Damage(damage);
+            Instantiate(explosion,transform.position, transform.rotation);
+            GameObject sound=GameObject.Find("SoundManager");
+            AudioSource source=sound.GetComponent<AudioSource>();
+            source.PlayOneShot(clip,1f);
+            Destroy(gameObject);
+        }
+        if (collision.gameObject.layer==8)
+        {
             Instantiate(explosion,transform.position, transform.rotation);
             GameObject sound=GameObject.Find("SoundManager");
             AudioSource source=sound.GetComponent<AudioSource>();
