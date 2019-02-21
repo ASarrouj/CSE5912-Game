@@ -17,7 +17,6 @@ namespace AI {
         private int speedStep = 4;
         private float angleThreshold = 10;
         private int maxSpeed = 12;
-        private bool stop = false;
 
         Rigidbody rb;
 
