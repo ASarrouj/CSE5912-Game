@@ -7,6 +7,7 @@ public class MechComp : MonoBehaviour
     public GameObject[] guns;
     public GameObject[] positions;
     public GameObject self;
+    private int[] healthValues;
     public int moveSpeed, rotateSpeed;
     public int health;
     private int trackSpot;
@@ -17,6 +18,13 @@ public class MechComp : MonoBehaviour
         rotateSpeed = 0;
         health = 100;
         trackSpot = 0;
+        healthValues = new int[positions.Length];
+        int track = 0;
+        while (track < healthValues.Length)
+        {
+            healthValues[track] = 100;
+            track++;
+        }
     }
 
     // Update is called once per frame
