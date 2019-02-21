@@ -7,21 +7,28 @@ public class MoveTest : MonoBehaviour
 {
     LineRenderer lr;
     public int moveSpeed;
-    public int rotateSpeed;
-    public int pathLength = 6000;
+    public float rotateSpeed;
+    public int pathLength = 600;
     GameObject future;
     private float nextActionTime = 0.0f;
-    public float period = 1f;
+    public float period = 0.1f;
+    private Vector3 com;
+    private Rigidbody rb;
+    private AudioSource engineSound;
 
     private void Awake()
     {
-       
+        //com = new Vector3(0,-1,0);
+        //rb = GetComponent<Rigidbody>();
+        //rb.centerOfMass = com;
 
+       // Physics.gravity = new Vector3(0, -10f, 0);
     }
     // Start is called before the first frame update
     void Start()
     {
         lr = GetComponent<LineRenderer>();
+        engineSound = GetComponent<AudioSource>();
         moveSpeed = 0;
         rotateSpeed = 0;
     }
@@ -37,6 +44,15 @@ public class MoveTest : MonoBehaviour
         
         transform.Translate(0, 0, Time.deltaTime * moveSpeed, Space.Self);
         transform.Rotate(0, Time.deltaTime * rotateSpeed, 0, Space.Self);
+
+        if (moveSpeed != 0)
+        {
+            engineSound.enabled = true;
+        }
+        else
+        {
+            engineSound.enabled = false;
+        }
 
     }
 

@@ -13,7 +13,7 @@ public class PathPredictor : NetworkBehaviour
     public int pathLength = 6000;
     GameObject future;
     private float nextActionTime = 0.0f;
-    public float period = 1f;
+    public float period = 0.1f;
     public GameObject mech;
     MechMovement MM;
 

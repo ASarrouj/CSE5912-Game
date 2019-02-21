@@ -6,9 +6,10 @@ using UnityEngine.Networking;
 public class PlayerInput : NetworkBehaviour
 {
     private CameraManager camManager;
+    private UIManager uiManager;
     private IInputState inputState;
     public List<string> weaponInputs;
-    public string lastKeyPress;
+    public int lastKeyIndex;
     private Transform playerMech;
     public List<Transform> weapons;
 
@@ -21,18 +22,20 @@ public class PlayerInput : NetworkBehaviour
         }
         else
         {
-            camManager = transform.Find("PlayerCamera").GetComponent<CameraManager>();
-            camManager.SetInput(this);
-
-            // Begin game by interpolating to mech
-            PrepareMechPerspec();
-
             weaponInputs = new List<string> { "Perspective2", "Perspective3", "Perspective4"};
             weapons = new List<Transform>();
             playerMech = transform.Find("NewMechWithGuns");
             weapons.Add(playerMech.Find("FrontGun").GetChild(0));
             weapons.Add(playerMech.Find("LeftGun").GetChild(0));
-            //shootControls = GetComponent<ShootInput>();
+
+            camManager = transform.Find("PlayerCamera").GetComponent<CameraManager>();
+            camManager.SetInput(this);
+
+            uiManager = transform.Find("UI").GetComponent<UIManager>();
+            uiManager.CreateSwitcherUI(this);
+
+            // Begin game by interpolating to mech
+            PrepareMechPerspec();
         }
     }
 
@@ -47,24 +50,29 @@ public class PlayerInput : NetworkBehaviour
     public void PrepareMechPerspec()
     {
         DisableInput();
+        uiManager.ChangeSlotHighlight(-1);
         camManager.FollowMech(transform);
     }
 
     public void PrepareWeaponPerspec(Transform weapon)
     {
         DisableInput();
+        lastKeyIndex = weapons.IndexOf(weapon);
+        uiManager.ChangeSlotHighlight(lastKeyIndex);
         camManager.AttachToWeapon(weapon);
     }
 
-    public void EnableInput(Transform currentTransform)
+    public void FinalizePerspective(Transform currentTransform)
     {
         if (currentTransform.tag == "Player")
         {
             inputState = new MechState(transform);
+            uiManager.MechUI();
         }
         else if (currentTransform.tag == "Weapon")
         {
-            inputState = new WeaponState(transform, lastKeyPress);
+            inputState = new WeaponState(transform);
+            uiManager.WeaponUI();
         }
     }
 

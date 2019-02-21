@@ -5,7 +5,7 @@ using UnityEditor;
 public class ProjectileShoot : MonoBehaviour, IWeapon
 {
     public Transform bulletSpawn;
-    public ParticleSystem smoke;
+    public GameObject smoke;
     public float projectileForce = 5000f;
     public float fireRate = 1f;
 
@@ -13,7 +13,7 @@ public class ProjectileShoot : MonoBehaviour, IWeapon
     private float nextFireTime;
     private ObjectPooler roundPool;
     private AudioSource source;
-    private WaitForSeconds shotLength = new WaitForSeconds(0.1f);
+    private WaitForSeconds shotLength = new WaitForSeconds(0.7f);
 
     void OnEnable()
     {
@@ -54,20 +54,26 @@ public class ProjectileShoot : MonoBehaviour, IWeapon
 
     void IWeapon.Shoot()
     {
-        nextFireTime = Time.time + fireRate;
+        if (Time.time > nextFireTime)
+        {
+            nextFireTime = Time.time + fireRate;
 
-        GameObject projectile = roundPool.GetObject();
-        projectile.transform.position = bulletSpawn.position;
-        projectile.transform.rotation = Quaternion.identity;
-        projectile.GetComponent<Rigidbody>().AddForce(bulletSpawn.transform.forward * projectileForce, ForceMode.Impulse);
-        StartCoroutine(ShotEffect());
+            GameObject projectile = roundPool.GetObject();
+            projectile.transform.position = bulletSpawn.position;
+            projectile.transform.rotation = bulletSpawn.rotation;
+            projectile.transform.Rotate(new Vector3(90, 0, 0));
+            projectile.SetActive(true);
+            projectile.GetComponent<Rigidbody>().AddForce(bulletSpawn.transform.forward * projectileForce, ForceMode.Impulse);
+            StartCoroutine(ShotEffect());
+        }
     }
 
     private IEnumerator ShotEffect()
     {
-        smoke.Play();
+        smoke.SetActive(true);
         source.Play();
         yield return shotLength;
+        smoke.SetActive(false);
 
     }
 }

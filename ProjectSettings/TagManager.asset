@@ -8,6 +8,7 @@ TagManager:
   - Target
   - Mech
   - Weapon
+  - Building
   layers:
   - Default
   - TransparentFX

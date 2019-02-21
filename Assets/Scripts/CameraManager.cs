@@ -11,7 +11,6 @@ public class CameraManager : MonoBehaviour
     private const float DT = 0.005f;
     private bool interpolating;
     private Transform target;
-    private UIManager uiManager;
     private PlayerInput playerInput;
 
     // Start is called before the first frame update
@@ -74,7 +73,7 @@ public class CameraManager : MonoBehaviour
         {
             interpolating = false;
             transform.parent = target.transform;
-            playerInput.EnableInput(target);
+            playerInput.FinalizePerspective(target);
         }
 
         transitionTime += DT;

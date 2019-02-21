@@ -32,7 +32,7 @@ public class PlayMusic : MonoBehaviour
     // Update is called once per frame
     void Update() {
         sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
-        if (!(sceneName == "Main Menu" || sceneName == "Options" || sceneName == "Credits")) {
+        if (!(sceneName == "Main Menu" || sceneName == "Option" || sceneName == "Credit")) {
             Destroy(gameObject);
         }
     }

@@ -8,22 +8,24 @@ public class WeaponState : IInputState
     private PlayerInput playerInput;
     private List<string> otherWeaponInputs;
     private List<Transform> otherWeapons;
-    private int lastPressIndex;
+    private int lastKeyIndex;
     private SmoothMouseLook mouseInput;
     private IWeapon shootInput;
+    private Quaternion originalRotation;
 
-    public WeaponState(Transform playerTransform, string lastKeyPress)
+    public WeaponState(Transform playerTransform)
     {
         playerInput = playerTransform.GetComponent<PlayerInput>();
 
-        lastPressIndex = playerInput.weaponInputs.IndexOf(lastKeyPress);
-        weapon = playerInput.weapons[lastPressIndex];
+        lastKeyIndex = playerInput.lastKeyIndex;
+        weapon = playerInput.weapons[lastKeyIndex];
         shootInput = weapon.GetComponent<IWeapon>();
         shootInput.ToggleActive();
         otherWeaponInputs = new List<string>(playerInput.weaponInputs);
-        otherWeaponInputs.Remove(lastKeyPress);
+        otherWeaponInputs.RemoveAt(lastKeyIndex);
         otherWeapons = new List<Transform>(playerInput.weapons);
-        otherWeapons.RemoveAt(lastPressIndex);
+        otherWeapons.RemoveAt(lastKeyIndex);
+        originalRotation = weapon.localRotation;
 
         mouseInput = new SmoothMouseLook(weapon);
         mouseInput.SetClamping(-60, 60, -30, 30);
@@ -31,8 +33,11 @@ public class WeaponState : IInputState
 
     public void Update()
     {
+        bool updateMouse = true;
         if (Input.GetButtonDown("Perspective1"))
         {
+            updateMouse = false;
+            weapon.localRotation = Quaternion.identity;
             shootInput.ToggleActive();
             playerInput.PrepareMechPerspec();
         }
@@ -41,8 +46,9 @@ public class WeaponState : IInputState
         {
             if (Input.GetButtonDown(otherWeaponInputs[i]))
             {
+                updateMouse = false;
+                weapon.localRotation = originalRotation;
                 shootInput.ToggleActive();
-                playerInput.lastKeyPress = otherWeaponInputs[i];
                 playerInput.PrepareWeaponPerspec(otherWeapons[i]);
             }
         }
@@ -52,6 +58,9 @@ public class WeaponState : IInputState
             shootInput.Shoot();
         }
 
-        mouseInput.Update();
+        if (updateMouse)
+        {
+            mouseInput.Update();
+        }
     }
 }
