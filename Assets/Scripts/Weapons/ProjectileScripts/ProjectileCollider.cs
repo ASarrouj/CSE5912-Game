@@ -6,6 +6,7 @@ public class ProjectileCollider : MonoBehaviour
 {
     public GameObject explosion;
     public AudioClip clip;
+    public int damage;
     void Start()
     {
     }
@@ -19,7 +20,16 @@ public class ProjectileCollider : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Target"))
         {
-            other.gameObject.GetComponent<Renderer>().material.color = Color.red;
+            other.gameObject.GetComponent<TargetTakeDamage>().Damage(damage);
+            Instantiate(explosion,transform.position, transform.rotation);
+            GameObject sound=GameObject.Find("SoundManager");
+            AudioSource source=sound.GetComponent<AudioSource>();
+            source.PlayOneShot(clip,1f);
+            Destroy(gameObject);
+        }
+        if (other.gameObject.CompareTag("Mech"))
+        {
+            other.gameObject.GetComponent<TargetTakeDamage>().Damage(damage);
             Instantiate(explosion,transform.position, transform.rotation);
             GameObject sound=GameObject.Find("SoundManager");
             AudioSource source=sound.GetComponent<AudioSource>();

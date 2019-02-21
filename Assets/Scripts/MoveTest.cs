@@ -17,11 +17,11 @@ public class MoveTest : MonoBehaviour
 
     private void Awake()
     {
-        com = new Vector3(0,-1,0);
-        rb = GetComponent<Rigidbody>();
-        rb.centerOfMass = com;
+        //com = new Vector3(0,-1,0);
+        //rb = GetComponent<Rigidbody>();
+        //rb.centerOfMass = com;
 
-        Physics.gravity = new Vector3(0, -10f, 0);
+       // Physics.gravity = new Vector3(0, -10f, 0);
     }
     // Start is called before the first frame update
     void Start()

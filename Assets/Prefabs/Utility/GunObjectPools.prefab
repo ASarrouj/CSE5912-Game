@@ -114,11 +114,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4706599564372466793}
     m_Modifications:
-    - target: {fileID: 943997390461511997, guid: e8b85d5a7220e5f4ba19167833346bc3,
-        type: 3}
-      propertyPath: m_Name
-      value: ArtProjectilePool
-      objectReference: {fileID: 0}
     - target: {fileID: 7312804877088887123, guid: e8b85d5a7220e5f4ba19167833346bc3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -174,6 +169,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 943997390461511997, guid: e8b85d5a7220e5f4ba19167833346bc3,
+        type: 3}
+      propertyPath: m_Name
+      value: ArtProjectilePool
+      objectReference: {fileID: 0}
+    - target: {fileID: 3566643541234812724, guid: e8b85d5a7220e5f4ba19167833346bc3,
+        type: 3}
+      propertyPath: pooledObject
+      value: 
+      objectReference: {fileID: 2287083176919119801, guid: f0cd41a2e27211b46af61d75ba123e87,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8b85d5a7220e5f4ba19167833346bc3, type: 3}
 --- !u!4 &3123977347711958072 stripped
