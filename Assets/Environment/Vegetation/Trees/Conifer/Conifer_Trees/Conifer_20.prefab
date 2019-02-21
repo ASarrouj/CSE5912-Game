@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3300000}
   - component: {fileID: 2300000}
   - component: {fileID: 13600000}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Conifer_20
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,15 +123,15 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpSpecMap:
-        m_Texture: {fileID: 2800000, guid: dc82918193578c24b869a34044066bca, type: 3}
+        m_Texture: {fileID: 2800000, guid: 717b87c7661ce7148ba74b5333b4573f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 9f17f01cf550af54da2b58e0f2632886, type: 3}
+        m_Texture: {fileID: 2800000, guid: 215d957e301b771459c2ff45fa900393, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TranslucencyMap:
-        m_Texture: {fileID: 2800000, guid: 3ef95720686c2664cb923ac71641b9c5, type: 3}
+        m_Texture: {fileID: 2800000, guid: 47c626fba24d8894d966af781d1530d6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -163,19 +163,19 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpSpecMap:
-        m_Texture: {fileID: 2800000, guid: dc82918193578c24b869a34044066bca, type: 3}
+        m_Texture: {fileID: 2800000, guid: 717b87c7661ce7148ba74b5333b4573f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 9f17f01cf550af54da2b58e0f2632886, type: 3}
+        m_Texture: {fileID: 2800000, guid: 215d957e301b771459c2ff45fa900393, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ShadowTex:
-        m_Texture: {fileID: 2800000, guid: 127d378a00a6b68419e1d2b9dd46e8e5, type: 3}
+        m_Texture: {fileID: 2800000, guid: eeca89f4b92933a4380cdf5aea001382, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TranslucencyMap:
-        m_Texture: {fileID: 2800000, guid: 3ef95720686c2664cb923ac71641b9c5, type: 3}
+        m_Texture: {fileID: 2800000, guid: 47c626fba24d8894d966af781d1530d6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -373,7 +373,7 @@ MonoBehaviour:
   m_Name: Tree Data
   m_EditorClassIdentifier: 
   _uniqueID: 1173
-  materialHash: 2edf6759f3d4c5285c6586618eb26193215482368
+  materialHash: 3663c4905e778de07a33dd368076cfc8215482368
   root:
     _uniqueID: 1
     seed: 768971

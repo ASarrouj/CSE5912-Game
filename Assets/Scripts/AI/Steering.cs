@@ -17,7 +17,6 @@ namespace AI {
         private int speedStep = 4;
         private float angleThreshold = 10;
         private int maxSpeed = 12;
-        private bool stop = false;
 
         Rigidbody rb;
 
@@ -52,7 +51,7 @@ namespace AI {
 
             float angle = Vector3.SignedAngle(transform.forward, linearAcceleration, Vector3.up);
 
-            if (Vector3.Magnitude(debugTar.transform.position - transform.position) < 1) {
+            if (Vector3.Magnitude(debugTar.transform.position - transform.position) < 6) {
                 Stop();
                 return;
             }

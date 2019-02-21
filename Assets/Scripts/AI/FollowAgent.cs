@@ -15,7 +15,6 @@ namespace AI
         private Rigidbody rb;
         private Steering steering;
 
-
         private void Awake() {
             follow = GetComponent<Follow>();
             steering = GetComponent<Steering>();
@@ -49,6 +48,10 @@ namespace AI
                     target = g;
                 }
             }
+        }
+
+        public void OnDisable() {
+            
         }
     }
 }
