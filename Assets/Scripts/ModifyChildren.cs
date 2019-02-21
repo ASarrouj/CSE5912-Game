@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Building : MonoBehaviour
+public class ModifyChildren : MonoBehaviour
 {
-    void Start()
+    void Awake()
     {
         AddPhysicsToChildren(gameObject);
 
@@ -17,8 +17,9 @@ public class Building : MonoBehaviour
             if (c.transform.childCount > 0) {
                 AddPhysicsToChildren(c);
             } else {
-                c.AddComponent<Rigidbody>();
+                Rigidbody rb = c.AddComponent<Rigidbody>();
                 c.AddComponent<BoxCollider>();
+                rb.isKinematic = true;
             }
         }
     }
