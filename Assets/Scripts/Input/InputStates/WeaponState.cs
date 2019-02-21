@@ -20,8 +20,8 @@ public class WeaponState : IInputState
 
         lastKeyIndex = playerInput.lastKeyIndex;
         weapon = playerInput.weapons[lastKeyIndex];
-        /*lineRenderer = weapon.GetComponent<LineRenderer>();
-        ToggleLine();*/
+        lineRenderer = weapon.GetComponent<LineRenderer>();
+        ToggleLine();
         shootInput = weapon.GetComponent<IWeapon>();
         shootInput.ToggleActive();
         otherWeaponInputs = new List<string>(playerInput.weaponInputs);
@@ -42,7 +42,7 @@ public class WeaponState : IInputState
             updateMouse = false;
             weapon.localRotation = Quaternion.identity;
             shootInput.ToggleActive();
-            //ToggleLine();
+            ToggleLine();
             playerInput.PrepareMechPerspec();
         }
 
@@ -53,7 +53,7 @@ public class WeaponState : IInputState
                 updateMouse = false;
                 weapon.localRotation = originalRotation;
                 shootInput.ToggleActive();
-                //ToggleLine();
+                ToggleLine();
                 playerInput.PrepareWeaponPerspec(otherWeapons[i]);
             }
         }
