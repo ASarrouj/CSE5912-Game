@@ -23,7 +23,6 @@ namespace AI
             float distToClosest = Mathf.Infinity;
             bestHidingSpot = Vector3.zero;
             foreach (Rigidbody r in obstacles) {
-                //Debug.Log("FLAG");
                 Vector3 hidingSpot = GetHidingPosition(r, target);
                 float dist = Vector3.Distance(hidingSpot, transform.position);
                 if (dist < distToClosest) {
@@ -32,13 +31,6 @@ namespace AI
                 }
             }
 
-            /*
-            if (distToClosest == Mathf.Infinity) {
-                Debug.Log("NO OBSTACLES");
-                return Vector3.zero;
-            }
-            */
-            //Debug.Log("BEST: " + bestHidingSpot);
             return steering.Arrive(bestHidingSpot);
         }
 
@@ -53,7 +45,6 @@ namespace AI
             obst.y = altitude;
             Vector3 dir = obst - tar;
             dir.Normalize();
-            //Debug.Log(target.position);
             return obst + dir * distAway;
         }
 

@@ -15,7 +15,7 @@ namespace AI {
         private MoveTest mechStats;
         private int rotateStep = 5;
         private int speedStep = 4;
-        private float angleThreshold = 1;
+        private float angleThreshold = 10;
         private int maxSpeed = 12;
 
         Rigidbody rb;
@@ -27,16 +27,15 @@ namespace AI {
         void Awake()
         {
             rb = gameObject.GetComponent<Rigidbody>();
+            mechStats = GetComponent<MoveTest>();
+            avoid = GetComponent<Avoidance>();
 
             if (ShowDebugTarget) {
                 debugTar = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 debugTar.GetComponent<Renderer>().material.color = Color.red;
+                Destroy(debugTar.GetComponent<BoxCollider>());
                 debugTar.name = "AI Target";
-            }
-
-            mechStats = GetComponent<MoveTest>();
-
-            avoid = GetComponent<Avoidance>();
+            }           
         }
 
         private bool CheckObstacle() {
@@ -50,20 +49,17 @@ namespace AI {
                 return;
             }
 
-            //Debug.Log("_ACCEL " + rb.velocity);
             float angle = Vector3.SignedAngle(transform.forward, linearAcceleration, Vector3.up);
-            //float angle =  transform.rotation.eulerAngles.y -
-            //Debug.Log("ANGLE: " + angle);
-            /* if (CheckObstacle()) {
-                Debug.Log("BLOCKED");
-                mechStats.moveSpeed = speedStep;
-                mechStats.rotateSpeed = 30;
-            } else */
+
+            if (Vector3.Magnitude(debugTar.transform.position - transform.position) < 1) {
+                mechStats.moveSpeed = 0;
+                return;
+            }
 
             if (avoid.AvoidRight) {
-                SteerRight();
-            } else if (avoid.AvoidLeft) {
                 SteerLeft();
+            } else if (avoid.AvoidLeft) {
+                SteerRight();
             } else if (angle > angleThreshold) {
                 SteerRight();
             } else if (angle < - angleThreshold) {
@@ -72,20 +68,12 @@ namespace AI {
                     mechStats.rotateSpeed = 0;
                     mechStats.moveSpeed += speedStep;
             }
-
-            /*
-            rb.velocity += linearAcceleration * Time.deltaTime;
-            if (rb.velocity.magnitude > maxVelocity) {
-                rb.velocity = rb.velocity.normalized * maxVelocity;
-            }
-            */
         }
 
         private void SteerRight() {
             if (mechStats.rotateSpeed < 30) {
                 mechStats.moveSpeed = speedStep;
                 mechStats.rotateSpeed += rotateStep;
-                //Debug.Log("R");
             }
         }
 
@@ -93,7 +81,6 @@ namespace AI {
             if (mechStats.rotateSpeed > -30) {
                 mechStats.moveSpeed = speedStep;
                 mechStats.rotateSpeed -= rotateStep;
-                //Debug.Log("L");
             }
         }
 
@@ -101,42 +88,15 @@ namespace AI {
 
         public Vector3 Arrive(Vector3 targetposition) {
             if (ShowDebugTarget) debugTar.transform.position = targetposition;
-            //Debug.Log("TAR: " + targetposition);
             Vector3 targetVelocity = targetposition - rb.position;
 
             float dist = targetVelocity.magnitude;
             
             if (dist < targetRadius) {
-                Debug.Log("CLOSE");
                 return Vector3.zero;
             }
-            
 
-            /*
-            float targetSpeed;
-            
-            if (dist > slowRadius) {
-                targetSpeed = maxVelocity;
-            } else {
-                targetSpeed = maxVelocity * (dist / slowRadius);
-            }*/
-
-            /*
-            targetSpeed = maxVelocity;
-
-            targetVelocity.Normalize();
-            targetVelocity *= targetSpeed;
-
-            Vector3 acceleration = targetVelocity - rb.velocity;
-            acceleration *= 1 / timeToTarget;
-
-            if (acceleration.magnitude > maxAcceleration) {
-                acceleration.Normalize();
-                acceleration *= maxAcceleration;
-            }
-            */
-
-            return targetVelocity; //acceleration;
+            return targetVelocity;
         }
     }
 }
