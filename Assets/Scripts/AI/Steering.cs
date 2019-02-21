@@ -85,7 +85,7 @@ namespace AI {
             if (mechStats.rotateSpeed < 30) {
                 mechStats.moveSpeed = speedStep;
                 mechStats.rotateSpeed += rotateStep;
-                Debug.Log("R");
+                //Debug.Log("R");
             }
         }
 
@@ -93,7 +93,7 @@ namespace AI {
             if (mechStats.rotateSpeed > -30) {
                 mechStats.moveSpeed = speedStep;
                 mechStats.rotateSpeed -= rotateStep;
-                Debug.Log("L");
+                //Debug.Log("L");
             }
         }
 

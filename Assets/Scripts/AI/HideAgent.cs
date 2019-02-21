@@ -8,49 +8,33 @@ namespace AI
     {
         
         public GameObject target;
-        public List<GameObject> obstacleParents;
 
-        private List<Rigidbody> obstacles;
-
+        private List<Rigidbody> obstacleRBs;
         private Vector3 hidePosition;
-
-        Rigidbody rb;
-
-        Steering steering;
-        Hide hide;
+        private Rigidbody rb;
+        private Steering steering;
+        private Hide hide;
 
 
         private void Awake() {
             steering = GetComponent<Steering>();
-            hide = GetComponent<Hide>();
-
-            
+            hide = GetComponent<Hide>();  
         }
 
         // Start is called before the first frame update
         void Start()
         {
-            obstacles = new List<Rigidbody>();
-            foreach (GameObject o in obstacleParents) {
-                GetObstacles(o);
-            }
+            obstacleRBs = GetObstacles();
             rb = GetComponent<Rigidbody>();
-
-            
-            
-
         }
 
-        void GetObstacles(GameObject o) {
-            int numChildren = o.transform.childCount;
-            if (numChildren > 0) {
-                for (int i = 0; i < numChildren; i++) {
-                    GameObject c = o.transform.GetChild(i).gameObject;
-                    GetObstacles(c);
-                }
-            } else {
-                obstacles.Add(o.GetComponent<Rigidbody>());
+        private List<Rigidbody> GetObstacles() {
+            List<Rigidbody> obstRB = new List<Rigidbody>();
+            GameObject[] obstacles = GameObject.FindGameObjectsWithTag("Building");
+            foreach (GameObject g in obstacles) {
+                obstRB.Add(g.GetComponent<Rigidbody>());
             }
+            return obstRB;
         }
 
         // Update is called once per frame
@@ -60,7 +44,7 @@ namespace AI
                 target = GameObject.FindGameObjectWithTag("Player");
             } else {
 
-            Vector3 hideAccel = hide.GetSteering(target.GetComponent<Rigidbody>(), obstacles);
+            Vector3 hideAccel = hide.GetSteering(target.GetComponent<Rigidbody>(), obstacleRBs);
             steering.Steer(hideAccel);
             
             //Vector3 v = rb.velocity;
