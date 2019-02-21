@@ -64,9 +64,11 @@ namespace AI {
                 SteerRight();
             } else if (angle < - angleThreshold) {
                 SteerLeft();
-            } else if (mechStats.moveSpeed < maxSpeed) {
-                    mechStats.rotateSpeed = 0;
+            } else {
+                mechStats.rotateSpeed = 0;
+                if (mechStats.moveSpeed < maxSpeed) {
                     mechStats.moveSpeed += speedStep;
+                }
             }
         }
 
