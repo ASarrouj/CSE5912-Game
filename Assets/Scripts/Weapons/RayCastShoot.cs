@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class RayCastShoot : MonoBehaviour, IWeapon
 {
@@ -63,9 +64,11 @@ public class RayCastShoot : MonoBehaviour, IWeapon
             }
 
             StartCoroutine(ShotEffect());
+            
+            GameObject mech = transform.parent.parent.parent.gameObject;
+            MachineGunSync gunScript = mech.GetComponent<MachineGunSync>();
+            gunScript.Shoot();
         }
-
-
     }
 
     public void ToggleActive()
@@ -73,7 +76,7 @@ public class RayCastShoot : MonoBehaviour, IWeapon
         this.enabled = !this.enabled;
     }
 
-    private IEnumerator ShotEffect()
+    public IEnumerator ShotEffect()
     {
         lineRenderer.enabled = true;
         muzzleFlash.SetActive(true);
