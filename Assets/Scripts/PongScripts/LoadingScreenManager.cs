@@ -139,7 +139,7 @@ public class LoadingScreenManager : MonoBehaviour
         loadingDoneIcon.gameObject.SetActive(true);
 
         progressBar.fillAmount = 1f;
-        //loadingText.text = "LOADING DONE";
+        loadingText.text = "DONE";
     }
 
 }

@@ -6,7 +6,7 @@ public class MechTakeDamage : MonoBehaviour, IDamagable
 {
     public enum Hitbox { FrontHitbox, LeftHitbox, RightHitbox, CoreHitbox}
     public Hitbox hitboxType;
-    public int health = 3;
+    public int health = 30;
     [SerializeField] GameObject [] particleEffects;
     // Start is called before the first frame update
     void Start()
@@ -62,7 +62,7 @@ public class MechTakeDamage : MonoBehaviour, IDamagable
         }
         if (hitboxType == Hitbox.CoreHitbox)
         {
-            Debug.Log("Core takes damage");
+            Debug.Log("Core takes " + dmgAmount + " damage");
 
             health -= dmgAmount;
             GameObject flames = Instantiate(particleEffects[1], transform.position, Quaternion.identity, transform);

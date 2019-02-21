@@ -4913,7 +4913,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitboxType: 1
-  health: 100
+  health: 30
   particleEffects: []
 --- !u!1 &301196269
 GameObject:
@@ -5051,7 +5051,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitboxType: 2
-  health: 100
+  health: 30
   particleEffects: []
 --- !u!1 &495328571
 GameObject:
@@ -14581,7 +14581,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitboxType: 3
-  health: 100
+  health: 60
   particleEffects: []
 --- !u!1 &978181261
 GameObject:
@@ -14719,7 +14719,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitboxType: 0
-  health: 100
+  health: 30
   particleEffects: []
 --- !u!1 &1201668168
 GameObject:
@@ -15196,7 +15196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitboxType: 2
-  health: 100
+  health: 3
   particleEffects: []
 --- !u!1 &1761427423
 GameObject:
