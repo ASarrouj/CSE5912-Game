@@ -48,5 +48,9 @@ namespace AI
             }
             return obstRB;
         }
+
+        private void OnDisable() {
+            
+        }
     }
 }
