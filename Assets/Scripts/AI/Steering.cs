@@ -88,6 +88,7 @@ namespace AI {
 
         public void Stop() {
             mechStats.moveSpeed = 0;
+            mechStats.rotateSpeed = 0;
         }   
 
         public Vector3 Arrive(Vector3 targetposition) {
