@@ -80,4 +80,8 @@ public class PlayerInput : NetworkBehaviour
     {
         inputState = new DisabledState();
     }
+
+    public void ToggleMenu() {
+        uiManager.MenuUI();
+    }
 }

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    private GameObject MechHUD, SwitcherHUD, NavHUD;
+    private GameObject MechHUD, SwitcherHUD, NavHUD, MenuHUD;
     private RectTransform slotHighlightTransform;
     private List<GameObject> slotImages;
     public GameObject slotImageTemplate;
@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviour
         MechHUD = transform.Find("MechHUD").gameObject;
         SwitcherHUD = transform.Find("SwitcherHUD").gameObject;
         NavHUD = transform.Find("NavHUD").gameObject;
+        MenuHUD = transform.Find("MenuHUD").gameObject;
         slotHighlightTransform = SwitcherHUD.transform.GetChild(0).GetComponent<RectTransform>();
 
         slotImages = new List<GameObject>();
@@ -26,6 +27,9 @@ public class UIManager : MonoBehaviour
         MechHUD.SetActive(false);
         SwitcherHUD.SetActive(true);
         NavHUD.SetActive(false);
+        MenuHUD.SetActive(false);
+
+        //Cursor.visible = false;
     }
 
     public void CreateSwitcherUI(PlayerInput input)
@@ -53,6 +57,12 @@ public class UIManager : MonoBehaviour
     public void WeaponUI()
     {
         
+    }
+
+    public void MenuUI()
+    {
+        MenuHUD.SetActive(!MenuHUD.activeSelf);
+        //Cursor.visible = !Cursor.visible;
     }
 
     public void DisableDynamicUI()

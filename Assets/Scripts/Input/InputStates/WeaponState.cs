@@ -36,6 +36,10 @@ public class WeaponState : IInputState
 
     public void Update()
     {
+        if (Input.GetButtonDown("Escape")) {
+            playerInput.ToggleMenu();
+        }
+
         bool updateMouse = true;
         if (Input.GetButtonDown("Perspective1"))
         {
