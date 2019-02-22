@@ -292,7 +292,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8640002006536919825}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b605d47cbc738e24c8c1a9cdfa8535a4, type: 3}
   m_Name: 
@@ -348,8 +348,8 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.0077705383
-        value: 0.32947922
+        time: 0
+        value: 0.20028707
         inSlope: 0
         outSlope: 0
         tangentMode: 0

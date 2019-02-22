@@ -24,7 +24,10 @@ public class ProjectileShoot : MonoBehaviour, IWeapon
 
     void Update()
     {
-        Plot(bulletSpawn.transform.position, projectileForce * bulletSpawn.transform.forward, .1f, 3f);
+        if (line.enabled)
+        {
+            Plot(gameObject.transform.position, projectileForce * bulletSpawn.transform.forward, .1f, 3f);
+        }
     }
 
     public void ToggleActive()
@@ -36,8 +39,21 @@ public class ProjectileShoot : MonoBehaviour, IWeapon
     {
         Vector3[] positions = new Vector3[Mathf.RoundToInt(maxTime / time) + 1];
         line.positionCount = positions.Length;
+        Debug.Log(start);
         positions[0] = start;
-        for (int i = 1; ; i++)
+
+        // bad hack: set all points up to 0.2*number of points = point at t=0.2*total_time
+        int half = (int)((Mathf.RoundToInt(maxTime / time) + 1) * 0.2f);
+        float halftime = time * half;
+
+        for (int i = 0; i < half; i++)
+        {
+            if (halftime > maxTime) break;
+            Vector3 pos = PlotTrajectoryAtTime(start, startVelocity, halftime);
+            positions[i] = pos;
+        }
+
+        for (int i = half; ; i++)
         {
             float t = time * i;
             if (t > maxTime) break;

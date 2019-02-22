@@ -32,6 +32,9 @@ public class LoadTargetScreenButton : MonoBehaviour
     {
         //gameObject.SetActive(false);
         //ipInput.SetActive(true);
+        //Debug.Log("joingame called, connecting to palware.space:7777");
+        //netManager.networkAddress = "palware.space";
+        //netManager.networkPort = 7777;
         netManager.StartClient();
     }
 
