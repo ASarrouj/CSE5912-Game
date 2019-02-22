@@ -6,21 +6,21 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_Scenes/PongScenes/StartScene.unity
+    path: Assets/_Scenes/MenuScenes/StartScene.unity
     guid: 29e9cb3407b25445bb05b843356403a6
   - enabled: 1
-    path: Assets/_Scenes/PongScenes/LoadingScene.unity
+    path: Assets/_Scenes/MenuScenes/LoadingScene.unity
     guid: eb4be2232406d450b9f50f0091d45538
   - enabled: 1
-    path: Assets/_Scenes/PongScenes/Main Menu.unity
+    path: Assets/_Scenes/MenuScenes/Main Menu.unity
     guid: 09d79d9c0ae236c4c93018223345b9b6
   - enabled: 1
     path: Assets/_Scenes/DemoCity.unity
     guid: 3b1f75e179a546445b64aebc8813cb4b
   - enabled: 1
-    path: Assets/_Scenes/PongScenes/Credit.unity
+    path: Assets/_Scenes/MenuScenes/Credit.unity
     guid: e23d91f26f3ae40c8baf867f929bdbb7
   - enabled: 1
-    path: Assets/_Scenes/PongScenes/Option.unity
+    path: Assets/_Scenes/MenuScenes/Option.unity
     guid: 8fa43360ee443ed48bec5e1294a97567
   m_configObjects: {}
