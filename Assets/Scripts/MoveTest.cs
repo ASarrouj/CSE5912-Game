@@ -10,19 +10,16 @@ public class MoveTest : MonoBehaviour
     public float rotateSpeed;
     public int pathLength = 600;
     GameObject future;
-    private float nextActionTime = 0.0f;
-    public float period = 0.1f;
     private Vector3 com;
     private Rigidbody rb;
     private AudioSource engineSound;
 
     private void Awake()
     {
-        //com = new Vector3(0,-1,0);
-        //rb = GetComponent<Rigidbody>();
-        //rb.centerOfMass = com;
-
-       // Physics.gravity = new Vector3(0, -10f, 0);
+        com = new Vector3(0,-1,0);
+        rb = GetComponent<Rigidbody>();
+        rb.centerOfMass = com;
+        Physics.gravity = new Vector3(0, -10f, 0);
     }
     // Start is called before the first frame update
     void Start()
@@ -36,11 +33,9 @@ public class MoveTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.time > nextActionTime)
-        {
-            nextActionTime += period;
+
             RenderPath();
-        }
+
         
         transform.Translate(0, 0, Time.deltaTime * moveSpeed, Space.Self);
         transform.Rotate(0, Time.deltaTime * rotateSpeed, 0, Space.Self);
