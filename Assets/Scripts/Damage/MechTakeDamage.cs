@@ -11,7 +11,10 @@ public class MechTakeDamage : MonoBehaviour, IDamagable
     // Start is called before the first frame update
     void Start()
     {
-        
+        if ((hitboxType == Hitbox.CoreHitbox)) {
+            health = 60;
+         }
+
     }
 
     // Update is called once per frame
@@ -63,7 +66,7 @@ public class MechTakeDamage : MonoBehaviour, IDamagable
         if (hitboxType == Hitbox.CoreHitbox)
         {
             Debug.Log("Core takes " + dmgAmount + " damage");
-
+            
             health -= dmgAmount;
             GameObject flames = Instantiate(particleEffects[1], transform.position, Quaternion.identity, transform);
             flames.transform.localScale += new Vector3(1f, 1f, 1f);
