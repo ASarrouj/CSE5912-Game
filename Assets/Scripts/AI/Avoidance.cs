@@ -14,7 +14,7 @@ namespace AI {
             GetComponent<FOV>().fov.AddComponent<DetectObstacle>();
         }
 
-        void Update()
+        void FixedUpdate()
         {
             AvoidLeft = false;
             AvoidRight = false;      
