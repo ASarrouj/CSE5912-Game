@@ -5,8 +5,7 @@ using UnityEngine;
 namespace AI {
     public class Steering : MonoBehaviour
     {
-        [SerializeField]
-        bool ShowDebugTarget = true;
+        public bool ShowDebugTarget = false;
 
         public float targetRadius = 1f;
         public float slowRadius = 0f;
@@ -17,6 +16,7 @@ namespace AI {
         private int speedStep = 4;
         private float angleThreshold = 10;
         private int maxSpeed = 12;
+        private Vector3 targetPos;
 
         Rigidbody rb;
 
@@ -51,7 +51,7 @@ namespace AI {
 
             float angle = Vector3.SignedAngle(transform.forward, linearAcceleration, Vector3.up);
 
-            if (Vector3.Magnitude(debugTar.transform.position - transform.position) < 6) {
+            if (Vector3.Magnitude(targetPos - transform.position) < 6) {
                 Stop();
                 return;
             }
@@ -91,6 +91,7 @@ namespace AI {
         }   
 
         public Vector3 Arrive(Vector3 targetposition) {
+            targetPos = targetposition;
             if (ShowDebugTarget) debugTar.transform.position = targetposition;
             Vector3 targetVelocity = targetposition - rb.position;
 
