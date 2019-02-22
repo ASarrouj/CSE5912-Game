@@ -7,6 +7,7 @@ public class MechState : IInputState
     private PlayerInput playerInput;
     private List<string> weaponInputs;
     private List<Transform> weapons;
+    private MechMouseLook mouseLook;
     private MoveTest mechStats;
     private int maxSpeed, speedStep;
 
@@ -17,6 +18,7 @@ public class MechState : IInputState
         weaponInputs = playerInput.weaponInputs;
         weapons = playerInput.weapons;
         mechStats = playerInput.transform.GetComponent<MoveTest>();
+        //mouseLook = new MechMouseLook(playerInput.transform.Find("PlayerCamera").GetComponent<Camera>());
 
         speedStep = 4;
         maxSpeed = 12;
@@ -67,6 +69,11 @@ public class MechState : IInputState
         if (mechStats.moveSpeed == 0 || Input.GetButtonDown("Shift"))
         {
             mechStats.rotateSpeed = 0;
+        }
+
+        if (Input.GetButton("Fire1"))
+        {
+            //mouseLook.Update();
         }
 
 
