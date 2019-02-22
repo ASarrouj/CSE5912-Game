@@ -245,7 +245,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeOverlay: {fileID: 0}
   fadeDuration: 1
-  netManager: {fileID: 0}
   ipInput: {fileID: 0}
 --- !u!114 &74229378
 MonoBehaviour:
@@ -683,7 +682,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeOverlay: {fileID: 0}
   fadeDuration: 1
-  netManager: {fileID: 0}
   ipInput: {fileID: 0}
 --- !u!114 &330252703
 MonoBehaviour:
@@ -1178,7 +1176,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeOverlay: {fileID: 0}
   fadeDuration: 1
-  netManager: {fileID: 0}
   ipInput: {fileID: 0}
 --- !u!114 &654041838
 MonoBehaviour:
@@ -1448,7 +1445,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeOverlay: {fileID: 0}
   fadeDuration: 1
-  netManager: {fileID: 416508187}
   ipInput: {fileID: 0}
 --- !u!114 &785199035
 MonoBehaviour:
@@ -1990,7 +1986,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeOverlay: {fileID: 0}
   fadeDuration: 1
-  netManager: {fileID: 0}
   ipInput: {fileID: 0}
 --- !u!114 &970499647
 MonoBehaviour:
@@ -3030,49 +3025,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1572915979
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1572915981}
-  - component: {fileID: 1572915980}
-  m_Layer: 0
-  m_Name: StandaloneServerAutostart
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1572915980
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1572915979}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38c75d48b2ab8064eb74a1c2e91b24a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1572915981
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1572915979}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 117.43153, y: -6.500898, z: -27.90503}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1696318857
 GameObject:
   m_ObjectHideFlags: 0
@@ -3962,7 +3914,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeOverlay: {fileID: 0}
   fadeDuration: 1
-  netManager: {fileID: 416508187}
   ipInput: {fileID: 271693781}
 --- !u!114 &2070662633
 MonoBehaviour:

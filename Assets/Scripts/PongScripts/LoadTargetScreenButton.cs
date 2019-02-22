@@ -10,8 +10,14 @@ public class LoadTargetScreenButton : MonoBehaviour
 
     public Image fadeOverlay;
     public float fadeDuration = 1f;
-    public NetworkManager netManager;
     public GameObject ipInput;
+
+    private NetworkManager netManager;
+
+    private void Awake()
+    {
+        netManager = NetworkManager.singleton;
+    }
 
     public void LoadSceneNum(int num)
     {
