@@ -11,7 +11,6 @@ namespace AI
 
         private List<Rigidbody> obstacleRBs;
         private Vector3 hidePosition;
-        private Rigidbody rb;
         private Steering steering;
         private Hide hide;
 
@@ -24,7 +23,6 @@ namespace AI
         void Start()
         {
             obstacleRBs = GetObstacles();
-            rb = GetComponent<Rigidbody>();
         }
 
         void Update()
@@ -47,6 +45,10 @@ namespace AI
                 }
             }
             return obstRB;
+        }
+
+        private void OnDisable() {
+            
         }
     }
 }

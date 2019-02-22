@@ -9,6 +9,7 @@ TagManager:
   - Mech
   - Weapon
   - Building
+  - Menu
   layers:
   - Default
   - TransparentFX

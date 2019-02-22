@@ -24,7 +24,6 @@ public class DetectObstacle : MonoBehaviour
         if (towardObst < 0) {
             towardObst += 360;
         }
-        Debug.Log("obst: " + towardObst + "rot: " + transform.rotation.eulerAngles.y);
         if (towardObst > transform.rotation.y) {
             av.AvoidLeft = true;
         } else {

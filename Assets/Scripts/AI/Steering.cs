@@ -51,8 +51,8 @@ namespace AI {
 
             float angle = Vector3.SignedAngle(transform.forward, linearAcceleration, Vector3.up);
 
-            if (Vector3.Magnitude(debugTar.transform.position - transform.position) < 1) {
-                mechStats.moveSpeed = 0;
+            if (Vector3.Magnitude(debugTar.transform.position - transform.position) < 6) {
+                Stop();
                 return;
             }
 
@@ -86,7 +86,9 @@ namespace AI {
             }
         }
 
-        
+        public void Stop() {
+            mechStats.moveSpeed = 0;
+        }   
 
         public Vector3 Arrive(Vector3 targetposition) {
             if (ShowDebugTarget) debugTar.transform.position = targetposition;

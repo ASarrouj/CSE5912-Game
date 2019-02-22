@@ -28,6 +28,7 @@ public class ButtonAction : MonoBehaviour
                 StartCoroutine(Play());
                 break;
             case Action.Quit:
+                Debug.Log("QUIT");
                 QuitGame();
                 break;
             case Action.Options:
