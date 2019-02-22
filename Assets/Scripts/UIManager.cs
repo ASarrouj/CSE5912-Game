@@ -29,7 +29,7 @@ public class UIManager : MonoBehaviour
         NavHUD.SetActive(false);
         MenuHUD.SetActive(false);
 
-        //Cursor.visible = false;
+        Cursor.visible = false;
     }
 
     public void CreateSwitcherUI(PlayerInput input)
@@ -62,7 +62,7 @@ public class UIManager : MonoBehaviour
     public void MenuUI()
     {
         MenuHUD.SetActive(!MenuHUD.activeSelf);
-        //Cursor.visible = !Cursor.visible;
+        Cursor.visible = !Cursor.visible;
     }
 
     public void DisableDynamicUI()
