@@ -26,6 +26,10 @@ public class MechState : IInputState
 
     public void Update()
     {
+        if (Input.GetButtonDown("Escape")) {
+            playerInput.ToggleMenu();
+        }
+
         for (int i = 0; i < weapons.Count; i++)
         {
             if (Input.GetButtonDown(weaponInputs[i]))
