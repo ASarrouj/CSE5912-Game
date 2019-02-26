@@ -300,7 +300,7 @@ MonoBehaviour:
   bulletSpawn: {fileID: 6869588983514568573}
   smoke: {fileID: 6870266194228576541}
   projectileForce: 15
-  fireRate: 1
+  fireRate: 2
 --- !u!120 &8356572040623034996
 LineRenderer:
   m_ObjectHideFlags: 0

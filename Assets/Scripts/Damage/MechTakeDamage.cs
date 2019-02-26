@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class MechTakeDamage : MonoBehaviour, IDamagable
+public class MechTakeDamage : NetworkBehaviour, IDamagable
 {
     public enum Hitbox { FrontHitbox, LeftHitbox, RightHitbox, CoreHitbox}
     public Hitbox hitboxType;
-    public int health = 30;
+    public const int maxHealth=30;
+    [SyncVar] public int health = 30;
     [SerializeField] GameObject [] particleEffects;
     // Start is called before the first frame update
     void Start()
