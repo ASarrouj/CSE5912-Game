@@ -14,16 +14,16 @@ namespace AI
             steering = GetComponent<Steering>();
         }
 
-        public Vector3 GetSteering(Rigidbody target, ICollection<Rigidbody> obstacles) {
+        public Vector3 GetSteering(Rigidbody target, ICollection<Transform> obstacles) {
             Vector3 bestHidingSpot;
             return GetSteering(target, obstacles, out bestHidingSpot);
         }
 
-        public Vector3 GetSteering(Rigidbody target, ICollection<Rigidbody> obstacles, out Vector3 bestHidingSpot) {
+        public Vector3 GetSteering(Rigidbody target, ICollection<Transform> obstacles, out Vector3 bestHidingSpot) {
             float distToClosest = Mathf.Infinity;
             bestHidingSpot = Vector3.zero;
-            foreach (Rigidbody r in obstacles) {
-                Vector3 hidingSpot = GetHidingPosition(r, target);
+            foreach (Transform o in obstacles) {
+                Vector3 hidingSpot = GetHidingPosition(o, target);
                 float dist = Vector3.Distance(hidingSpot, transform.position);
                 if (dist < distToClosest) {
                     distToClosest = dist;
@@ -34,7 +34,7 @@ namespace AI
             return steering.Arrive(bestHidingSpot);
         }
 
-        Vector3 GetHidingPosition(Rigidbody obstacle, Rigidbody target) {
+        Vector3 GetHidingPosition(Transform obstacle, Rigidbody target) {
             BoxCollider col = obstacle.GetComponent<BoxCollider>();
             float distAway = Mathf.Max(obstacle.transform.localScale.x, obstacle.transform.localScale.z) 
                 * Mathf.Max(col.size.x, col.size.z) + distanceFromBoundary;

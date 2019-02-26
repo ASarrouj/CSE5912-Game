@@ -9,10 +9,12 @@ namespace AI
         
         public GameObject target;
 
-        private List<Rigidbody> obstacleRBs;
+        private List<Transform> obstacles;
         private Vector3 hidePosition;
         private Steering steering;
         private Hide hide;
+
+        private readonly float minHideDist = 40f;
 
 
         private void Awake() {
@@ -22,7 +24,7 @@ namespace AI
 
         void Start()
         {
-            obstacleRBs = GetObstacles();
+            obstacles = GetObstacles();
         }
 
         void Update()
@@ -30,21 +32,25 @@ namespace AI
             if (target == null) {
                 target = GameObject.FindGameObjectWithTag("Player");
             } else {
-                Vector3 hideAccel = hide.GetSteering(target.GetComponent<Rigidbody>(), obstacleRBs);
-                steering.Steer(hideAccel);
+                Vector3 dist = transform.position - target.transform.position;
+                if (dist.magnitude < minHideDist) {
+                    steering.Steer(dist); //flee
+                } else {
+                    steering.Steer(hide.GetSteering(target.GetComponent<Rigidbody>(), obstacles)); //hide
+                }
             }
         }
 
-        private List<Rigidbody> GetObstacles() {
-            List<Rigidbody> obstRB = new List<Rigidbody>();
+        private List<Transform> GetObstacles() {
+            List<Transform> obst = new List<Transform>();
             GameObject[] obstacles = GameObject.FindGameObjectsWithTag("Building");
             foreach (GameObject g in obstacles) {
-                Rigidbody r = g.GetComponent<Rigidbody>();
+                Transform t = g.transform;
                 if (g != null) {
-                    obstRB.Add(r);
+                    obst.Add(t);
                 }
             }
-            return obstRB;
+            return obst;
         }
 
         private void OnDisable() {

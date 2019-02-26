@@ -16,9 +16,9 @@ public class AddBuildingPhysics : MonoBehaviour
             GameObject c = g.transform.GetChild(i).gameObject;
 
             if (c.CompareTag("Building")) {
-                Rigidbody rb = c.AddComponent<Rigidbody>();
+                //Rigidbody rb = c.AddComponent<Rigidbody>();
                 c.AddComponent<BoxCollider>();
-                rb.isKinematic = true;
+                //rb.isKinematic = true;
             }
         
             if (c.transform.childCount > 0) {
