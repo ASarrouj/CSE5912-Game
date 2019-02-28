@@ -6,7 +6,7 @@ public class CameraManager : MonoBehaviour
 
     private Vector3 offsetPos, originalPos;
     private Quaternion offsetRot, originalRot;
-    private float transitionTime;
+    private float transitionTime, dragSpeed, dragOrigin, lastMousePosX;
     private const float transitionMaxTime = 0.2f;
     private const float DT = 0.005f;
     private bool interpolating;
@@ -17,13 +17,15 @@ public class CameraManager : MonoBehaviour
     void Start()
     {
         transitionTime = 0.0f;
+        dragSpeed = 0.2f;
+        lastMousePosX = Screen.width / 2;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         if (interpolating)
-            InterpolatePosition();
+            InterpolateCamera();
     }
 
     public void SetInput(PlayerInput input)
@@ -64,7 +66,7 @@ public class CameraManager : MonoBehaviour
         transform.parent = null;
     }
 
-    private void InterpolatePosition()
+    private void InterpolateCamera()
     {
         transform.position = Vector3.Lerp(originalPos, target.position + (offsetPos.x * target.forward + offsetPos.y * target.up + offsetPos.z * target.right), ComputeArcLengthFromTime(transitionTime));
         transform.rotation = Quaternion.Slerp(originalRot, target.rotation * offsetRot, ComputeArcLengthFromTime(transitionTime));
@@ -83,5 +85,29 @@ public class CameraManager : MonoBehaviour
     {
         float normalizedTime = time / transitionMaxTime;
         return -2 * (float)Math.Pow(normalizedTime, 3) + 3 * (float)Math.Pow(normalizedTime, 2);
+    }
+
+    public void DragCamera()
+    {
+        float dragDistance = (Input.mousePosition.x - dragOrigin - lastMousePosX) * dragSpeed;
+
+        //if (Mathf.Abs(Input.mousePosition.x - dragOrigin) < Screen.width / 4)
+        //{
+            transform.RotateAround(target.position, target.up, dragDistance);
+        //}
+
+        lastMousePosX = Input.mousePosition.x - dragOrigin;
+    }
+
+    public void UnDragCamera()
+    {
+        transform.position = target.position + (offsetPos.x * target.forward + offsetPos.y * target.up + offsetPos.z * target.right);
+        transform.rotation = target.rotation * offsetRot;
+    }
+
+    public void SetDragOrigin()
+    {
+        dragOrigin = Input.mousePosition.x;
+        lastMousePosX = 0;
     }
 }

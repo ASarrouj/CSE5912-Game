@@ -84,4 +84,19 @@ public class PlayerInput : NetworkBehaviour
     public void ToggleMenu() {
         uiManager.MenuUI();
     }
+
+    public void DragCamera()
+    {
+        camManager.DragCamera();
+    }
+
+    public void UnDragCamera()
+    {
+        camManager.UnDragCamera();
+    }
+
+    public void SetDragOrigin()
+    {
+        camManager.SetDragOrigin();
+    }
 }
