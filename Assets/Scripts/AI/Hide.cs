@@ -7,18 +7,29 @@ namespace AI
     public class Hide : MonoBehaviour
     {
         public float distanceFromBoundary = 5f;
-        Steering steering;
+        public bool arriving = false;
 
-        private Vector3 bestHidingSpot;
+        private Steering steering;
+        private HideAgent hideAgent;
+
+        private Vector3 currentSpot;
 
         void Awake()
         {
             steering = GetComponent<Steering>();
+            hideAgent = GetComponent<HideAgent>();
         }
 
         public Vector3 GetSteering(Rigidbody target, ICollection<Transform> obstacles) {
+            Vector3 bestHidingSpot;
+            return GetSteering(target, obstacles, out bestHidingSpot);
+        }
 
-            if (!steering.arriving) {
+        public Vector3 GetSteering(Rigidbody target, ICollection<Transform> obstacles, out Vector3 bestHidingSpot) {
+
+            if (arriving) {
+                bestHidingSpot = currentSpot;
+            } else {
                 float distToClosest = Mathf.Infinity;
                 bestHidingSpot = Vector3.zero;
                 foreach (Transform o in obstacles) {
@@ -29,7 +40,8 @@ namespace AI
                         bestHidingSpot = hidingSpot;
                     }
                 }
-                steering.arriving = true;
+                arriving = true;
+                currentSpot = bestHidingSpot;
             }
 
             return steering.Arrive(bestHidingSpot);
@@ -46,7 +58,8 @@ namespace AI
             obst.y = altitude;
             Vector3 dir = obst - tar;
             dir.Normalize();
-            return obst + dir * distAway;
+            Vector3 hidePos = obst + dir * distAway;
+            return hidePos;
         }
 
     }

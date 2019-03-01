@@ -7,8 +7,6 @@ namespace AI {
     {
         public bool ShowDebugTarget = false;
 
-        public bool arriving = false;
-
         private MoveTest mechStats;
         private readonly int rotateStep = 5;
         private readonly int speedStep = 4;
@@ -43,18 +41,11 @@ namespace AI {
         public void Steer(Vector3 linearAcceleration) {
 
             if (linearAcceleration.magnitude == 0) {
-                mechStats.moveSpeed = 0;
+                Stop();
                 return;
-            }
+            }           
 
             float angle = Vector3.SignedAngle(transform.forward, linearAcceleration, Vector3.up);
-
-            if (Vector3.Magnitude(targetPos - transform.position) < targetRadius) {
-                Stop();
-                arriving = false;
-                Debug.Log("????");
-                return;
-            }
 
             if (avoid.AvoidRight) {
                 SteerLeft();

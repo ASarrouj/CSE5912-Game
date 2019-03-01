@@ -277,10 +277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32874b01fb4ea4940b9d8501627f0861, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShowDebugTarget: 0
-  targetRadius: 1
-  slowRadius: 0
-  timeToTarget: 0.1
+  ShowDebugTarget: 1
 --- !u!114 &4493241846513700412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -345,6 +342,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceFromBoundary: 5
+  arriving: 0
 --- !u!82 &7614408769711282320
 AudioSource:
   m_ObjectHideFlags: 0
