@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/MechWeaponPick.unity
     guid: fd95043929893ad4e8bc0cd5e995065a
+  - enabled: 1
+    path: Assets/_Scenes/MenuScenes/LobbyScene.unity
+    guid: a9a93dc9b382ff3428230be29f86566c
   m_configObjects: {}
