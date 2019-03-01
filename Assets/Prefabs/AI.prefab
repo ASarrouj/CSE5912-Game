@@ -211,7 +211,6 @@ MonoBehaviour:
   moveSpeed: 0
   rotateSpeed: 0
   pathLength: 6000
-  period: 1
 --- !u!54 &3227839355828598611
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -622,11 +621,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 90
       objectReference: {fileID: 0}
-    - target: {fileID: 2026154732833375640, guid: c252754bf9fd2f34080cbe7857660ca4,
-        type: 3}
-      propertyPath: health
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 1986241285299148540, guid: c252754bf9fd2f34080cbe7857660ca4,
         type: 3}
       propertyPath: m_TagString
@@ -641,6 +635,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2026154732833375640, guid: c252754bf9fd2f34080cbe7857660ca4,
+        type: 3}
+      propertyPath: health
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 262316372863664156, guid: c252754bf9fd2f34080cbe7857660ca4, type: 3}

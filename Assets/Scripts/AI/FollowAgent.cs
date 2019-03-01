@@ -29,11 +29,9 @@ namespace AI
         {
             if (target == null) {
                 TargetClosestEnemy();
-            } else if (Vector3.Magnitude(transform.position - target.transform.position) > 10) {
+            } else {
                 Vector3 followAccel = follow.GetSteering(target.GetComponent<Rigidbody>());
                 steering.Steer(followAccel);
-            } else {
-                steering.Stop();
             }
         }
 

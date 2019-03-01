@@ -8,27 +8,28 @@ namespace AI
     {
         public float distanceFromBoundary = 5f;
         Steering steering;
-        
+
+        private Vector3 bestHidingSpot;
+
         void Awake()
         {
             steering = GetComponent<Steering>();
         }
 
         public Vector3 GetSteering(Rigidbody target, ICollection<Transform> obstacles) {
-            Vector3 bestHidingSpot;
-            return GetSteering(target, obstacles, out bestHidingSpot);
-        }
 
-        public Vector3 GetSteering(Rigidbody target, ICollection<Transform> obstacles, out Vector3 bestHidingSpot) {
-            float distToClosest = Mathf.Infinity;
-            bestHidingSpot = Vector3.zero;
-            foreach (Transform o in obstacles) {
-                Vector3 hidingSpot = GetHidingPosition(o, target);
-                float dist = Vector3.Distance(hidingSpot, transform.position);
-                if (dist < distToClosest) {
-                    distToClosest = dist;
-                    bestHidingSpot = hidingSpot;
+            if (!steering.arriving) {
+                float distToClosest = Mathf.Infinity;
+                bestHidingSpot = Vector3.zero;
+                foreach (Transform o in obstacles) {
+                    Vector3 hidingSpot = GetHidingPosition(o, target);
+                    float dist = Vector3.Distance(hidingSpot, transform.position);
+                    if (dist < distToClosest) {
+                        distToClosest = dist;
+                        bestHidingSpot = hidingSpot;
+                    }
                 }
+                steering.arriving = true;
             }
 
             return steering.Arrive(bestHidingSpot);

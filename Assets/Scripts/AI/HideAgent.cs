@@ -14,7 +14,7 @@ namespace AI
         private Steering steering;
         private Hide hide;
 
-        private readonly float minHideDist = 40f;
+        private readonly float fleeRadius = 40f;
 
 
         private void Awake() {
@@ -33,7 +33,7 @@ namespace AI
                 target = GameObject.FindGameObjectWithTag("Player");
             } else {
                 Vector3 dist = transform.position - target.transform.position;
-                if (dist.magnitude < minHideDist) {
+                if (dist.magnitude < fleeRadius) {
                     steering.Steer(dist); //flee
                 } else {
                     steering.Steer(hide.GetSteering(target.GetComponent<Rigidbody>(), obstacles)); //hide
