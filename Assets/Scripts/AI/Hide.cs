@@ -40,7 +40,6 @@ namespace AI
                         bestHidingSpot = hidingSpot;
                     }
                 }
-                arriving = true;
                 currentSpot = bestHidingSpot;
             }
 

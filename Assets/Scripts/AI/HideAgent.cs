@@ -14,8 +14,8 @@ namespace AI
         private Steering steering;
         private Hide hide;
 
-        private readonly float fleeRadius = 20f;
-        private readonly float hidingSpotRadius = 5f;
+        private readonly float fleeRadius = 10f;
+        private readonly float hidingSpotRadius = 10f;
 
         private void Awake() {
             steering = GetComponent<Steering>();
@@ -37,9 +37,11 @@ namespace AI
             Vector3 dist = transform.position - target.transform.position;
             if (dist.magnitude < fleeRadius) {
                 steering.Steer(dist); //flee
+                hide.arriving = false;
             } else {
                 Vector3 dir = hide.GetSteering(target.GetComponent<Rigidbody>(), obstacles, out hidePosition); //hide
                 if (Vector3.Magnitude(transform.position - hidePosition) > hidingSpotRadius) {
+                    hide.arriving = true;
                     steering.Steer(dir);
                 } else if (hide.arriving) {
                     hide.arriving = false;
