@@ -7,11 +7,17 @@ namespace AI
     public class Hide : MonoBehaviour
     {
         public float distanceFromBoundary = 5f;
-        Steering steering;
-        
+        public bool arriving = false;
+
+        private Steering steering;
+        private HideAgent hideAgent;
+
+        private Vector3 currentSpot;
+
         void Awake()
         {
             steering = GetComponent<Steering>();
+            hideAgent = GetComponent<HideAgent>();
         }
 
         public Vector3 GetSteering(Rigidbody target, ICollection<Transform> obstacles) {
@@ -20,15 +26,21 @@ namespace AI
         }
 
         public Vector3 GetSteering(Rigidbody target, ICollection<Transform> obstacles, out Vector3 bestHidingSpot) {
-            float distToClosest = Mathf.Infinity;
-            bestHidingSpot = Vector3.zero;
-            foreach (Transform o in obstacles) {
-                Vector3 hidingSpot = GetHidingPosition(o, target);
-                float dist = Vector3.Distance(hidingSpot, transform.position);
-                if (dist < distToClosest) {
-                    distToClosest = dist;
-                    bestHidingSpot = hidingSpot;
+
+            if (arriving) {
+                bestHidingSpot = currentSpot;
+            } else {
+                float distToClosest = Mathf.Infinity;
+                bestHidingSpot = Vector3.zero;
+                foreach (Transform o in obstacles) {
+                    Vector3 hidingSpot = GetHidingPosition(o, target);
+                    float dist = Vector3.Distance(hidingSpot, transform.position);
+                    if (dist < distToClosest) {
+                        distToClosest = dist;
+                        bestHidingSpot = hidingSpot;
+                    }
                 }
+                currentSpot = bestHidingSpot;
             }
 
             return steering.Arrive(bestHidingSpot);
@@ -45,7 +57,8 @@ namespace AI
             obst.y = altitude;
             Vector3 dir = obst - tar;
             dir.Normalize();
-            return obst + dir * distAway;
+            Vector3 hidePos = obst + dir * distAway;
+            return hidePos;
         }
 
     }

@@ -244,7 +244,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: bd57d6306d5e02545b68a97f9a0cfde2, type: 3}
       propertyPath: m_TagString
-      value: Building
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 100004, guid: bd57d6306d5e02545b68a97f9a0cfde2, type: 3}
       propertyPath: m_Layer
@@ -285,6 +285,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: bd57d6306d5e02545b68a97f9a0cfde2, type: 3}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: bd57d6306d5e02545b68a97f9a0cfde2, type: 3}
+      propertyPath: m_TagString
+      value: Building
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6400000, guid: bd57d6306d5e02545b68a97f9a0cfde2, type: 3}
@@ -3435,7 +3439,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: bd57d6306d5e02545b68a97f9a0cfde2, type: 3}
       propertyPath: m_TagString
-      value: Building
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 100004, guid: bd57d6306d5e02545b68a97f9a0cfde2, type: 3}
       propertyPath: m_Layer
@@ -3476,6 +3480,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: bd57d6306d5e02545b68a97f9a0cfde2, type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: bd57d6306d5e02545b68a97f9a0cfde2, type: 3}
+      propertyPath: m_TagString
+      value: Building
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6400000, guid: bd57d6306d5e02545b68a97f9a0cfde2, type: 3}
@@ -4239,7 +4247,7 @@ Transform:
   - {fileID: 995296715}
   - {fileID: 707075509}
   - {fileID: 1728323734}
-  - {fileID: 6259023596819288520}
+  - {fileID: 2348248785166318221}
   - {fileID: 2016555263}
   - {fileID: 1908773690}
   - {fileID: 1793488177}
@@ -22578,10 +22586,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cdcbe93cf7650ed4ab5b8a85c326334e, type: 3}
---- !u!4 &6259023596819288520 stripped
+--- !u!4 &2348248785166318221 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 6259023596819288520, guid: cdcbe93cf7650ed4ab5b8a85c326334e,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 2348248785166318220}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &7363518050801106947 stripped

@@ -7,15 +7,13 @@ namespace AI {
     {
         public bool ShowDebugTarget = false;
 
-        public float targetRadius = 1f;
-        public float slowRadius = 0f;
-        public float timeToTarget = 0.1f;
-
         private MoveTest mechStats;
-        private int rotateStep = 5;
-        private int speedStep = 4;
-        private float angleThreshold = 10;
-        private int maxSpeed = 12;
+        private readonly int rotateStep = 5;
+        private readonly int speedStep = 4;
+        private readonly float angleThreshold = 10;
+        private readonly int maxSpeed = 12;
+        private readonly int maxAngle = 30;
+        private readonly float targetRadius = 20f;
         private Vector3 targetPos;
 
         Rigidbody rb;
@@ -23,12 +21,14 @@ namespace AI {
         GameObject debugTar;
 
         Avoidance avoid;
+        Hide hide;
 
         void Awake()
         {
             rb = gameObject.GetComponent<Rigidbody>();
             mechStats = GetComponent<MoveTest>();
             avoid = GetComponent<Avoidance>();
+            hide = GetComponent<Hide>();
 
             if (ShowDebugTarget) {
                 debugTar = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -38,23 +38,14 @@ namespace AI {
             }           
         }
 
-        private bool CheckObstacle() {
-            return Physics.Raycast(transform.position, transform.forward, 20f, 0, QueryTriggerInteraction.Ignore);
-        }
-
         public void Steer(Vector3 linearAcceleration) {
 
             if (linearAcceleration.magnitude == 0) {
-                mechStats.moveSpeed = 0;
-                return;
-            }
-
-            float angle = Vector3.SignedAngle(transform.forward, linearAcceleration, Vector3.up);
-
-            if (Vector3.Magnitude(targetPos - transform.position) < 6) {
                 Stop();
                 return;
-            }
+            }           
+
+            float angle = Vector3.SignedAngle(transform.forward, linearAcceleration, Vector3.up);
 
             if (avoid.AvoidRight) {
                 SteerLeft();
@@ -73,14 +64,14 @@ namespace AI {
         }
 
         private void SteerRight() {
-            if (mechStats.rotateSpeed < 30) {
+            if (mechStats.rotateSpeed < maxAngle) {
                 mechStats.moveSpeed = speedStep;
                 mechStats.rotateSpeed += rotateStep;
             }
         }
 
         private void SteerLeft() {
-            if (mechStats.rotateSpeed > -30) {
+            if (mechStats.rotateSpeed > - maxAngle) {
                 mechStats.moveSpeed = speedStep;
                 mechStats.rotateSpeed -= rotateStep;
             }
@@ -97,10 +88,6 @@ namespace AI {
             Vector3 targetVelocity = targetposition - rb.position;
 
             float dist = targetVelocity.magnitude;
-            
-            if (dist < targetRadius) {
-                return Vector3.zero;
-            }
 
             return targetVelocity;
         }
