@@ -1278,7 +1278,7 @@ GameObject:
   - component: {fileID: 673921408}
   - component: {fileID: 673921409}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: CaptureManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
