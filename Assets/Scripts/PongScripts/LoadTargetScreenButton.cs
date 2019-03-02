@@ -29,6 +29,21 @@ public class LoadTargetScreenButton : MonoBehaviour
         GameStateManager.LoadState(num);
     }
 
+    public void StartHost()
+    {
+        netManager.StartHost();
+    }
+
+    public void JoinGame()
+    {
+        //gameObject.SetActive(false);
+        //ipInput.SetActive(true);
+        //Debug.Log("joingame called, connecting to palware.space:7777");
+        //netManager.networkAddress = "palware.space";
+        //netManager.networkPort = 7777;
+        netManager.StartClient();
+    }
+
     public void QuickLoadScene(int num)
     {
         if (num < 0 || num >= SceneManager.sceneCountInBuildSettings)
