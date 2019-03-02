@@ -380,6 +380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 214d931298270924ab8cb82069b16957, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAI: 0
 --- !u!65 &1399714903223172193
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -692,6 +693,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3660ed75b81e4f6abb01d4f8b8c3c33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Invincible: 0
   hitboxType: 1
   health: 30
   particleEffects: []
@@ -1813,6 +1815,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2026154732833375640, guid: c252754bf9fd2f34080cbe7857660ca4,
+        type: 3}
+      propertyPath: Invincible
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1986241285299148540, guid: c252754bf9fd2f34080cbe7857660ca4,
         type: 3}

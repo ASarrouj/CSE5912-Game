@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class AI_Spawner : MonoBehaviour
 {
@@ -14,5 +15,6 @@ public class AI_Spawner : MonoBehaviour
             newAI.GetComponent<AI.Steering>().ShowDebugTarget = true;
             newAI.GetComponent<LineRenderer>().enabled = true;     
         }
+        NetworkServer.Spawn(newAI);
     }
 }

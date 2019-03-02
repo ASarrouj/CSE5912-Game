@@ -5,6 +5,7 @@ using UnityEngine.Networking;
 
 public class MechTakeDamage : NetworkBehaviour, IDamagable
 {
+    public bool Invincible;
     public enum Hitbox { FrontHitbox, LeftHitbox, RightHitbox, CoreHitbox}
     public Hitbox hitboxType;
     public const int maxHealth=30;
@@ -27,12 +28,13 @@ public class MechTakeDamage : NetworkBehaviour, IDamagable
 
     public void Damage(int dmgAmount) 
     {
+        if (Invincible) return;
         if (hitboxType == Hitbox.FrontHitbox)
         {
             Debug.Log("Front takes damage");
 
             health -= dmgAmount;
-            if (health <= 0)
+            if (health <= 0 && particleEffects != null && particleEffects.Length > 0)
             {
                 GameObject explosion = Instantiate(particleEffects[0], transform.position, Quaternion.identity);
                 explosion.transform.localScale -= new Vector3(1f,1f,1f);
@@ -41,7 +43,7 @@ public class MechTakeDamage : NetworkBehaviour, IDamagable
             }
         }
 
-        if (hitboxType == Hitbox.LeftHitbox)
+        if (hitboxType == Hitbox.LeftHitbox && particleEffects != null && particleEffects.Length > 0)
         {
             Debug.Log("Left takes damage");
 
@@ -53,7 +55,7 @@ public class MechTakeDamage : NetworkBehaviour, IDamagable
                 Destroy(transform.parent.gameObject);
             }
         }
-        if (hitboxType == Hitbox.RightHitbox)
+        if (hitboxType == Hitbox.RightHitbox && particleEffects != null && particleEffects.Length > 0)
         {
             Debug.Log("Right takes damage"); health -= dmgAmount;
                 if (health <= 0)
@@ -65,7 +67,7 @@ public class MechTakeDamage : NetworkBehaviour, IDamagable
 
 
         }
-        if (hitboxType == Hitbox.CoreHitbox)
+        if (hitboxType == Hitbox.CoreHitbox && particleEffects != null && particleEffects.Length > 0)
         {
             Debug.Log("Core takes " + dmgAmount + " damage");
             

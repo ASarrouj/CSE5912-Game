@@ -13,22 +13,18 @@ namespace AI {
         private readonly float angleThreshold = 10;
         private readonly int maxSpeed = 12;
         private readonly int maxAngle = 30;
-        private readonly float targetRadius = 20f;
-        private Vector3 targetPos;
 
         Rigidbody rb;
 
         GameObject debugTar;
 
         Avoidance avoid;
-        Hide hide;
 
         void Awake()
         {
             rb = gameObject.GetComponent<Rigidbody>();
             mechStats = GetComponent<MoveTest>();
-            avoid = GetComponent<Avoidance>();
-            hide = GetComponent<Hide>();
+            avoid = GetComponent<Avoidance>();;
 
             if (ShowDebugTarget) {
                 debugTar = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -83,7 +79,6 @@ namespace AI {
         }   
 
         public Vector3 Arrive(Vector3 targetposition) {
-            targetPos = targetposition;
             if (ShowDebugTarget) debugTar.transform.position = targetposition;
             Vector3 targetVelocity = targetposition - rb.position;
 

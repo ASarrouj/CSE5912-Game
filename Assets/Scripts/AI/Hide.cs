@@ -10,14 +10,12 @@ namespace AI
         public bool arriving = false;
 
         private Steering steering;
-        private HideAgent hideAgent;
 
         private Vector3 currentSpot;
 
         void Awake()
         {
             steering = GetComponent<Steering>();
-            hideAgent = GetComponent<HideAgent>();
         }
 
         public Vector3 GetSteering(Rigidbody target, ICollection<Transform> obstacles) {

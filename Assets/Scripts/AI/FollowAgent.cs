@@ -12,19 +12,15 @@ namespace AI
         private GameObject[] enemies;
         private Follow follow;
 
-        private Rigidbody rb;
         private Steering steering;
+        private Combat combat;
 
         private float targetRadius = 20f;
 
         private void Awake() {
             follow = GetComponent<Follow>();
             steering = GetComponent<Steering>();
-        }
-
-        void Start()
-        {
-            rb = GetComponent<Rigidbody>();     
+            combat = GetComponent<Combat>();
         }
 
         void Update()
@@ -38,6 +34,7 @@ namespace AI
             } else {
                 steering.Stop();
             }
+            combat.Attack(target);
         }
 
         private void TargetClosestEnemy() {
