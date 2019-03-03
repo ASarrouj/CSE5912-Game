@@ -24,14 +24,16 @@ namespace AI {
         {
             rb = gameObject.GetComponent<Rigidbody>();
             mechStats = GetComponent<MoveTest>();
-            avoid = GetComponent<Avoidance>();;
+            avoid = GetComponent<Avoidance>();;      
+        }
 
+        void Start() {
             if (ShowDebugTarget) {
                 debugTar = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 debugTar.GetComponent<Renderer>().material.color = Color.red;
                 Destroy(debugTar.GetComponent<BoxCollider>());
                 debugTar.name = "AI Target";
-            }           
+            }
         }
 
         public void Steer(Vector3 linearAcceleration) {

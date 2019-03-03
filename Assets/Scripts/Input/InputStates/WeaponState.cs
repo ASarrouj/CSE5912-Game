@@ -56,9 +56,9 @@ public class WeaponState : IInputState
             {
                 updateMouse = false;
                 weapon.localRotation = originalRotation;
-                shootInput.ToggleActive();
                 ToggleLine(false);
                 playerInput.PrepareWeaponPerspec(otherWeapons[i]);
+                shootInput.ToggleActive();
             }
         }
 

@@ -13,8 +13,7 @@ namespace AI {
 
         private Transform cam;
 
-        // Start is called before the first frame update
-        void Start()
+        void Awake()
         {
             cam = transform.Find("PlayerCamera");
             weapons = new List<Transform>();
@@ -33,6 +32,7 @@ namespace AI {
             cam.localPosition = new Vector3(0, 2.5f, 0);
             cam.localRotation = Quaternion.identity;
 
+            input.ToggleActive();
             currentWep.GetComponent<LineRenderer>().enabled = true;
             
         }

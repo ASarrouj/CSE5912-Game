@@ -28,7 +28,7 @@ namespace AI
             obstacles = GetObstacles();
         }
 
-        void Update()
+        void FixedUpdate()
         {
             if (target == null) {
                 target = GameObject.FindGameObjectWithTag("Player");

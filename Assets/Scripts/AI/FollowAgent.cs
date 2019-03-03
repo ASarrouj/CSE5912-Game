@@ -23,7 +23,7 @@ namespace AI
             combat = GetComponent<Combat>();
         }
 
-        void Update()
+        void FixedUpdate()
         {
             if (target == null) {
                 TargetClosestEnemy();

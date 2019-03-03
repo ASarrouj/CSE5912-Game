@@ -74,7 +74,7 @@ public class CameraManager : MonoBehaviour
         if (transitionTime >= transitionMaxTime)
         {
             interpolating = false;
-            transform.parent = target.transform;
+            transform.parent = target;
             playerInput.FinalizePerspective(target);
         }
 

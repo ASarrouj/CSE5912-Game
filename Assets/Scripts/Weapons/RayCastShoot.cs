@@ -21,7 +21,7 @@ public class RayCastShoot : MonoBehaviour, IWeapon
     void OnEnable()
     {
         lineRenderer = GetComponent<LineRenderer>();
-        gunCamera = transform.root.Find("PlayerCamera").GetComponent<Camera>();
+        gunCamera = transform.Find("PlayerCamera").GetComponent<Camera>();
         hitEffectPool = GameObject.Find("MGImpactPool").GetComponent<ObjectPooler>();
     }
 
