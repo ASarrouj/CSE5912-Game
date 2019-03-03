@@ -12,10 +12,6 @@ public class AI_Spawner : NetworkBehaviour
     public bool ShowTarget = false;
     public bool ShowPath = false;
 
-    private bool conn = false;
-
-    private GameObject[] players;
-
     public void SpawnAI() {
         //NetworkManager man = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
         //prefabAI = man.spawnPrefabs[0];

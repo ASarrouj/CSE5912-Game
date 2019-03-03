@@ -7,17 +7,19 @@ namespace AI
     public class HideAgent : MonoBehaviour
     {
         
-        public GameObject target;
+        private GameObject target;
 
         private List<Transform> obstacles;
         private Vector3 hidePosition;
         private Steering steering;
         private Hide hide;
+        private PlayerTargeting targeting;
 
         private readonly float fleeRadius = 10f;
         private readonly float hidingSpotRadius = 10f;
 
         private void Awake() {
+            targeting = GetComponent<PlayerTargeting>();
             steering = GetComponent<Steering>();
             hide = GetComponent<Hide>();
             hidePosition = new Vector3(0, -100, 0);
@@ -30,9 +32,7 @@ namespace AI
 
         void FixedUpdate()
         {
-            if (target == null) {
-                target = GameObject.FindGameObjectWithTag("Player");
-            }
+            target = targeting.Target;
 
             Vector3 dist = transform.position - target.transform.position;
             if (dist.magnitude < fleeRadius) {
