@@ -380,7 +380,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 214d931298270924ab8cb82069b16957, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAI: 0
 --- !u!65 &1399714903223172193
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1441,7 +1440,7 @@ GameObject:
   - component: {fileID: 7098752926128963746}
   - component: {fileID: 1265047847997790077}
   - component: {fileID: 5695159756574488396}
-  - component: {fileID: 8734270691256008071}
+  - component: {fileID: 7570849180832329633}
   m_Layer: 5
   m_Name: SpawnAI
   m_TagString: Untagged
@@ -1546,7 +1545,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8734270691256008071}
+      - m_Target: {fileID: 7570849180832329633}
         m_MethodName: SpawnAI
         m_Mode: 1
         m_Arguments:
@@ -1559,7 +1558,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &8734270691256008071
+--- !u!114 &7570849180832329633
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1568,11 +1567,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6822787124915880757}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 931d7a73196dbcf4a88ecd59b0cf5bc1, type: 3}
+  m_Script: {fileID: 11500000, guid: 43bf3b3c51b8beb4185829ca3f92b38c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabAI: {fileID: 319536895269049431, guid: 6123532ebe6b5e54fa6b1a01da8c0aa5, type: 3}
-  debug: 0
 --- !u!1 &7032868412837669085
 GameObject:
   m_ObjectHideFlags: 0

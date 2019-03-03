@@ -43,22 +43,22 @@ public class MechTakeDamage : NetworkBehaviour, IDamagable
             }
         }
 
-        if (hitboxType == Hitbox.LeftHitbox && particleEffects != null && particleEffects.Length > 0)
+        if (hitboxType == Hitbox.LeftHitbox)
         {
             Debug.Log("Left takes damage");
 
             health -= dmgAmount;
-            if (health <= 0)
+            if (health <= 0 && /*particleEffects != null &&*/particleEffects.Length > 0)
             {
                 GameObject explosion = Instantiate(particleEffects[0], transform.position, Quaternion.identity);
                 Destroy(explosion, 3f);
                 Destroy(transform.parent.gameObject);
             }
         }
-        if (hitboxType == Hitbox.RightHitbox && particleEffects != null && particleEffects.Length > 0)
+        if (hitboxType == Hitbox.RightHitbox)
         {
             Debug.Log("Right takes damage"); health -= dmgAmount;
-                if (health <= 0)
+                if (health <= 0 && /*particleEffects != null &&*/particleEffects.Length > 0)
                 {
                     GameObject explosion = Instantiate(particleEffects[0], transform.position, Quaternion.identity);
                     Destroy(transform.parent.gameObject);
@@ -67,7 +67,7 @@ public class MechTakeDamage : NetworkBehaviour, IDamagable
 
 
         }
-        if (hitboxType == Hitbox.CoreHitbox && particleEffects != null && particleEffects.Length > 0)
+        if (hitboxType == Hitbox.CoreHitbox)
         {
             Debug.Log("Core takes " + dmgAmount + " damage");
             
