@@ -37,10 +37,7 @@ public class MechTakeDamage : NetworkBehaviour, IDamagable
             health -= dmgAmount;
             if (health <= 0 && particleEffects != null && particleEffects.Length > 0)
             {
-                GameObject explosion = Instantiate(particleEffects[0], transform.position, Quaternion.identity);
-                explosion.transform.localScale -= new Vector3(1f, 1f, 1f);
-                Destroy(explosion, 3f);
-                Destroy(transform.parent.gameObject);
+                RpcExplodingFront();
             }
         }
 
@@ -51,9 +48,7 @@ public class MechTakeDamage : NetworkBehaviour, IDamagable
             health -= dmgAmount;
             if (health <= 0 && /*particleEffects != null &&*/particleEffects.Length > 0)
             {
-                GameObject explosion = Instantiate(particleEffects[0], transform.position, Quaternion.identity);
-                Destroy(explosion, 3f);
-                Destroy(transform.parent.gameObject);
+                RpcExploding();
             }
         }
         if (hitboxType == Hitbox.RightHitbox)
@@ -61,9 +56,7 @@ public class MechTakeDamage : NetworkBehaviour, IDamagable
             Debug.Log("Right takes damage"); health -= dmgAmount;
                 if (health <= 0 && /*particleEffects != null &&*/particleEffects.Length > 0)
                 {
-                    GameObject explosion = Instantiate(particleEffects[0], transform.position, Quaternion.identity);
-                    Destroy(transform.parent.gameObject);
-                    Destroy(explosion, 3f);
+                    RpcExploding();
                 }
 
 
@@ -77,10 +70,7 @@ public class MechTakeDamage : NetworkBehaviour, IDamagable
             flames.transform.localScale += new Vector3(1f, 1f, 1f);
             if (health <= 0)
             {
-                GameObject explosion = Instantiate(particleEffects[0], transform.position, Quaternion.identity);
-                explosion.transform.localScale += new Vector3(2f, 2f, 2f);
-                Destroy(explosion, 3f);
-                Destroy(transform.parent.gameObject);
+                RpcExplodingCore();
             }
         }
 
@@ -91,12 +81,34 @@ public class MechTakeDamage : NetworkBehaviour, IDamagable
             health -= dmgAmount;
             if (health <= 0 && particleEffects != null && particleEffects.Length > 0)
             {
-                GameObject explosion = Instantiate(particleEffects[0], transform.position, Quaternion.identity);
-                Destroy(explosion, 3f);
-                Destroy(transform.parent.gameObject);
+                RpcExploding();
             }
         }
 
+    }
+    [ClientRpc]
+    void RpcExploding()
+    {
+                    GameObject explosion = Instantiate(particleEffects[0], transform.position, Quaternion.identity);
+                    Destroy(transform.parent.gameObject);
+                    Destroy(explosion, 3f);
+    }
+
+        [ClientRpc]
+    void RpcExplodingCore()
+    {
+                GameObject explosion = Instantiate(particleEffects[0], transform.position, Quaternion.identity);
+                explosion.transform.localScale += new Vector3(1f, 1f, 1f);
+                Destroy(explosion, 3f);
+                Destroy(transform.parent.gameObject);
+    }
+            [ClientRpc]
+        void RpcExplodingFront()
+    {
+             GameObject explosion = Instantiate(particleEffects[0], transform.position, Quaternion.identity);
+                explosion.transform.localScale -= new Vector3(1f,1f,1f);
+                Destroy(explosion, 3f);
+                Destroy(transform.parent.gameObject);
     }
 
 }
