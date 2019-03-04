@@ -62,9 +62,10 @@ namespace AI {
         void Update()
         {
             updateCount++;
-            if (updateCount > 10) {
+            if (updateCount > 100) {
 
                 WeaponCheck();
+                updateCount = 0;
             }
         }
 
