@@ -32,7 +32,7 @@ namespace AI
                 Vector3 followAccel = follow.GetSteering(target.GetComponent<Rigidbody>());
                 steering.Steer(followAccel);
             } else {
-                steering.Stop();
+                //steering.Stop();
             }
             combat.Attack(target);
         }
