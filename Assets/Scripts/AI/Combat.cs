@@ -6,7 +6,7 @@ namespace AI {
     public class Combat : MonoBehaviour
     {
         private Transform mech;
-        public List<Transform> weapons;
+        public Transform[] weapons;
 
         private Transform currentWep;
         private IWeapon input;
@@ -16,6 +16,9 @@ namespace AI {
         private RayCastShoot rayCastShoot;
         private ProjectileShoot projectileShoot;
 
+
+        private float leftFOV = 45, frontFOV = 30, rightFOV = 30, fovRad;
+
         private enum WeaponType
         {
             raycast,
@@ -23,29 +26,29 @@ namespace AI {
             noncombat
         }
 
-        WeaponType wepType;
+        private WeaponType wepType;
+        private int wepIndex;
 
         void Awake()
         {
             cam = transform.Find("PlayerCamera");
-            weapons = new List<Transform>();
+            weapons = new Transform[3];
             foreach (Transform t in transform) {
                 if (t.tag == "Mech") {
                     mech = t;
                     break;
                 }
             }
-            currentWep = mech.Find("LeftGun").GetChild(0);          
-            weapons.Add(mech.Find("FrontGun").GetChild(0));
-            weapons.Add(currentWep);
-            input = currentWep.GetComponent<IWeapon>();
 
-            cam.parent = currentWep;
-            cam.localPosition = new Vector3(0, 2.5f, 0);
-            cam.localRotation = Quaternion.identity;
+            weapons[1] = (mech.Find("FrontGun").GetChild(0));
+            weapons[2] = (mech.Find("LeftGun").GetChild(0));
+            //weapons.Add(mech.Find("RightGun").GetChild(0));
+
+
+            ChangeCurrentWeapon(2);
 
             input.ToggleActive();
-            currentWep.GetComponent<LineRenderer>().enabled = true;
+            //currentWep.GetComponent<LineRenderer>().enabled = true;
 
             GetCurrentWeaponType();
 
@@ -91,25 +94,21 @@ namespace AI {
 
         private void ChangeCurrentWeapon(int index) {
             currentWep = weapons[index];
+            Debug.Log(currentWep);
             GetCurrentWeaponType();
+            wepIndex = index;
+            SetRadiusFOV();
+            input = currentWep.GetComponent<IWeapon>();
+            cam.parent = currentWep;
+            cam.localPosition = new Vector3(0, 2.5f, 0);
+            cam.localRotation = Quaternion.identity;
         }
 
         private void RaycastShoot(GameObject target) {
 
             currentWep.LookAt(target.transform);
-            Vector3 rot = currentWep.localRotation.eulerAngles;
-
-            if (!(rot.y > 40 && rot.y < 320)) {
-                input.Shoot();
-            }
-
-            if (rot.y > 30 && rot.y < 180) {
-                rot.y = 30;
-                currentWep.localRotation = Quaternion.Euler(rot);
-            } else if (rot.y < 330 && rot.y > 180) {
-                rot.y = 330;
-                currentWep.localRotation = Quaternion.Euler(rot);
-            }
+            RestrictedShoot();
+            
         }
 
         private void ProjectileShoot(GameObject target) {
@@ -118,7 +117,39 @@ namespace AI {
                 target.GetComponent<Rigidbody>().velocity, Physics.gravity.y, out projectileVelocity);
             if (valid) {
                 currentWep.rotation = Quaternion.LookRotation(projectileVelocity);
+                Debug.Log("ROT: " + currentWep.rotation.eulerAngles);
+                RestrictedShoot();
+            }
+        }
+
+        private void SetRadiusFOV() {
+            switch (wepIndex) {
+                case 2:
+                    fovRad = leftFOV;
+                    break;
+                case 3:
+                    fovRad = rightFOV;
+                    break;
+                default:
+                    fovRad = frontFOV;
+                    break;
+            }
+        }
+
+        private void RestrictedShoot() {
+
+            Vector3 rot = currentWep.localRotation.eulerAngles;
+
+            if (!(rot.y > fovRad + 10 && rot.y < 350 - fovRad)) {
                 input.Shoot();
+            }
+
+            if (rot.y > fovRad && rot.y < 180) {
+                rot.y = 30;
+                currentWep.localRotation = Quaternion.Euler(rot);
+            } else if (rot.y < 360 - fovRad && rot.y > 180) {
+                rot.y = 360 - frontFOV;
+                currentWep.localRotation = Quaternion.Euler(rot);
             }
         }
     }
