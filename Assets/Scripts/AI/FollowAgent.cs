@@ -16,7 +16,7 @@ namespace AI
         private Combat combat;
         private PlayerTargeting targeting;
 
-        private float targetRadius = 20f;
+        private readonly float targetRadius = 20f;
 
         private void Awake() {
             follow = GetComponent<Follow>();
@@ -32,7 +32,7 @@ namespace AI
                 Vector3 followAccel = follow.GetSteering(target.GetComponent<Rigidbody>());
                 steering.Steer(followAccel);
             } else {
-                steering.Stop();
+                //steering.Stop();
             }
             combat.Attack(target);
         }
