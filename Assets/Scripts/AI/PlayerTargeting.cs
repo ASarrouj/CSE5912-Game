@@ -27,6 +27,11 @@ public class PlayerTargeting : MonoBehaviour
         }
     }
 
+    public float TargetAngle() {
+        Vector3 tarPos = transform.InverseTransformPoint(Target.transform.position);
+        return Mathf.Atan2(tarPos.x, tarPos.z) * (180 / Mathf.PI);
+    }
+
     private void GetPlayers() {
         players = GameObject.FindGameObjectsWithTag("Player");
     }

@@ -16,6 +16,7 @@ namespace AI {
         private RayCastShoot rayCastShoot;
         private ProjectileShoot projectileShoot;
 
+        private PlayerTargeting targeting;
 
         private float leftFOV = 45, frontFOV = 30, rightFOV = 30, fovRad;
 
@@ -27,10 +28,13 @@ namespace AI {
         }
 
         private WeaponType wepType;
-        private int wepIndex;
+        private int wepIndex = -1;
+        private int updateCount = 0, wepCheckTime = 10;
 
         void Awake()
         {
+            targeting = GetComponent<PlayerTargeting>();
+
             cam = transform.Find("PlayerCamera");
             weapons = new Transform[3];
             foreach (Transform t in transform) {
@@ -45,9 +49,9 @@ namespace AI {
             //weapons.Add(mech.Find("RightGun").GetChild(0));
 
 
-            ChangeCurrentWeapon(2);
+            SelectWeapon(1);
 
-            input.ToggleActive();
+            //input.ToggleActive();
             //currentWep.GetComponent<LineRenderer>().enabled = true;
 
             GetCurrentWeaponType();
@@ -57,6 +61,11 @@ namespace AI {
         // Update is called once per frame
         void Update()
         {
+            updateCount++;
+            if (updateCount > 10) {
+
+                WeaponCheck();
+            }
         }
 
         public void Attack(GameObject target) {
@@ -92,9 +101,10 @@ namespace AI {
             }
         }
 
-        private void ChangeCurrentWeapon(int index) {
+        private void SelectWeapon(int index) {
+            if (wepIndex == index) return;
             currentWep = weapons[index];
-            Debug.Log(currentWep);
+            //Debug.Log(currentWep);
             GetCurrentWeaponType();
             wepIndex = index;
             SetRadiusFOV();
@@ -102,6 +112,16 @@ namespace AI {
             cam.parent = currentWep;
             cam.localPosition = new Vector3(0, 2.5f, 0);
             cam.localRotation = Quaternion.identity;
+            input.ToggleActive();
+        }
+
+        private void WeaponCheck() {
+            float angle = targeting.TargetAngle();
+            if (angle > -frontFOV - 10 && angle < frontFOV + 10) {
+                SelectWeapon(1);
+            } else if (angle < -45 + leftFOV) {
+                SelectWeapon(2);
+            }
         }
 
         private void RaycastShoot(GameObject target) {
@@ -117,7 +137,7 @@ namespace AI {
                 target.GetComponent<Rigidbody>().velocity, Physics.gravity.y, out projectileVelocity);
             if (valid) {
                 currentWep.rotation = Quaternion.LookRotation(projectileVelocity);
-                Debug.Log("ROT: " + currentWep.rotation.eulerAngles);
+                //Debug.Log("ROT: " + currentWep.rotation.eulerAngles);
                 RestrictedShoot();
             }
         }
