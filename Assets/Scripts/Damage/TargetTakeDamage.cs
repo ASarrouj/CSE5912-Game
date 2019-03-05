@@ -7,7 +7,7 @@ public class TargetTakeDamage : NetworkBehaviour, IDamagable
 {
     [SyncVar] public int health;
     public const int maxHealth=30;
-    public void Damage(int dmgAmount)
+    public bool Damage(int dmgAmount)
     {
         health-=dmgAmount;
         if (health<0)
@@ -15,5 +15,6 @@ public class TargetTakeDamage : NetworkBehaviour, IDamagable
             health=0;
             this.gameObject.GetComponent<Renderer>().material.color = Color.red;
         }
+        return false;
     }
 }

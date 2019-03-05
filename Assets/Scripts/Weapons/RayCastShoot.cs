@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Networking;
 
 public class RayCastShoot : MonoBehaviour, IWeapon
@@ -11,18 +12,23 @@ public class RayCastShoot : MonoBehaviour, IWeapon
     public Transform gunEnd;
     public ParticleSystem gunSmoke;
     public GameObject muzzleFlash;
+    public Text scoreText;
 
     private Camera gunCamera;
     private ObjectPooler hitEffectPool;
     private LineRenderer lineRenderer;
     private WaitForSeconds shotLength = new WaitForSeconds(0.05f);
+    private Score score;
     private float nextFireTime;
+    private bool ifScore;
+    private int scoreNum = 50;
 
     void OnEnable()
     {
         lineRenderer = GetComponent<LineRenderer>();
         gunCamera = transform.Find("PlayerCamera").GetComponent<Camera>();
         hitEffectPool = GameObject.Find("MGImpactPool").GetComponent<ObjectPooler>();
+        score = scoreText.GetComponent<Score>();
     }
 
     void IWeapon.Shoot()
@@ -53,7 +59,11 @@ public class RayCastShoot : MonoBehaviour, IWeapon
                     {
                         hit.rigidbody.AddForce(-hit.normal * 100f);
                     }
-                    hit.collider.gameObject.GetComponent<MechTakeDamage>().Damage(10);
+                    ifScore = hit.collider.gameObject.GetComponent<MechTakeDamage>().Damage(10);
+                    if (ifScore)
+                    {
+                        score.scoreUp(scoreNum);
+                    }
                 }
                 lineRenderer.SetPosition(0, gunEnd.position);
                 lineRenderer.SetPosition(1, hit.point);

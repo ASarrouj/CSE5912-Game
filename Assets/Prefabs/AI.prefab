@@ -30,7 +30,7 @@ GameObject:
   - component: {fileID: 8273889849970798613}
   m_Layer: 10
   m_Name: AI
-  m_TagString: Untagged
+  m_TagString: Mech
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
