@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 6931812e30acd804d8173e1fa378ebb0, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 71dcfd962772bb84eb0726b8aa40c50a, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.23188388, g: 0.24366358, b: 0.25720397, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -241,9 +241,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1342585230
+--- !u!1 &1107944865
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -251,10 +251,10 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1342585233}
-  - component: {fileID: 1342585232}
-  - component: {fileID: 1342585231}
-  - component: {fileID: 1342585234}
+  - component: {fileID: 1107944868}
+  - component: {fileID: 1107944867}
+  - component: {fileID: 1107944866}
+  - component: {fileID: 1107944869}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -262,27 +262,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
---- !u!154 &1342585231
+--- !u!154 &1107944866
 TerrainCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1342585230}
+  m_GameObject: {fileID: 1107944865}
   m_Material: {fileID: 0}
   m_Enabled: 1
-  m_TerrainData: {fileID: 15600000, guid: f3d807aedce9b724ebec7070cdbb5fba, type: 2}
+  m_TerrainData: {fileID: 15600000, guid: 2bc9a6fe7a56f4a45a81de0be99bee07, type: 2}
   m_EnableTreeColliders: 1
---- !u!218 &1342585232
+--- !u!218 &1107944867
 Terrain:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1342585230}
+  m_GameObject: {fileID: 1107944865}
   m_Enabled: 1
   serializedVersion: 3
-  m_TerrainData: {fileID: 15600000, guid: f3d807aedce9b724ebec7070cdbb5fba, type: 2}
+  m_TerrainData: {fileID: 15600000, guid: 2bc9a6fe7a56f4a45a81de0be99bee07, type: 2}
   m_TreeDistance: 5000
   m_TreeBillboardDistance: 50
   m_TreeCrossFadeLength: 5
@@ -309,36 +309,36 @@ Terrain:
   m_LightmapParameters: {fileID: 15203, guid: 0000000000000000f000000000000000, type: 0}
   m_GroupingID: 0
   m_AllowAutoConnect: 1
---- !u!4 &1342585233
+--- !u!4 &1107944868
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1342585230}
+  m_GameObject: {fileID: 1107944865}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -50, y: -40, z: -50}
+  m_LocalPosition: {x: -20, y: -20, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1342585234
+--- !u!114 &1107944869
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1342585230}
+  m_GameObject: {fileID: 1107944865}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7525ab843a021174481764feadaa0ddc, type: 3}
+  m_Script: {fileID: 11500000, guid: 0b9b93d9ec0b0204a924608a252d57d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   terrainLayers:
-  - {fileID: 8574412962073106934, guid: fc3e519e48ad71141a4ea0b21281f312, type: 2}
+  - {fileID: 8574412962073106934, guid: 0535983d2cb2e7a4cad380bcd65938b7, type: 2}
   roughness: 1
-  initialDisplacement: 0.2
+  initialDisplacement: 0.3
 --- !u!1 &1347981831
 GameObject:
   m_ObjectHideFlags: 0
