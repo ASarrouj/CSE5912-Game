@@ -12,7 +12,7 @@ public class WeaponState : IInputState
     private SmoothMouseLook mouseInput;
     private IWeapon shootInput;
     private Quaternion originalRotation;
-    private LineRenderer lineRenderer;
+    private GameObject weaponUI;
 
     public WeaponState(Transform playerTransform)
     {
@@ -20,8 +20,8 @@ public class WeaponState : IInputState
 
         lastKeyIndex = playerInput.lastKeyIndex;
         weapon = playerInput.weapons[lastKeyIndex];
-        lineRenderer = weapon.GetComponent<LineRenderer>();
-        ToggleLine(true);
+        weaponUI = weapon.GetChild(0).Find("WeaponUI").gameObject;
+        ToggleGunUI();
         shootInput = weapon.GetComponent<IWeapon>();
         shootInput.ToggleActive();
         otherWeaponInputs = new List<string>(playerInput.weaponInputs);
@@ -50,14 +50,14 @@ public class WeaponState : IInputState
                     updateMouse = false;
                     weapon.localRotation = Quaternion.identity;
                     shootInput.ToggleActive();
-                    ToggleLine(false);
+                    ToggleGunUI();
                     playerInput.PrepareMechPerspec();
                 }
                 for (int i = 0; i < otherWeapons.Count; i++) {
                     if (Input.GetButtonDown(otherWeaponInputs[i])) {
                         updateMouse = false;
                         weapon.localRotation = originalRotation;
-                        ToggleLine(false);
+                        ToggleGunUI();
                         playerInput.PrepareWeaponPerspec(otherWeapons[i]);
                         shootInput.ToggleActive();
                     }
@@ -70,14 +70,14 @@ public class WeaponState : IInputState
                     updateMouse = false;
                     weapon.localRotation = Quaternion.identity;
                     shootInput.ToggleActive();
-                    ToggleLine(false);
+                    ToggleGunUI();
                     playerInput.PrepareMechPerspec();
                 }
                 for (int i = 0; i < otherWeapons.Count; i++) {
                     if (Input.GetButtonDown(otherWeaponInputs[i])) {
                         updateMouse = false;
                         weapon.localRotation = originalRotation;
-                        ToggleLine(false);
+                        ToggleGunUI();
                         playerInput.PrepareWeaponPerspec(otherWeapons[i]);
                         shootInput.ToggleActive();
                     }
@@ -101,7 +101,7 @@ public class WeaponState : IInputState
                 if (select >= 0 && select != lastKeyIndex) {
                     updateMouse = false;
                     weapon.localRotation = originalRotation;
-                    ToggleLine(false);
+                    ToggleGunUI();
                     playerInput.PrepareWeaponPerspec(playerInput.weapons[select]);
                     shootInput.ToggleActive();
                 }
@@ -120,12 +120,9 @@ public class WeaponState : IInputState
 
     }
 
-    private void ToggleLine(bool turnOn)
+    private void ToggleGunUI()
     {
-        if (lineRenderer != null)
-        {
-            lineRenderer.enabled = turnOn;
-        }
+        weaponUI.SetActive(!weaponUI.activeSelf);
     }
 
 }
