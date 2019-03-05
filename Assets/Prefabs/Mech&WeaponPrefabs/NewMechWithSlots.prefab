@@ -9675,6 +9675,9 @@ MonoBehaviour:
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of 2770f18... Merge branch 'master' of https://github.com/ASarrouj/CSE5912-Game
+=======
 >>>>>>> parent of 2770f18... Merge branch 'master' of https://github.com/ASarrouj/CSE5912-Game
 =======
 >>>>>>> parent of 2770f18... Merge branch 'master' of https://github.com/ASarrouj/CSE5912-Game
@@ -10729,8 +10732,13 @@ MonoBehaviour:
   - {fileID: 1000010823978654, guid: 3228a22491941734bb83ad691d17fcb9, type: 3}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!1 &3444333815690060502
 GameObject:
+=======
+--- !u!114 &2698062353473903995
+MonoBehaviour:
+>>>>>>> parent of 2770f18... Merge branch 'master' of https://github.com/ASarrouj/CSE5912-Game
 =======
 --- !u!114 &2698062353473903995
 MonoBehaviour:
@@ -10745,7 +10753,10 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 2770f18... Merge branch 'master' of https://github.com/ASarrouj/CSE5912-Game
 =======
 >>>>>>> parent of 2770f18... Merge branch 'master' of https://github.com/ASarrouj/CSE5912-Game
   m_GameObject: {fileID: 3042825789720092143}
@@ -15604,7 +15615,10 @@ Transform:
 ParticleSystem:
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 2770f18... Merge branch 'master' of https://github.com/ASarrouj/CSE5912-Game
 =======
 >>>>>>> parent of 2770f18... Merge branch 'master' of https://github.com/ASarrouj/CSE5912-Game
   m_ObjectHideFlags: 0
@@ -20233,6 +20247,7 @@ ParticleSystem:
     vectorLabel1_3: W
 --- !u!199 &2718656321032299410
 ParticleSystemRenderer:
+<<<<<<< HEAD
 <<<<<<< HEAD
   serializedVersion: 6
   m_ObjectHideFlags: 0
@@ -24924,6 +24939,8 @@ GameObject:
     vectorLabel1_3: W
 --- !u!199 &2718656321032299410
 ParticleSystemRenderer:
+=======
+>>>>>>> parent of 2770f18... Merge branch 'master' of https://github.com/ASarrouj/CSE5912-Game
 =======
 >>>>>>> parent of 2770f18... Merge branch 'master' of https://github.com/ASarrouj/CSE5912-Game
   serializedVersion: 6
