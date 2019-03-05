@@ -9670,6 +9670,8 @@ GameObject:
   - component: {fileID: 5679300954060498422}
   - component: {fileID: 4232371090329622714}
   - component: {fileID: 7877521302717690922}
+  - component: {fileID: 3706133184513385179}
+  - component: {fileID: 6270754764033553786}
   m_Layer: 0
   m_Name: RearHitbox
   m_TagString: Mech
@@ -9766,7 +9768,6 @@ MonoBehaviour:
   health: 100
   particleEffects:
   - {fileID: 1000013462590818, guid: ecdd96beb7f93494880c052dfccf9dc1, type: 3}
-<<<<<<< HEAD
 --- !u!114 &3706133184513385179
 MonoBehaviour:
 --- !u!1 &1549258288499336006
@@ -9845,8 +9846,6 @@ Transform:
   m_Father: {fileID: 8232608009927797723}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
-=======
->>>>>>> parent of 53078ae... Testing now with Server Mechs
 --- !u!1 &1596917141955327869
 GameObject:
   m_ObjectHideFlags: 0
@@ -10320,6 +10319,7 @@ MonoBehaviour:
   gunEnd: {fileID: 2647629175914134154}
   gunSmoke: {fileID: 198000011441735220, guid: 85a8865d1bf4a63478038fae23776de8, type: 3}
   muzzleFlash: {fileID: 7448014211037102205}
+  scoreText: {fileID: 0}
 --- !u!1 &1984271244019170788
 GameObject:
   m_ObjectHideFlags: 0
@@ -10934,7 +10934,6 @@ MonoBehaviour:
   particleEffects:
   - {fileID: 1000013462590818, guid: ecdd96beb7f93494880c052dfccf9dc1, type: 3}
   - {fileID: 1000010823978654, guid: 3228a22491941734bb83ad691d17fcb9, type: 3}
-<<<<<<< HEAD
 --- !u!1 &3345748361463255016
 GameObject:
   m_ObjectHideFlags: 0
@@ -10966,8 +10965,6 @@ Transform:
   m_Father: {fileID: 8232608009927797723}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
-=======
->>>>>>> parent of 53078ae... Testing now with Server Mechs
 --- !u!1 &3444333815690060502
 GameObject:
   m_ObjectHideFlags: 0
@@ -21363,6 +21360,8 @@ GameObject:
   - component: {fileID: 6916048111942976370}
   - component: {fileID: 6140165648077457348}
   - component: {fileID: 8191731039129949806}
+  - component: {fileID: 8083143777120894627}
+  - component: {fileID: 836440095179164405}
   m_Layer: 0
   m_Name: LeftHitbox
   m_TagString: Mech
@@ -21460,3 +21459,58 @@ MonoBehaviour:
   particleEffects:
   - {fileID: 1000013462590818, guid: ecdd96beb7f93494880c052dfccf9dc1, type: 3}
   - {fileID: 1000010823978654, guid: 3228a22491941734bb83ad691d17fcb9, type: 3}
+--- !u!114 &8083143777120894627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9191802790451342501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 0
+    i1: 0
+    i2: 0
+    i3: 0
+    i4: 0
+    i5: 0
+    i6: 0
+    i7: 0
+    i8: 0
+    i9: 0
+    i10: 0
+    i11: 0
+    i12: 0
+    i13: 0
+    i14: 0
+    i15: 0
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
+--- !u!114 &836440095179164405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9191802790451342501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 1
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
