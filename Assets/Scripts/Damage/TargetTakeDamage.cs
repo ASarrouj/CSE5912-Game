@@ -13,8 +13,13 @@ public class TargetTakeDamage : NetworkBehaviour, IDamagable
         if (health<0)
         {
             health=0;
-            this.gameObject.GetComponent<Renderer>().material.color = Color.red;
+            RpcDamage();
         }
         return false;
+    }
+    [ClientRpc]
+    void RpcDamage()
+    {
+            this.gameObject.GetComponent<Renderer>().material.color = Color.red;
     }
 }

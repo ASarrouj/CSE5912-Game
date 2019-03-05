@@ -39,7 +39,6 @@ public class ProjectileShoot : MonoBehaviour, IWeapon
     {
         Vector3[] positions = new Vector3[Mathf.RoundToInt(maxTime / time) + 1];
         line.positionCount = positions.Length;
-        Debug.Log(start);
         positions[0] = start;
 
         // bad hack: set all points up to 0.2*number of points = point at t=0.2*total_time
