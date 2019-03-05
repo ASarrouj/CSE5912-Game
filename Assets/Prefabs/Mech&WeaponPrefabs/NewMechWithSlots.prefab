@@ -9767,7 +9767,6 @@ MonoBehaviour:
   particleEffects:
   - {fileID: 1000013462590818, guid: ecdd96beb7f93494880c052dfccf9dc1, type: 3}
 <<<<<<< HEAD
-<<<<<<< HEAD
 --- !u!114 &3706133184513385179
 MonoBehaviour:
 --- !u!1 &1549258288499336006
@@ -9846,8 +9845,6 @@ Transform:
   m_Father: {fileID: 8232608009927797723}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
-=======
->>>>>>> parent of 53078ae... Testing now with Server Mechs
 =======
 >>>>>>> parent of 53078ae... Testing now with Server Mechs
 --- !u!1 &1596917141955327869
@@ -10938,7 +10935,6 @@ MonoBehaviour:
   - {fileID: 1000013462590818, guid: ecdd96beb7f93494880c052dfccf9dc1, type: 3}
   - {fileID: 1000010823978654, guid: 3228a22491941734bb83ad691d17fcb9, type: 3}
 <<<<<<< HEAD
-<<<<<<< HEAD
 --- !u!1 &3345748361463255016
 GameObject:
   m_ObjectHideFlags: 0
@@ -10970,8 +10966,6 @@ Transform:
   m_Father: {fileID: 8232608009927797723}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
-=======
->>>>>>> parent of 53078ae... Testing now with Server Mechs
 =======
 >>>>>>> parent of 53078ae... Testing now with Server Mechs
 --- !u!1 &3444333815690060502
