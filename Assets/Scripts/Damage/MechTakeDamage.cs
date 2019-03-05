@@ -31,15 +31,14 @@ public class MechTakeDamage : NetworkBehaviour, IDamagable
         if (hitboxType == Hitbox.FrontHitbox)
         {
             Debug.Log("Front takes damage");
-
             health -= dmgAmount;
             if (health <= 0 && particleEffects != null && particleEffects.Length > 0)
             {
-                //RpcExplodingFront();
-                GameObject explosion = Instantiate(particleEffects[0], transform.position, Quaternion.identity);
-                explosion.transform.localScale -= new Vector3(1f, 1f, 1f);
-                Destroy(explosion, 3f);
-                Destroy(transform.parent.gameObject);
+                RpcExplodingFront();
+                // GameObject explosion = Instantiate(particleEffects[0], transform.position, Quaternion.identity);
+                // explosion.transform.localScale -= new Vector3(1f, 1f, 1f);
+                // Destroy(explosion, 3f);
+                // Destroy(transform.parent.gameObject);
             }
         }
 
@@ -50,10 +49,10 @@ public class MechTakeDamage : NetworkBehaviour, IDamagable
             health -= dmgAmount;
             if (health <= 0 && /*particleEffects != null &&*/particleEffects.Length > 0)
             {
-                //RpcExploding();
-                GameObject explosion = Instantiate(particleEffects[0], transform.position, Quaternion.identity);
-                Destroy(transform.parent.gameObject);
-                Destroy(explosion, 3f);
+                RpcExploding();
+                // GameObject explosion = Instantiate(particleEffects[0], transform.position, Quaternion.identity);
+                // Destroy(transform.parent.gameObject);
+                // Destroy(explosion, 3f);
             }
         }
         if (hitboxType == Hitbox.RightHitbox)
@@ -61,10 +60,10 @@ public class MechTakeDamage : NetworkBehaviour, IDamagable
             Debug.Log("Right takes damage"); health -= dmgAmount;
                 if (health <= 0 && /*particleEffects != null &&*/particleEffects.Length > 0)
                 {
-                //RpcExploding();
-                GameObject explosion = Instantiate(particleEffects[0], transform.position, Quaternion.identity);
-                Destroy(transform.parent.gameObject);
-                Destroy(explosion, 3f);
+                RpcExploding();
+                // GameObject explosion = Instantiate(particleEffects[0], transform.position, Quaternion.identity);
+                // Destroy(transform.parent.gameObject);
+                // Destroy(explosion, 3f);
             }
 
 
@@ -79,11 +78,11 @@ public class MechTakeDamage : NetworkBehaviour, IDamagable
             if (health <= 0)
             {
                 coreDestroyed = true;
-                //RpcExplodingCore();
-                GameObject explosion = Instantiate(particleEffects[0], transform.position, Quaternion.identity);
-                explosion.transform.localScale += new Vector3(1f, 1f, 1f);
-                Destroy(explosion, 3f);
-                Destroy(transform.parent.gameObject);
+                RpcExplodingCore();
+                // GameObject explosion = Instantiate(particleEffects[0], transform.position, Quaternion.identity);
+                // explosion.transform.localScale += new Vector3(1f, 1f, 1f);
+                // Destroy(explosion, 3f);
+                // Destroy(transform.parent.gameObject);
             }
         }
 
@@ -94,10 +93,10 @@ public class MechTakeDamage : NetworkBehaviour, IDamagable
             health -= dmgAmount;
             if (health <= 0 && particleEffects != null && particleEffects.Length > 0)
             {
-                //RpcExploding();
-                GameObject explosion = Instantiate(particleEffects[0], transform.position, Quaternion.identity);
-                Destroy(transform.parent.gameObject);
-                Destroy(explosion, 3f);
+                RpcExploding();
+                // GameObject explosion = Instantiate(particleEffects[0], transform.position, Quaternion.identity);
+                // Destroy(transform.parent.gameObject);
+                // Destroy(explosion, 3f);
             }
         }
 
