@@ -12,13 +12,6 @@ public class LoadTargetScreenButton : MonoBehaviour
     public float fadeDuration = 1f;
     public GameObject ipInput;
 
-    private NetworkManager netManager;
-
-    private void Awake()
-    {
-        netManager = NetworkManager.singleton;
-    }
-
     public void LoadSceneNum(int num)
     {
         if (num < 0 || num >= SceneManager.sceneCountInBuildSettings)
@@ -27,21 +20,6 @@ public class LoadTargetScreenButton : MonoBehaviour
             return;
         }
         GameStateManager.LoadState(num);
-    }
-
-    public void StartHost()
-    {
-        netManager.StartHost();
-    }
-
-    public void JoinGame()
-    {
-        //gameObject.SetActive(false);
-        //ipInput.SetActive(true);
-        //Debug.Log("joingame called, connecting to palware.space:7777");
-        //netManager.networkAddress = "palware.space";
-        //netManager.networkPort = 7777;
-        netManager.StartClient();
     }
 
     public void QuickLoadScene(int num)
