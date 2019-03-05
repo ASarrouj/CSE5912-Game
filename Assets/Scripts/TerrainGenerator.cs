@@ -13,8 +13,6 @@ public class TerrainGenerator : MonoBehaviour
     public float roughness, initialDisplacement;
     private float displacement;
 
-    private Transform glassDome;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -34,16 +32,6 @@ public class TerrainGenerator : MonoBehaviour
         DiamondSquareAlgo();
 
         terrainData.SetHeights(0, 0, heights);
-
-        glassDome = transform.GetChild(0);
-        Vector3[] normals = glassDome.GetComponent<MeshFilter>().mesh.normals;
-        for (int i = 0; i < normals.Length; i++)
-        {
-            normals[i] = -normals[i];
-        }
-
-        glassDome.position = transform.position + new Vector3(terrainData.size.x, 0, terrainData.size.z) / 2;
-        glassDome.localScale = new Vector3(terrainData.size.x, Mathf.Min(terrainData.size.x, terrainData.size.z), terrainData.size.z);
     }
 
     // Update is called once per frame
