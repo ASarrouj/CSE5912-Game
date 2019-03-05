@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LobbyManager : NetworkLobbyManager
 {
@@ -13,18 +14,29 @@ public class LobbyManager : NetworkLobbyManager
 
     private void Start()
     {
+        if (SceneManager.GetActiveScene().name == "Main Menu")
+        {
+            Destroy(gameObject);
+            NetworkManager.Shutdown();
+        }
         lobbyTitle = GameObject.Find("LobbyTitle").GetComponent<Text>();
         matchNameField = GameObject.Find("MatchName").GetComponent<InputField>();
         ipAddress = GameObject.Find("IPAddress").GetComponent<InputField>();
     }
 
-    public void CreateMatch()
+    public override void OnLobbyStartHost()
     {
         if (matchNameField.text != "")
         {
             singleton.matchName = matchNameField.text;
             lobbyTitle.text = singleton.matchName;
         }
+        
+        base.OnLobbyStartHost();
+    }
+
+    public void CreateMatch()
+    {
         singleton.StartHost();
     }
 
