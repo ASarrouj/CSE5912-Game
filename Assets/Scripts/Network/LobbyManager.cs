@@ -24,13 +24,19 @@ public class LobbyManager : NetworkLobbyManager
         ipAddress = GameObject.Find("IPAddress").GetComponent<InputField>();
     }
 
-    public void CreateMatch()
+    public override void OnLobbyStartHost()
     {
         if (matchNameField.text != "")
         {
             singleton.matchName = matchNameField.text;
             lobbyTitle.text = singleton.matchName;
         }
+        
+        base.OnLobbyStartHost();
+    }
+
+    public void CreateMatch()
+    {
         singleton.StartHost();
     }
 
