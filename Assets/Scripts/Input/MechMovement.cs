@@ -8,6 +8,7 @@ public class MechMovement : MonoBehaviour
     public int rotateSpeed;
     public GameObject mech;
     public bool takeInput;
+    private Rigidbody rb;
 
     // Start is called before the first frame update
     void Start()
@@ -15,6 +16,7 @@ public class MechMovement : MonoBehaviour
         moveSpeed = 0;
         rotateSpeed = 0;
         takeInput = false;
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -65,7 +67,9 @@ public class MechMovement : MonoBehaviour
             rotateSpeed = 0;
         }
 
-        mech.transform.Translate(0, 0, Time.deltaTime * moveSpeed, Space.Self);
-        mech.transform.Rotate(0, Time.deltaTime * rotateSpeed, 0, Space.Self);
+        rb.MovePosition(new Vector3(0, 0, Time.deltaTime * moveSpeed));
+        rb.MoveRotation(rb.rotation * Quaternion.Euler(0, rotateSpeed, 0));
+        //mech.transform.Translate(0, 0, Time.deltaTime * moveSpeed, Space.Self);
+        //mech.transform.Rotate(0, Time.deltaTime * rotateSpeed, 0, Space.Self);
     }
 }
