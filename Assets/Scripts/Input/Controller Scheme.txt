@@ -1,0 +1,19 @@
+=====================
+Switch Pro Controller
+=====================
+
+Left Stick: Vertical to set speed
+            Horizontal to change direction
+
+Right Stick: Look around / Aim
+
+Plus Pad: Select corresponding directional module perspective
+
+Any of the above to navigate menus
+
+A: Select
+B: Cancel / Exit to mech perspective
+
+RT: Fire
+
++: Escape Menu

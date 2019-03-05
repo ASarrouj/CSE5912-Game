@@ -9,6 +9,7 @@ public class MechState : IInputState
     private List<Transform> weapons;
     private MoveTest mechStats;
     private int maxSpeed, speedStep;
+    private bool ignoreStick;
 
     public MechState(Transform playerTransform)
     {
@@ -22,70 +23,120 @@ public class MechState : IInputState
         maxSpeed = 12;
     }
 
-    public void Update()
+    public void Update(PlayerInput.InputType inputType)
     {
         if (Input.GetButtonDown("Escape")) {
             playerInput.ToggleMenu();
         }
 
-        for (int i = 0; i < weapons.Count; i++)
-        {
-            if (Input.GetButtonDown(weaponInputs[i]))
-            {
-                playerInput.PrepareWeaponPerspec(weapons[i]);
-            }
-        }
+        switch (inputType) {
 
-        if (Input.GetButtonDown("Forward") && mechStats.moveSpeed < maxSpeed)
-        {
-            mechStats.moveSpeed += speedStep;
-        }
-        if (Input.GetButtonDown("Backward") && mechStats.moveSpeed > -4)
-        {
-            mechStats.moveSpeed -= speedStep;
-        }
-        if (Input.GetButton("Left") && mechStats.moveSpeed != 0 && mechStats.rotateSpeed >= -30 && mechStats.rotateSpeed <= 30)
-        {
-            if (mechStats.moveSpeed > 0 && mechStats.rotateSpeed > -30)
-            {
-                mechStats.rotateSpeed -= 1f;
-            }
-            else if (mechStats.moveSpeed < 0 && mechStats.rotateSpeed < 30)
-            {
-                mechStats.rotateSpeed += 1f;
-            }
+            case PlayerInput.InputType.MouseKeyboard:
 
-        }
-        if (Input.GetButton("Right") && mechStats.moveSpeed != 0 && mechStats.rotateSpeed <= 30 && mechStats.rotateSpeed >= -30)
-        {
-            if (mechStats.moveSpeed > 0 && mechStats.rotateSpeed < 30)
-            {
-                mechStats.rotateSpeed += 1f;
-            }
-            else if (mechStats.moveSpeed < 0 && mechStats.rotateSpeed > -30)
-            {
-                mechStats.rotateSpeed -= 1f;
-            }
-        }
+                for (int i = 0; i < weapons.Count; i++) {
+                    if (Input.GetButtonDown(weaponInputs[i])) {
+                        playerInput.PrepareWeaponPerspec(weapons[i]);
+                    }
+                }
 
-        if (mechStats.moveSpeed == 0 || Input.GetButtonDown("Shift"))
+                if (Input.GetButtonDown("Forward") && mechStats.moveSpeed < maxSpeed) {
+                    mechStats.moveSpeed += speedStep;
+                }
+                if (Input.GetButtonDown("Backward") && mechStats.moveSpeed > -4) {
+                    mechStats.moveSpeed -= speedStep;
+                }
+                if (Input.GetButton("Left") && mechStats.moveSpeed != 0 && mechStats.rotateSpeed >= -30 && mechStats.rotateSpeed <= 30) {
+                    if (mechStats.moveSpeed > 0 && mechStats.rotateSpeed > -30) {
+                        mechStats.rotateSpeed -= 1f;
+                    } else if (mechStats.moveSpeed < 0 && mechStats.rotateSpeed < 30) {
+                        mechStats.rotateSpeed += 1f;
+                    }
+                }
+                if (Input.GetButton("Right") && mechStats.moveSpeed != 0 && mechStats.rotateSpeed <= 30 && mechStats.rotateSpeed >= -30) {
+                    if (mechStats.moveSpeed > 0 && mechStats.rotateSpeed < 30) {
+                        mechStats.rotateSpeed += 1f;
+                    } else if (mechStats.moveSpeed < 0 && mechStats.rotateSpeed > -30) {
+                        mechStats.rotateSpeed -= 1f;
+                    }
+                }
+
+                if (Input.GetButtonDown("Left Click")) {
+                    playerInput.SetDragOrigin();
+                }
+
+                if (Input.GetButton("Left Click")) {
+                    playerInput.DragCamera();
+                }
+
+                if (Input.GetButtonUp("Left Click")) {
+                    playerInput.UnDragCamera();
+                }
+
+                break;
+
+            case PlayerInput.InputType.Controller:
+
+                float xPad = Input.GetAxis("Plus Pad X");
+                float yPad = Input.GetAxis("Plus Pad Y");
+
+                if (yPad > 0) { // front mod
+                    playerInput.PrepareWeaponPerspec(weapons[0]);
+                } else if (xPad < 0) { // left mod
+                    playerInput.PrepareWeaponPerspec(weapons[1]);
+                } else if (xPad > 0) { // right mod
+                    //playerInput.PrepareWeaponPerspec(weapons[2]);
+                } else if (yPad < 0) { // back mod
+                    //playerInput.PrepareWeaponPerspec(weapons[3]);
+                }
+
+                float xAxis = Input.GetAxis("Left Stick X");
+                float yAxis = Input.GetAxis("Left Stick Y");         
+
+                if (ignoreStick) {
+                    if (yAxis > -0.1f && yAxis < 0.1f) {
+                        ignoreStick = false;
+                    }
+                } else {
+                    if (yAxis > 0 && mechStats.moveSpeed < maxSpeed) {
+                        mechStats.moveSpeed += speedStep;
+                        ignoreStick = true;
+                    }
+                    if (yAxis < 0 && mechStats.moveSpeed > -4) {
+                        mechStats.moveSpeed -= speedStep;
+                        ignoreStick = true;
+                    }
+                }
+
+                if (xAxis < 0 && mechStats.moveSpeed != 0 && mechStats.rotateSpeed >= -30 && mechStats.rotateSpeed <= 30) {
+                    if (mechStats.moveSpeed > 0 && mechStats.rotateSpeed > -30) {
+                        mechStats.rotateSpeed -= 1f;
+                    } else if (mechStats.moveSpeed < 0 && mechStats.rotateSpeed < 30) {
+                        mechStats.rotateSpeed += 1f;
+                    }
+                }
+                if (xAxis > 0 && mechStats.moveSpeed != 0 && mechStats.rotateSpeed <= 30 && mechStats.rotateSpeed >= -30) {
+                    if (mechStats.moveSpeed > 0 && mechStats.rotateSpeed < 30) {
+                        mechStats.rotateSpeed += 1f;
+                    } else if (mechStats.moveSpeed < 0 && mechStats.rotateSpeed > -30) {
+                        mechStats.rotateSpeed -= 1f;
+                    }
+                }
+
+                float xLook = Input.GetAxis("Right Stick X");
+                if (xLook != 0.0f) {
+                    playerInput.RotateCamera(xLook);
+                }
+
+                break;
+        }
+        
+        
+
+        if (mechStats.moveSpeed == 0 || Input.GetButtonDown("Stop"))
         {
             mechStats.rotateSpeed = 0;
         }
 
-        if (Input.GetButtonDown("Fire1"))
-        {
-            playerInput.SetDragOrigin();
-        }
-
-        if (Input.GetButton("Fire1"))
-        {
-            playerInput.DragCamera();
-        }
-
-        if (Input.GetButtonUp("Fire1"))
-        {
-            playerInput.UnDragCamera();
-        }
+        
     }
 }

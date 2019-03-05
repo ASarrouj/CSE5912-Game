@@ -13,6 +13,14 @@ public class PlayerInput : NetworkBehaviour
     private Transform playerMech;
     public List<Transform> weapons;
 
+    public enum InputType
+    {
+        MouseKeyboard,
+        Controller
+    };
+
+    private InputType input = InputType.MouseKeyboard;
+
     void Start()
     {
         if (!isLocalPlayer)
@@ -43,7 +51,24 @@ public class PlayerInput : NetworkBehaviour
     {
         if (isLocalPlayer)
         {
-            inputState.Update();
+            inputState.Update(input);
+        }
+    }
+
+    void OnGUI() {
+        switch (input) {
+            case InputType.MouseKeyboard:
+                if (IsControllerInput()) {
+                    input = InputType.Controller;
+                    Debug.Log("Gamepad being used");
+                }
+                break;
+            case InputType.Controller:
+                if (IsMouseKeyboard()) {
+                    input = InputType.MouseKeyboard;
+                    Debug.Log("Mouse & Keyboard being used");
+                }
+                break;
         }
     }
 
@@ -98,5 +123,53 @@ public class PlayerInput : NetworkBehaviour
     public void SetDragOrigin()
     {
         camManager.SetDragOrigin();
+    }
+
+    public void RotateCamera(float xInput) {
+        camManager.RotateCamera(xInput);
+    }
+
+    private bool IsMouseKeyboard() {
+        if (Event.current.isKey || Event.current.isMouse) {
+            return true;
+        }
+        if (Input.GetAxis("Mouse X") != 0.0f || Input.GetAxis("Mouse Y") != 0.0f) {
+            return true;
+        }
+        return false;
+    }
+
+    private bool IsControllerInput() {
+        if (Input.GetKey(KeyCode.Joystick1Button0) ||
+           Input.GetKey(KeyCode.Joystick1Button1) ||
+           Input.GetKey(KeyCode.Joystick1Button2) ||
+           Input.GetKey(KeyCode.Joystick1Button3) ||
+           Input.GetKey(KeyCode.Joystick1Button4) ||
+           Input.GetKey(KeyCode.Joystick1Button5) ||
+           Input.GetKey(KeyCode.Joystick1Button6) ||
+           Input.GetKey(KeyCode.Joystick1Button7) ||
+           Input.GetKey(KeyCode.Joystick1Button8) ||
+           Input.GetKey(KeyCode.Joystick1Button9) ||
+           Input.GetKey(KeyCode.Joystick1Button10) ||
+           Input.GetKey(KeyCode.Joystick1Button11) ||
+           Input.GetKey(KeyCode.Joystick1Button12) ||
+           Input.GetKey(KeyCode.Joystick1Button13) ||
+           Input.GetKey(KeyCode.Joystick1Button14) ||
+           Input.GetKey(KeyCode.Joystick1Button15) ||
+           Input.GetKey(KeyCode.Joystick1Button16) ||
+           Input.GetKey(KeyCode.Joystick1Button17) ||
+           Input.GetKey(KeyCode.Joystick1Button18) ||
+           Input.GetKey(KeyCode.Joystick1Button19)) {
+            return true;
+        }
+
+        if (Input.GetAxis("Left Stick X") != 0.0f ||
+           Input.GetAxis("Left Stick Y") != 0.0f ||
+           Input.GetAxis("Right Stick X") != 0.0f ||
+           Input.GetAxis("Right Stick Y") != 0.0f) {
+            return true;
+        }
+
+        return false;
     }
 }

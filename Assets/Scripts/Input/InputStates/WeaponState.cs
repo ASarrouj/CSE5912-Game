@@ -34,32 +34,79 @@ public class WeaponState : IInputState
         mouseInput.SetClamping(-60, 60, -30, 30);
     }
 
-    public void Update()
+    public void Update(PlayerInput.InputType inputType)
     {
         if (Input.GetButtonDown("Escape")) {
             playerInput.ToggleMenu();
         }
 
         bool updateMouse = true;
-        if (Input.GetButtonDown("Perspective1"))
-        {
-            updateMouse = false;
-            weapon.localRotation = Quaternion.identity;
-            shootInput.ToggleActive();
-            ToggleLine(false);
-            playerInput.PrepareMechPerspec();
-        }
 
-        for (int i = 0; i < otherWeapons.Count; i++)
-        {
-            if (Input.GetButtonDown(otherWeaponInputs[i]))
-            {
-                updateMouse = false;
-                weapon.localRotation = originalRotation;
-                ToggleLine(false);
-                playerInput.PrepareWeaponPerspec(otherWeapons[i]);
-                shootInput.ToggleActive();
-            }
+        switch (inputType) {
+
+            case PlayerInput.InputType.MouseKeyboard:
+
+                if (Input.GetButtonDown("Perspective1")) {
+                    updateMouse = false;
+                    weapon.localRotation = Quaternion.identity;
+                    shootInput.ToggleActive();
+                    ToggleLine(false);
+                    playerInput.PrepareMechPerspec();
+                }
+                for (int i = 0; i < otherWeapons.Count; i++) {
+                    if (Input.GetButtonDown(otherWeaponInputs[i])) {
+                        updateMouse = false;
+                        weapon.localRotation = originalRotation;
+                        ToggleLine(false);
+                        playerInput.PrepareWeaponPerspec(otherWeapons[i]);
+                        shootInput.ToggleActive();
+                    }
+                }         
+                break;
+
+            case PlayerInput.InputType.Controller:
+
+                if (Input.GetButtonDown("Cancel")) {
+                    updateMouse = false;
+                    weapon.localRotation = Quaternion.identity;
+                    shootInput.ToggleActive();
+                    ToggleLine(false);
+                    playerInput.PrepareMechPerspec();
+                }
+                for (int i = 0; i < otherWeapons.Count; i++) {
+                    if (Input.GetButtonDown(otherWeaponInputs[i])) {
+                        updateMouse = false;
+                        weapon.localRotation = originalRotation;
+                        ToggleLine(false);
+                        playerInput.PrepareWeaponPerspec(otherWeapons[i]);
+                        shootInput.ToggleActive();
+                    }
+                }
+
+                float xPad = Input.GetAxis("Plus Pad X");
+                float yPad = Input.GetAxis("Plus Pad Y");
+
+                int select = -1;
+
+                if (yPad > 0) { // front mod
+                    select = 0;
+                } else if (xPad < 0) { // left mod
+                    select = 1;
+                } else if (xPad > 0) { // right mod
+                    // select = 2;
+                } else if (yPad < 0) { // back mod
+                    // select = 3;
+                }
+
+                if (select >= 0 && select != lastKeyIndex) {
+                    updateMouse = false;
+                    weapon.localRotation = originalRotation;
+                    ToggleLine(false);
+                    playerInput.PrepareWeaponPerspec(playerInput.weapons[select]);
+                    shootInput.ToggleActive();
+                }
+
+                break;
         }
 
         if (Input.GetButton("Fire1"))
@@ -67,10 +114,10 @@ public class WeaponState : IInputState
             shootInput.Shoot();
         }
 
-        if (updateMouse)
-        {
-            mouseInput.Update();
+        if (updateMouse) {
+            mouseInput.Update(inputType);
         }
+
     }
 
     private void ToggleLine(bool turnOn)

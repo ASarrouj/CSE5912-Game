@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IInputState
 {
-    void Update();
+    void Update(PlayerInput.InputType input);
 }

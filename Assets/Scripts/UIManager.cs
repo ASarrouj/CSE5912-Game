@@ -62,7 +62,7 @@ public class UIManager : MonoBehaviour
     public void MenuUI()
     {
         MenuHUD.SetActive(!MenuHUD.activeSelf);
-        Cursor.visible = !Cursor.visible;
+        //Cursor.visible = !Cursor.visible;
     }
 
     public void DisableDynamicUI()

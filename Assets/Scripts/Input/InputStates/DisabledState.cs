@@ -10,7 +10,7 @@ public class DisabledState : IInputState
 
     }
 
-    public void Update()
+    public void Update(PlayerInput.InputType input)
     {
         
     }

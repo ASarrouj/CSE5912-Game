@@ -9,6 +9,8 @@ public class SmoothMouseLook
     public RotationAxes axes = RotationAxes.MouseXAndY;
     public float sensitivityX = 15F;
     public float sensitivityY = 15F;
+    public float stickSensitivityX = 5F;
+    public float stickSensitivityY = 5F;
     public Transform weapon;
 
     public float minimumX = -360F;
@@ -39,15 +41,20 @@ public class SmoothMouseLook
         originalRotation = weapon.localRotation;
     }
 
-    public void Update()
+    public void Update(PlayerInput.InputType inputType)
     {
         if (axes == RotationAxes.MouseXAndY)
         {
             rotAverageY = 0f;
             rotAverageX = 0f;
 
-            rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
-            rotationX += Input.GetAxis("Mouse X") * sensitivityX;
+            if (inputType == PlayerInput.InputType.Controller) {
+                rotationY += Input.GetAxis("Right Stick Y") * stickSensitivityY;
+                rotationX += Input.GetAxis("Right Stick X") * stickSensitivityX;
+            } else {
+                rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
+                rotationX += Input.GetAxis("Mouse X") * sensitivityX;
+            }  
 
             rotArrayY.Add(rotationY);
             rotArrayX.Add(rotationX);
@@ -85,7 +92,11 @@ public class SmoothMouseLook
         {
             rotAverageX = 0f;
 
-            rotationX += Input.GetAxis("Mouse X") * sensitivityX;
+            if (inputType == PlayerInput.InputType.Controller) {
+                rotationX += Input.GetAxis("Right Stick X") * stickSensitivityX;
+            } else {
+                rotationX += Input.GetAxis("Mouse X") * sensitivityX;
+            }
 
             rotArrayX.Add(rotationX);
 
@@ -108,7 +119,11 @@ public class SmoothMouseLook
         {
             rotAverageY = 0f;
 
-            rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
+            if (inputType == PlayerInput.InputType.Controller) {
+                rotationY += Input.GetAxis("Right Stick Y") * stickSensitivityY;
+            } else {
+                rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
+            }
 
             rotArrayY.Add(rotationY);
 

@@ -12,6 +12,7 @@ public class CameraManager : MonoBehaviour
     private bool interpolating;
     private Transform target;
     private PlayerInput playerInput;
+    private int joystickLookSpeed = 5;
 
     // Start is called before the first frame update
     void Start()
@@ -109,5 +110,9 @@ public class CameraManager : MonoBehaviour
     {
         dragOrigin = Input.mousePosition.x;
         lastMousePosX = 0;
+    }
+
+    public void RotateCamera(float xInput) {
+        transform.RotateAround(target.position, target.up, xInput * joystickLookSpeed);
     }
 }
