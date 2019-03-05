@@ -166,6 +166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeOverlay: {fileID: 0}
   fadeDuration: 1
+  ipInput: {fileID: 0}
 --- !u!114 &298050214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1247,7 +1248,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1696318859}
-  - component: {fileID: 1696318858}
   - component: {fileID: 1696318861}
   - component: {fileID: 1696318860}
   - component: {fileID: 1696318862}
@@ -1258,23 +1258,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1696318858
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1696318857}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aea8180c4c0872c4b87b28b64c27032b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  menuSound: {fileID: 8300000, guid: 12fd7266c93f78146b48d555fd36b062, type: 3}
-  buttons:
-  - {fileID: 0}
-  selectColor: {r: 1, g: 0, b: 0, a: 1}
-  defaultColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &1696318859
 Transform:
   m_ObjectHideFlags: 0
@@ -1320,7 +1303,7 @@ MonoBehaviour:
   m_Script: {fileID: -619905303, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 1796610660}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!82 &1696318862
