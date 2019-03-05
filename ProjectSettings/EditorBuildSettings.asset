@@ -5,31 +5,28 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/MenuScenes/StartScene.unity
     guid: 9e5e73d6ef71c5a4296e9356927b90ec
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/MenuScenes/LoadingScene.unity
     guid: 1ab663a5c444c084692f2b82d09888de
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/MenuScenes/Main Menu.unity
     guid: cf1d5a86fd38c81408fc363448ba0629
-  - enabled: 0
-    path: Assets/_Scenes/MenuScenes/Option.unity
-    guid: 17d0fa09ad599c5428c84430f150b77f
-  - enabled: 0
-    path: Assets/_Scenes/MenuScenes/Credit.unity
-    guid: d7ea6b4c9e8c95c49a01d588177c332b
-  - enabled: 0
-    path: Assets/_Scenes/MechWeaponPick.unity
-    guid: fd95043929893ad4e8bc0cd5e995065a
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/MenuScenes/Lobby.unity
     guid: 06921e9623b4eec4c8e04c90f6818d13
-  - enabled: 0
+  - enabled: 1
+    path: Assets/_Scenes/MechWeaponPick.unity
+    guid: fd95043929893ad4e8bc0cd5e995065a
+  - enabled: 1
+    path: Assets/_Scenes/MenuScenes/Option.unity
+    guid: 17d0fa09ad599c5428c84430f150b77f
+  - enabled: 1
+    path: Assets/_Scenes/MenuScenes/Credit.unity
+    guid: d7ea6b4c9e8c95c49a01d588177c332b
+  - enabled: 1
     path: Assets/_Scenes/CityMap.unity
     guid: 8e01cc974bc3c1d4b844e8986932d76e
-  - enabled: 1
-    path: Assets/_Scenes/TestSceneCity.unity
-    guid: 58e62a805d02e58459703d02d73ab2e9
   m_configObjects: {}
