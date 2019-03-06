@@ -20,7 +20,7 @@ public class WeaponState : IInputState
 
         lastKeyIndex = playerInput.lastKeyIndex;
         weapon = playerInput.weapons[lastKeyIndex];
-        weaponUI = weapon.GetChild(0).Find("WeaponUI").gameObject;
+        weaponUI = weapon.Find("WeaponUI").gameObject;
         ToggleGunUI();
         shootInput = weapon.GetComponent<IWeapon>();
         shootInput.ToggleActive();
