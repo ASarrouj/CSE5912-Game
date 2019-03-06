@@ -25,6 +25,7 @@ namespace Prototype.NetworkLobby
         public LobbyTopPanel topPanel;
 
         public RectTransform mainMenuPanel;
+        public RectTransform optionsPanel;
         public RectTransform gamesPanel;
         public RectTransform lobbyPanel;
 
