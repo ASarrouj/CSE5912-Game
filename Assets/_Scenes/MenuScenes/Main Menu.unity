@@ -4881,7 +4881,8 @@ MonoBehaviour:
   m_PlayerSpawnMethod: 0
   m_OfflineScene: Main Menu
   m_OnlineScene: 
-  m_SpawnPrefabs: []
+  m_SpawnPrefabs:
+  - {fileID: 319536895269049431, guid: 6123532ebe6b5e54fa6b1a01da8c0aa5, type: 3}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
@@ -4943,7 +4944,8 @@ MonoBehaviour:
   m_MinPlayers: 2
   m_LobbyPlayerPrefab: {fileID: 11487034, guid: ad727d7e1462ecc4f83c898ecc501997,
     type: 3}
-  m_GamePlayerPrefab: {fileID: 0}
+  m_GamePlayerPrefab: {fileID: 319536895269049431, guid: a4acbbd34642b224d8782bdb148d7392,
+    type: 3}
   m_LobbyScene: Main Menu
   m_PlayScene: CityMap
   lobbySlots: []

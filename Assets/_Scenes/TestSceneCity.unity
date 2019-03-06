@@ -250,6 +250,22 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: bd57d6306d5e02545b68a97f9a0cfde2, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: bd57d6306d5e02545b68a97f9a0cfde2, type: 3}
+      propertyPath: m_TagString
+      value: Building
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: bd57d6306d5e02545b68a97f9a0cfde2, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: bd57d6306d5e02545b68a97f9a0cfde2, type: 3}
+      propertyPath: m_TagString
+      value: Building
+      objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: bd57d6306d5e02545b68a97f9a0cfde2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -281,22 +297,6 @@ PrefabInstance:
     - target: {fileID: 400002, guid: bd57d6306d5e02545b68a97f9a0cfde2, type: 3}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: bd57d6306d5e02545b68a97f9a0cfde2, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: bd57d6306d5e02545b68a97f9a0cfde2, type: 3}
-      propertyPath: m_TagString
-      value: Building
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: bd57d6306d5e02545b68a97f9a0cfde2, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: bd57d6306d5e02545b68a97f9a0cfde2, type: 3}
-      propertyPath: m_TagString
-      value: Building
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6400000, guid: bd57d6306d5e02545b68a97f9a0cfde2, type: 3}
@@ -3828,6 +3828,22 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: bd57d6306d5e02545b68a97f9a0cfde2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: bd57d6306d5e02545b68a97f9a0cfde2, type: 3}
+      propertyPath: m_TagString
+      value: Building
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: bd57d6306d5e02545b68a97f9a0cfde2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: bd57d6306d5e02545b68a97f9a0cfde2, type: 3}
+      propertyPath: m_TagString
+      value: Building
+      objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: bd57d6306d5e02545b68a97f9a0cfde2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3859,22 +3875,6 @@ PrefabInstance:
     - target: {fileID: 400002, guid: bd57d6306d5e02545b68a97f9a0cfde2, type: 3}
       propertyPath: m_RootOrder
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: bd57d6306d5e02545b68a97f9a0cfde2, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: bd57d6306d5e02545b68a97f9a0cfde2, type: 3}
-      propertyPath: m_TagString
-      value: Building
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: bd57d6306d5e02545b68a97f9a0cfde2, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: bd57d6306d5e02545b68a97f9a0cfde2, type: 3}
-      propertyPath: m_TagString
-      value: Building
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6400000, guid: bd57d6306d5e02545b68a97f9a0cfde2, type: 3}
@@ -15989,6 +15989,16 @@ PrefabInstance:
     - target: {fileID: 6259023596819288520, guid: fb626d759b9a2b545b8cc49b831841b6,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2348248786809787847, guid: fb626d759b9a2b545b8cc49b831841b6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5091002115132357411, guid: fb626d759b9a2b545b8cc49b831841b6,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
