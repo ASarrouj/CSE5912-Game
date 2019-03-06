@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class TerrainGenerator : MonoBehaviour
 {
@@ -13,7 +14,11 @@ public class TerrainGenerator : MonoBehaviour
     public float roughness, initialDisplacement;
     private float displacement;
     private Transform glassDome;
+    public GameObject[] spawnPos;
+    public GameObject spawnPlatform;
     private Mesh domeMesh;
+
+    private float spawnRadius;
 
     // Start is called before the first frame update
     void Start()
@@ -35,26 +40,19 @@ public class TerrainGenerator : MonoBehaviour
 
         terrainData.SetHeights(0, 0, heights);
 
-        glassDome = transform.GetChild(0);
-        glassDome.position = transform.position + new Vector3(terrainData.size.x, 0, terrainData.size.z) / 2;
-        glassDome.localScale = new Vector3(terrainData.size.x, Mathf.Min(terrainData.size.x, terrainData.size.z), terrainData.size.z);
+        CreateGlassDome();
 
-        domeMesh = glassDome.GetComponent<MeshFilter>().mesh;
-        for (int i = 0; i < domeMesh.normals.Length; i++)
-        {
-            domeMesh.normals[i] = -domeMesh.normals[i];
-        }
+        spawnRadius = glassDome.localScale.x / 2 - 30;
 
-        for (int m = 0; m < domeMesh.subMeshCount; m++)
+        float deg = 0;
+        for (int i = 0; i < spawnPos.Length; i++)
         {
-            int[] triangles = domeMesh.GetTriangles(m);
-            for (int i = 0; i < triangles.Length; i += 3)
-            {
-                int temp = triangles[i + 0];
-                triangles[i + 0] = triangles[i + 1];
-                triangles[i + 1] = temp;
-            }
-            domeMesh.SetTriangles(triangles, m);
+            Vector3 platPos = new Vector3(Mathf.Cos(deg), 0, Mathf.Sin(deg)) * spawnRadius + glassDome.transform.position;
+            platPos.y = terrain.SampleHeight(platPos) + 2;
+            deg += 2f * Mathf.PI / spawnPos.Length;
+            Instantiate(spawnPlatform, platPos, Quaternion.identity);
+            spawnPos[i].transform.position = platPos + new Vector3(0, 5, 0);
+            spawnPos[i].AddComponent<NetworkStartPosition>();
         }
     }
 
@@ -106,6 +104,31 @@ public class TerrainGenerator : MonoBehaviour
             }
             displacement *= Mathf.Pow(2, -roughness);
         }
+    }
 
+    private void CreateGlassDome()
+    {
+        glassDome = transform.GetChild(0);
+        glassDome.position = transform.position + new Vector3(terrainData.size.x, 0, terrainData.size.z) / 2;
+        glassDome.localScale = new Vector3(terrainData.size.x, Mathf.Min(terrainData.size.x, terrainData.size.z), terrainData.size.z) / 2;
+
+        domeMesh = glassDome.GetComponent<MeshFilter>().mesh;
+        for (int i = 0; i < domeMesh.normals.Length; i++)
+        {
+            domeMesh.normals[i] = -domeMesh.normals[i];
+        }
+
+        for (int m = 0; m < domeMesh.subMeshCount; m++)
+        {
+            int[] triangles = domeMesh.GetTriangles(m);
+            for (int i = 0; i < triangles.Length; i += 3)
+            {
+                int temp = triangles[i + 0];
+                triangles[i + 0] = triangles[i + 1];
+                triangles[i + 1] = temp;
+            }
+            domeMesh.SetTriangles(triangles, m);
+        }
+        glassDome.gameObject.AddComponent<MeshCollider>();
     }
 }

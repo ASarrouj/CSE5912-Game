@@ -19,8 +19,8 @@ public class MechState : IInputState
         weapons = playerInput.weapons;
         mechStats = playerInput.transform.GetComponent<MoveTest>();
 
-        speedStep = 4;
-        maxSpeed = 12;
+        speedStep = 10;
+        maxSpeed = 100;
     }
 
     public void Update(PlayerInput.InputType inputType)
