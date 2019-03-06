@@ -115,4 +115,9 @@ public class CameraManager : MonoBehaviour
     public void RotateCamera(float xInput) {
         transform.RotateAround(target.position, target.up, xInput * joystickLookSpeed);
     }
+
+    public Ray CreateRayFromMouseClick()
+    {
+        return GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
+    }
 }

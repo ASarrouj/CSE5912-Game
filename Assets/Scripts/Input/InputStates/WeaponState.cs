@@ -61,7 +61,8 @@ public class WeaponState : IInputState
                         playerInput.PrepareWeaponPerspec(otherWeapons[i]);
                         shootInput.ToggleActive();
                     }
-                }         
+                }      
+                
                 break;
 
             case PlayerInput.InputType.Controller:

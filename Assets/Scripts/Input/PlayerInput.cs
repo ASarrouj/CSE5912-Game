@@ -129,6 +129,11 @@ public class PlayerInput : NetworkBehaviour
         camManager.RotateCamera(xInput);
     }
 
+    public Ray CreateRayFromMouseClick()
+    {
+        return camManager.CreateRayFromMouseClick();
+    }
+
     private bool IsMouseKeyboard() {
         if (Event.current.isKey || Event.current.isMouse) {
             return true;

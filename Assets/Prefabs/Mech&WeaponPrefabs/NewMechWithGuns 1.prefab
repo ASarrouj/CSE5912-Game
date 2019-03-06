@@ -19958,7 +19958,7 @@ Transform:
   m_LocalScale: {x: 1.5440819, y: 2.7430067, z: 3.066858}
   m_Children: []
   m_Father: {fileID: 6536977056939160894}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8714147311267132691
 MeshFilter:
@@ -20308,6 +20308,36 @@ MonoBehaviour:
   particleEffects:
   - {fileID: 1000011797152326, guid: acf39d9f4addf294d93fa56fa373961b, type: 3}
   - {fileID: 1000010823978654, guid: 3228a22491941734bb83ad691d17fcb9, type: 3}
+--- !u!1 &2213949944804834869
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8017071454808725506}
+  m_Layer: 10
+  m_Name: RepairTool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8017071454808725506
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2213949944804834869}
+  m_LocalRotation: {x: -0, y: 0.71961653, z: -0, w: 0.6943717}
+  m_LocalPosition: {x: 0, y: -0.6, z: -0.06999993}
+  m_LocalScale: {x: 1.5440819, y: 2.7430067, z: 3.066858}
+  m_Children: []
+  m_Father: {fileID: 6536977056939160894}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2689384610890394356
 GameObject:
   m_ObjectHideFlags: 0
@@ -31562,6 +31592,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 1, z: -2.19}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 8017071454808725506}
   - {fileID: 7447400520648123112}
   m_Father: {fileID: 8413345022708477440}
   m_RootOrder: 4
