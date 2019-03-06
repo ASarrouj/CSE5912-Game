@@ -5,8 +5,8 @@ using UnityEngine;
 public class MechState : IInputState
 {
     private PlayerInput playerInput;
-    private List<string> weaponInputs;
-    private List<Transform> weapons;
+    private List<string> slotInputs;
+    private List<Transform> slots;
     private MoveTest mechStats;
     private int maxSpeed, speedStep;
     private bool ignoreStick;
@@ -15,8 +15,8 @@ public class MechState : IInputState
     {
         playerInput = playerTransform.GetComponent<PlayerInput>();
 
-        weaponInputs = playerInput.weaponInputs;
-        weapons = playerInput.weapons;
+        slotInputs = playerInput.slotInputs;
+        slots = playerInput.slots;
         mechStats = playerInput.transform.GetComponent<MoveTest>();
 
         speedStep = 10;
@@ -33,9 +33,9 @@ public class MechState : IInputState
 
             case PlayerInput.InputType.MouseKeyboard:
 
-                for (int i = 0; i < weapons.Count; i++) {
-                    if (Input.GetButtonDown(weaponInputs[i])) {
-                        playerInput.PrepareWeaponPerspec(weapons[i]);
+                for (int i = 0; i < slots.Count; i++) {
+                    if (Input.GetButtonDown(slotInputs[i])) {
+                        playerInput.PrepareSlotPerspec(slots[i]);
                     }
                 }
 
@@ -80,9 +80,9 @@ public class MechState : IInputState
                 float yPad = Input.GetAxis("Plus Pad Y");
 
                 if (yPad > 0) { // front mod
-                    playerInput.PrepareWeaponPerspec(weapons[0]);
+                    playerInput.PrepareSlotPerspec(slots[0]);
                 } else if (xPad < 0) { // left mod
-                    playerInput.PrepareWeaponPerspec(weapons[1]);
+                    playerInput.PrepareSlotPerspec(slots[1]);
                 } else if (xPad > 0) { // right mod
                     //playerInput.PrepareWeaponPerspec(weapons[2]);
                 } else if (yPad < 0) { // back mod

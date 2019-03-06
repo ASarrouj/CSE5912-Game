@@ -6,8 +6,8 @@ public class WeaponState : IInputState
 {
     private Transform weapon;
     private PlayerInput playerInput;
-    private List<string> otherWeaponInputs;
-    private List<Transform> otherWeapons;
+    private List<string> otherSlotInputs;
+    private List<Transform> otherSlots;
     private int lastKeyIndex;
     private SmoothMouseLook mouseInput;
     private IWeapon shootInput;
@@ -19,15 +19,15 @@ public class WeaponState : IInputState
         playerInput = playerTransform.GetComponent<PlayerInput>();
 
         lastKeyIndex = playerInput.lastKeyIndex;
-        weapon = playerInput.weapons[lastKeyIndex];
+        weapon = playerInput.slots[lastKeyIndex];
         weaponUI = weapon.Find("WeaponUI").gameObject;
         ToggleGunUI();
         shootInput = weapon.GetComponent<IWeapon>();
         shootInput.ToggleActive();
-        otherWeaponInputs = new List<string>(playerInput.weaponInputs);
-        otherWeaponInputs.RemoveAt(lastKeyIndex);
-        otherWeapons = new List<Transform>(playerInput.weapons);
-        otherWeapons.RemoveAt(lastKeyIndex);
+        otherSlotInputs = new List<string>(playerInput.slotInputs);
+        otherSlotInputs.RemoveAt(lastKeyIndex);
+        otherSlots = new List<Transform>(playerInput.slots);
+        otherSlots.RemoveAt(lastKeyIndex);
         originalRotation = weapon.localRotation;
 
         mouseInput = new SmoothMouseLook(weapon);
@@ -53,12 +53,12 @@ public class WeaponState : IInputState
                     ToggleGunUI();
                     playerInput.PrepareMechPerspec();
                 }
-                for (int i = 0; i < otherWeapons.Count; i++) {
-                    if (Input.GetButtonDown(otherWeaponInputs[i])) {
+                for (int i = 0; i < otherSlots.Count; i++) {
+                    if (Input.GetButtonDown(otherSlotInputs[i])) {
                         updateMouse = false;
                         weapon.localRotation = originalRotation;
                         ToggleGunUI();
-                        playerInput.PrepareWeaponPerspec(otherWeapons[i]);
+                        playerInput.PrepareSlotPerspec(otherSlots[i]);
                         shootInput.ToggleActive();
                     }
                 }      
@@ -74,12 +74,12 @@ public class WeaponState : IInputState
                     ToggleGunUI();
                     playerInput.PrepareMechPerspec();
                 }
-                for (int i = 0; i < otherWeapons.Count; i++) {
-                    if (Input.GetButtonDown(otherWeaponInputs[i])) {
+                for (int i = 0; i < otherSlots.Count; i++) {
+                    if (Input.GetButtonDown(otherSlotInputs[i])) {
                         updateMouse = false;
                         weapon.localRotation = originalRotation;
                         ToggleGunUI();
-                        playerInput.PrepareWeaponPerspec(otherWeapons[i]);
+                        playerInput.PrepareSlotPerspec(otherSlots[i]);
                         shootInput.ToggleActive();
                     }
                 }
@@ -103,7 +103,7 @@ public class WeaponState : IInputState
                     updateMouse = false;
                     weapon.localRotation = originalRotation;
                     ToggleGunUI();
-                    playerInput.PrepareWeaponPerspec(playerInput.weapons[select]);
+                    playerInput.PrepareSlotPerspec(playerInput.slots[select]);
                     shootInput.ToggleActive();
                 }
 
