@@ -11,6 +11,7 @@ namespace Prototype.NetworkLobby
         public void OnClickPlay()
         {
             lobbyManager.ChangeTo(lobbyManager.gamesPanel);
+            lobbyManager.backDelegate = lobbyManager.BackToMainClbk;
         }
     }
 }

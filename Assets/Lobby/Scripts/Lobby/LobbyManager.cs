@@ -132,15 +132,24 @@ namespace Prototype.NetworkLobby
 
             currentPanel = newPanel;
 
-            if (currentPanel != gamesPanel)
+            if (currentPanel != mainMenuPanel)
             {
                 backButton.gameObject.SetActive(true);
             }
             else
             {
                 backButton.gameObject.SetActive(false);
+            }
+
+            if (currentPanel == mainMenuPanel || currentPanel == gamesPanel)
+            {
                 SetServerInfo("Offline", "None");
                 _isMatchmaking = false;
+            }
+
+            if (currentPanel == gamesPanel)
+            {
+                backDelegate = BackToMainClbk;
             }
         }
 
@@ -180,6 +189,11 @@ namespace Prototype.NetworkLobby
         public void SimpleBackClbk()
         {
             ChangeTo(gamesPanel);
+        }
+
+        public void BackToMainClbk()
+        {
+            ChangeTo(mainMenuPanel);
         }
                  
         public void StopHostClbk()
