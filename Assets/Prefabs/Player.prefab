@@ -2131,20 +2131,25 @@ PrefabInstance:
       propertyPath: m_TransformSyncMode
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2110294972796132912, guid: b5bc8c24de5352f42aa601b03d7b6f93,
+    - target: {fileID: 933251954924035252, guid: b5bc8c24de5352f42aa601b03d7b6f93,
         type: 3}
-      propertyPath: m_Enabled
-      value: 0
+      propertyPath: m_TransformSyncMode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3347650803474322714, guid: b5bc8c24de5352f42aa601b03d7b6f93,
         type: 3}
       propertyPath: m_TransformSyncMode
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7423750020629294004, guid: b5bc8c24de5352f42aa601b03d7b6f93,
+    - target: {fileID: 3443597057955249272, guid: b5bc8c24de5352f42aa601b03d7b6f93,
         type: 3}
-      propertyPath: m_TransformSyncMode
-      value: 1
+      propertyPath: scoreText
+      value: 
+      objectReference: {fileID: 297596281719896996}
+    - target: {fileID: 2110294972796132912, guid: b5bc8c24de5352f42aa601b03d7b6f93,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6441310939000351664, guid: b5bc8c24de5352f42aa601b03d7b6f93, type: 3}
