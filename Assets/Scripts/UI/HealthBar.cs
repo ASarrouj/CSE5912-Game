@@ -12,7 +12,7 @@ public class HealthBar : MonoBehaviour
     }
 
     public void setHealthBar(float health) {
-        bar.localScale = new Vector3(health, 1f);
+        transform.localScale = new Vector3(health, 1f);
     }
 
 }

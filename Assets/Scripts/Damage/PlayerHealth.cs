@@ -6,11 +6,16 @@ using UnityEngine.Networking;
 public class PlayerHealth : NetworkBehaviour
 {
     // Start is called before the first frame update
+    
     public int maxHealth;
     [SyncVar] public int coreHealth, rearHealth, leftHealth, rightHealth, frontHealth;
     [SerializeField] HealthBar[] healthbars;
 
+
     public bool dmgCore(int dmg, MechTakeDamage hitbox)
+
+   
+
 {
     coreHealth-=dmg;
     
