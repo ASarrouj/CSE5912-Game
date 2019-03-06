@@ -25,6 +25,7 @@ namespace Prototype.NetworkLobby
         public LobbyTopPanel topPanel;
 
         public RectTransform mainMenuPanel;
+        public RectTransform gamesPanel;
         public RectTransform lobbyPanel;
 
         public LobbyInfoPanel infoPanel;
@@ -99,7 +100,7 @@ namespace Prototype.NetworkLobby
                 }
                 else
                 {
-                    ChangeTo(mainMenuPanel);
+                    ChangeTo(gamesPanel);
                 }
 
                 topPanel.ToggleVisibility(true);
@@ -131,7 +132,7 @@ namespace Prototype.NetworkLobby
 
             currentPanel = newPanel;
 
-            if (currentPanel != mainMenuPanel)
+            if (currentPanel != gamesPanel)
             {
                 backButton.gameObject.SetActive(true);
             }
@@ -178,7 +179,7 @@ namespace Prototype.NetworkLobby
 
         public void SimpleBackClbk()
         {
-            ChangeTo(mainMenuPanel);
+            ChangeTo(gamesPanel);
         }
                  
         public void StopHostClbk()
@@ -194,7 +195,7 @@ namespace Prototype.NetworkLobby
             }
 
             
-            ChangeTo(mainMenuPanel);
+            ChangeTo(gamesPanel);
         }
 
         public void StopClientClbk()
@@ -206,13 +207,13 @@ namespace Prototype.NetworkLobby
                 StopMatchMaker();
             }
 
-            ChangeTo(mainMenuPanel);
+            ChangeTo(gamesPanel);
         }
 
         public void StopServerClbk()
         {
             StopServer();
-            ChangeTo(mainMenuPanel);
+            ChangeTo(gamesPanel);
         }
 
         class KickMsg : MessageBase { }
@@ -409,12 +410,12 @@ namespace Prototype.NetworkLobby
         public override void OnClientDisconnect(NetworkConnection conn)
         {
             base.OnClientDisconnect(conn);
-            ChangeTo(mainMenuPanel);
+            ChangeTo(gamesPanel);
         }
 
         public override void OnClientError(NetworkConnection conn, int errorCode)
         {
-            ChangeTo(mainMenuPanel);
+            ChangeTo(gamesPanel);
             infoPanel.Display("Client error : " + (errorCode == 6 ? "timeout" : errorCode.ToString()), "Close", null);
         }
     }
