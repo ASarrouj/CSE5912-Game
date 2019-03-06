@@ -12,6 +12,8 @@ public class TerrainGenerator : MonoBehaviour
     private int maxIndex;
     public float roughness, initialDisplacement;
     private float displacement;
+    private Transform glassDome;
+    private Mesh domeMesh;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +34,28 @@ public class TerrainGenerator : MonoBehaviour
         DiamondSquareAlgo();
 
         terrainData.SetHeights(0, 0, heights);
+
+        glassDome = transform.GetChild(0);
+        glassDome.position = transform.position + new Vector3(terrainData.size.x, 0, terrainData.size.z) / 2;
+        glassDome.localScale = new Vector3(terrainData.size.x, Mathf.Min(terrainData.size.x, terrainData.size.z), terrainData.size.z);
+
+        domeMesh = glassDome.GetComponent<MeshFilter>().mesh;
+        for (int i = 0; i < domeMesh.normals.Length; i++)
+        {
+            domeMesh.normals[i] = -domeMesh.normals[i];
+        }
+
+        for (int m = 0; m < domeMesh.subMeshCount; m++)
+        {
+            int[] triangles = domeMesh.GetTriangles(m);
+            for (int i = 0; i < triangles.Length; i += 3)
+            {
+                int temp = triangles[i + 0];
+                triangles[i + 0] = triangles[i + 1];
+                triangles[i + 1] = temp;
+            }
+            domeMesh.SetTriangles(triangles, m);
+        }
     }
 
     // Update is called once per frame
@@ -83,45 +107,5 @@ public class TerrainGenerator : MonoBehaviour
             displacement *= Mathf.Pow(2, -roughness);
         }
 
-    }
-
-    private void DiamondStep()
-    {
-
-    }
-
-    private void SquareStep()
-    {
-        float sum = 0;
-        int denominator = 0;
-
-        /*if (offsetMidpoint.x - midpoint.x >= 0)
-        {
-            sum += heights[offsetMidpoint.x - midpoint.x, offsetMidpoint.y];
-            denominator++;
-        }
-        if (offsetMidpoint.x + midpoint.x <= maxIndex)
-        {
-            sum += heights[offsetMidpoint.x + midpoint.x, offsetMidpoint.y];
-            denominator++;
-        }
-        if (offsetMidpoint.y - midpoint.y >= 0)
-        {
-            sum += heights[offsetMidpoint.x, offsetMidpoint.y - midpoint.y];
-            denominator++;
-        }
-        if (offsetMidpoint.y + midpoint.y <= maxIndex)
-        {
-            sum += heights[offsetMidpoint.x, offsetMidpoint.y + midpoint.y];
-            denominator++;
-        }
-
-        heights[offsetMidpoint.x, offsetMidpoint.y] = (sum / denominator) + Random.Range(-displacement, displacement);
-    }
-
-    try { sum += heights[x + midpoint, y]; denominator++; } catch { }
-                    try { sum += heights[x - midpoint, y]; denominator++; } catch { }
-                    try { sum += heights[x, y + midpoint]; denominator++; } catch { }
-                    try { sum += heights[x, y - midpoint]; denominator++; } catch { }*/
     }
 }
