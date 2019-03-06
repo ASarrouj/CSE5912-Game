@@ -15,9 +15,9 @@ public class RepairState : IInputState
         playerInput = playerTransform.GetComponent<PlayerInput>();
         lastKeyIndex = playerInput.lastKeyIndex;
 
-        otherWeaponInputs = new List<string>(playerInput.weaponInputs);
+        otherWeaponInputs = new List<string>(playerInput.slotInputs);
         otherWeaponInputs.RemoveAt(lastKeyIndex);
-        otherWeapons = new List<Transform>(playerInput.weapons);
+        otherWeapons = new List<Transform>(playerInput.slots);
         otherWeapons.RemoveAt(lastKeyIndex);
 
         hitEffectPool = GameObject.Find("MGImpactPool").GetComponent<ObjectPooler>();
@@ -28,23 +28,6 @@ public class RepairState : IInputState
         if (Input.GetButtonDown("Escape"))
         {
             playerInput.ToggleMenu();
-        }
-
-        if (Input.GetButtonDown("Fire1"))
-        {
-            Ray ray = playerInput.CreateRayFromMouseClick();
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit, 50f))
-            {
-                if (hit.collider.gameObject.tag == "Mech")
-                {
-                    GameObject hitEffect = hitEffectPool.GetObject();
-                    hitEffect.transform.position = hit.point;
-                    hitEffect.transform.rotation = Quaternion.identity;
-                    hitEffect.SetActive(true);
-                }
-            }
         }
 
         switch (inputType)
@@ -60,8 +43,35 @@ public class RepairState : IInputState
                 {
                     if (Input.GetButtonDown(otherWeaponInputs[i]))
                     {
-                        playerInput.PrepareWeaponPerspec(otherWeapons[i]);
+                        playerInput.PrepareSlotPerspec(otherWeapons[i]);
                     }
+                }
+
+                if (Input.GetButtonDown("RightClick"))
+                {
+                    Ray ray = playerInput.CreateRayFromMouseClick();
+                    RaycastHit hit;
+
+                    if (Physics.Raycast(ray, out hit, 50f))
+                    {
+                        if (hit.collider.gameObject.tag == "Mech")
+                        {
+                            GameObject hitEffect = hitEffectPool.GetObject();
+                            hitEffect.transform.position = hit.point;
+                            hitEffect.transform.rotation = Quaternion.identity;
+                            hitEffect.SetActive(true);
+                        }
+                    }
+                }
+
+                if (Input.GetButtonDown("Left Click"))
+                {
+                    playerInput.SetDragOrigin();
+                }
+
+                if (Input.GetButton("Left Click"))
+                {
+                    playerInput.DragCamera();
                 }
 
                 break;
@@ -76,7 +86,7 @@ public class RepairState : IInputState
                 {
                     if (Input.GetButtonDown(otherWeaponInputs[i]))
                     {
-                        playerInput.PrepareWeaponPerspec(otherWeapons[i]);
+                        playerInput.PrepareSlotPerspec(otherWeapons[i]);
                     }
                 }
 
@@ -104,7 +114,7 @@ public class RepairState : IInputState
 
                 if (select >= 0 && select != lastKeyIndex)
                 {
-                    playerInput.PrepareWeaponPerspec(playerInput.weapons[select]);
+                    playerInput.PrepareSlotPerspec(playerInput.slots[select]);
                 }
 
                 break;

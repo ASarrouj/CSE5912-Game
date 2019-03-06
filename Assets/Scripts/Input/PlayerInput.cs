@@ -8,10 +8,10 @@ public class PlayerInput : NetworkBehaviour
     private CameraManager camManager;
     private UIManager uiManager;
     private IInputState inputState;
-    public List<string> weaponInputs;
+    public List<string> slotInputs;
     public int lastKeyIndex;
     private Transform playerMech;
-    public List<Transform> weapons;
+    public List<Transform> slots;
 
     public enum InputType
     {
@@ -30,11 +30,12 @@ public class PlayerInput : NetworkBehaviour
         }
         else
         {
-            weaponInputs = new List<string> { "Perspective2", "Perspective3", "Perspective4"};
-            weapons = new List<Transform>();
+            slotInputs = new List<string> { "Perspective2", "Perspective3", "Perspective4"};
+            slots = new List<Transform>();
             playerMech = transform.Find("NewMechWithGuns");
-            weapons.Add(playerMech.Find("FrontGun").GetChild(0));
-            weapons.Add(playerMech.Find("LeftGun").GetChild(0));
+            slots.Add(playerMech.Find("FrontGun").GetChild(0));
+            slots.Add(playerMech.Find("LeftGun").GetChild(0));
+            slots.Add(playerMech.Find("RearGun").GetChild(0));
 
             camManager = transform.Find("PlayerCamera").GetComponent<CameraManager>();
             camManager.SetInput(this);
@@ -75,29 +76,43 @@ public class PlayerInput : NetworkBehaviour
     public void PrepareMechPerspec()
     {
         DisableInput();
-        uiManager.ChangeSlotHighlight(-1);
+        lastKeyIndex = -1;
+        uiManager.ChangeSlotHighlight(lastKeyIndex);
         camManager.FollowMech(transform);
     }
 
-    public void PrepareWeaponPerspec(Transform weapon)
+    public void PrepareSlotPerspec(Transform slot)
     {
         DisableInput();
-        lastKeyIndex = weapons.IndexOf(weapon);
+        lastKeyIndex = slots.IndexOf(slot);
         uiManager.ChangeSlotHighlight(lastKeyIndex);
-        camManager.AttachToWeapon(weapon);
+
+        if (slot.tag == "Weapon")
+        {
+            camManager.AttachToWeapon(slot);
+        }
+        else if (slot.tag == "RepairTool")
+        {
+            camManager.FollowMech(transform);
+        }
     }
 
     public void FinalizePerspective(Transform currentTransform)
     {
-        if (currentTransform.tag == "Player")
+        if (lastKeyIndex == -1)
         {
             inputState = new MechState(transform);
             uiManager.MechUI();
         }
-        else if (currentTransform.tag == "Weapon")
+        else if (slots[lastKeyIndex].tag == "Weapon")
         {
             inputState = new WeaponState(transform);
             uiManager.WeaponUI();
+        }
+        else if (slots[lastKeyIndex].tag == "RepairTool")
+        {
+            inputState = new RepairState(transform);
+            uiManager.MechUI();
         }
     }
 
