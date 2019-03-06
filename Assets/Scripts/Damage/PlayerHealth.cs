@@ -74,10 +74,10 @@ public void dmgRight(int dmg, MechTakeDamage hitbox)
     void Update()
     {
 
-        //healthbars[0].setHealthBar((float)coreHealth / (float)maxHealth);
-        //healthbars[1].setHealthBar((float)frontHealth / (float)maxHealth);
-        //healthbars[2].setHealthBar((float)leftHealth / (float)maxHealth);
-        //healthbars[3].setHealthBar((float)rightHealth / (float)maxHealth);
-        //healthbars[4].setHealthBar((float)rearHealth / (float)maxHealth);
+        healthbars[0].setHealthBar((float)coreHealth / (float)maxHealth);
+        healthbars[1].setHealthBar((float)frontHealth / (float)maxHealth);
+        healthbars[2].setHealthBar((float)leftHealth / (float)maxHealth);
+        healthbars[3].setHealthBar((float)rightHealth / (float)maxHealth);
+        healthbars[4].setHealthBar((float)rearHealth / (float)maxHealth);
     }
 }
