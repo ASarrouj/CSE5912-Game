@@ -25,7 +25,6 @@ namespace Prototype.NetworkLobby
         public LobbyTopPanel topPanel;
 
         public RectTransform mainMenuPanel;
-        public RectTransform gamesPanel;
         public RectTransform lobbyPanel;
 
         public LobbyInfoPanel infoPanel;
@@ -60,7 +59,7 @@ namespace Prototype.NetworkLobby
             _lobbyHooks = GetComponent<Prototype.NetworkLobby.LobbyHook>();
             currentPanel = mainMenuPanel;
 
-            backDelegate = QuitClbk;
+            backButton.gameObject.SetActive(false);
             GetComponent<Canvas>().enabled = true;
 
             DontDestroyOnLoad(gameObject);
@@ -100,7 +99,7 @@ namespace Prototype.NetworkLobby
                 }
                 else
                 {
-                    ChangeTo(gamesPanel);
+                    ChangeTo(mainMenuPanel);
                 }
 
                 topPanel.ToggleVisibility(true);
@@ -132,17 +131,13 @@ namespace Prototype.NetworkLobby
 
             currentPanel = newPanel;
 
-            if (currentPanel == mainMenuPanel)
+            if (currentPanel != mainMenuPanel)
             {
-                backButton.gameObject.GetComponentInChildren<Text>().text = "Quit";
-                backDelegate = QuitClbk;
-                SetServerInfo("Offline", "None");
-                _isMatchmaking = false;
+                backButton.gameObject.SetActive(true);
             }
-            else if (currentPanel == gamesPanel)
+            else
             {
-                backButton.gameObject.GetComponentInChildren<Text>().text = "Back";
-                backDelegate = BackToMainClbk;
+                backButton.gameObject.SetActive(false);
                 SetServerInfo("Offline", "None");
                 _isMatchmaking = false;
             }
@@ -181,17 +176,7 @@ namespace Prototype.NetworkLobby
             player.RemovePlayer();
         }
 
-        public void QuitClbk()
-        {
-            Application.Quit();
-        }
-
         public void SimpleBackClbk()
-        {
-            ChangeTo(gamesPanel);
-        }
-
-        public void BackToMainClbk()
         {
             ChangeTo(mainMenuPanel);
         }
@@ -209,7 +194,7 @@ namespace Prototype.NetworkLobby
             }
 
             
-            ChangeTo(gamesPanel);
+            ChangeTo(mainMenuPanel);
         }
 
         public void StopClientClbk()
@@ -221,13 +206,13 @@ namespace Prototype.NetworkLobby
                 StopMatchMaker();
             }
 
-            ChangeTo(gamesPanel);
+            ChangeTo(mainMenuPanel);
         }
 
         public void StopServerClbk()
         {
             StopServer();
-            ChangeTo(gamesPanel);
+            ChangeTo(mainMenuPanel);
         }
 
         class KickMsg : MessageBase { }
@@ -424,12 +409,12 @@ namespace Prototype.NetworkLobby
         public override void OnClientDisconnect(NetworkConnection conn)
         {
             base.OnClientDisconnect(conn);
-            ChangeTo(gamesPanel);
+            ChangeTo(mainMenuPanel);
         }
 
         public override void OnClientError(NetworkConnection conn, int errorCode)
         {
-            ChangeTo(gamesPanel);
+            ChangeTo(mainMenuPanel);
             infoPanel.Display("Client error : " + (errorCode == 6 ? "timeout" : errorCode.ToString()), "Close", null);
         }
     }

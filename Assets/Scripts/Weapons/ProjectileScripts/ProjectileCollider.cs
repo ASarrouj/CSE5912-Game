@@ -43,16 +43,6 @@ public class ProjectileCollider : MonoBehaviour
             GameObject sound=GameObject.Find("SoundManager");
             AudioSource source=sound.GetComponent<AudioSource>();
             source.PlayOneShot(clip,1f);
-            collision.gameObject.GetComponent<SwapToBroken>().swapToBroken();
-            Vector3 explosionPos = transform.position;
-            Collider[] colliders = Physics.OverlapSphere(explosionPos, 8f);
-            foreach (Collider hit in colliders)
-            {
-                Rigidbody rb = hit.GetComponent<Rigidbody>();
-
-                if (rb != null)
-                    rb.AddExplosionForce(1000, explosionPos, 1.5f);
-            }
             this.gameObject.SetActive(false);
         }
         if (collision.gameObject.layer==8)
