@@ -38,12 +38,13 @@ public class ProjectileCollider : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Building"))
         {
+            Debug.Log("Collide Building");
             collision.gameObject.GetComponent<IDamagable>().Damage(damage);
             Instantiate(explosion,transform.position, transform.rotation);
             GameObject sound=GameObject.Find("SoundManager");
             AudioSource source=sound.GetComponent<AudioSource>();
             source.PlayOneShot(clip,1f);
-            collision.gameObject.GetComponent<SwapToBroken>().swapToBroken();
+            collision.gameObject.GetComponentInParent<SwapToBroken>().swapToBroken();
             Vector3 explosionPos = transform.position;
             Collider[] colliders = Physics.OverlapSphere(explosionPos, 8f);
             foreach (Collider hit in colliders)
