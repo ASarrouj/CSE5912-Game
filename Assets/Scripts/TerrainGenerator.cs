@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class TerrainGenerator : MonoBehaviour
 {
@@ -12,6 +13,12 @@ public class TerrainGenerator : MonoBehaviour
     private int maxIndex;
     public float roughness, initialDisplacement;
     private float displacement;
+    private Transform glassDome;
+    public GameObject[] spawnPos;
+    public GameObject spawnPlatform;
+    private Mesh domeMesh;
+
+    private float spawnRadius;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +39,21 @@ public class TerrainGenerator : MonoBehaviour
         DiamondSquareAlgo();
 
         terrainData.SetHeights(0, 0, heights);
+
+        CreateGlassDome();
+
+        spawnRadius = glassDome.localScale.x / 2 - 30;
+
+        float deg = 0;
+        for (int i = 0; i < spawnPos.Length; i++)
+        {
+            Vector3 platPos = new Vector3(Mathf.Cos(deg), 0, Mathf.Sin(deg)) * spawnRadius + glassDome.transform.position;
+            platPos.y = terrain.SampleHeight(platPos) + 2;
+            deg += 2f * Mathf.PI / spawnPos.Length;
+            Instantiate(spawnPlatform, platPos, Quaternion.identity);
+            spawnPos[i].transform.position = platPos + new Vector3(0, 5, 0);
+            spawnPos[i].AddComponent<NetworkStartPosition>();
+        }
     }
 
     // Update is called once per frame
@@ -82,46 +104,31 @@ public class TerrainGenerator : MonoBehaviour
             }
             displacement *= Mathf.Pow(2, -roughness);
         }
-
     }
 
-    private void DiamondStep()
+    private void CreateGlassDome()
     {
+        glassDome = transform.GetChild(0);
+        glassDome.position = transform.position + new Vector3(terrainData.size.x, 0, terrainData.size.z) / 2;
+        glassDome.localScale = new Vector3(terrainData.size.x, Mathf.Min(terrainData.size.x, terrainData.size.z), terrainData.size.z) / 2;
 
-    }
-
-    private void SquareStep()
-    {
-        float sum = 0;
-        int denominator = 0;
-
-        /*if (offsetMidpoint.x - midpoint.x >= 0)
+        domeMesh = glassDome.GetComponent<MeshFilter>().mesh;
+        for (int i = 0; i < domeMesh.normals.Length; i++)
         {
-            sum += heights[offsetMidpoint.x - midpoint.x, offsetMidpoint.y];
-            denominator++;
-        }
-        if (offsetMidpoint.x + midpoint.x <= maxIndex)
-        {
-            sum += heights[offsetMidpoint.x + midpoint.x, offsetMidpoint.y];
-            denominator++;
-        }
-        if (offsetMidpoint.y - midpoint.y >= 0)
-        {
-            sum += heights[offsetMidpoint.x, offsetMidpoint.y - midpoint.y];
-            denominator++;
-        }
-        if (offsetMidpoint.y + midpoint.y <= maxIndex)
-        {
-            sum += heights[offsetMidpoint.x, offsetMidpoint.y + midpoint.y];
-            denominator++;
+            domeMesh.normals[i] = -domeMesh.normals[i];
         }
 
-        heights[offsetMidpoint.x, offsetMidpoint.y] = (sum / denominator) + Random.Range(-displacement, displacement);
-    }
-
-    try { sum += heights[x + midpoint, y]; denominator++; } catch { }
-                    try { sum += heights[x - midpoint, y]; denominator++; } catch { }
-                    try { sum += heights[x, y + midpoint]; denominator++; } catch { }
-                    try { sum += heights[x, y - midpoint]; denominator++; } catch { }*/
+        for (int m = 0; m < domeMesh.subMeshCount; m++)
+        {
+            int[] triangles = domeMesh.GetTriangles(m);
+            for (int i = 0; i < triangles.Length; i += 3)
+            {
+                int temp = triangles[i + 0];
+                triangles[i + 0] = triangles[i + 1];
+                triangles[i + 1] = temp;
+            }
+            domeMesh.SetTriangles(triangles, m);
+        }
+        glassDome.gameObject.AddComponent<MeshCollider>();
     }
 }
