@@ -60,7 +60,7 @@ namespace Prototype.NetworkLobby
             _lobbyHooks = GetComponent<Prototype.NetworkLobby.LobbyHook>();
             currentPanel = mainMenuPanel;
 
-            backButton.gameObject.SetActive(false);
+            backDelegate = QuitClbk;
             GetComponent<Canvas>().enabled = true;
 
             DontDestroyOnLoad(gameObject);
@@ -132,24 +132,19 @@ namespace Prototype.NetworkLobby
 
             currentPanel = newPanel;
 
-            if (currentPanel != mainMenuPanel)
+            if (currentPanel == mainMenuPanel)
             {
-                backButton.gameObject.SetActive(true);
-            }
-            else
-            {
-                backButton.gameObject.SetActive(false);
-            }
-
-            if (currentPanel == mainMenuPanel || currentPanel == gamesPanel)
-            {
+                backButton.gameObject.GetComponentInChildren<Text>().text = "Quit";
+                backDelegate = QuitClbk;
                 SetServerInfo("Offline", "None");
                 _isMatchmaking = false;
             }
-
-            if (currentPanel == gamesPanel)
+            else if (currentPanel == gamesPanel)
             {
+                backButton.gameObject.GetComponentInChildren<Text>().text = "Back";
                 backDelegate = BackToMainClbk;
+                SetServerInfo("Offline", "None");
+                _isMatchmaking = false;
             }
         }
 
@@ -184,6 +179,11 @@ namespace Prototype.NetworkLobby
         public void RemovePlayer(LobbyPlayer player)
         {
             player.RemovePlayer();
+        }
+
+        public void QuitClbk()
+        {
+            Application.Quit();
         }
 
         public void SimpleBackClbk()
