@@ -6,55 +6,78 @@ using UnityEngine.Networking;
 public class PlayerHealth : NetworkBehaviour
 {
     // Start is called before the first frame update
-    [SyncVar]public int coreHealth,rearHealth,leftHealth,rightHealth,frontHealth;
+    public int maxHealth;
+    [SyncVar] public int coreHealth, rearHealth, leftHealth, rightHealth, frontHealth;
+    [SerializeField] HealthBar[] healthbars;
 
-public bool dmgCore(int dmg, MechTakeDamage hitbox)
+    public bool dmgCore(int dmg, MechTakeDamage hitbox)
 {
     coreHealth-=dmg;
+    
     if(coreHealth<0)
-    {
+    {   
+        coreHealth = 0;
+        healthbars[0].setHealthBar((float)coreHealth / (float)maxHealth);
         hitbox.explodeServer();
         return true;
     }
+    healthbars[0].setHealthBar((float)coreHealth / (float)maxHealth);
     return false;
 }
 public void dmgFront(int dmg, MechTakeDamage hitbox)
 {
     frontHealth-=dmg;
-    
-    if(frontHealth<0)
+       
+        if (frontHealth<0)
     {
-        hitbox.explodeServer();
+            frontHealth = 0;
+
+            hitbox.explodeServer();
     }
-}
+        healthbars[1].setHealthBar((float)frontHealth / (float)maxHealth);
+    }
 public void dmgRear(int dmg, MechTakeDamage hitbox)
 {
     rearHealth-=dmg;
-        if(rearHealth<0)
+
+        if (rearHealth<0)
     {
+            rearHealth = 0;
         hitbox.explodeServer();
     }
-}
+        healthbars[4].setHealthBar((float)rearHealth / (float)maxHealth);
+    }
 public void dmgLeft(int dmg, MechTakeDamage hitbox)
 {
     leftHealth-=dmg;
-        if(leftHealth<0)
+
+        if (leftHealth<0)
     {
+            leftHealth = 0;
         hitbox.explodeServer();
     }
-}
+        healthbars[2].setHealthBar((float)leftHealth / (float)maxHealth);
+    }
 public void dmgRight(int dmg, MechTakeDamage hitbox)
 {
     rightHealth-=dmg;
-        if(rightHealth<0)
+
+        if (rightHealth<0)
     {
+            rightHealth = 0;
         hitbox.explodeServer();
     }
-}
+        healthbars[3].setHealthBar((float)rightHealth / (float)maxHealth);
+    }
 
-    // Update is called once per frame
+    // Testing health bars
     void Update()
     {
-        
+
+        healthbars[0].setHealthBar((float)coreHealth / (float)maxHealth);
+        healthbars[1].setHealthBar((float)frontHealth / (float)maxHealth);
+        healthbars[2].setHealthBar((float)leftHealth / (float)maxHealth);
+        healthbars[3].setHealthBar((float)rightHealth / (float)maxHealth);
+        healthbars[4].setHealthBar((float)rearHealth / (float)maxHealth);
     }
 }
