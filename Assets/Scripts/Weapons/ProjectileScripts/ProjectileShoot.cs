@@ -18,7 +18,7 @@ public class ProjectileShoot : MonoBehaviour, IWeapon
     void OnEnable()
     {
         source = GetComponent<AudioSource>();
-        line = GetComponentInChildren<LineRenderer>();
+        line = GetComponentInChildren<LineRenderer>(true);
         roundPool = GameObject.Find("ArtProjectilePool").GetComponent<ObjectPooler>();
     }
 
