@@ -40,6 +40,7 @@ public class UIManager : MonoBehaviour
         slotImages.Add(Instantiate(slotImageTemplate, SwitcherHUD.transform));
         slotImages[0].GetComponent<RectTransform>().anchoredPosition = slotPos;
         slotImages[0].transform.Find("SlotNum").GetComponent<Text>().text = "1";
+        slotImages[0].transform.Find("SlotSprite").GetComponent<Image>().sprite = mechSprite;
         slotPos += slotPosDelta;
 
         for (int i = 1; i < input.slots.Count + 1; i++)
@@ -47,6 +48,16 @@ public class UIManager : MonoBehaviour
             slotImages.Add(Instantiate(slotImageTemplate, SwitcherHUD.transform));
             slotImages[i].GetComponent<RectTransform>().anchoredPosition = slotPos;
             slotImages[i].transform.Find("SlotNum").GetComponent<Text>().text = (i + 1).ToString();
+
+            if (input.slots[i - 1].tag == "Weapon")
+            {
+                slotImages[i].transform.Find("SlotSprite").GetComponent<Image>().sprite = machineGunSprite;
+            }
+            else if (input.slots[i - 1].tag == "RepairTool")
+            {
+                slotImages[i].transform.Find("SlotSprite").GetComponent<Image>().sprite = repairSprite;
+            }
+
             slotPos += slotPosDelta;
         }
     }
