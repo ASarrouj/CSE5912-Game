@@ -22,6 +22,11 @@ public class RayCastShoot : MonoBehaviour, IWeapon
     private float nextFireTime;
     private bool ifScore;
     private int scoreNum = 50;
+    private DamageOverNetwork dmgOverNet;
+
+    void Start() {
+        dmgOverNet = transform.root.GetComponent<DamageOverNetwork>();
+    }
 
     void OnEnable()
     {
@@ -59,7 +64,7 @@ public class RayCastShoot : MonoBehaviour, IWeapon
                     {
                         hit.rigidbody.AddForce(-hit.normal * 100f);
                     }
-                    ifScore = hit.collider.gameObject.GetComponent<MechTakeDamage>().Damage(10);
+                    ifScore = dmgOverNet.DamagePlayer(10, hit.collider.gameObject.name, hit.collider.transform.root.GetComponent<NetworkIdentity>());   //hit.collider.gameObject.GetComponent<MechTakeDamage>().Damage(10);
                     if (ifScore)
                     {
                         score.scoreUp(scoreNum);

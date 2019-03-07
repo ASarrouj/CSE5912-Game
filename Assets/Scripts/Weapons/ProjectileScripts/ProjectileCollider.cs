@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class ProjectileCollider : MonoBehaviour
 {
@@ -29,7 +30,8 @@ public class ProjectileCollider : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Mech"))
         {
-            collision.gameObject.GetComponent<IDamagable>().Damage(damage);
+            Transform mech = collision.transform.root;
+            mech.GetComponent<DamageOverNetwork>().DamagePlayer(damage, collision.gameObject.name, mech.GetComponent<NetworkIdentity>());
             Instantiate(explosion,transform.position, transform.rotation);
             GameObject sound=GameObject.Find("SoundManager");
             AudioSource source=sound.GetComponent<AudioSource>();

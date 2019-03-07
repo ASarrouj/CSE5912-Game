@@ -12,14 +12,14 @@ public class MechTakeDamage : MonoBehaviour, IDamagable
     public int health=30;
     [SerializeField] GameObject [] particleEffects;
 
-    private DestroyMod destroyMod;
+    private PlayerHealth pHealth;
+    //private DestroyMod destroyMod;
 
     // Start is called before the first frame update
     void Start()
     {
         coreDestroyed = false;
-        destroyMod = transform.root.GetComponent<DestroyMod>();
-
+        pHealth = transform.root.GetComponent<PlayerHealth>();
     }
 
     // Update is called once per frame
@@ -28,86 +28,36 @@ public class MechTakeDamage : MonoBehaviour, IDamagable
         
     }
 
+    // instead of this call DamageOverNetwork.DamagePlayer()
     public bool Damage(int dmgAmount) 
     {
-        if (gameObject == null) return coreDestroyed;
-        if (Invincible) return coreDestroyed;
-        if (hitboxType == Hitbox.FrontHitbox)
-        {
-            Debug.Log("Front takes damage");
-            transform.root.GetComponent<PlayerHealth>().dmgFront(dmgAmount,this);
-            /*
-             if (health <= 0 && particleEffects != null && particleEffects.Length > 0)
-             {
-                 destroyMod.RpcExplodingFront(gameObject, particleEffects[0]);
-             }
-             */
-        }
-
-        if (hitboxType == Hitbox.LeftHitbox)
-        {
-            Debug.Log("Left takes damage");
-
-            transform.root.GetComponent<PlayerHealth>().dmgLeft(dmgAmount,this);
-            /*
-            if (health <= 0 && particleEffects != null && particleEffects.Length > 0)
-            {
-                 destroyMod.RpcExploding(gameObject, particleEffects[0]);
-            }
-            */
-        }
-        if (hitboxType == Hitbox.RightHitbox)
-        {
-            Debug.Log("Right takes damage");             
-            transform.root.GetComponent<PlayerHealth>().dmgRight(dmgAmount,this);
-            /*
-            if (health <= 0 && particleEffects != null && particleEffects.Length > 0)
-            {
-                destroyMod.RpcExploding(gameObject, particleEffects[0]);
-            }
-            */
-
-
-        }
-        if (hitboxType == Hitbox.CoreHitbox)
-        {
-            Debug.Log("Core takes " + dmgAmount + " damage");
-            
-            coreDestroyed=transform.root.GetComponent<PlayerHealth>().dmgCore(dmgAmount,this);
-            GameObject flames = Instantiate(particleEffects[1], transform.position, Quaternion.identity, transform);
-            flames.transform.localScale += new Vector3(1f, 1f, 1f);
-            /*
-            if (health <= 0)
-            {
-
-                destroyMod.RpcExplodingCore(gameObject, particleEffects[0]);
-            }
-            */
-        }
-
-        if (hitboxType == Hitbox.RearHitbox)
-        {
-            Debug.Log("Rear takes damage");
-            transform.root.GetComponent<PlayerHealth>().dmgRear(dmgAmount,this);
-            /*
-            if (health <= 0 && particleEffects != null && particleEffects.Length > 0)
-            {
-                destroyMod.RpcExploding(gameObject, particleEffects[0]);
-            }
-            */
-        }
-
-        return coreDestroyed;
-
+        return false;
     }
-    public void explodeServer()
-    {
-        if(particleEffects != null && particleEffects.Length > 0)
-        {
-            destroyMod.Explode(gameObject, particleEffects[0], hitboxType);
-        }
 
+    public void Exploding() {
+        GameObject explosion = Instantiate(particleEffects[0], transform.position, Quaternion.identity);
+        explosion.AddComponent<NetworkIdentity>();
+        NetworkServer.Spawn(explosion);
+        Destroy(transform.parent.gameObject);
+        Destroy(explosion, 3f);
     }
-    
+
+    public void ExplodingCore() {
+        GameObject explosion = Instantiate(particleEffects[1], transform.position, Quaternion.identity);
+        explosion.transform.localScale += new Vector3(1f, 1f, 1f);
+        explosion.AddComponent<NetworkIdentity>();
+        NetworkServer.Spawn(explosion);
+        Destroy(explosion, 3f);
+        Destroy(transform.parent.gameObject);
+    }
+
+    public void ExplodingFront() {
+        GameObject explosion = Instantiate(particleEffects[0], transform.position, Quaternion.identity);
+        explosion.transform.localScale -= new Vector3(1f, 1f, 1f);
+        explosion.AddComponent<NetworkIdentity>();
+        NetworkServer.Spawn(explosion);
+        Destroy(explosion, 3f);
+        Destroy(transform.parent.gameObject);
+    }
 
 }
