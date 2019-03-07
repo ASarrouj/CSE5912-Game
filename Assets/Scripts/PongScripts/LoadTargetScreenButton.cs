@@ -32,6 +32,10 @@ public class LoadTargetScreenButton : MonoBehaviour
         GameStateManager.QuickLoadState(num);
     }
 
+    public void LoadSceneName(string name) {
+        SceneManager.LoadScene(name);
+    }
+
     public void Quit()
     {
 
