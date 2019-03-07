@@ -7,6 +7,9 @@ namespace Prototype.NetworkLobby
     public class LobbyTopPanel : MonoBehaviour
     {
         public bool isInGame = false;
+        public LobbyManager lobbyManager;
+
+        public RectTransform matchSettingsPanel;
 
         protected bool isDisplayed = true;
         protected Image panelImage;
@@ -41,6 +44,12 @@ namespace Prototype.NetworkLobby
             {
                 panelImage.enabled = isDisplayed;
             }
+        }
+
+        public void OnClickSettings()
+        {
+            lobbyManager.backDelegate = lobbyManager.SimpleBackClbk;
+            lobbyManager.ChangeTo(matchSettingsPanel);
         }
     }
 }
