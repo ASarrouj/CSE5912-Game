@@ -10917,9 +10917,9 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: City
+    - m_Text: CityMap
       m_Image: {fileID: 0}
-    - m_Text: Moon
+    - m_Text: TerrainTest
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
