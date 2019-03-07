@@ -120,7 +120,6 @@ public void dmgRight(int dmg, MechTakeDamage hitbox)
 
    
 
-{
     void Update()
     {
 
