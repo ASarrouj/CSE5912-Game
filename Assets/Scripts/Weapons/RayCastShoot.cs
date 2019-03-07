@@ -88,11 +88,11 @@ public class RayCastShoot : MonoBehaviour, IWeapon
 
     public IEnumerator ShotEffect()
     {
-        lineRenderer.enabled = true;
+        //lineRenderer.enabled = true;
         muzzleFlash.SetActive(true);
 
         yield return shotLength;
-        lineRenderer.enabled = false;
+        //lineRenderer.enabled = false;
         muzzleFlash.SetActive(false);
     }
 }
