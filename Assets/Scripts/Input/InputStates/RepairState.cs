@@ -60,6 +60,8 @@ public class RepairState : IInputState
                             hitEffect.transform.position = hit.point;
                             hitEffect.transform.rotation = Quaternion.identity;
                             hitEffect.SetActive(true);
+
+                            hit.collider.gameObject.GetComponent<MechTakeDamage>().Damage(-1);
                         }
                     }
                 }
