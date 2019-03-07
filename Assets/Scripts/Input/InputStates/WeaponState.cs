@@ -12,7 +12,6 @@ public class WeaponState : IInputState
     private SmoothMouseLook mouseInput;
     private IWeapon shootInput;
     private Quaternion originalRotation;
-    private GameObject weaponUI;
 
     public WeaponState(Transform playerTransform)
     {
@@ -20,8 +19,6 @@ public class WeaponState : IInputState
 
         lastKeyIndex = playerInput.lastKeyIndex;
         weapon = playerInput.slots[lastKeyIndex];
-        weaponUI = weapon.Find("WeaponUI").gameObject;
-        ToggleGunUI();
         shootInput = weapon.GetComponent<IWeapon>();
         shootInput.ToggleActive();
         otherSlotInputs = new List<string>(playerInput.slotInputs);
@@ -50,14 +47,12 @@ public class WeaponState : IInputState
                     updateMouse = false;
                     weapon.localRotation = Quaternion.identity;
                     shootInput.ToggleActive();
-                    ToggleGunUI();
                     playerInput.PrepareMechPerspec();
                 }
                 for (int i = 0; i < otherSlots.Count; i++) {
                     if (Input.GetButtonDown(otherSlotInputs[i])) {
                         updateMouse = false;
                         weapon.localRotation = originalRotation;
-                        ToggleGunUI();
                         playerInput.PrepareSlotPerspec(otherSlots[i]);
                         shootInput.ToggleActive();
                     }
@@ -71,14 +66,12 @@ public class WeaponState : IInputState
                     updateMouse = false;
                     weapon.localRotation = Quaternion.identity;
                     shootInput.ToggleActive();
-                    ToggleGunUI();
                     playerInput.PrepareMechPerspec();
                 }
                 for (int i = 0; i < otherSlots.Count; i++) {
                     if (Input.GetButtonDown(otherSlotInputs[i])) {
                         updateMouse = false;
                         weapon.localRotation = originalRotation;
-                        ToggleGunUI();
                         playerInput.PrepareSlotPerspec(otherSlots[i]);
                         shootInput.ToggleActive();
                     }
@@ -102,7 +95,6 @@ public class WeaponState : IInputState
                 if (select >= 0 && select != lastKeyIndex) {
                     updateMouse = false;
                     weapon.localRotation = originalRotation;
-                    ToggleGunUI();
                     playerInput.PrepareSlotPerspec(playerInput.slots[select]);
                     shootInput.ToggleActive();
                 }
@@ -123,7 +115,6 @@ public class WeaponState : IInputState
 
     private void ToggleGunUI()
     {
-        weaponUI.SetActive(!weaponUI.activeSelf);
     }
 
 }

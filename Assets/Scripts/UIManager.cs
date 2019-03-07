@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    private GameObject MechHUD, SwitcherHUD, NavHUD, MenuHUD;
+    private GameObject MechHUD, SwitcherHUD, NavHUD, MenuHUD, GunHUD;
     private RectTransform slotHighlightTransform;
     private List<GameObject> slotImages;
     public GameObject slotImageTemplate;
@@ -18,6 +18,7 @@ public class UIManager : MonoBehaviour
         SwitcherHUD = transform.Find("SwitcherHUD").gameObject;
         NavHUD = transform.Find("NavHUD").gameObject;
         MenuHUD = transform.Find("MenuHUD").gameObject;
+        GunHUD = transform.Find("GunHUD").gameObject;
         slotHighlightTransform = SwitcherHUD.transform.GetChild(0).GetComponent<RectTransform>();
 
         slotImages = new List<GameObject>();
@@ -28,6 +29,7 @@ public class UIManager : MonoBehaviour
         SwitcherHUD.SetActive(true);
         NavHUD.SetActive(false);
         MenuHUD.SetActive(false);
+        GunHUD.SetActive(false);
 
         Cursor.visible = false;
     }
@@ -52,23 +54,28 @@ public class UIManager : MonoBehaviour
     {
         MechHUD.SetActive(true);
         NavHUD.SetActive(true);
+        GunHUD.SetActive(false);
     }
 
     public void WeaponUI()
     {
-        
+        MechHUD.SetActive(true);
+        NavHUD.SetActive(false);
+        GunHUD.SetActive(true);
     }
 
     public void MenuUI()
     {
         MenuHUD.SetActive(!MenuHUD.activeSelf);
         //Cursor.visible = !Cursor.visible;
+        GunHUD.SetActive(false);
     }
 
     public void DisableDynamicUI()
     {
         MechHUD.SetActive(false);
         NavHUD.SetActive(false);
+        GunHUD.SetActive(false);
     }
 
     public void ChangeSlotHighlight(int index)
