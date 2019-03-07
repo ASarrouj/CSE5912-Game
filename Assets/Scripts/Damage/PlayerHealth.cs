@@ -11,6 +11,8 @@ public class PlayerHealth : NetworkBehaviour
     [SyncVar] public int coreHealth, rearHealth, leftHealth, rightHealth, frontHealth;
     [SerializeField] HealthBar[] healthbars;
 
+    public bool isPlayer = true;
+
     private bool coreDestroyed;
 
     public bool dmgCore(int dmg, MechTakeDamage hitbox) {
@@ -19,12 +21,12 @@ public class PlayerHealth : NetworkBehaviour
         if(coreHealth<0)
         {   
             coreHealth = 0;
-            healthbars[0].setHealthBar((float)coreHealth / (float)maxHealth);
+            if (isPlayer) healthbars[0].setHealthBar((float)coreHealth / (float)maxHealth);
             //eSync.Explode("CoreHitbox", MechTakeDamage.Hitbox.CoreHitbox);
             hitbox.ExplodingCore();
             coreDestroyed = true;
         }
-        healthbars[0].setHealthBar((float)coreHealth / (float)maxHealth);
+        if (isPlayer) healthbars[0].setHealthBar((float)coreHealth / (float)maxHealth);
         coreDestroyed = false;
         return coreDestroyed;
     }
@@ -38,7 +40,7 @@ public class PlayerHealth : NetworkBehaviour
             //eSync.Explode("FrontHitbox", MechTakeDamage.Hitbox.FrontHitbox);
             hitbox.ExplodingFront();
         }
-        healthbars[1].setHealthBar((float)frontHealth / (float)maxHealth);
+        if (isPlayer) healthbars[1].setHealthBar((float)frontHealth / (float)maxHealth);
     }
 
     public void dmgRear(int dmg, MechTakeDamage hitbox) {
@@ -49,7 +51,7 @@ public class PlayerHealth : NetworkBehaviour
             rearHealth = 0;
             hitbox.Exploding();
         }
-        healthbars[4].setHealthBar((float)rearHealth / (float)maxHealth);
+        if (isPlayer) healthbars[4].setHealthBar((float)rearHealth / (float)maxHealth);
     }
 
     public void dmgLeft(int dmg, MechTakeDamage hitbox) {
@@ -61,7 +63,7 @@ public class PlayerHealth : NetworkBehaviour
                 leftHealth = 0;
             hitbox.Exploding();
         }
-            healthbars[2].setHealthBar((float)leftHealth / (float)maxHealth);
+            if (isPlayer) healthbars[2].setHealthBar((float)leftHealth / (float)maxHealth);
         }
 
     public void dmgRight(int dmg, MechTakeDamage hitbox) {
@@ -71,7 +73,7 @@ public class PlayerHealth : NetworkBehaviour
             rightHealth = 0;
             hitbox.Exploding();
         }
-        healthbars[3].setHealthBar((float)rightHealth / (float)maxHealth);
+        if (isPlayer) healthbars[3].setHealthBar((float)rightHealth / (float)maxHealth);
     }
 
     // Testing health bars
