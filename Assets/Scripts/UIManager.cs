@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     private List<GameObject> slotImages;
     public GameObject slotImageTemplate;
     private Vector3 slotPos, slotPosDelta;
+    public Sprite mechSprite, repairSprite, machineGunSprite, artillerySprite;
 
     // Start is called before the first frame update
     void Start()
@@ -38,14 +39,14 @@ public class UIManager : MonoBehaviour
     {
         slotImages.Add(Instantiate(slotImageTemplate, SwitcherHUD.transform));
         slotImages[0].GetComponent<RectTransform>().anchoredPosition = slotPos;
-        slotImages[0].transform.GetChild(0).GetComponent<Text>().text = "1";
+        slotImages[0].transform.Find("SlotNum").GetComponent<Text>().text = "1";
         slotPos += slotPosDelta;
 
         for (int i = 1; i < input.slots.Count + 1; i++)
         {
             slotImages.Add(Instantiate(slotImageTemplate, SwitcherHUD.transform));
             slotImages[i].GetComponent<RectTransform>().anchoredPosition = slotPos;
-            slotImages[i].transform.GetChild(0).GetComponent<Text>().text = (i + 1).ToString();
+            slotImages[i].transform.Find("SlotNum").GetComponent<Text>().text = (i + 1).ToString();
             slotPos += slotPosDelta;
         }
     }
