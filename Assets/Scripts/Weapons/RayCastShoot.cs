@@ -33,6 +33,9 @@ public class RayCastShoot : MonoBehaviour, IWeapon
 
     void IWeapon.Shoot()
     {
+        GameObject mech = transform.parent.parent.parent.gameObject;
+        MachineGunSync gunScript = mech.GetComponent<MachineGunSync>();
+
         RaycastHit hit;
         Vector3 rayOrigin = gunCamera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
         if (Time.time > nextFireTime)
@@ -67,17 +70,15 @@ public class RayCastShoot : MonoBehaviour, IWeapon
                 }
                 lineRenderer.SetPosition(0, gunEnd.position);
                 lineRenderer.SetPosition(1, hit.point);
-                GameObject hitEffect = hitEffectPool.GetObject();
-                hitEffect.transform.position = hit.point;
-                hitEffect.transform.rotation = Quaternion.identity;
-                hitEffect.SetActive(true);
+
+                ShotHit(new Vector3(hit.point.x, hit.point.y, hit.point.z));
+                gunScript.Hit(new Vector3(hit.point.x, hit.point.y, hit.point.z));
             }
 
             StartCoroutine(ShotEffect());
             
-            GameObject mech = transform.parent.parent.parent.gameObject;
-            MachineGunSync gunScript = mech.GetComponent<MachineGunSync>();
             gunScript.Shoot();
+            
         }
     }
 
@@ -88,11 +89,24 @@ public class RayCastShoot : MonoBehaviour, IWeapon
 
     public IEnumerator ShotEffect()
     {
-        lineRenderer.enabled = true;
+        //lineRenderer.enabled = true;
         muzzleFlash.SetActive(true);
 
         yield return shotLength;
-        lineRenderer.enabled = false;
+        //lineRenderer.enabled = false;
         muzzleFlash.SetActive(false);
+    }
+
+    public void ShotHit(Vector3 point)
+    {
+        if (hitEffectPool == null)
+        {
+            hitEffectPool = GameObject.Find("MGImpactPool").GetComponent<ObjectPooler>();
+        }
+
+        GameObject hitEffect = hitEffectPool.GetObject();
+        hitEffect.transform.position = point;
+        hitEffect.transform.rotation = Quaternion.identity;
+        hitEffect.SetActive(true);
     }
 }
