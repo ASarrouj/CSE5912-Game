@@ -37,6 +37,7 @@ public class RayCastShoot : MonoBehaviour, IWeapon
         Vector3 rayOrigin = gunCamera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
         if (Time.time > nextFireTime)
         {
+            Vector3 hit_point = null;
             nextFireTime = Time.time + fireRate;
 
             if (Physics.Raycast(rayOrigin, gunCamera.transform.forward, out hit, range))
@@ -67,17 +68,16 @@ public class RayCastShoot : MonoBehaviour, IWeapon
                 }
                 lineRenderer.SetPosition(0, gunEnd.position);
                 lineRenderer.SetPosition(1, hit.point);
-                GameObject hitEffect = hitEffectPool.GetObject();
-                hitEffect.transform.position = hit.point;
-                hitEffect.transform.rotation = Quaternion.identity;
-                hitEffect.SetActive(true);
+
+                ShotHit(hit.point);
+                hit_point = hit.point;
             }
 
             StartCoroutine(ShotEffect());
             
             GameObject mech = transform.parent.parent.parent.gameObject;
             MachineGunSync gunScript = mech.GetComponent<MachineGunSync>();
-            gunScript.Shoot();
+            gunScript.Shoot(hit_point);
         }
     }
 
@@ -94,5 +94,13 @@ public class RayCastShoot : MonoBehaviour, IWeapon
         yield return shotLength;
         //lineRenderer.enabled = false;
         muzzleFlash.SetActive(false);
+    }
+
+    public void ShotHit(Vector3 point)
+    {
+        GameObject hitEffect = hitEffectPool.GetObject();
+        hitEffect.transform.position = point;
+        hitEffect.transform.rotation = Quaternion.identity;
+        hitEffect.SetActive(true);
     }
 }

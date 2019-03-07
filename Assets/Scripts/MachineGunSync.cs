@@ -17,15 +17,17 @@ public class MachineGunSync : NetworkBehaviour
         
     }
 
-    public void Shoot()
+    public void Shoot(Vector3 hit_point)
     {
         if (isServer)
         {
             RpcDrawMuzzleFlash(gameObject);
+            RpcDrawHit(hit_point);
         }
         else
         {
             CmdDrawMuzzleFlash(gameObject);
+            CmdDrawHit(hit_point);
         }
     }
 
@@ -41,6 +43,21 @@ public class MachineGunSync : NetworkBehaviour
         if (!isLocalPlayer)
         {
             StartCoroutine(mech.GetComponentInChildren<RayCastShoot>().ShotEffect());
+        }
+    }
+
+    [Command]
+    void CmdDrawHit(Vector3 hit_point)
+    {
+        RpcDrawHit(hit_point);
+    }
+
+    [ClientRpc]
+    void RpcDrawHit(Vector3 hit_point)
+    {
+        if (!isLocalPlayer)
+        {
+            gameObject.GetComponentInChildren<RayCastShoot>().ShotHit(hit_point);
         }
     }
 }
