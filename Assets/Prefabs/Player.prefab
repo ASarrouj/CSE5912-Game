@@ -432,6 +432,7 @@ MonoBehaviour:
   - {fileID: 2679145627534969184}
   - {fileID: 3030867988319612539}
   - {fileID: 7577901177858819089}
+  isPlayer: 1
 --- !u!114 &4981460579182455023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2053,6 +2054,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: frontLeft
       objectReference: {fileID: 0}
+    - target: {fileID: 5362992028445605094, guid: b5bc8c24de5352f42aa601b03d7b6f93,
+        type: 3}
+      propertyPath: Invincible
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5908262885553353100, guid: b5bc8c24de5352f42aa601b03d7b6f93,
         type: 3}
       propertyPath: m_Name
@@ -2102,6 +2108,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: frontRight
+      objectReference: {fileID: 0}
+    - target: {fileID: 503182649263845541, guid: b5bc8c24de5352f42aa601b03d7b6f93,
+        type: 3}
+      propertyPath: Invincible
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 30602884463402246, guid: b5bc8c24de5352f42aa601b03d7b6f93,
         type: 3}
