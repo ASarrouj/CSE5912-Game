@@ -33,11 +33,13 @@ public class RayCastShoot : MonoBehaviour, IWeapon
 
     void IWeapon.Shoot()
     {
+        GameObject mech = transform.parent.parent.parent.gameObject;
+        MachineGunSync gunScript = mech.GetComponent<MachineGunSync>();
+
         RaycastHit hit;
         Vector3 rayOrigin = gunCamera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
         if (Time.time > nextFireTime)
         {
-            Vector3 hit_point = null;
             nextFireTime = Time.time + fireRate;
 
             if (Physics.Raycast(rayOrigin, gunCamera.transform.forward, out hit, range))
@@ -69,15 +71,14 @@ public class RayCastShoot : MonoBehaviour, IWeapon
                 lineRenderer.SetPosition(0, gunEnd.position);
                 lineRenderer.SetPosition(1, hit.point);
 
-                ShotHit(hit.point);
-                hit_point = hit.point;
+                ShotHit(new Vector3(hit.point.x, hit.point.y, hit.point.z));
+                gunScript.Hit(new Vector3(hit.point.x, hit.point.y, hit.point.z));
             }
 
             StartCoroutine(ShotEffect());
             
-            GameObject mech = transform.parent.parent.parent.gameObject;
-            MachineGunSync gunScript = mech.GetComponent<MachineGunSync>();
-            gunScript.Shoot(hit_point);
+            gunScript.Shoot();
+            
         }
     }
 
@@ -98,6 +99,11 @@ public class RayCastShoot : MonoBehaviour, IWeapon
 
     public void ShotHit(Vector3 point)
     {
+        if (hitEffectPool == null)
+        {
+            hitEffectPool = GameObject.Find("MGImpactPool").GetComponent<ObjectPooler>();
+        }
+
         GameObject hitEffect = hitEffectPool.GetObject();
         hitEffect.transform.position = point;
         hitEffect.transform.rotation = Quaternion.identity;

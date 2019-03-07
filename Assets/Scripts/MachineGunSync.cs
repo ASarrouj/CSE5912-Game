@@ -17,16 +17,26 @@ public class MachineGunSync : NetworkBehaviour
         
     }
 
-    public void Shoot(Vector3 hit_point)
+    public void Shoot()
     {
         if (isServer)
         {
             RpcDrawMuzzleFlash(gameObject);
-            RpcDrawHit(hit_point);
         }
         else
         {
             CmdDrawMuzzleFlash(gameObject);
+        }
+    }
+
+    public void Hit(Vector3 hit_point)
+    {
+        if (isServer)
+        {
+            RpcDrawHit(hit_point);
+        }
+        else
+        {
             CmdDrawHit(hit_point);
         }
     }
