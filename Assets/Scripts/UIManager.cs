@@ -5,11 +5,12 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    private GameObject MechHUD, SwitcherHUD, NavHUD, MenuHUD;
+    private GameObject MechHUD, SwitcherHUD, NavHUD, MenuHUD, GunHUD;
     private RectTransform slotHighlightTransform;
     private List<GameObject> slotImages;
     public GameObject slotImageTemplate;
     private Vector3 slotPos, slotPosDelta;
+    public Sprite mechSprite, repairSprite, machineGunSprite, artillerySprite;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +19,7 @@ public class UIManager : MonoBehaviour
         SwitcherHUD = transform.Find("SwitcherHUD").gameObject;
         NavHUD = transform.Find("NavHUD").gameObject;
         MenuHUD = transform.Find("MenuHUD").gameObject;
+        GunHUD = transform.Find("GunHUD").gameObject;
         slotHighlightTransform = SwitcherHUD.transform.GetChild(0).GetComponent<RectTransform>();
 
         slotImages = new List<GameObject>();
@@ -28,6 +30,7 @@ public class UIManager : MonoBehaviour
         SwitcherHUD.SetActive(true);
         NavHUD.SetActive(false);
         MenuHUD.SetActive(false);
+        GunHUD.SetActive(false);
 
         Cursor.visible = false;
     }
@@ -36,14 +39,25 @@ public class UIManager : MonoBehaviour
     {
         slotImages.Add(Instantiate(slotImageTemplate, SwitcherHUD.transform));
         slotImages[0].GetComponent<RectTransform>().anchoredPosition = slotPos;
-        slotImages[0].transform.GetChild(0).GetComponent<Text>().text = "1";
+        slotImages[0].transform.Find("SlotNum").GetComponent<Text>().text = "1";
+        slotImages[0].transform.Find("SlotSprite").GetComponent<Image>().sprite = mechSprite;
         slotPos += slotPosDelta;
 
         for (int i = 1; i < input.slots.Count + 1; i++)
         {
             slotImages.Add(Instantiate(slotImageTemplate, SwitcherHUD.transform));
             slotImages[i].GetComponent<RectTransform>().anchoredPosition = slotPos;
-            slotImages[i].transform.GetChild(0).GetComponent<Text>().text = (i + 1).ToString();
+            slotImages[i].transform.Find("SlotNum").GetComponent<Text>().text = (i + 1).ToString();
+
+            if (input.slots[i - 1].tag == "Weapon")
+            {
+                slotImages[i].transform.Find("SlotSprite").GetComponent<Image>().sprite = machineGunSprite;
+            }
+            else if (input.slots[i - 1].tag == "RepairTool")
+            {
+                slotImages[i].transform.Find("SlotSprite").GetComponent<Image>().sprite = repairSprite;
+            }
+
             slotPos += slotPosDelta;
         }
     }
@@ -52,23 +66,28 @@ public class UIManager : MonoBehaviour
     {
         MechHUD.SetActive(true);
         NavHUD.SetActive(true);
+        GunHUD.SetActive(false);
     }
 
     public void WeaponUI()
     {
-        
+        MechHUD.SetActive(true);
+        NavHUD.SetActive(false);
+        GunHUD.SetActive(true);
     }
 
     public void MenuUI()
     {
         MenuHUD.SetActive(!MenuHUD.activeSelf);
         //Cursor.visible = !Cursor.visible;
+        GunHUD.SetActive(false);
     }
 
     public void DisableDynamicUI()
     {
         MechHUD.SetActive(false);
         NavHUD.SetActive(false);
+        GunHUD.SetActive(false);
     }
 
     public void ChangeSlotHighlight(int index)

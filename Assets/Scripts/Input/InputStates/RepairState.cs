@@ -5,9 +5,9 @@ using UnityEngine;
 public class RepairState : IInputState
 {
     private PlayerInput playerInput;
-    private List<string> otherWeaponInputs;
+    private List<string> otherSlotInputs;
     private ObjectPooler hitEffectPool;
-    private List<Transform> otherWeapons;
+    private List<Transform> otherSlots;
     private int maxSpeed, speedStep, lastKeyIndex;
 
     public RepairState(Transform playerTransform)
@@ -15,10 +15,10 @@ public class RepairState : IInputState
         playerInput = playerTransform.GetComponent<PlayerInput>();
         lastKeyIndex = playerInput.lastKeyIndex;
 
-        otherWeaponInputs = new List<string>(playerInput.slotInputs);
-        otherWeaponInputs.RemoveAt(lastKeyIndex);
-        otherWeapons = new List<Transform>(playerInput.slots);
-        otherWeapons.RemoveAt(lastKeyIndex);
+        otherSlotInputs = new List<string>(playerInput.slotInputs);
+        otherSlotInputs.RemoveAt(lastKeyIndex);
+        otherSlots = new List<Transform>(playerInput.slots);
+        otherSlots.RemoveAt(lastKeyIndex);
 
         hitEffectPool = GameObject.Find("MGImpactPool").GetComponent<ObjectPooler>();
     }
@@ -39,11 +39,11 @@ public class RepairState : IInputState
                 {
                     playerInput.PrepareMechPerspec();
                 }
-                for (int i = 0; i < otherWeapons.Count; i++)
+                for (int i = 0; i < otherSlots.Count; i++)
                 {
-                    if (Input.GetButtonDown(otherWeaponInputs[i]))
+                    if (Input.GetButtonDown(otherSlotInputs[i]))
                     {
-                        playerInput.PrepareSlotPerspec(otherWeapons[i]);
+                        playerInput.PrepareSlotPerspec(otherSlots[i]);
                     }
                 }
 
@@ -60,6 +60,8 @@ public class RepairState : IInputState
                             hitEffect.transform.position = hit.point;
                             hitEffect.transform.rotation = Quaternion.identity;
                             hitEffect.SetActive(true);
+
+                            hit.collider.gameObject.GetComponent<MechTakeDamage>().Damage(-1);
                         }
                     }
                 }
@@ -82,11 +84,11 @@ public class RepairState : IInputState
                 {
                     playerInput.PrepareMechPerspec();
                 }
-                for (int i = 0; i < otherWeapons.Count; i++)
+                for (int i = 0; i < otherSlots.Count; i++)
                 {
-                    if (Input.GetButtonDown(otherWeaponInputs[i]))
+                    if (Input.GetButtonDown(otherSlotInputs[i]))
                     {
-                        playerInput.PrepareSlotPerspec(otherWeapons[i]);
+                        playerInput.PrepareSlotPerspec(otherSlots[i]);
                     }
                 }
 

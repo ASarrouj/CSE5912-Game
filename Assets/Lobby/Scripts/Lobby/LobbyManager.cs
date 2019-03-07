@@ -26,6 +26,7 @@ namespace Prototype.NetworkLobby
 
         public RectTransform mainMenuPanel;
         public RectTransform optionsPanel;
+        public RectTransform matchSettingsPanel;
         public RectTransform gamesPanel;
         public RectTransform lobbyPanel;
 
@@ -36,6 +37,7 @@ namespace Prototype.NetworkLobby
         protected RectTransform currentPanel;
 
         public Button backButton;
+        public Button settingsButton;
 
         public Text statusInfo;
         public Text hostInfo;
@@ -60,6 +62,8 @@ namespace Prototype.NetworkLobby
             s_Singleton = this;
             _lobbyHooks = GetComponent<Prototype.NetworkLobby.LobbyHook>();
             currentPanel = mainMenuPanel;
+
+            settingsButton.gameObject.SetActive(false);
 
             backDelegate = QuitClbk;
             GetComponent<Canvas>().enabled = true;
@@ -139,6 +143,7 @@ namespace Prototype.NetworkLobby
                 backDelegate = QuitClbk;
                 SetServerInfo("Offline", "None");
                 _isMatchmaking = false;
+                settingsButton.gameObject.SetActive(false);
             }
             else if (currentPanel == gamesPanel)
             {
@@ -146,7 +151,13 @@ namespace Prototype.NetworkLobby
                 backDelegate = BackToMainClbk;
                 SetServerInfo("Offline", "None");
                 _isMatchmaking = false;
+                settingsButton.gameObject.SetActive(true);
             }
+            else
+            {
+                settingsButton.gameObject.SetActive(true);
+            }
+
         }
 
         public void DisplayIsConnecting()

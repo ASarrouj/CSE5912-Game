@@ -75,6 +75,50 @@ public class PlayerHealth : NetworkBehaviour
     }
 
     // Testing health bars
+        public void healCore(int heal)
+        {
+            coreHealth+=heal;
+            if(coreHealth>maxHealth)
+            {
+                coreHealth=maxHealth;
+            }
+        }
+        public void healFront(int heal)
+        {
+        frontHealth+=heal;
+            if(frontHealth>maxHealth)
+            {
+                frontHealth=maxHealth;
+            }
+        }
+        public void healRear(int heal)
+        {
+            rearHealth+=heal;
+            if(rearHealth>maxHealth)
+            {
+                rearHealth=maxHealth;
+            }
+        }
+        public void healLeft(int heal)
+        {
+        leftHealth+=heal;
+            if(leftHealth>maxHealth)
+            {
+                leftHealth=maxHealth;
+            }
+        }
+        public void healRight(int heal)
+        {
+           rightHealth+=heal; 
+                if(rightHealth>maxHealth)
+            {
+                rightHealth=maxHealth;
+            }
+        }
+
+
+   
+
     void Update()
     {
 
