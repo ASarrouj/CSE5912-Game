@@ -36,6 +36,16 @@ public class LoadTargetScreenButton : MonoBehaviour
         SceneManager.LoadScene(name);
     }
 
+    public void ExitToMenu() {
+        QuickLoadScene(0);
+        GameObject lobbyManager = GameObject.Find("LobbyManager");
+        foreach (Transform t in lobbyManager.transform) {
+            if (t.name == "MainPanel") {
+                t.gameObject.SetActive(true);
+            }
+        }
+    }
+
     public void Quit()
     {
 
