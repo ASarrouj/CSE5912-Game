@@ -37,13 +37,13 @@ public class LoadTargetScreenButton : MonoBehaviour
     }
 
     public void ExitToMenu() {
-        QuickLoadScene(0);
+        NetworkManager.singleton.StopClient();
+        NetworkManager.singleton.StopHost();
+        NetworkManager.singleton.StopMatchMaker();
+        
         GameObject lobbyManager = GameObject.Find("LobbyManager");
-        foreach (Transform t in lobbyManager.transform) {
-            if (t.name == "MainPanel") {
-                t.gameObject.SetActive(true);
-            }
-        }
+        Prototype.NetworkLobby.LobbyManager l = lobbyManager.GetComponent<Prototype.NetworkLobby.LobbyManager>();
+        l.ChangeTo(l.mainMenuPanel);
     }
 
     public void Quit()
