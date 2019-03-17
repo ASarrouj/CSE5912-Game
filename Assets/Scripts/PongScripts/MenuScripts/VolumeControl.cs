@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class VolumeControl : MonoBehaviour
 {
     public UnityEngine.Audio.AudioMixer mixer;
+    public string AudioGroup;
     public Slider slider;
 
     private float newVol;
@@ -22,7 +23,7 @@ public class VolumeControl : MonoBehaviour
     void Update()
     {
         newVol = slider.value - 80;
-        mixer.SetFloat("MasterVol", newVol);
+        mixer.SetFloat(AudioGroup, newVol);
         GlobalVariables.MasterVolume = newVol;
     }
 }
