@@ -17,13 +17,13 @@ AudioMixerController:
   m_UpdateMode: 0
   m_ExposedParameters:
   - guid: 0de3648ebcdaeb940868a4bd436a9d00
-    name: ambienceVol
+    name: Ambience
   - guid: b7099950b00bc9d42b87438fb6dd9edc
-    name: MasterVol
+    name: Master
   - guid: b608d698ab4d23d46ae6aaedb0095701
-    name: musicVol
+    name: Music
   - guid: 4bac884a322eb8c4bbaf50daffc972a3
-    name: sfxVol
+    name: SFX
   m_AudioMixerGroupViews:
   - guids:
     - 18a27df64a6681247999595afdabe169
