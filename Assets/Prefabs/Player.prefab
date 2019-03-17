@@ -264,7 +264,8 @@ AudioSource:
   m_GameObject: {fileID: 319536895269049431}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 243799566357541848, guid: 6e5612a7ea4bb9645bc08fa3b72f4cd8,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 963429f18376a8546b465fd2a3ff5165, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.397
@@ -2319,16 +2320,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3443597057955249272, guid: b5bc8c24de5352f42aa601b03d7b6f93,
+    - target: {fileID: 7464065947328483951, guid: b5bc8c24de5352f42aa601b03d7b6f93,
         type: 3}
-      propertyPath: scoreText
+      propertyPath: OutputAudioMixerGroup
       value: 
-      objectReference: {fileID: 297596281719896996}
-    - target: {fileID: 3443597057955249272, guid: b5bc8c24de5352f42aa601b03d7b6f93,
-        type: 3}
-      propertyPath: scoreText
-      value: 
-      objectReference: {fileID: 297596281719896996}
+      objectReference: {fileID: 243799566357541848, guid: 6e5612a7ea4bb9645bc08fa3b72f4cd8,
+        type: 2}
     - target: {fileID: 933251954924035252, guid: b5bc8c24de5352f42aa601b03d7b6f93,
         type: 3}
       propertyPath: scoreText
@@ -2343,16 +2340,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TransformSyncMode
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2110294972796132912, guid: b5bc8c24de5352f42aa601b03d7b6f93,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3347650803474322714, guid: b5bc8c24de5352f42aa601b03d7b6f93,
         type: 3}
       propertyPath: m_TransformSyncMode
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3443597057955249272, guid: b5bc8c24de5352f42aa601b03d7b6f93,
+        type: 3}
+      propertyPath: scoreText
+      value: 
+      objectReference: {fileID: 297596281719896996}
+    - target: {fileID: 3443597057955249272, guid: b5bc8c24de5352f42aa601b03d7b6f93,
+        type: 3}
+      propertyPath: scoreText
+      value: 
+      objectReference: {fileID: 297596281719896996}
+    - target: {fileID: 2110294972796132912, guid: b5bc8c24de5352f42aa601b03d7b6f93,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6441310939000351664, guid: b5bc8c24de5352f42aa601b03d7b6f93, type: 3}
