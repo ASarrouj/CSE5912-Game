@@ -2283,8 +2283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b42838958a4c2bf499976d42e4c5bb83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mixer: {fileID: 24100000, guid: 6e5612a7ea4bb9645bc08fa3b72f4cd8, type: 2}
-  AudioGroup: sfxVol
+  output: {fileID: 243799566357541848, guid: 6e5612a7ea4bb9645bc08fa3b72f4cd8, type: 2}
   slider: {fileID: 759462223}
 --- !u!114 &759462223
 MonoBehaviour:
@@ -3787,8 +3786,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b42838958a4c2bf499976d42e4c5bb83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mixer: {fileID: 24100000, guid: 6e5612a7ea4bb9645bc08fa3b72f4cd8, type: 2}
-  AudioGroup: musicVol
+  output: {fileID: 243767801960744104, guid: 6e5612a7ea4bb9645bc08fa3b72f4cd8, type: 2}
   slider: {fileID: 1035713586}
 --- !u!114 &1035713586
 MonoBehaviour:
@@ -4157,8 +4155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b42838958a4c2bf499976d42e4c5bb83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mixer: {fileID: 24100000, guid: 6e5612a7ea4bb9645bc08fa3b72f4cd8, type: 2}
-  AudioGroup: ambienceVol
+  output: {fileID: 243908209123369986, guid: 6e5612a7ea4bb9645bc08fa3b72f4cd8, type: 2}
   slider: {fileID: 1114902501}
 --- !u!114 &1114902501
 MonoBehaviour:
@@ -5529,8 +5526,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b42838958a4c2bf499976d42e4c5bb83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mixer: {fileID: 24100000, guid: 6e5612a7ea4bb9645bc08fa3b72f4cd8, type: 2}
-  AudioGroup: MasterVol
+  output: {fileID: 24300002, guid: 6e5612a7ea4bb9645bc08fa3b72f4cd8, type: 2}
   slider: {fileID: 1507605745}
 --- !u!1 &1520697441
 GameObject:
