@@ -4561,7 +4561,7 @@ PrefabInstance:
     - target: {fileID: 5362992028445605094, guid: b5bc8c24de5352f42aa601b03d7b6f93,
         type: 3}
       propertyPath: Invincible
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5908262885553353100, guid: b5bc8c24de5352f42aa601b03d7b6f93,
         type: 3}
@@ -4616,7 +4616,7 @@ PrefabInstance:
     - target: {fileID: 503182649263845541, guid: b5bc8c24de5352f42aa601b03d7b6f93,
         type: 3}
       propertyPath: Invincible
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 30602884463402246, guid: b5bc8c24de5352f42aa601b03d7b6f93,
         type: 3}
