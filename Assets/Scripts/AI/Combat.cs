@@ -76,6 +76,8 @@ namespace AI {
             //float dist = targetVelocity.magnitude;
             //input.ToggleActive();
 
+            if (currentWep == null) return;
+
             switch (wepType) {
                 case WeaponType.raycast:
                     RaycastShoot(target);
@@ -105,11 +107,15 @@ namespace AI {
         private void SelectWeapon(int index) {
             if (wepIndex == index) return;
             currentWep = weapons[index];
-            //Debug.Log(currentWep);
-            GetCurrentWeaponType();
             wepIndex = index;
             SetRadiusFOV();
+            if (currentWep == null) return;
+
+            GetCurrentWeaponType(); 
             input = currentWep.GetComponent<IWeapon>();
+            if (cam == null) {
+                cam = transform.root.Find("PlayerCamera");
+            }
             cam.parent = currentWep;
             cam.localPosition = new Vector3(0, 2.5f, 0);
             cam.localRotation = Quaternion.identity;

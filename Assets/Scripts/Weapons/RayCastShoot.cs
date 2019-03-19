@@ -65,12 +65,12 @@ public class RayCastShoot : MonoBehaviour, IWeapon
                 {
                     if (hit.rigidbody != null)
                     {
+                        Transform player = hit.collider.gameObject.transform.root;
                         hit.rigidbody.AddForce(-hit.normal * 100f);
-                    }
-                    ifScore = dmgOverNet.DamagePlayer(10, hit.collider.gameObject.name, hit.collider.transform.root.GetComponent<NetworkIdentity>());   //hit.collider.gameObject.GetComponent<MechTakeDamage>().Damage(10);
-                    if (ifScore)
-                    {
-                        score.scoreUp(scoreNum);
+                        dmgOverNet.DamagePlayer(10, hit.collider.gameObject.name, hit.collider.transform.root.GetComponent<NetworkIdentity>());
+                        if (player.GetComponent<PlayerHealth>().coreDestroyed) {
+                            score.scoreUp(scoreNum);
+                        }
                     }
                 }
                 lineRenderer.SetPosition(0, gunEnd.position);

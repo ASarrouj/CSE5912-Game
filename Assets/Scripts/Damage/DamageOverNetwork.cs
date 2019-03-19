@@ -21,9 +21,8 @@ public class DamageOverNetwork : NetworkBehaviour
         
     }
 
-    public bool DamagePlayer(int dmg, string hb, NetworkIdentity mechID) {
+    public void DamagePlayer(int dmg, string hb, NetworkIdentity mechID) {
         CmdDamagePlayer(dmg, hb, mechID);
-        return false;
     }
 
     [Command]
