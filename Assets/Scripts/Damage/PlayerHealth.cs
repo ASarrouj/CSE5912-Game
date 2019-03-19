@@ -13,7 +13,7 @@ public class PlayerHealth : NetworkBehaviour
 
     public bool isPlayer = true;
 
-    private bool coreDestroyed;
+    public bool coreDestroyed = false;
 
     public bool dmgCore(int dmg, MechTakeDamage hitbox) {
         Debug.Log("Core takes " + dmg + " damage");
@@ -21,13 +21,11 @@ public class PlayerHealth : NetworkBehaviour
         if(coreHealth<0)
         {   
             coreHealth = 0;
-            if (isPlayer) healthbars[0].setHealthBar((float)coreHealth / (float)maxHealth);
             //eSync.Explode("CoreHitbox", MechTakeDamage.Hitbox.CoreHitbox);
             hitbox.ExplodingCore();
-            coreDestroyed = true;
         }
-        if (isPlayer) healthbars[0].setHealthBar((float)coreHealth / (float)maxHealth);
-        coreDestroyed = false;
+        coreDestroyed = (coreHealth == 0);
+        if (isPlayer) healthbars[0].setHealthBar((float)coreHealth / (float)maxHealth);   
         return coreDestroyed;
     }
 
