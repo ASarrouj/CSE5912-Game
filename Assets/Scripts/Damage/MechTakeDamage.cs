@@ -39,6 +39,7 @@ public class MechTakeDamage : MonoBehaviour, IDamagable
         explosion.AddComponent<NetworkIdentity>();
         NetworkServer.Spawn(explosion);
         Destroy(transform.parent.gameObject);
+        DestroyNetChild();
         Destroy(explosion, 3f);
     }
 
@@ -49,6 +50,7 @@ public class MechTakeDamage : MonoBehaviour, IDamagable
         explosion.AddComponent<NetworkIdentity>();
         NetworkServer.Spawn(explosion);
         Destroy(explosion, 3f);
+        DestroyNetChild();
         Destroy(transform.parent.gameObject);
     }
 
@@ -58,7 +60,28 @@ public class MechTakeDamage : MonoBehaviour, IDamagable
         explosion.AddComponent<NetworkIdentity>();
         NetworkServer.Spawn(explosion);
         Destroy(explosion, 3f);
+        DestroyNetChild();
         Destroy(transform.parent.gameObject);
+    }
+
+    private void DestroyNetChild() {
+        Transform wep = null;
+        foreach (Transform c in transform.parent) {
+            if (c.tag == "Weapon") {
+                wep = c;
+                break;
+            }
+        }
+        if (wep == null) {
+            return;
+        }
+        NetworkTransformChild[] netChildren = transform.root.GetComponents<NetworkTransformChild>();
+        foreach (NetworkTransformChild c in netChildren) {
+            if (c.target == wep) {
+                c.enabled = false;
+                break;
+            }
+        }
     }
 
 }
