@@ -28,37 +28,12 @@ public class MoveTest : MonoBehaviour
     {
         lr = GetComponent<LineRenderer>();
         engineSound = GetComponent<AudioSource>();
-        wheels = new List<Transform>();
-
-        Transform tiresParent = transform.Find("NewMechWithGuns").Find("Tires");
-        for (int i = 0; i < tiresParent.childCount; i++)
-        {
-            wheels.Add(tiresParent.GetChild(i));
-        }
-
-        wheelColliders = new List<WheelCollider>();
-
-        Transform colliderParent = transform.Find("NewMechWithGuns").Find("TireColliders");
-        for (int i = 0; i < tiresParent.childCount; i++)
-        {
-            wheelColliders.Add(colliderParent.GetChild(i).GetComponent<WheelCollider>());
-        }
-
-        moveSpeed = 0;
-        rotateSpeed = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
         RenderPath();
-
-        /*foreach(WheelCollider collider in wheelColliders)
-        {
-            collider.motorTorque = moveSpeed;
-        }*/
-        transform.Translate(0, 0, Time.deltaTime * moveSpeed, Space.Self);
-        transform.Rotate(0, Time.deltaTime * rotateSpeed, 0, Space.Self);
 
         if (moveSpeed != 0)
         {
