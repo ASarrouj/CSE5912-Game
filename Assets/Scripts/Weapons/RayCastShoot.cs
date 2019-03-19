@@ -66,9 +66,10 @@ public class RayCastShoot : MonoBehaviour, IWeapon
                     if (hit.rigidbody != null)
                     {
                         hit.rigidbody.AddForce(-hit.normal * 100f);
+                        dmgOverNet.DamagePlayer(10, hit.collider.gameObject.name, hit.collider.transform.root.GetComponent<NetworkIdentity>());
                     }
-                    ifScore = dmgOverNet.DamagePlayer(10, hit.collider.gameObject.name, hit.collider.transform.root.GetComponent<NetworkIdentity>());   //hit.collider.gameObject.GetComponent<MechTakeDamage>().Damage(10);
-                    if (ifScore)
+                    
+                    if (false)// (hit.collider.gameObject.GetComponent<MechTakeDamage>().coreDestroyed)
                     {
                         score.scoreUp(scoreNum);
                     }
