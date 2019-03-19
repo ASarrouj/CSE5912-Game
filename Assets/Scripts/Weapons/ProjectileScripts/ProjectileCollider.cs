@@ -8,8 +8,12 @@ public class ProjectileCollider : MonoBehaviour
     public GameObject explosion;
     public AudioClip clip;
     public int damage;
+
+    private AudioSource source;
+
     void Start()
     {
+        source = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -23,8 +27,6 @@ public class ProjectileCollider : MonoBehaviour
         {
             collision.gameObject.GetComponent<IDamagable>().Damage(damage);
             Instantiate(explosion,transform.position, transform.rotation);
-            GameObject sound=GameObject.Find("SoundManager");
-            AudioSource source=sound.GetComponent<AudioSource>();
             source.PlayOneShot(clip,1f);
             this.gameObject.SetActive(false);
         }
