@@ -38,6 +38,7 @@ public class MechTakeDamage : MonoBehaviour, IDamagable
         GameObject explosion = Instantiate(particleEffects[0], transform.position, Quaternion.identity);
         explosion.AddComponent<NetworkIdentity>();
         NetworkServer.Spawn(explosion);
+        ForceCameraSwitch();
         Destroy(transform.parent.gameObject);
         DestroyNetChild();
         Destroy(explosion, 3f);
@@ -49,6 +50,7 @@ public class MechTakeDamage : MonoBehaviour, IDamagable
         explosion.transform.localScale += new Vector3(1f, 1f, 1f);
         explosion.AddComponent<NetworkIdentity>();
         NetworkServer.Spawn(explosion);
+        ForceCameraSwitch();
         Destroy(explosion, 3f);
         DestroyNetChild();
         Destroy(transform.parent.gameObject);
@@ -59,6 +61,7 @@ public class MechTakeDamage : MonoBehaviour, IDamagable
         explosion.transform.localScale -= new Vector3(1f, 1f, 1f);
         explosion.AddComponent<NetworkIdentity>();
         NetworkServer.Spawn(explosion);
+        ForceCameraSwitch();
         Destroy(explosion, 3f);
         DestroyNetChild();
         Destroy(transform.parent.gameObject);
@@ -82,6 +85,15 @@ public class MechTakeDamage : MonoBehaviour, IDamagable
                 break;
             }
         }
+    }
+
+    private void ForceCameraSwitch() {
+        Transform cam = null;
+        foreach (Transform c in transform.parent) {
+            cam = c.Find("PlayerCamera");
+            if (cam != null) break;
+        }
+        if (cam != null) cam.parent = transform.root;
     }
 
 }
