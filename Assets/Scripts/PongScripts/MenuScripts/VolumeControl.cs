@@ -9,17 +9,23 @@ public class VolumeControl : MonoBehaviour
     public Slider slider;
 
     private UnityEngine.Audio.AudioMixer mixer;
-    private float newVol;
+    private float startVol, newVol;
 
     // Start is called before the first frame update
     void Start()
     {
         mixer = output.audioMixer;
+
+        if (PlayerPrefs.HasKey(output.name)) {
+            startVol = PlayerPrefs.GetFloat(output.name);
+            mixer.SetFloat(output.name, startVol);
+        } else {
+            mixer.GetFloat(output.name, out startVol);
+        }
+        
         slider.minValue = 0;
         slider.maxValue = 100;
-        float vol;
-        mixer.GetFloat(output.name, out vol);//GlobalVariables.MasterVolume + 80;
-        slider.value = vol + 80;
+        slider.value = startVol + 80;
     }
 
     // Update is called once per frame
@@ -27,5 +33,6 @@ public class VolumeControl : MonoBehaviour
     {
         newVol = slider.value - 80;
         mixer.SetFloat(output.name, newVol);
+        PlayerPrefs.SetFloat(output.name, newVol);
     }
 }
