@@ -12,7 +12,7 @@ public class VolumeControl : MonoBehaviour
     private float startVol, newVol;
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         mixer = output.audioMixer;
 
