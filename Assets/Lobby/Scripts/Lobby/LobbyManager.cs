@@ -26,6 +26,7 @@ namespace Prototype.NetworkLobby
 
         public RectTransform mainMenuPanel;
         public RectTransform optionsPanel;
+        public RectTransform creditsPanel;
         public RectTransform matchSettingsPanel;
         public RectTransform gamesPanel;
         public RectTransform lobbyPanel;
@@ -155,7 +156,7 @@ namespace Prototype.NetworkLobby
             }
             else
             {
-                settingsButton.gameObject.SetActive(true);
+                settingsButton.gameObject.SetActive(false);
             }
 
         }
