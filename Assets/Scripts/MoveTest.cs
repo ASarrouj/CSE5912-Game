@@ -27,22 +27,12 @@ public class MoveTest : MonoBehaviour
     void Start()
     {
         lr = GetComponent<LineRenderer>();
-        engineSound = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
         RenderPath();
-
-        if (moveSpeed != 0)
-        {
-            engineSound.enabled = true;
-        }
-        else
-        {
-            engineSound.enabled = false;
-        }
 
     }
 

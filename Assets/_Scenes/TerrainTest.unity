@@ -516,8 +516,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   terrainLayers:
   - {fileID: 8574412962073106934, guid: 0535983d2cb2e7a4cad380bcd65938b7, type: 2}
-  roughness: 0.85
-  initialDisplacement: 0.3
+  roughness: 1.25
+  initialDisplacement: 0.45
   spawnPos:
   - {fileID: 594389210}
   - {fileID: 1562833345}

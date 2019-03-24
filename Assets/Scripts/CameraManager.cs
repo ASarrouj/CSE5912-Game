@@ -37,8 +37,8 @@ public class CameraManager : MonoBehaviour
     public void FollowMech(Transform player)
     {
         PrepareInterp();
-        offsetPos = new Vector3(-10, 5, -2); // X multiplier determines distance behind, Y for above, Z for right
-        offsetRot = Quaternion.Euler(30, 0, 0); // X value determines level of downward tilt
+        offsetPos = new Vector3(-10, 4.5f, -2); // X multiplier determines distance behind, Y for above, Z for right
+        offsetRot = Quaternion.Euler(28, 0, 0); // X value determines level of downward tilt
         target = player;
     }
 
