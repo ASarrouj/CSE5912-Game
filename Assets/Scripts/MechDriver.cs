@@ -12,12 +12,14 @@ public class MechDriver : MonoBehaviour
     private float turnAngle;
     private const float maxTurnAngle = 30;
     private const float turnDelta = 0.25f;
+    private float maxEngineVolume;
 
     private WheelCollider frontLeftCollider, frontRightCollider;
     private List<WheelCollider> allColliders;
     private Transform frontLeftWheel, frontRightWheel;
     private List<Transform> allWheels;
     private Rigidbody rb;
+    private AudioSource engineSound;
 
     void Start()
     {
@@ -27,36 +29,37 @@ public class MechDriver : MonoBehaviour
         allColliders = new List<WheelCollider>();
         allWheels = new List<Transform>();
         rb = GetComponent<Rigidbody>();
+        engineSound = GetComponent<AudioSource>();
+        maxEngineVolume = engineSound.volume;
 
         Transform tiresParent = transform.Find("NewMechWithGuns").Find("Tires");
         for (int i = 0; i < tiresParent.childCount; i++)
         {
-            allWheels.Add(tiresParent.GetChild(i));
+            allWheels.Add(tiresParent.GetChild(i).GetChild(0));
         }
-        frontLeftWheel = allWheels[0];
-        frontRightWheel = allWheels[3];
+        frontRightWheel = allWheels[0];
+        frontLeftWheel = allWheels[3];
 
         Transform colliderParent = transform.Find("NewMechWithGuns").Find("TireColliders");
         for (int i = 0; i < tiresParent.childCount; i++)
         {
             allColliders.Add(colliderParent.GetChild(i).GetComponent<WheelCollider>());
         }
-        frontLeftCollider = allColliders[0];
-        frontRightCollider = allColliders[3];
+        frontRightCollider = allColliders[0];
+        frontLeftCollider = allColliders[3];
     }
 
     void FixedUpdate()
     {
         foreach (WheelCollider collider in allColliders)
         {
-            collider.motorTorque = wheelTorque;
-            if (rb.velocity.magnitude <= velLimit)
+            if (rb.velocity.magnitude <= Mathf.Abs(velLimit))
             {
                 collider.motorTorque = Mathf.Sign(velLimit) * wheelTorque;
             }
             else
             {
-                rb.velocity = rb.velocity.normalized * velLimit;
+                rb.velocity = rb.velocity.normalized * Mathf.Abs(velLimit);
             }
         }
 
@@ -65,15 +68,15 @@ public class MechDriver : MonoBehaviour
             turnAngle = 0;
         }
 
+        engineSound.volume = (rb.velocity.magnitude / maxVelocity) * maxEngineVolume;
+
         frontLeftCollider.steerAngle = turnAngle;
         frontRightCollider.steerAngle = turnAngle;
-        frontLeftWheel.rotation = Quaternion.Euler(frontLeftWheel.localRotation.eulerAngles.x, frontLeftWheel.localRotation.eulerAngles.y, turnAngle);
-        frontRightWheel.rotation = Quaternion.Euler(frontRightWheel.localRotation.eulerAngles.x, frontRightWheel.localRotation.eulerAngles.y, turnAngle);
-        Debug.Log(rb.velocity.magnitude);
+        Debug.Log(rb.velocity.magnitude * Mathf.Sign(velLimit));
 
-        foreach (Transform wheel in allWheels)
+        for (int i = 0; i < allColliders.Count; i++)
         {
-            
+            UpdateWheelPositions(allColliders[i], allWheels[i]);
         }
     }
 
@@ -95,7 +98,7 @@ public class MechDriver : MonoBehaviour
 
     public void Accelerate()
     {
-        if (velLimit <= maxVelocity)
+        if (velLimit < maxVelocity)
         {
             velLimit += velDelta;
         }
@@ -103,7 +106,7 @@ public class MechDriver : MonoBehaviour
 
     public void Decelerate()
     {
-        if (velLimit >= -maxVelocity)
+        if (velLimit > -maxVelocity)
         {
             velLimit -= velDelta;
         }
@@ -117,6 +120,6 @@ public class MechDriver : MonoBehaviour
         collider.GetWorldPose(out pos, out rot);
 
         wheel.position = pos;
-        wheel.rotation = rot;
+        wheel.rotation = rot * Quaternion.Euler(0, 90, 0);
     }
 }
