@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class ProjectileCollider : MonoBehaviour
+public class ProjectileCollider : NetworkBehaviour
 {
     public GameObject explosion;
     public AudioClip clip;
@@ -19,6 +19,17 @@ public class ProjectileCollider : MonoBehaviour
     void Update()
     {
 
+    }
+    public void Force(Vector3 direct)
+    {
+    Debug.Log(direct);
+    GetComponent<Rigidbody>().velocity=new Vector3(0f,0f,0f);
+    RpcForce(direct);
+    }
+    [ClientRpc]
+    public void RpcForce(Vector3 direct)
+    {
+    GetComponent<Rigidbody>().AddForce(direct, ForceMode.Impulse);
     }
 
     void OnCollisionEnter(Collision collision)
