@@ -78,8 +78,8 @@ public class ProjectileShoot : MonoBehaviour, IWeapon
             projectile.transform.rotation = bulletSpawn.rotation;
             projectile.transform.Rotate(new Vector3(90, 0, 0));
             projectile.SetActive(true);
-            // projectile.GetComponent<Rigidbody>().AddForce(bulletSpawn.forward * projectileForce,ForceMode.Impulse);
-            projectile.GetComponent<ProjectileCollider>().Force(bulletSpawn.forward * projectileForce);
+            projectile.GetComponent<Rigidbody>().AddForce(bulletSpawn.forward * projectileForce,ForceMode.Impulse);
+            //projectile.GetComponent<ProjectileCollider>().Force(bulletSpawn.forward * projectileForce);
             StartCoroutine(ShotEffect());
         }
     }

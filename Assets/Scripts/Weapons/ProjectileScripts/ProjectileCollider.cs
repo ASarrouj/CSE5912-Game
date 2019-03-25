@@ -28,7 +28,7 @@ public class ProjectileCollider : NetworkBehaviour
     RpcForce(direct);
     }
     else{
-    CommandForce(direct);
+    CmdForce(direct);
     }
     }
     [ClientRpc]
@@ -38,7 +38,7 @@ public class ProjectileCollider : NetworkBehaviour
         gameObject.GetComponent<Rigidbody>().AddForce(direct,ForceMode.Impulse);
     }
         [Command]
-    public void CommandForce(Vector3 direct)
+    public void CmdForce(Vector3 direct)
     {
         gameObject.GetComponent<Rigidbody>().velocity=new Vector3(0f,0f,0f);
         gameObject.GetComponent<Rigidbody>().AddForce(direct,ForceMode.Impulse);
