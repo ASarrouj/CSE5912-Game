@@ -121,6 +121,25 @@ public class MechDriver : MonoBehaviour
         }
     }
 
+    public void ResetRotation()
+    {
+        while (transform.rotation.z > 0) {
+            transform.Rotate(0, 0, -1 * Time.deltaTime);
+        }
+        while (transform.rotation.z < 0)
+        {
+            transform.Rotate(0, 0, 1 * Time.deltaTime);
+        }
+        while (transform.rotation.x > 0)
+        {
+            transform.Rotate(-1 * Time.deltaTime, 0, 0);
+        }
+        while (transform.rotation.x > 0)
+        {
+            transform.Rotate(1 * Time.deltaTime, 0, 0);
+        }
+    }
+
     private void UpdateWheelPositions(WheelCollider collider, Transform wheel)
     {
         Vector3 pos = wheel.position;
