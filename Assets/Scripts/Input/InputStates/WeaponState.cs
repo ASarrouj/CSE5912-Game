@@ -76,6 +76,10 @@ public class WeaponState : IInputState
                 {
                     driver.TurnRight();
                 }
+                if (Input.GetButton("ResetRotation"))
+                {
+                    driver.ResetRotation();
+                }
 
                 break;
 

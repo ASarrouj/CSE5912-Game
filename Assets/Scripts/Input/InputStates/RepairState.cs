@@ -94,6 +94,10 @@ public class RepairState : IInputState
                 {
                     driver.TurnRight();
                 }
+                if (Input.GetButton("ResetRotation"))
+                {
+                    driver.ResetRotation();
+                }
 
                 break;
 
