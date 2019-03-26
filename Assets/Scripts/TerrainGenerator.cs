@@ -24,7 +24,7 @@ public class TerrainGenerator : MonoBehaviour
     private int playersSpawnedCount;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         terrain = GetComponent<Terrain>();
         terrainData = terrain.terrainData;

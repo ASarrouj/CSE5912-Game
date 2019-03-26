@@ -356,6 +356,15 @@ namespace Prototype.NetworkLobby
         {
             //This hook allows you to apply state data from the lobby-player to the game-player
             //just subclass "LobbyHook" and add it to the lobby object.
+            
+            if (SceneManager.GetActiveScene().name == "TerrainTest")
+            {
+                
+                TerrainGenerator tg = GameObject.Find("Terrain").GetComponent<TerrainGenerator>();
+
+                Vector3 pos = tg.getSpawnPoint();
+                gamePlayer.transform.position = pos;
+            }
 
             if (_lobbyHooks)
                 _lobbyHooks.OnLobbyServerSceneLoadedForPlayer(this, lobbyPlayer, gamePlayer);
