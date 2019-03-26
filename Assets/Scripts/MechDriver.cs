@@ -19,7 +19,7 @@ public class MechDriver : MonoBehaviour
     private Transform frontLeftWheel, frontRightWheel;
     private List<Transform> allWheels;
     private Rigidbody rb;
-    private AudioSource engineSound;
+    private AudioSource[] mechSounds;
 
     void Start()
     {
@@ -29,8 +29,8 @@ public class MechDriver : MonoBehaviour
         allColliders = new List<WheelCollider>();
         allWheels = new List<Transform>();
         rb = GetComponent<Rigidbody>();
-        engineSound = GetComponent<AudioSource>();
-        maxEngineVolume = engineSound.volume;
+        mechSounds = GetComponents<AudioSource>();
+        maxEngineVolume = mechSounds[0].volume;
 
         Transform tiresParent = transform.Find("NewMechWithGuns").Find("Tires");
         for (int i = 0; i < tiresParent.childCount; i++)
@@ -63,12 +63,14 @@ public class MechDriver : MonoBehaviour
             }
         }
 
-        if (rb.velocity.magnitude == 0)
+        if (rb.velocity.magnitude <= 0.5f && rb.velocity.magnitude >= -0.5f
+            && (velLimit >= 5 || velLimit <= -5))
         {
+            velLimit = Mathf.Sign(velLimit) * 5;
             turnAngle = 0;
         }
 
-        engineSound.volume = (rb.velocity.magnitude / maxVelocity) * maxEngineVolume;
+        mechSounds[0].volume = (rb.velocity.magnitude / maxVelocity) * maxEngineVolume;
 
         frontLeftCollider.steerAngle = turnAngle;
         frontRightCollider.steerAngle = turnAngle;
@@ -121,5 +123,13 @@ public class MechDriver : MonoBehaviour
 
         wheel.position = pos;
         wheel.rotation = rot * Quaternion.Euler(0, 90, 0);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.tag == "Building")
+        {
+            mechSounds[1].Play();
+        }
     }
 }

@@ -525,6 +525,10 @@ MonoBehaviour:
   - {fileID: 1136431132}
   spawnPlatform: {fileID: 2777939086679988639, guid: c607f0ffc704ca7489fa348c373cc37e,
     type: 3}
+  buildingPrefabs:
+  - {fileID: 8208217414252385821, guid: eade6996d58c1a640a2729db8f77e595, type: 3}
+  - {fileID: 1010087743337001394, guid: 2bb74529c81a46749b50efcf34d1d5c1, type: 3}
+  - {fileID: 2039139370023410588, guid: 1fd679baaa0da9b44a3160a243acef79, type: 3}
 --- !u!1 &1136431132
 GameObject:
   m_ObjectHideFlags: 0
