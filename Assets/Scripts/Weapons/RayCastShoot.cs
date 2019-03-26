@@ -12,7 +12,6 @@ public class RayCastShoot : MonoBehaviour, IWeapon
     public Transform gunEnd;
     public ParticleSystem gunSmoke;
     public GameObject muzzleFlash;
-    public Text scoreText;
 
     private Camera gunCamera;
     private ObjectPooler hitEffectPool;
@@ -33,7 +32,7 @@ public class RayCastShoot : MonoBehaviour, IWeapon
         lineRenderer = GetComponent<LineRenderer>();
         gunCamera = transform.Find("PlayerCamera").GetComponent<Camera>();
         hitEffectPool = GameObject.Find("MGImpactPool").GetComponent<ObjectPooler>();
-        score = scoreText.GetComponent<Score>();
+        score = transform.root.GetComponent<Score>();
     }
 
     void IWeapon.Shoot()
