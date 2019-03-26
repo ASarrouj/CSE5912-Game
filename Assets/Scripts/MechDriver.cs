@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(LineRenderer))]
 public class MechDriver : MonoBehaviour
 {
     private const float wheelTorque = 1000;
@@ -19,7 +20,11 @@ public class MechDriver : MonoBehaviour
     private Transform frontLeftWheel, frontRightWheel;
     private List<Transform> allWheels;
     private Rigidbody rb;
-    private AudioSource[] mechSounds;
+    private AudioSource engineSound;
+
+    private LineRenderer lr;
+    public int pathPredictorLength = 600;
+    private GameObject future;
 
     void Start()
     {
@@ -29,8 +34,8 @@ public class MechDriver : MonoBehaviour
         allColliders = new List<WheelCollider>();
         allWheels = new List<Transform>();
         rb = GetComponent<Rigidbody>();
-        mechSounds = GetComponents<AudioSource>();
-        maxEngineVolume = mechSounds[0].volume;
+        engineSound = GetComponent<AudioSource>();
+        maxEngineVolume = engineSound.volume;
 
         Transform tiresParent = transform.Find("NewMechWithGuns").Find("Tires");
         for (int i = 0; i < tiresParent.childCount; i++)
@@ -47,6 +52,8 @@ public class MechDriver : MonoBehaviour
         }
         frontRightCollider = allColliders[0];
         frontLeftCollider = allColliders[3];
+
+        lr = GetComponent<LineRenderer>();
     }
 
     void FixedUpdate()
@@ -63,14 +70,12 @@ public class MechDriver : MonoBehaviour
             }
         }
 
-        if (rb.velocity.magnitude <= 0.5f && rb.velocity.magnitude >= -0.5f
-            && (velLimit >= 5 || velLimit <= -5))
+        if (rb.velocity.magnitude == 0)
         {
-            velLimit = Mathf.Sign(velLimit) * 5;
             turnAngle = 0;
         }
 
-        mechSounds[0].volume = (rb.velocity.magnitude / maxVelocity) * maxEngineVolume;
+        engineSound.volume = (rb.velocity.magnitude / maxVelocity) * maxEngineVolume;
 
         frontLeftCollider.steerAngle = turnAngle;
         frontRightCollider.steerAngle = turnAngle;
@@ -80,6 +85,8 @@ public class MechDriver : MonoBehaviour
         {
             UpdateWheelPositions(allColliders[i], allWheels[i]);
         }
+
+        RenderPath();
     }
 
     public void TurnLeft()
@@ -125,11 +132,40 @@ public class MechDriver : MonoBehaviour
         wheel.rotation = rot * Quaternion.Euler(0, 90, 0);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void RenderPath()
     {
-        if (collision.transform.tag == "Building")
+        lr.SetVertexCount(pathPredictorLength);
+        lr.SetPositions(CalculatePathArray());
+    }
+
+    private Vector3[] CalculatePathArray()
+    {
+        Vector3[] PathArray = new Vector3[pathPredictorLength];
+
+        future = new GameObject();
+        future.transform.position = transform.position;
+        future.transform.rotation = transform.rotation;
+
+        for (int i = 0; i < pathPredictorLength; i++)
         {
-            mechSounds[1].Play();
+            PathArray[i] = CalculatePathPoint(i);
         }
+
+        Destroy(future);
+        return PathArray;
+    }
+
+    private Vector3 CalculatePathPoint(int frame)
+    {
+        if (velLimit >= 0)
+        {
+            future.transform.Rotate(0, Time.deltaTime * turnAngle, 0, Space.Self);
+        } else { 
+            future.transform.Rotate(0, -(Time.deltaTime * turnAngle), 0, Space.Self);
+        }
+        future.transform.Translate(0, 0, Time.deltaTime * velLimit, Space.Self);
+
+        Vector3 futurePos = future.transform.position;
+        return futurePos;
     }
 }
