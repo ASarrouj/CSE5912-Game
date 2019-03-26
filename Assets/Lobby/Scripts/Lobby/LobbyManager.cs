@@ -43,6 +43,10 @@ namespace Prototype.NetworkLobby
         public Text statusInfo;
         public Text hostInfo;
 
+        [Space]
+        [Header("Match Settings")]
+        public int numRounds = 3;
+
         //Client numPlayers from NetworkManager is always 0, so we count (throught connect/destroy in LobbyPlayer) the number
         //of players, so that even client know how many player there is.
         [HideInInspector]
@@ -59,6 +63,7 @@ namespace Prototype.NetworkLobby
         protected LobbyHook _lobbyHooks;
 
         private List<PlayerStatus> playerStatuses;
+        private int roundCount;
 
         void Start()
         {
@@ -365,16 +370,39 @@ namespace Prototype.NetworkLobby
 
             if (destroyedPlayerCount >= numPlayers - 1)
             {
-                foreach (PlayerStatus s in playerStatuses)
+                roundCount++;
+                if (roundCount >= numRounds)
                 {
-                    if (s.Destroyed == false)
+                    foreach (PlayerStatus s in playerStatuses)
                     {
-                        s.SetVictoryText("Round Win");
+                        if (s.Destroyed == false)
+                        {
+                            s.SetVictoryText("Victory");
+                        }
+                        else
+                        {
+                            s.SetVictoryText("Defeat");
+                        }
+                        s.SetTextActive(true);
+                        StartCoroutine(EndMatch());
                     }
-                    s.SetTextActive(true);
                 }
-
-                StartCoroutine(NewRound());
+                else
+                {
+                    foreach (PlayerStatus s in playerStatuses)
+                    {
+                        if (s.Destroyed == false)
+                        {
+                            s.SetVictoryText("Round Win");
+                        }
+                        else
+                        {
+                            s.SetVictoryText("Round Loss");
+                        }
+                        s.SetTextActive(true);
+                    }
+                    StartCoroutine(NewRound());
+                }
             }
         }
 
@@ -413,6 +441,12 @@ namespace Prototype.NetworkLobby
             {
                 playerStatuses.Add(o.GetComponent<PlayerStatus>());
             }
+        }
+
+        private IEnumerator EndMatch()
+        {
+            yield return new WaitForSecondsRealtime(3);
+            SendReturnToLobby();
         }
 
         public override void OnLobbyServerPlayerRemoved(NetworkConnection conn, short playerControllerId)

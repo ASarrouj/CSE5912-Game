@@ -35,7 +35,6 @@ namespace Prototype.NetworkLobby
 
         public void OnDestroyed()
         {
-            SetVictoryText("Round Loss");
             lobbyManager.CheckRoundOver();
         }
 
