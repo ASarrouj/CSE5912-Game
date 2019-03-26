@@ -22,7 +22,6 @@ public class ProjectileCollider : NetworkBehaviour
     }
     public void Force(Vector3 direct)
     {
-    Debug.Log(direct);
     if(!isServer)
     {
     RpcForce(direct);
@@ -36,12 +35,14 @@ public class ProjectileCollider : NetworkBehaviour
     {
         gameObject.GetComponent<Rigidbody>().velocity=new Vector3(0f,0f,0f);
         gameObject.GetComponent<Rigidbody>().AddForce(direct,ForceMode.Impulse);
+        Debug.Log(gameObject.GetComponent<Rigidbody>().velocity);
     }
-        [Command]
+    [Command]
     public void CmdForce(Vector3 direct)
     {
         gameObject.GetComponent<Rigidbody>().velocity=new Vector3(0f,0f,0f);
         gameObject.GetComponent<Rigidbody>().AddForce(direct,ForceMode.Impulse);
+        Debug.Log(gameObject.GetComponent<Rigidbody>().velocity);
     }
 
 
