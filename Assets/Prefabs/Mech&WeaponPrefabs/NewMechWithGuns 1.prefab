@@ -19788,6 +19788,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Invincible: 0
   hitboxType: 0
+  coreDestroyed: 0
   health: 100
   particleEffects:
   - {fileID: 1000011797152326, guid: acf39d9f4addf294d93fa56fa373961b, type: 3}
@@ -20032,6 +20033,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Invincible: 0
   hitboxType: 3
+  coreDestroyed: 0
   health: 100
   particleEffects:
   - {fileID: 1000013462590818, guid: ecdd96beb7f93494880c052dfccf9dc1, type: 3}
@@ -20304,6 +20306,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Invincible: 0
   hitboxType: 4
+  coreDestroyed: 0
   health: 100
   particleEffects:
   - {fileID: 1000011797152326, guid: acf39d9f4addf294d93fa56fa373961b, type: 3}
@@ -20507,6 +20510,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Invincible: 0
   hitboxType: 2
+  coreDestroyed: 0
   health: 100
   particleEffects:
   - {fileID: 1000013462590818, guid: ecdd96beb7f93494880c052dfccf9dc1, type: 3}
@@ -31367,6 +31371,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Invincible: 0
   hitboxType: 1
+  coreDestroyed: 0
   health: 100
   particleEffects:
   - {fileID: 1000013462590818, guid: ecdd96beb7f93494880c052dfccf9dc1, type: 3}
