@@ -7,14 +7,5 @@ namespace Prototype.NetworkLobby
 {
     public class RoundsManager : NetworkBehaviour
     {
-        public List<PlayerStatus> playerStatuses;
-
-        private LobbyManager lobbyManager;
-
-        private void Start()
-        {
-            lobbyManager.spa
-        }
-
     }
 }

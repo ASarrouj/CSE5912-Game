@@ -330,13 +330,29 @@ namespace Prototype.NetworkLobby
         
         public override GameObject OnLobbyServerCreateGamePlayer(NetworkConnection conn, short playerControllerId)
         {
-            GameObject obj = base.OnLobbyServerCreateGamePlayer(conn, playerControllerId);
+            GameObject obj = Instantiate(gamePlayerPrefab.gameObject) as GameObject;
 
             PlayerStatus status = obj.GetComponent<PlayerStatus>();
             playerStatuses.Add(status);
+            Debug.Log(playerStatuses);
+
+            // get start position from base class
+            Transform startPos = GetStartPosition();
+            if (startPos != null)
+            {
+                obj.transform.position = startPos.transform.position;
+                obj.transform.rotation = startPos.rotation;
+            }
+            else
+            {
+                obj.transform.position = startPos.transform.position;
+                obj.transform.rotation = startPos.rotation;
+            }
 
             return obj;
         }
+        
+
 
         public override void OnLobbyServerPlayerRemoved(NetworkConnection conn, short playerControllerId)
         {
