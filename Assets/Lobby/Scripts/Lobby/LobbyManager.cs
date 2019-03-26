@@ -65,6 +65,8 @@ namespace Prototype.NetworkLobby
         private List<PlayerStatus> playerStatuses;
         private int roundCount;
 
+        private int totalPlayersEver = 0;
+
         void Start()
         {
             s_Singleton = this;
@@ -354,11 +356,18 @@ namespace Prototype.NetworkLobby
                 obj.transform.rotation = startPos.rotation;
             }
 
+            totalPlayersEver++;
+
             return obj;
         }
 
         public void CheckRoundOver()
         {
+            if (totalPlayersEver < 2)
+            {
+                return;
+            }
+
             int destroyedPlayerCount = 0;
             foreach (PlayerStatus s in playerStatuses)
             {
