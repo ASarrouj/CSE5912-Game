@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class RepairState : IInputState
 {
@@ -63,7 +64,7 @@ public class RepairState : IInputState
                             hitEffect.transform.rotation = Quaternion.identity;
                             hitEffect.SetActive(true);
 
-                            hit.collider.gameObject.GetComponent<MechTakeDamage>().Damage(-1);
+                            hit.collider.gameObject.GetComponent<DamageOverNetwork>().HealPlayer(1, hit.collider.gameObject.name, playerInput.transform.GetComponent<NetworkIdentity>());
                         }
                     }
                 }

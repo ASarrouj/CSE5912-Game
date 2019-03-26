@@ -6,13 +6,13 @@ using UnityEngine;
 public class MechDriver : MonoBehaviour
 {
     private const float wheelTorque = 1000;
-    private float maxVelocity = 30;
+    private float maxVelocity = 20;
     private float velLimit;
     private const float velDelta = 5;
 
     private float turnAngle;
-    private const float maxTurnAngle = 30;
-    private const float turnDelta = 0.25f;
+    private const float maxTurnAngle = 25;
+    private const float turnDelta = 0.20f;
     private float maxEngineVolume;
 
     private WheelCollider frontLeftCollider, frontRightCollider;
@@ -20,7 +20,7 @@ public class MechDriver : MonoBehaviour
     private Transform frontLeftWheel, frontRightWheel;
     private List<Transform> allWheels;
     private Rigidbody rb;
-    private AudioSource engineSound;
+    private AudioSource[] mechSounds;
 
     private LineRenderer lr;
     public int pathPredictorLength = 600;
@@ -34,8 +34,10 @@ public class MechDriver : MonoBehaviour
         allColliders = new List<WheelCollider>();
         allWheels = new List<Transform>();
         rb = GetComponent<Rigidbody>();
-        engineSound = GetComponent<AudioSource>();
-        maxEngineVolume = engineSound.volume;
+        mechSounds = GetComponents<AudioSource>();
+        maxEngineVolume = mechSounds[0].volume;
+
+        rb.centerOfMass = transform.Find("CenterOfMass").transform.localPosition;
 
         Transform tiresParent = transform.Find("NewMechWithGuns").Find("Tires");
         for (int i = 0; i < tiresParent.childCount; i++)
@@ -70,12 +72,12 @@ public class MechDriver : MonoBehaviour
             }
         }
 
-        if (rb.velocity.magnitude == 0)
+        if (rb.velocity.magnitude <= 0.5f && rb.velocity.magnitude >= -0.5f && (velLimit >= 5 || velLimit <= -5))
         {
-            turnAngle = 0;
+            velLimit = Mathf.Sign(velLimit) * 5;
         }
 
-        engineSound.volume = (rb.velocity.magnitude / maxVelocity) * maxEngineVolume;
+        mechSounds[0].volume = (rb.velocity.magnitude / maxVelocity) * maxEngineVolume;
 
         frontLeftCollider.steerAngle = turnAngle;
         frontRightCollider.steerAngle = turnAngle;
@@ -87,6 +89,12 @@ public class MechDriver : MonoBehaviour
         }
 
         RenderPath();
+
+        if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            transform.Translate(0, 5, 0);
+            transform.localRotation = Quaternion.identity;
+        }
     }
 
     public void TurnLeft()
@@ -167,5 +175,13 @@ public class MechDriver : MonoBehaviour
 
         Vector3 futurePos = future.transform.position;
         return futurePos;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.tag == "Building")
+        {
+            mechSounds[1].Play();
+        }
     }
 }
