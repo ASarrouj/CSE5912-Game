@@ -25,9 +25,20 @@ public class DamageOverNetwork : NetworkBehaviour
         CmdDamagePlayer(dmg, hb, mechID);
     }
 
+    public void HealPlayer(int heal, string hb, NetworkIdentity mechID)
+    {
+        CmdDamagePlayer(heal, hb, mechID);
+    }
+
     [Command]
     void CmdDamagePlayer(int dmg, string hb, NetworkIdentity id) {
         NetworkServer.FindLocalObject(id.netId).GetComponent<DamageOverNetwork>().RpcHitboxTakeDamage(dmg, hb);
+    }
+
+    [Command]
+    void CmdHealPlayer(int dmg, string hb, NetworkIdentity id)
+    {
+        NetworkServer.FindLocalObject(id.netId).GetComponent<DamageOverNetwork>().RpcHitboxRepairDamage(dmg, hb);
     }
 
     private Transform GetHitBox(GameObject mech, string hitboxName) {
@@ -63,6 +74,37 @@ public class DamageOverNetwork : NetworkBehaviour
         } else if (hbName == "RearHitbox") {
             Debug.Log("Rear takes damage");
             pHealth.dmgRear(dmgAmount, m);
+        }
+
+    }
+
+    [ClientRpc]
+    public void RpcHitboxRepairDamage(int healAmount, string hbName)
+    {
+        Transform hitbox = GetHitBox(gameObject, hbName);
+        if (gameObject == null) return;
+        if (hbName == "FrontHitbox")
+        {
+            pHealth.healFront(healAmount);
+        }
+        else if (hbName == "LeftHitbox")
+        {
+            pHealth.healLeft(healAmount);
+        }
+        else if (hbName == "RightHitbox")
+        {
+            Debug.Log("Right heals");
+            pHealth.healRight(healAmount);
+        }
+        else if (hbName == "CoreHitbox")
+        {
+            Debug.Log("Core heals " + healAmount + " health");
+            pHealth.healCore(healAmount);
+        }
+        else if (hbName == "RearHitbox")
+        {
+            Debug.Log("Rear heals");
+            pHealth.healRear(healAmount);
         }
 
     }

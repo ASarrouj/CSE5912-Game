@@ -12,6 +12,7 @@ public class WeaponState : IInputState
     private SmoothMouseLook mouseInput;
     private IWeapon shootInput;
     private Quaternion originalRotation;
+    private MechDriver driver;
 
     public WeaponState(Transform playerTransform)
     {
@@ -26,6 +27,7 @@ public class WeaponState : IInputState
         otherSlots = new List<Transform>(playerInput.slots);
         otherSlots.RemoveAt(lastKeyIndex);
         originalRotation = weapon.localRotation;
+        driver = playerInput.transform.GetComponent<MechDriver>();
 
         mouseInput = new SmoothMouseLook(weapon);
         mouseInput.SetClamping(-60, 60, -30, 30);
@@ -56,8 +58,25 @@ public class WeaponState : IInputState
                         playerInput.PrepareSlotPerspec(otherSlots[i]);
                         shootInput.ToggleActive();
                     }
-                }      
-                
+                }
+
+                if (Input.GetButtonDown("Forward"))
+                {
+                    driver.Accelerate();
+                }
+                if (Input.GetButtonDown("Backward"))
+                {
+                    driver.Decelerate();
+                }
+                if (Input.GetButton("Left"))
+                {
+                    driver.TurnLeft();
+                }
+                if (Input.GetButton("Right"))
+                {
+                    driver.TurnRight();
+                }
+
                 break;
 
             case PlayerInput.InputType.Controller:

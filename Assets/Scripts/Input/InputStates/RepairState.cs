@@ -8,6 +8,7 @@ public class RepairState : IInputState
     private List<string> otherSlotInputs;
     private ObjectPooler hitEffectPool;
     private List<Transform> otherSlots;
+    private MechDriver driver;
     private int maxSpeed, speedStep, lastKeyIndex;
 
     public RepairState(Transform playerTransform)
@@ -19,6 +20,7 @@ public class RepairState : IInputState
         otherSlotInputs.RemoveAt(lastKeyIndex);
         otherSlots = new List<Transform>(playerInput.slots);
         otherSlots.RemoveAt(lastKeyIndex);
+        driver = playerInput.transform.GetComponent<MechDriver>();
 
         hitEffectPool = GameObject.Find("MGImpactPool").GetComponent<ObjectPooler>();
     }
@@ -74,6 +76,23 @@ public class RepairState : IInputState
                 if (Input.GetButton("Left Click"))
                 {
                     playerInput.DragCamera();
+                }
+
+                if (Input.GetButtonDown("Forward"))
+                {
+                    driver.Accelerate();
+                }
+                if (Input.GetButtonDown("Backward"))
+                {
+                    driver.Decelerate();
+                }
+                if (Input.GetButton("Left"))
+                {
+                    driver.TurnLeft();
+                }
+                if (Input.GetButton("Right"))
+                {
+                    driver.TurnRight();
                 }
 
                 break;
