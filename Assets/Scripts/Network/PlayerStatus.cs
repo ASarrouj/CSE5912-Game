@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 namespace Prototype.NetworkLobby
 {
     public class PlayerStatus : NetworkBehaviour
     {
+        public GameObject victoryText;
+
         private bool destroyed;
         private LobbyManager lobbyManager;
 
@@ -32,7 +35,18 @@ namespace Prototype.NetworkLobby
 
         public void OnDestroyed()
         {
+            SetVictoryText("Round Loss");
             lobbyManager.CheckRoundOver();
+        }
+
+        public void SetVictoryText(string text)
+        {
+            victoryText.GetComponent<Text>().text = text;
+        }
+
+        public void SetTextActive(bool active)
+        {
+            victoryText.SetActive(active);
         }
     }
 }
