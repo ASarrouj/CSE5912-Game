@@ -51,8 +51,8 @@ LightmapSettings:
     m_IndirectOutputScale: 1
     m_AlbedoBoost: 1
     m_EnvironmentLightingMode: 0
-    m_EnableBakedLightmaps: 1
-    m_EnableRealtimeLightmaps: 1
+    m_EnableBakedLightmaps: 0
+    m_EnableRealtimeLightmaps: 0
   m_LightmapEditorSettings:
     serializedVersion: 10
     m_Resolution: 2
@@ -529,6 +529,8 @@ MonoBehaviour:
   - {fileID: 8208217414252385821, guid: eade6996d58c1a640a2729db8f77e595, type: 3}
   - {fileID: 1010087743337001394, guid: 2bb74529c81a46749b50efcf34d1d5c1, type: 3}
   - {fileID: 2039139370023410588, guid: 1fd679baaa0da9b44a3160a243acef79, type: 3}
+  - {fileID: 893724193844196180, guid: 02298337c459e404c993c1022693f8ae, type: 3}
+  - {fileID: 2317343101983020172, guid: 720a71d321e65bf4fb565d7202cc17e9, type: 3}
 --- !u!1 &1136431132
 GameObject:
   m_ObjectHideFlags: 0
