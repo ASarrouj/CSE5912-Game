@@ -32,7 +32,7 @@ namespace Prototype.NetworkLobby
 
         public void OnDestroyed()
         {
-            lobbyManager.CheckWinStatus();
+            lobbyManager.CheckRoundOver();
         }
     }
 }

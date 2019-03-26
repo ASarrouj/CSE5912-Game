@@ -352,7 +352,7 @@ namespace Prototype.NetworkLobby
             return obj;
         }
         
-        public void CheckWinStatus()
+        public void CheckRoundOver()
         {
             int destroyedPlayerCount = 0;
             foreach (PlayerStatus s in playerStatuses) {
@@ -362,10 +362,43 @@ namespace Prototype.NetworkLobby
                 }
             }
 
+            List<GameObject> newPlayers = new List<GameObject>();
             if (destroyedPlayerCount >= numPlayers - 1)
             {
-                ServerChangeScene(lobbyScene);
+                for (int i = 0; i < playerStatuses.Count; i++)
+                {
+                    newPlayers.Add(Respawn(playerStatuses[i]));
+                }
+                playerStatuses.Clear();
+                foreach (GameObject o in newPlayers)
+                {
+                    playerStatuses.Add(o.GetComponent<PlayerStatus>());
+                }
+                newPlayers.Clear();
             }
+        }
+
+        public GameObject Respawn(PlayerStatus s)
+        {
+            GameObject obj = Instantiate(gamePlayerPrefab.gameObject) as GameObject;
+
+            // get start position from base class
+            Transform startPos = GetStartPosition();
+            if (startPos != null)
+            {
+                obj.transform.position = startPos.transform.position;
+                obj.transform.rotation = startPos.rotation;
+            }
+            else
+            {
+                obj.transform.position = startPos.transform.position;
+                obj.transform.rotation = startPos.rotation;
+            }
+            NetworkServer.ReplacePlayerForConnection(s.connectionToClient, obj, s.playerControllerId);
+            Destroy(s.gameObject);
+
+            return obj;
+
         }
 
         public override void OnLobbyServerPlayerRemoved(NetworkConnection conn, short playerControllerId)
