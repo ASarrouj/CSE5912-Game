@@ -352,7 +352,21 @@ namespace Prototype.NetworkLobby
             return obj;
         }
         
+        public void CheckWinStatus()
+        {
+            int destroyedPlayerCount = 0;
+            foreach (PlayerStatus s in playerStatuses) {
+                if (s.Destroyed == true)
+                {
+                    destroyedPlayerCount++;
+                }
+            }
 
+            if (destroyedPlayerCount >= numPlayers - 1)
+            {
+                ServerChangeScene(lobbyScene);
+            }
+        }
 
         public override void OnLobbyServerPlayerRemoved(NetworkConnection conn, short playerControllerId)
         {
