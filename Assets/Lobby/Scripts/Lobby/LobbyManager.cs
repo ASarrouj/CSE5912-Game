@@ -5,11 +5,11 @@ using UnityEngine.Networking;
 using UnityEngine.Networking.Types;
 using UnityEngine.Networking.Match;
 using System.Collections;
-
+using System.Collections.Generic;
 
 namespace Prototype.NetworkLobby
 {
-    public class LobbyManager : NetworkLobbyManager 
+    public class LobbyManager : NetworkLobbyManager
     {
         static short MsgKicked = MsgType.Highest + 1;
 
@@ -43,6 +43,10 @@ namespace Prototype.NetworkLobby
         public Text statusInfo;
         public Text hostInfo;
 
+        [Space]
+        [Header("Match Settings")]
+        public int numRounds = 3;
+
         //Client numPlayers from NetworkManager is always 0, so we count (throught connect/destroy in LobbyPlayer) the number
         //of players, so that even client know how many player there is.
         [HideInInspector]
@@ -53,10 +57,13 @@ namespace Prototype.NetworkLobby
         public bool _isMatchmaking = false;
 
         protected bool _disconnectServer = false;
-        
+
         protected ulong _currentMatchID;
 
         protected LobbyHook _lobbyHooks;
+
+        private List<PlayerStatus> playerStatuses;
+        private int roundCount;
 
         void Start()
         {
@@ -72,7 +79,10 @@ namespace Prototype.NetworkLobby
             DontDestroyOnLoad(gameObject);
 
             SetServerInfo("Offline", "None");
+
+            playerStatuses = new List<PlayerStatus>();
         }
+
 
         public override void OnLobbyClientSceneChanged(NetworkConnection conn)
         {
@@ -179,7 +189,7 @@ namespace Prototype.NetworkLobby
         public void GoBackButton()
         {
             backDelegate();
-			topPanel.isInGame = false;
+            topPanel.isInGame = false;
         }
 
         // ----------------- Server management
@@ -208,20 +218,20 @@ namespace Prototype.NetworkLobby
         {
             ChangeTo(mainMenuPanel);
         }
-                 
+
         public void StopHostClbk()
         {
             if (_isMatchmaking)
             {
-				matchMaker.DestroyMatch((NetworkID)_currentMatchID, 0, OnDestroyMatch);
-				_disconnectServer = true;
+                matchMaker.DestroyMatch((NetworkID)_currentMatchID, 0, OnDestroyMatch);
+                _disconnectServer = true;
             }
             else
             {
                 StopHost();
             }
 
-            
+
             ChangeTo(gamesPanel);
         }
 
@@ -269,16 +279,16 @@ namespace Prototype.NetworkLobby
             SetServerInfo("Hosting", networkAddress);
         }
 
-		public override void OnMatchCreate(bool success, string extendedInfo, MatchInfo matchInfo)
-		{
-			base.OnMatchCreate(success, extendedInfo, matchInfo);
+        public override void OnMatchCreate(bool success, string extendedInfo, MatchInfo matchInfo)
+        {
+            base.OnMatchCreate(success, extendedInfo, matchInfo);
             _currentMatchID = (System.UInt64)matchInfo.networkId;
-		}
+        }
 
-		public override void OnDestroyMatch(bool success, string extendedInfo)
-		{
-			base.OnDestroyMatch(success, extendedInfo);
-			if (_disconnectServer)
+        public override void OnDestroyMatch(bool success, string extendedInfo)
+        {
+            base.OnDestroyMatch(success, extendedInfo);
+            if (_disconnectServer)
             {
                 StopMatchMaker();
                 StopHost();
@@ -321,6 +331,122 @@ namespace Prototype.NetworkLobby
             }
 
             return obj;
+        }
+
+        public override GameObject OnLobbyServerCreateGamePlayer(NetworkConnection conn, short playerControllerId)
+        {
+            GameObject obj = Instantiate(gamePlayerPrefab.gameObject) as GameObject;
+
+            PlayerStatus status = obj.GetComponent<PlayerStatus>();
+            playerStatuses.Add(status);
+            Debug.Log(playerStatuses);
+
+            // get start position from base class
+            Transform startPos = GetStartPosition();
+            if (startPos != null)
+            {
+                obj.transform.position = startPos.transform.position;
+                obj.transform.rotation = startPos.rotation;
+            }
+            else
+            {
+                obj.transform.position = startPos.transform.position;
+                obj.transform.rotation = startPos.rotation;
+            }
+
+            return obj;
+        }
+
+        public void CheckRoundOver()
+        {
+            int destroyedPlayerCount = 0;
+            foreach (PlayerStatus s in playerStatuses)
+            {
+                if (s.Destroyed == true)
+                {
+                    destroyedPlayerCount++;
+                }
+            }
+
+            if (destroyedPlayerCount >= numPlayers - 1)
+            {
+                roundCount++;
+                if (roundCount >= numRounds)
+                {
+                    foreach (PlayerStatus s in playerStatuses)
+                    {
+                        if (s.Destroyed == false)
+                        {
+                            s.SetVictoryText("Victory");
+                        }
+                        else
+                        {
+                            s.SetVictoryText("Defeat");
+                        }
+                        s.SetTextActive(true);
+                        StartCoroutine(EndMatch());
+                    }
+                }
+                else
+                {
+                    foreach (PlayerStatus s in playerStatuses)
+                    {
+                        if (s.Destroyed == false)
+                        {
+                            s.SetVictoryText("Round Win");
+                        }
+                        else
+                        {
+                            s.SetVictoryText("Round Loss");
+                        }
+                        s.SetTextActive(true);
+                    }
+                    StartCoroutine(NewRound());
+                }
+            }
+        }
+
+        private IEnumerator NewRound()
+        {
+            yield return new WaitForSecondsRealtime(3);
+            foreach (PlayerStatus s in playerStatuses)
+            {
+                s.SetTextActive(false);
+            }
+            Debug.Log("coroutine");
+            List<GameObject> newPlayers = new List<GameObject>();
+            for (int i = 0; i < playerStatuses.Count; i++)
+            {
+                GameObject obj = Instantiate(gamePlayerPrefab.gameObject) as GameObject;
+                newPlayers.Add(obj);
+
+                // get start position from base class
+                Transform startPos = GetStartPosition();
+                if (startPos != null)
+                {
+                    obj.transform.position = startPos.transform.position;
+                    obj.transform.rotation = startPos.rotation;
+                }
+                else
+                {
+                    obj.transform.position = startPos.transform.position;
+                    obj.transform.rotation = startPos.rotation;
+                }
+                NetworkServer.ReplacePlayerForConnection(playerStatuses[i].connectionToClient, obj, playerStatuses[i].playerControllerId);
+                Destroy(playerStatuses[i].gameObject);
+            }
+            playerStatuses.Clear();
+
+            foreach (GameObject o in newPlayers)
+            {
+                playerStatuses.Add(o.GetComponent<PlayerStatus>());
+            }
+        }
+
+        private IEnumerator EndMatch()
+        {
+            yield return new WaitForSecondsRealtime(3);
+            SendReturnToLobby();
         }
 
         public override void OnLobbyServerPlayerRemoved(NetworkConnection conn, short playerControllerId)
@@ -376,15 +502,15 @@ namespace Prototype.NetworkLobby
 
         public override void OnLobbyServerPlayersReady()
         {
-			bool allready = true;
-			for(int i = 0; i < lobbySlots.Length; ++i)
-			{
-				if(lobbySlots[i] != null)
-					allready &= lobbySlots[i].readyToBegin;
-			}
+            bool allready = true;
+            for (int i = 0; i < lobbySlots.Length; ++i)
+            {
+                if (lobbySlots[i] != null)
+                    allready &= lobbySlots[i].readyToBegin;
+            }
 
-			if(allready)
-				StartCoroutine(ServerCountdownCoroutine());
+            if (allready)
+                StartCoroutine(ServerCountdownCoroutine());
         }
 
         public IEnumerator ServerCountdownCoroutine()
