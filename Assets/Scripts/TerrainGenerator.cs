@@ -17,11 +17,14 @@ public class TerrainGenerator : MonoBehaviour
     public GameObject[] spawnPos;
     public GameObject spawnPlatform;
     private Mesh domeMesh;
+    public GameObject[] buildingPrefabs;
 
     private float spawnRadius;
 
+    private int playersSpawnedCount;
+
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         terrain = GetComponent<Terrain>();
         terrainData = terrain.terrainData;
@@ -43,17 +46,20 @@ public class TerrainGenerator : MonoBehaviour
         CreateGlassDome();
 
         spawnRadius = glassDome.localScale.x / 2 - 30;
+        playersSpawnedCount = 0;
 
-        float deg = 0;
-        for (int i = 0; i < spawnPos.Length; i++)
+        int instancePerBuilding = 6;
+        for (int i = 0; i < instancePerBuilding; i++)
         {
-            Vector3 platPos = new Vector3(Mathf.Cos(deg), 0, Mathf.Sin(deg)) * spawnRadius + glassDome.transform.position;
-            platPos.y = terrain.SampleHeight(platPos) + 2;
-            deg += 2f * Mathf.PI / spawnPos.Length;
-            Instantiate(spawnPlatform, platPos, Quaternion.identity);
-            spawnPos[i].transform.position = platPos + new Vector3(0, 5, 0);
-            spawnPos[i].AddComponent<NetworkStartPosition>();
+            for (int j = 0; j < buildingPrefabs.Length; j++)
+            {
+                Vector3 buildingPos = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)) * (spawnRadius - 40) + glassDome.transform.position;
+                buildingPos.y = terrain.SampleHeight(buildingPos) + 1;
+                Quaternion buildingRot = Quaternion.Euler(0, Random.Range(-180, 180), 0);
+                Instantiate(buildingPrefabs[j], buildingPos, buildingRot, transform);
+            }
         }
+        
     }
 
     // Update is called once per frame
@@ -130,5 +136,21 @@ public class TerrainGenerator : MonoBehaviour
             domeMesh.SetTriangles(triangles, m);
         }
         glassDome.gameObject.AddComponent<MeshCollider>();
+    }
+
+    public Vector3 getSpawnPoint()
+    {
+        Vector3 spawnPoint = new Vector3(0, 0, 0);
+        float deg = 0;
+        int i = playersSpawnedCount;
+
+        Vector3 platPos = new Vector3(Mathf.Cos(deg), 0, Mathf.Sin(deg)) * spawnRadius + glassDome.transform.position;
+        platPos.y = terrain.SampleHeight(platPos) + 2;
+        deg += 2f * Mathf.PI / spawnPos.Length;
+        Instantiate(spawnPlatform, platPos, Quaternion.identity);
+        spawnPoint = platPos + new Vector3(0, 5, 0);
+        playersSpawnedCount++;
+
+        return spawnPoint;
     }
 }

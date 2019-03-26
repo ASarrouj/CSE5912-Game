@@ -42,7 +42,8 @@ public class RayCastShoot : MonoBehaviour, IWeapon
         MachineGunSync gunScript = mech.GetComponent<MachineGunSync>();
 
         RaycastHit hit;
-        Vector3 rayOrigin = gunCamera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
+        //Vector3 rayOrigin = gunCamera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
+        Vector3 rayOrigin = gunEnd.position;
         if (Time.time > nextFireTime)
         {
             nextFireTime = Time.time + fireRate;

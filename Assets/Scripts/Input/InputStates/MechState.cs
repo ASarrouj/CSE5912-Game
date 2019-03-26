@@ -54,6 +54,11 @@ public class MechState : IInputState
                     driver.TurnRight();
                 }
 
+                if (Input.GetButton("ResetRotation"))
+                {
+                    driver.ResetRotation();
+                }
+
                 if (Input.GetButtonDown("Left Click"))
                 {
                     playerInput.SetDragOrigin();
