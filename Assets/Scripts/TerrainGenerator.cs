@@ -21,6 +21,8 @@ public class TerrainGenerator : MonoBehaviour
 
     private float spawnRadius;
 
+    private int playersSpawnedCount;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,17 +46,7 @@ public class TerrainGenerator : MonoBehaviour
         CreateGlassDome();
 
         spawnRadius = glassDome.localScale.x / 2 - 30;
-
-        float deg = 0;
-        for (int i = 0; i < spawnPos.Length; i++)
-        {
-            Vector3 platPos = new Vector3(Mathf.Cos(deg), 0, Mathf.Sin(deg)) * spawnRadius + glassDome.transform.position;
-            platPos.y = terrain.SampleHeight(platPos) + 2;
-            deg += 2f * Mathf.PI / spawnPos.Length;
-            Instantiate(spawnPlatform, platPos, Quaternion.identity);
-            spawnPos[i].transform.position = platPos + new Vector3(0, 5, 0);
-            spawnPos[i].AddComponent<NetworkStartPosition>();
-        }
+        playersSpawnedCount = 0;
 
         int instancePerBuilding = 6;
         for (int i = 0; i < instancePerBuilding; i++)
@@ -144,5 +136,21 @@ public class TerrainGenerator : MonoBehaviour
             domeMesh.SetTriangles(triangles, m);
         }
         glassDome.gameObject.AddComponent<MeshCollider>();
+    }
+
+    public Vector3 getSpawnPoint()
+    {
+        Vector3 spawnPoint = new Vector3(0, 0, 0);
+        float deg = 0;
+        int i = playersSpawnedCount;
+
+        Vector3 platPos = new Vector3(Mathf.Cos(deg), 0, Mathf.Sin(deg)) * spawnRadius + glassDome.transform.position;
+        platPos.y = terrain.SampleHeight(platPos) + 2;
+        deg += 2f * Mathf.PI / spawnPos.Length;
+        Instantiate(spawnPlatform, platPos, Quaternion.identity);
+        spawnPoint = platPos + new Vector3(0, 5, 0);
+        playersSpawnedCount++;
+
+        return spawnPoint;
     }
 }
