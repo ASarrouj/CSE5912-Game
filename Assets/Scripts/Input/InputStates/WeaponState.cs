@@ -33,9 +33,7 @@ public class WeaponState : IInputState
 
     public void Update(PlayerInput.InputType inputType)
     {
-        if (Input.GetButtonDown("Escape")) {
-            playerInput.ToggleMenu();
-        }
+        playerInput.CheckUI();
 
         bool updateMouse = true;
 
