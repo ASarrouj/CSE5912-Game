@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 using UnityEngine.Networking.Types;
 using UnityEngine.Networking.Match;
 using System.Collections;
-
+using System.Collections.Generic;
 
 namespace Prototype.NetworkLobby
 {
@@ -58,6 +58,8 @@ namespace Prototype.NetworkLobby
 
         protected LobbyHook _lobbyHooks;
 
+        private List<PlayerStatus> playerStatuses;
+
         void Start()
         {
             s_Singleton = this;
@@ -72,7 +74,10 @@ namespace Prototype.NetworkLobby
             DontDestroyOnLoad(gameObject);
 
             SetServerInfo("Offline", "None");
+
+            playerStatuses = new List<PlayerStatus>();
         }
+
 
         public override void OnLobbyClientSceneChanged(NetworkConnection conn)
         {
@@ -319,6 +324,16 @@ namespace Prototype.NetworkLobby
                     p.ToggleJoinButton(numPlayers + 1 >= minPlayers);
                 }
             }
+
+            return obj;
+        }
+        
+        public override GameObject OnLobbyServerCreateGamePlayer(NetworkConnection conn, short playerControllerId)
+        {
+            GameObject obj = base.OnLobbyServerCreateGamePlayer(conn, playerControllerId);
+
+            PlayerStatus status = obj.GetComponent<PlayerStatus>();
+            playerStatuses.Add(status);
 
             return obj;
         }
