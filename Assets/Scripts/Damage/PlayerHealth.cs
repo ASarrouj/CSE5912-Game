@@ -15,6 +15,13 @@ public class PlayerHealth : NetworkBehaviour
 
     public bool coreDestroyed = false;
 
+    private PlayerStatus status;
+
+    private void Awake()
+    {
+        status = gameObject.GetComponent<PlayerStatus>();
+    }
+
     public bool dmgCore(int dmg, MechTakeDamage hitbox) {
         Debug.Log("Core takes " + dmg + " damage");
         coreHealth -=dmg;
@@ -23,6 +30,7 @@ public class PlayerHealth : NetworkBehaviour
             coreHealth = 0;
             //eSync.Explode("CoreHitbox", MechTakeDamage.Hitbox.CoreHitbox);
             hitbox.ExplodingCore();
+            status.Destroyed = true;
         }
         coreDestroyed = (coreHealth == 0);
         if (isPlayer) healthbars[0].setHealthBar((float)coreHealth / (float)maxHealth);   
