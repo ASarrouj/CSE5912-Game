@@ -2025,7 +2025,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: CityMap
+  m_Text: City
 --- !u!222 &653434783
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8881,6 +8881,7 @@ MonoBehaviour:
   settingsButton: {fileID: 886799722}
   statusInfo: {fileID: 1562853022}
   hostInfo: {fileID: 1562840228}
+  numRounds: 3
   _playerNumber: 0
   _isMatchmaking: 0
 --- !u!114 &1562781862
@@ -13461,9 +13462,9 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: CityMap
+    - m_Text: City
       m_Image: {fileID: 0}
-    - m_Text: TerrainTest
+    - m_Text: Moon
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
