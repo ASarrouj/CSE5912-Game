@@ -95,6 +95,10 @@ public class PlayerInput : NetworkBehaviour
         {
             camManager.FollowMech(transform);
         }
+        else if (slot.tag == "MineDeployer")
+        {
+            camManager.FollowMech(transform);
+        }
     }
 
     public void FinalizePerspective(Transform currentTransform)
@@ -113,6 +117,10 @@ public class PlayerInput : NetworkBehaviour
         {
             inputState = new RepairState(transform);
             uiManager.MechUI();
+        }
+        else if (slots[lastKeyIndex].tag == "MineDeployer")
+        {
+            inputState = new MineState(transform);
         }
     }
 
