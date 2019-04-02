@@ -39,22 +39,6 @@ public class MechDriver : MonoBehaviour
 
         rb.centerOfMass = transform.Find("CenterOfMass").transform.localPosition;
 
-        Transform tiresParent = transform.Find("NewMechWithGuns").Find("Tires");
-        for (int i = 0; i < tiresParent.childCount; i++)
-        {
-            allWheels.Add(tiresParent.GetChild(i).GetChild(0));
-        }
-        frontRightWheel = allWheels[0];
-        frontLeftWheel = allWheels[3];
-
-        Transform colliderParent = transform.Find("NewMechWithGuns").Find("TireColliders");
-        for (int i = 0; i < tiresParent.childCount; i++)
-        {
-            allColliders.Add(colliderParent.GetChild(i).GetComponent<WheelCollider>());
-        }
-        frontRightCollider = allColliders[0];
-        frontLeftCollider = allColliders[3];
-
         lr = GetComponent<LineRenderer>();
     }
 
@@ -95,6 +79,25 @@ public class MechDriver : MonoBehaviour
             transform.Translate(0, 5, 0);
             transform.localRotation = Quaternion.identity;
         }
+    }
+
+    public void findColliders()
+    {
+        Transform tiresParent = transform.Find("NewMechWithSlots(Clone)").Find("Tires");
+        for (int i = 0; i < tiresParent.childCount; i++)
+        {
+            allWheels.Add(tiresParent.GetChild(i).GetChild(0));
+        }
+        frontRightWheel = allWheels[0];
+        frontLeftWheel = allWheels[3];
+        Transform colliderParent = transform.Find("NewMechWithSlots(Clone)").Find("TireColliders");
+        for (int i = 0; i < tiresParent.childCount; i++)
+        {
+            allColliders.Add(colliderParent.GetChild(i).GetComponent<WheelCollider>());
+        }
+        frontRightCollider = allColliders[0];
+        frontLeftCollider = allColliders[3];
+        GetComponent<Rigidbody>().useGravity = true;
     }
 
     public void TurnLeft()

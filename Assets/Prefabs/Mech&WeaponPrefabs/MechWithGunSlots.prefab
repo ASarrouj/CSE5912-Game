@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8413345022708477440}
   - component: {fileID: 463256422654121196}
-  - component: {fileID: 7297640257525323683}
   m_Layer: 0
   m_Name: MechWithGunSlots
   m_TagString: Untagged
@@ -58,21 +57,12 @@ MonoBehaviour:
   - {fileID: 5433537573165544778}
   - {fileID: 4206227258339432451}
   self: {fileID: 521016686472392782}
+  coreHealth: 0
+  healthValues: 
+  maxSpeed: 0
   moveSpeed: 0
   rotateSpeed: 0
   health: 0
---- !u!114 &7297640257525323683
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 521016686472392782}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0428557a720721644a21357ce5e4744e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3791383091976833672
 GameObject:
   m_ObjectHideFlags: 0
