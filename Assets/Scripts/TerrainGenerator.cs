@@ -48,6 +48,7 @@ public class TerrainGenerator : MonoBehaviour
         spawnRadius = glassDome.localScale.x / 2 - 30;
         playersSpawnedCount = 0;
 
+        Random.InitState(1);
         int instancePerBuilding = 6;
         for (int i = 0; i < instancePerBuilding; i++)
         {
@@ -70,6 +71,7 @@ public class TerrainGenerator : MonoBehaviour
 
     private void DiamondSquareAlgo()
     {
+        Random.InitState(1);
         for (int i = maxIndex; i > 1; i = i / 2)
         {
             int midpoint = i / 2;
