@@ -22,7 +22,7 @@ public class MineState : IInputState
         otherSlotInputs.RemoveAt(lastKeyIndex);
         otherSlots = new List<Transform>(playerInput.slots);
         otherSlots.RemoveAt(lastKeyIndex);
-        mineDeployer = 
+        mineDeployer = minePrefab.GetComponent<MineDeployer>();
         driver = playerInput.transform.GetComponent<MechDriver>();
     }
 
@@ -119,7 +119,7 @@ public class MineState : IInputState
 
         if (Input.GetButton("Fire1"))
         {
-            
+            mineDeployer.DeployMine();
         }
     }
 }
