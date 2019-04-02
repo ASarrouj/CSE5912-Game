@@ -149,7 +149,7 @@ public class TerrainGenerator : MonoBehaviour
         Vector3 platPos = new Vector3(Mathf.Cos(deg), 0, Mathf.Sin(deg)) * spawnRadius + glassDome.transform.position;
         platPos.y = terrain.SampleHeight(platPos) + 2;
         deg += 2f * Mathf.PI / spawnPos.Length;
-        Instantiate(spawnPlatform, platPos, Quaternion.identity);
+        NetworkServer.Spawn(Instantiate(spawnPlatform, platPos, Quaternion.identity));
         spawnPoint = platPos + new Vector3(0, 5, 0);
         playersSpawnedCount++;
 
