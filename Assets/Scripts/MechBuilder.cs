@@ -33,7 +33,7 @@ public class MechBuilder : MonoBehaviour
 
     public void AddGun(int gun)
     {
-        toAttach.AttachGunInOrder(Instantiate(guns[gun]));
+        toAttach.AttachGunInOrder(guns[gun]);
     }
 
     public void moveToGunScreen(int screen)

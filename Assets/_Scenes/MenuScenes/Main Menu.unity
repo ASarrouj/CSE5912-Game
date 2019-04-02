@@ -8881,6 +8881,7 @@ MonoBehaviour:
   settingsButton: {fileID: 886799722}
   statusInfo: {fileID: 1562853022}
   hostInfo: {fileID: 1562840228}
+  numRounds: 3
   _playerNumber: 0
   _isMatchmaking: 0
 --- !u!114 &1562781862

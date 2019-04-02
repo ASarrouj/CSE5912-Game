@@ -46,8 +46,12 @@ public class MechComp : MonoBehaviour
     {
         if (trackSpot < guns.Length)
         {
-            guns[trackSpot] = gun;
-            guns[trackSpot].transform.SetParent(positions[trackSpot].transform, false);
+            guns[trackSpot] = Instantiate(gun, positions[trackSpot].transform, false);
+            guns[trackSpot].transform.SetParent(positions[trackSpot].transform);
+            if (guns[trackSpot].name.Equals("MachineGun"))
+            {
+                guns[trackSpot].GetComponent<RayCastShoot>().GetCameraAndScore();
+            }
             trackSpot++;
         }
         else
