@@ -386,13 +386,13 @@ namespace Prototype.NetworkLobby
                     {
                         if (s.Destroyed == false)
                         {
-                            s.SetVictoryText("Victory");
+                            s.RpcSetVictoryText("Victory");
                         }
                         else
                         {
-                            s.SetVictoryText("Defeat");
+                            s.RpcSetVictoryText("Defeat");
                         }
-                        s.SetTextActive(true);
+                        s.RpcSetTextActive(true);
                         StartCoroutine(EndMatch());
                     }
                 }
@@ -402,25 +402,25 @@ namespace Prototype.NetworkLobby
                     {
                         if (s.Destroyed == false)
                         {
-                            s.SetVictoryText("Round Win");
+                            s.RpcSetVictoryText("Round Win");
                         }
                         else
                         {
-                            s.SetVictoryText("Round Loss");
+                            s.RpcSetVictoryText("Round Loss");
                         }
-                        s.SetTextActive(true);
+                        s.RpcSetTextActive(true);
                     }
                     StartCoroutine(NewRound());
                 }
             }
         }
-
+        
         private IEnumerator NewRound()
         {
             yield return new WaitForSecondsRealtime(3);
             foreach (PlayerStatus s in playerStatuses)
             {
-                s.SetTextActive(false);
+                s.RpcSetTextActive(false);
             }
             Debug.Log("coroutine");
             List<GameObject> newPlayers = new List<GameObject>();
