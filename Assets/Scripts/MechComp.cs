@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MechComp : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class MechComp : MonoBehaviour
     public GameObject[] positions;
     public GameObject self;
     public PlayerInput selfInput;
+    public Camera viewCam;
+    public Text scoreStuff;
     public int coreHealth;
     // these health values are for the different sections of the mech.
     public int[] healthValues;
@@ -49,11 +52,11 @@ public class MechComp : MonoBehaviour
         {
             guns[trackSpot] = Instantiate(gun, positions[trackSpot].transform, false);
             guns[trackSpot].transform.SetParent(positions[trackSpot].transform);
-            if (guns[trackSpot].name.Equals("MachineGun"))
-            {
-                guns[trackSpot].GetComponent<RayCastShoot>().GetCameraAndScore();
-            }
             selfInput.addGun(trackSpot);
+            if (guns[trackSpot].name.Equals("MachineGun(Clone)"))
+            {
+                guns[trackSpot].GetComponent<RayCastShoot>().GetCameraAndScore(viewCam, scoreStuff);
+            }
             trackSpot++;
         }
         else
