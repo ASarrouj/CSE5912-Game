@@ -32,17 +32,30 @@ public class PlayerInput : NetworkBehaviour
         {
             slotInputs = new List<string> { "Perspective2", "Perspective3", "Perspective4"};
             slots = new List<Transform>();
-            playerMech = transform.Find("NewMechWithGuns");
-            slots.Add(playerMech.Find("FrontGun").GetChild(0));
-            slots.Add(playerMech.Find("LeftGun").GetChild(0));
-            slots.Add(playerMech.Find("RearGun").GetChild(0));
-
+            playerMech = transform.Find("NewMechWithSlots");
             camManager = transform.Find("PlayerCamera").GetComponent<CameraManager>();
             camManager.SetInput(this);
 
             uiManager = transform.Find("UI").GetComponent<UIManager>();
-            uiManager.CreateSwitcherUI(this);
 
+
+        }
+    }
+
+    public void addGun(int trackSpot)
+    {
+        if (trackSpot == 0)
+        {
+            slots.Add(playerMech.Find("FrontGun").GetChild(0));
+        }
+        else if (trackSpot == 1)
+        {
+            slots.Add(playerMech.Find("LeftGun").GetChild(0));
+        }
+        else if (trackSpot == 2)
+        {
+            slots.Add(playerMech.Find("RearGun").GetChild(0));
+            uiManager.CreateSwitcherUI(this);
             // Begin game by interpolating to mech
             PrepareMechPerspec();
         }
