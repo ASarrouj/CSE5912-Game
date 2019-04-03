@@ -7,6 +7,7 @@ public class MechComp : MonoBehaviour
     public GameObject[] guns;
     public GameObject[] positions;
     public GameObject self;
+    public PlayerInput selfInput;
     public int coreHealth;
     // these health values are for the different sections of the mech.
     public int[] healthValues;
@@ -52,6 +53,7 @@ public class MechComp : MonoBehaviour
             {
                 guns[trackSpot].GetComponent<RayCastShoot>().GetCameraAndScore();
             }
+            selfInput.addGun(trackSpot);
             trackSpot++;
         }
         else

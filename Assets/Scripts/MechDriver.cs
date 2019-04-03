@@ -83,14 +83,14 @@ public class MechDriver : MonoBehaviour
 
     public void findColliders()
     {
-        Transform tiresParent = transform.Find("NewMechWithSlots(Clone)").Find("Tires");
+        Transform tiresParent = transform.Find("NewMechWithSlots").Find("Tires");
         for (int i = 0; i < tiresParent.childCount; i++)
         {
             allWheels.Add(tiresParent.GetChild(i).GetChild(0));
         }
         frontRightWheel = allWheels[0];
         frontLeftWheel = allWheels[3];
-        Transform colliderParent = transform.Find("NewMechWithSlots(Clone)").Find("TireColliders");
+        Transform colliderParent = transform.Find("NewMechWithSlots").Find("TireColliders");
         for (int i = 0; i < tiresParent.childCount; i++)
         {
             allColliders.Add(colliderParent.GetChild(i).GetComponent<WheelCollider>());

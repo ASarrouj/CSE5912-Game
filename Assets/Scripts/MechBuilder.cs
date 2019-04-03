@@ -12,23 +12,22 @@ public class MechBuilder : MonoBehaviour
     public GameObject[] mechPrefabs;
     public GameObject[] partScreens;
     public GameObject[] guns;
-    public GameObject mechScreen;
     private GameObject currentScreen;
     
 
-    private GameObject mech;
+    public GameObject mech;
     private MechComp toAttach;
 
     private void Start()
     {
-        currentScreen = mechScreen;
+        currentScreen = partScreens[0];
+        toAttach = mech.GetComponent<MechComp>();
+        playerPrefab.GetComponent<MechDriver>().findColliders();
     }
 
     public void createMech(int selection)
     {
-        mech = Instantiate(mechPrefabs[selection], playerPrefab.transform);
-        toAttach = mech.GetComponent<MechComp>();
-        mech.transform.SetParent(playerPrefab.transform);
+        //leftover in case mech creation is involving picking mechs again
     }
 
     public void AddGun(int gun)
@@ -41,12 +40,6 @@ public class MechBuilder : MonoBehaviour
         currentScreen.SetActive(false);
         partScreens[screen].SetActive(true);
         currentScreen = partScreens[screen];
-    }
-
-    public void backToMechScreen(int current)
-    {
-        partScreens[current].SetActive(false);
-        mechScreen.SetActive(true);
     }
 
     public void removeLastGun()
