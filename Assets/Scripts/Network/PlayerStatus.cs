@@ -38,12 +38,14 @@ namespace Prototype.NetworkLobby
             lobbyManager.CheckRoundOver();
         }
 
-        public void SetVictoryText(string text)
+        [ClientRpc]
+        public void RpcSetVictoryText(string text)
         {
             victoryText.GetComponent<Text>().text = text;
         }
 
-        public void SetTextActive(bool active)
+        [ClientRpc]
+        public void RpcSetTextActive(bool active)
         {
             victoryText.SetActive(active);
         }
