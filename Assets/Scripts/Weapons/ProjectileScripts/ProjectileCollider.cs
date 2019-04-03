@@ -48,7 +48,11 @@ public class ProjectileCollider : NetworkBehaviour
 
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.GetComponentInParent<DamageOverNetwork>().DamagePlayer(damage, collision.gameObject.name, collision.gameObject.GetComponentInParent<NetworkIdentity>());
+            DamageOverNetwork dmgHandler = collision.gameObject.GetComponent<DamageOverNetwork>();
+            NetworkIdentity id = collision.gameObject.GetComponent<NetworkIdentity>();
+            string hitBoxName = collision.GetContact(0).otherCollider.gameObject.name;
+            Debug.Log(hitBoxName);
+            dmgHandler.DamagePlayer(damage, hitBoxName, id);
         }
 
         if (collision.gameObject.CompareTag("Building"))

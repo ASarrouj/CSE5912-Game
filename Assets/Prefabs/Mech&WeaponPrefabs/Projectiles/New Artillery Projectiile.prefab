@@ -127,7 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosion: {fileID: 1000011797152326, guid: acf39d9f4addf294d93fa56fa373961b, type: 3}
   clip: {fileID: 8300000, guid: 9caaffa2c14eddf44928418382cb4ecf, type: 3}
-  damage: 10
+  damage: 50
 --- !u!114 &4275061348303119460
 MonoBehaviour:
   m_ObjectHideFlags: 0
