@@ -65,7 +65,7 @@ public class MechDriver : MonoBehaviour
 
         frontLeftCollider.steerAngle = turnAngle;
         frontRightCollider.steerAngle = turnAngle;
-        Debug.Log(rb.velocity.magnitude * Mathf.Sign(velLimit));
+        //Debug.Log(rb.velocity.magnitude * Mathf.Sign(velLimit));
 
         for (int i = 0; i < allColliders.Count; i++)
         {
