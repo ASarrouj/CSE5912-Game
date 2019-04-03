@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 5863196659231249071}
   m_Layer: 0
   m_Name: MachineGun
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -319,6 +319,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5432795628689478992}
     m_Modifications:
+    - target: {fileID: 195198, guid: ba8d7f7d02a92d9429a17beba429f0ff, type: 3}
+      propertyPath: m_Name
+      value: YellowFireMuzzleFlash
+      objectReference: {fileID: 0}
+    - target: {fileID: 195198, guid: ba8d7f7d02a92d9429a17beba429f0ff, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 479570, guid: ba8d7f7d02a92d9429a17beba429f0ff, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -374,14 +382,6 @@ PrefabInstance:
     - target: {fileID: 479570, guid: ba8d7f7d02a92d9429a17beba429f0ff, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.37500048
-      objectReference: {fileID: 0}
-    - target: {fileID: 195198, guid: ba8d7f7d02a92d9429a17beba429f0ff, type: 3}
-      propertyPath: m_Name
-      value: YellowFireMuzzleFlash
-      objectReference: {fileID: 0}
-    - target: {fileID: 195198, guid: ba8d7f7d02a92d9429a17beba429f0ff, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 19847732, guid: ba8d7f7d02a92d9429a17beba429f0ff, type: 3}
       propertyPath: InitialModule.startSizeY.minMaxState

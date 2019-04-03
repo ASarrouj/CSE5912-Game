@@ -236,7 +236,7 @@ GameObject:
   - component: {fileID: 6516192656357096717}
   m_Layer: 0
   m_Name: Artillery2
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
