@@ -1635,7 +1635,9 @@ MonoBehaviour:
   - {fileID: 518053524009791844}
   - {fileID: 8728658586116080592}
   - {fileID: 9066408655554981794}
+  - {fileID: 8951559970811914079}
   self: {fileID: 4537626250507772418}
+  selfInput: {fileID: 0}
   coreHealth: 100
   healthValues: 
   maxSpeed: 0

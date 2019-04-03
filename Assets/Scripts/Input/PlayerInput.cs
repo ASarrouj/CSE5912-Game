@@ -30,7 +30,7 @@ public class PlayerInput : NetworkBehaviour
         }
         else
         {
-            slotInputs = new List<string> { "Perspective2", "Perspective3", "Perspective4"};
+            slotInputs = new List<string> { "Perspective2", "Perspective3", "Perspective4", "Perspective5"};
             slots = new List<Transform>();
             playerMech = transform.Find("NewMechWithSlots");
             camManager = transform.Find("PlayerCamera").GetComponent<CameraManager>();
@@ -53,6 +53,10 @@ public class PlayerInput : NetworkBehaviour
             slots.Add(playerMech.Find("LeftGun").GetChild(0));
         }
         else if (trackSpot == 2)
+        {
+            slots.Add(playerMech.Find("RightGun").GetChild(0));
+        }
+        else if (trackSpot == 3)
         {
             slots.Add(playerMech.Find("RearGun").GetChild(0));
             uiManager.CreateSwitcherUI(this);
