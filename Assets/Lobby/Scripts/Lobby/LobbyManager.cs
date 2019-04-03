@@ -67,7 +67,7 @@ namespace Prototype.NetworkLobby
         private int roundCount;
 
         private int totalPlayersEver = 0;
-        private float matchStartTime;
+        private float roundStartTime;
 
         void Start()
         {
@@ -87,6 +87,13 @@ namespace Prototype.NetworkLobby
             playerStatuses = new List<PlayerStatus>();
         }
 
+        private void Update()
+        {
+            if (Time.time > roundStartTime + roundLengthSeconds)
+            {
+                CheckRoundOver();
+            }
+        }
 
         public override void OnLobbyClientSceneChanged(NetworkConnection conn)
         {
@@ -379,7 +386,7 @@ namespace Prototype.NetworkLobby
                 }
             }
 
-            bool roundTimeout = Time.time > matchStartTime + roundLengthSeconds;
+            bool roundTimeout = Time.time > roundStartTime + roundLengthSeconds;
 
             if (destroyedPlayerCount >= numPlayers - 1 || roundTimeout)
             {
@@ -462,7 +469,7 @@ namespace Prototype.NetworkLobby
                 playerStatuses.Add(o.GetComponent<PlayerStatus>());
             }
 
-            matchStartTime = Time.time;
+            roundStartTime = Time.time;
         }
 
         private IEnumerator EndMatch()
@@ -570,7 +577,7 @@ namespace Prototype.NetworkLobby
             }
 
             ServerChangeScene(playScene);
-            matchStartTime = Time.time;
+            roundStartTime = Time.time;
         }
 
         // ----------------- Client callbacks ------------------
