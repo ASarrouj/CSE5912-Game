@@ -46,19 +46,19 @@ public class PlayerInput : NetworkBehaviour
     {
         if (trackSpot == 0)
         {
-            slots.Add(playerMech.Find("FrontGun").GetChild(0));
+            slots.Add(playerMech.Find("FrontGun").GetChild(1));
         }
         else if (trackSpot == 1)
         {
-            slots.Add(playerMech.Find("LeftGun").GetChild(0));
+            slots.Add(playerMech.Find("LeftGun").GetChild(1));
         }
         else if (trackSpot == 2)
         {
-            slots.Add(playerMech.Find("RightGun").GetChild(0));
+            slots.Add(playerMech.Find("RightGun").GetChild(1));
         }
         else if (trackSpot == 3)
         {
-            slots.Add(playerMech.Find("RearGun").GetChild(0));
+            slots.Add(playerMech.Find("RearGun").GetChild(1));
             uiManager.CreateSwitcherUI(this);
             // Begin game by interpolating to mech
             PrepareMechPerspec();
@@ -103,10 +103,12 @@ public class PlayerInput : NetworkBehaviour
         DisableInput();
         lastKeyIndex = slots.IndexOf(slot);
         uiManager.ChangeSlotHighlight(lastKeyIndex);
+        Debug.Log("ok");
 
         if (slot.tag == "Weapon")
         {
             camManager.AttachToWeapon(slot);
+            Debug.Log("ok");
         }
         else if (slot.tag == "RepairTool")
         {
