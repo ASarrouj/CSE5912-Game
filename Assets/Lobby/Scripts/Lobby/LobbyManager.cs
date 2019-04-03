@@ -570,6 +570,7 @@ namespace Prototype.NetworkLobby
             }
 
             ServerChangeScene(playScene);
+            matchStartTime = Time.time;
         }
 
         // ----------------- Client callbacks ------------------
