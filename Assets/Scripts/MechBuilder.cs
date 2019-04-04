@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 
-public class MechBuilder : MonoBehaviour
+public class MechBuilder : NetworkBehaviour
 {
 
     public GameObject self;
@@ -13,16 +14,23 @@ public class MechBuilder : MonoBehaviour
     public GameObject[] partScreens;
     public GameObject[] guns;
     private GameObject currentScreen;
-    
+
 
     public GameObject mech;
     private MechComp toAttach;
 
     private void Start()
     {
-        currentScreen = partScreens[0];
-        toAttach = mech.GetComponent<MechComp>();
-        playerPrefab.GetComponent<MechDriver>().findColliders();
+        if (!isLocalPlayer)
+        {
+            self.SetActive(false);
+        }
+        else
+        {
+            currentScreen = partScreens[0];
+            toAttach = mech.GetComponent<MechComp>();
+            playerPrefab.GetComponent<MechDriver>().findColliders();
+        }
     }
 
     public void createMech(int selection)
@@ -60,3 +68,4 @@ public class MechBuilder : MonoBehaviour
         self.SetActive(false);
     }
 }
+
