@@ -46,6 +46,7 @@ namespace Prototype.NetworkLobby
         [Space]
         [Header("Match Settings")]
         public int numRounds = 3;
+        public int roundLengthSeconds = 180;
 
         //Client numPlayers from NetworkManager is always 0, so we count (throught connect/destroy in LobbyPlayer) the number
         //of players, so that even client know how many player there is.
@@ -64,6 +65,10 @@ namespace Prototype.NetworkLobby
 
         private List<PlayerStatus> playerStatuses;
         private int roundCount;
+
+        private int totalPlayersEver = 0;
+        private float roundStartTime;
+
         void Start()
         {
             s_Singleton = this;
@@ -80,6 +85,14 @@ namespace Prototype.NetworkLobby
             SetServerInfo("Offline", "None");
 
             playerStatuses = new List<PlayerStatus>();      
+        }
+
+        private void Update()
+        {
+            if (Time.time > roundStartTime + roundLengthSeconds)
+            {
+                CheckRoundOver();
+            }
         }
 
         public override void OnLobbyClientSceneChanged(NetworkConnection conn)
@@ -354,11 +367,18 @@ namespace Prototype.NetworkLobby
                 obj.transform.rotation = startPos.rotation;
             }
 
+            totalPlayersEver++;
+
             return obj;
         }
 
         public void CheckRoundOver()
         {
+            if (totalPlayersEver < 2)
+            {
+                return;
+            }
+
             int destroyedPlayerCount = 0;
             foreach (PlayerStatus s in playerStatuses)
             {
@@ -368,7 +388,9 @@ namespace Prototype.NetworkLobby
                 }
             }
 
-            if (false)//destroyedPlayerCount >= numPlayers - 1)
+            bool roundTimeout = Time.time > roundStartTime + roundLengthSeconds;
+
+            if (destroyedPlayerCount >= numPlayers - 1 || roundTimeout)
             {
                 roundCount++;
                 if (roundCount >= numRounds)
@@ -377,13 +399,13 @@ namespace Prototype.NetworkLobby
                     {
                         if (s.Destroyed == false)
                         {
-                            s.SetVictoryText("Victory");
+                            s.RpcSetVictoryText("Victory");
                         }
                         else
                         {
-                            s.SetVictoryText("Defeat");
+                            s.RpcSetVictoryText("Defeat");
                         }
-                        s.SetTextActive(true);
+                        s.RpcSetTextActive(true);
                         StartCoroutine(EndMatch());
                     }
                 }
@@ -393,25 +415,32 @@ namespace Prototype.NetworkLobby
                     {
                         if (s.Destroyed == false)
                         {
-                            s.SetVictoryText("Round Win");
+                            if (roundTimeout)
+                            {
+                                s.RpcSetVictoryText("Round Tie");
+                            }
+                            else
+                            {
+                                s.RpcSetVictoryText("Round Win");
+                            }
                         }
                         else
                         {
-                            s.SetVictoryText("Round Loss");
+                            s.RpcSetVictoryText("Round Loss");
                         }
-                        s.SetTextActive(true);
+                        s.RpcSetTextActive(true);
                     }
                     StartCoroutine(NewRound());
                 }
             }
         }
-
+        
         private IEnumerator NewRound()
         {
             yield return new WaitForSecondsRealtime(3);
             foreach (PlayerStatus s in playerStatuses)
             {
-                s.SetTextActive(false);
+                s.RpcSetTextActive(false);
             }
             Debug.Log("coroutine");
             List<GameObject> newPlayers = new List<GameObject>();
@@ -441,6 +470,8 @@ namespace Prototype.NetworkLobby
             {
                 playerStatuses.Add(o.GetComponent<PlayerStatus>());
             }
+
+            roundStartTime = Time.time;
         }
 
         private IEnumerator EndMatch()
@@ -482,8 +513,8 @@ namespace Prototype.NetworkLobby
         {
             //This hook allows you to apply state data from the lobby-player to the game-player
             //just subclass "LobbyHook" and add it to the lobby object.
-            Debug.Log("!!!!!!!!");
-            if (SceneManager.GetActiveScene().name == "TerrainTest")
+            
+            if (SceneManager.GetActiveScene().name == "Moon")
             {
                 
                 TerrainGenerator tg = GameObject.Find("Terrain").GetComponent<TerrainGenerator>();
@@ -574,6 +605,7 @@ namespace Prototype.NetworkLobby
             }
 
             ServerChangeScene(playScene);
+            roundStartTime = Time.time;
         }
 
         // ----------------- Client callbacks ------------------

@@ -2025,7 +2025,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: CityMap
+  m_Text: City
 --- !u!222 &653434783
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8800,7 +8800,7 @@ MonoBehaviour:
   m_OnlineScene: 
   m_SpawnPrefabs:
   - {fileID: 319536895269049431, guid: 6123532ebe6b5e54fa6b1a01da8c0aa5, type: 3}
-  - {fileID: 3730385914984413709, guid: 9234a7ae65db59d4caeba18db8c216bb, type: 3}
+  - {fileID: 2777939086679988639, guid: c607f0ffc704ca7489fa348c373cc37e, type: 3}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
@@ -8865,7 +8865,7 @@ MonoBehaviour:
   m_GamePlayerPrefab: {fileID: 319536895269049431, guid: a4acbbd34642b224d8782bdb148d7392,
     type: 3}
   m_LobbyScene: Main Menu
-  m_PlayScene: CityMap
+  m_PlayScene: City
   lobbySlots: []
   prematchCountdown: 3
   topPanel: {fileID: 1562863846}
@@ -11968,7 +11968,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1569409730
 GameObject:
   m_ObjectHideFlags: 0
@@ -13463,9 +13463,9 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: CityMap
+    - m_Text: City
       m_Image: {fileID: 0}
-    - m_Text: TerrainTest
+    - m_Text: Moon
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:

@@ -30,19 +30,36 @@ public class PlayerInput : NetworkBehaviour
         }
         else
         {
-            slotInputs = new List<string> { "Perspective2", "Perspective3", "Perspective4"};
+            slotInputs = new List<string> { "Perspective2", "Perspective3", "Perspective4", "Perspective5"};
             slots = new List<Transform>();
-            playerMech = transform.Find("NewMechWithGuns");
-            slots.Add(playerMech.Find("FrontGun").GetChild(0));
-            slots.Add(playerMech.Find("LeftGun").GetChild(0));
-            slots.Add(playerMech.Find("RearGun").GetChild(0));
-
+            playerMech = transform.Find("NewMechWithSlots");
             camManager = transform.Find("PlayerCamera").GetComponent<CameraManager>();
             camManager.SetInput(this);
 
             uiManager = transform.Find("UI").GetComponent<UIManager>();
-            uiManager.CreateSwitcherUI(this);
 
+
+        }
+    }
+
+    public void addGun(int trackSpot)
+    {
+        if (trackSpot == 0)
+        {
+            slots.Add(playerMech.Find("FrontGun").GetChild(1));
+        }
+        else if (trackSpot == 1)
+        {
+            slots.Add(playerMech.Find("LeftGun").GetChild(1));
+        }
+        else if (trackSpot == 2)
+        {
+            slots.Add(playerMech.Find("RightGun").GetChild(1));
+        }
+        else if (trackSpot == 3)
+        {
+            slots.Add(playerMech.Find("RearGun").GetChild(1));
+            uiManager.CreateSwitcherUI(this);
             // Begin game by interpolating to mech
             PrepareMechPerspec();
         }
@@ -52,7 +69,7 @@ public class PlayerInput : NetworkBehaviour
     {
         if (isLocalPlayer)
         {
-            inputState.Update(input);
+             inputState.Update(input);
         }
     }
 
@@ -86,12 +103,18 @@ public class PlayerInput : NetworkBehaviour
         DisableInput();
         lastKeyIndex = slots.IndexOf(slot);
         uiManager.ChangeSlotHighlight(lastKeyIndex);
+        Debug.Log("ok");
 
         if (slot.tag == "Weapon")
         {
             camManager.AttachToWeapon(slot);
+            Debug.Log("ok");
         }
         else if (slot.tag == "RepairTool")
+        {
+            camManager.FollowMech(transform);
+        }
+        else if (slot.tag == "MineDeployer")
         {
             camManager.FollowMech(transform);
         }
@@ -113,6 +136,10 @@ public class PlayerInput : NetworkBehaviour
         {
             inputState = new RepairState(transform);
             uiManager.MechUI();
+        }
+        else if (slots[lastKeyIndex].tag == "MineDeployer")
+        {
+            inputState = new MineState(transform);
         }
     }
 

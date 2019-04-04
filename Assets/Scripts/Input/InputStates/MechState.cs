@@ -10,6 +10,8 @@ public class MechState : IInputState
     private MechDriver driver;
     private int maxSpeed, speedStep;
     private bool ignoreStick;
+    private float nextJump;
+    private float jumpCoolDown = 5.0f;
 
     public MechState(Transform playerTransform)
     {
@@ -57,6 +59,13 @@ public class MechState : IInputState
                 if (Input.GetButton("ResetRotation"))
                 {
                     driver.ResetRotation();
+                }
+
+                if (Input.GetButtonDown("Jump") && Time.time > nextJump)
+                {
+                    nextJump = Time.time + jumpCoolDown;
+                    driver.jump();
+
                 }
 
                 if (Input.GetButtonDown("Left Click"))
@@ -139,6 +148,5 @@ public class MechState : IInputState
 
                 break;
         }
-        
     }
 }

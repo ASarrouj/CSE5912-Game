@@ -48,6 +48,7 @@ public class TerrainGenerator : MonoBehaviour
         spawnRadius = glassDome.localScale.x / 2 - 30;
         playersSpawnedCount = 0;
 
+        Random.InitState(1);
         int instancePerBuilding = 6;
         for (int i = 0; i < instancePerBuilding; i++)
         {
@@ -70,6 +71,7 @@ public class TerrainGenerator : MonoBehaviour
 
     private void DiamondSquareAlgo()
     {
+        Random.InitState(1);
         for (int i = maxIndex; i > 1; i = i / 2)
         {
             int midpoint = i / 2;
@@ -141,13 +143,14 @@ public class TerrainGenerator : MonoBehaviour
     public Vector3 getSpawnPoint()
     {
         Vector3 spawnPoint = new Vector3(0, 0, 0);
-        float deg = 0;
+        
         int i = playersSpawnedCount;
+        float deg = i*45;
 
         Vector3 platPos = new Vector3(Mathf.Cos(deg), 0, Mathf.Sin(deg)) * spawnRadius + glassDome.transform.position;
         platPos.y = terrain.SampleHeight(platPos) + 2;
         deg += 2f * Mathf.PI / spawnPos.Length;
-        Instantiate(spawnPlatform, platPos, Quaternion.identity);
+        NetworkServer.Spawn(Instantiate(spawnPlatform, platPos, Quaternion.identity));
         spawnPoint = platPos + new Vector3(0, 5, 0);
         playersSpawnedCount++;
 

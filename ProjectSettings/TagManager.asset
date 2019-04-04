@@ -11,6 +11,7 @@ TagManager:
   - Building
   - Menu
   - RepairTool
+  - MineDeployer
   layers:
   - Default
   - TransparentFX

@@ -1,34 +1,37 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
 
-public class RepairState : IInputState
+public class MineState : IInputState
 {
+    private Transform minePrefab;
     private PlayerInput playerInput;
     private List<string> otherSlotInputs;
-    private ObjectPooler hitEffectPool;
     private List<Transform> otherSlots;
+    private int lastKeyIndex;
+    private MineDeployer mineDeployer;
     private MechDriver driver;
-    private int maxSpeed, speedStep, lastKeyIndex;
 
-    public RepairState(Transform playerTransform)
+    public MineState(Transform playerTransform)
     {
         playerInput = playerTransform.GetComponent<PlayerInput>();
-        lastKeyIndex = playerInput.lastKeyIndex;
 
+        lastKeyIndex = playerInput.lastKeyIndex;
+        minePrefab = playerInput.slots[lastKeyIndex];
         otherSlotInputs = new List<string>(playerInput.slotInputs);
         otherSlotInputs.RemoveAt(lastKeyIndex);
         otherSlots = new List<Transform>(playerInput.slots);
         otherSlots.RemoveAt(lastKeyIndex);
+        mineDeployer = minePrefab.GetComponent<MineDeployer>();
         driver = playerInput.transform.GetComponent<MechDriver>();
-
-        hitEffectPool = GameObject.Find("MGImpactPool").GetComponent<ObjectPooler>();
     }
 
     public void Update(PlayerInput.InputType inputType)
     {
-        playerInput.CheckUI();
+        if (Input.GetButtonDown("Escape"))
+        {
+            playerInput.ToggleMenu();
+        }
 
         switch (inputType)
         {
@@ -45,35 +48,6 @@ public class RepairState : IInputState
                     {
                         playerInput.PrepareSlotPerspec(otherSlots[i]);
                     }
-                }
-
-                if (Input.GetButtonDown("RightClick"))
-                {
-                    Ray ray = playerInput.CreateRayFromMouseClick();
-                    RaycastHit hit;
-
-                    if (Physics.Raycast(ray, out hit, 50f))
-                    {
-                        if (hit.collider.gameObject.tag == "Mech")
-                        {
-                            GameObject hitEffect = hitEffectPool.GetObject();
-                            hitEffect.transform.position = hit.point;
-                            hitEffect.transform.rotation = Quaternion.identity;
-                            hitEffect.SetActive(true);
-
-                            hit.collider.gameObject.GetComponent<DamageOverNetwork>().HealPlayer(1, hit.collider.gameObject.name, playerInput.transform.GetComponent<NetworkIdentity>());
-                        }
-                    }
-                }
-
-                if (Input.GetButtonDown("Left Click"))
-                {
-                    playerInput.SetDragOrigin();
-                }
-
-                if (Input.GetButton("Left Click"))
-                {
-                    playerInput.DragCamera();
                 }
 
                 if (Input.GetButtonDown("Forward"))
@@ -141,6 +115,11 @@ public class RepairState : IInputState
                 }
 
                 break;
+        }
+
+        if (Input.GetButton("Fire1"))
+        {
+            mineDeployer.DeployMine();
         }
     }
 }
