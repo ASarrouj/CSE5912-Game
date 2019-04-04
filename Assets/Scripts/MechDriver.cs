@@ -6,13 +6,13 @@ using UnityEngine;
 public class MechDriver : MonoBehaviour
 {
     private const float wheelTorque = 1000;
-    private float maxVelocity = 20;
+    private float maxVelocity = 10;
     private float velLimit;
-    private const float velDelta = 5;
+    private const float velDelta = 2;
 
     private float turnAngle;
     private const float maxTurnAngle = 25;
-    private const float turnDelta = 0.20f;
+    private const float turnDelta = 0.5f;
     private float maxEngineVolume;
 
     private WheelCollider frontLeftCollider, frontRightCollider;
@@ -24,6 +24,8 @@ public class MechDriver : MonoBehaviour
 
     private LineRenderer lr;
     public int pathPredictorLength = 600;
+    public float thrust = 150000;
+    public bool canJump = false;
     private GameObject future;
 
     void Start()
@@ -149,6 +151,11 @@ public class MechDriver : MonoBehaviour
         {
             transform.Rotate(1 * Time.deltaTime, 0, 0);
         }
+    }
+
+    public void jump()
+    {
+        if (canJump) { rb.AddRelativeForce(new Vector3(0, 1, 9) * thrust, ForceMode.Impulse); }
     }
 
     private void UpdateWheelPositions(WheelCollider collider, Transform wheel)
