@@ -2,75 +2,70 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 public class ScoreManager : NetworkBehaviour
 {
-    public int[] Score;
+    public SyncListInt SyncListIntScores = new SyncListInt();
 
     private GameObject[] players;
+    public Scoreboard scoreboard;
 
     public delegate void OnMatchStart();
     public event OnMatchStart onMatchStart;
 
-    static public ScoreManager singleton;
-
-    private void Awake() {
-        singleton = this;
-    }
-
     // Start is called before the first frame update
     void Start()
     {
+        name = "ScoreManager";
         DontDestroyOnLoad(gameObject);
+        Invoke("MatchStart", 1);
+
     }
 
-    private void OnLevelWasLoaded(int level) {
-        
-        if (level > 0) {
-            Invoke("MatchStart", 3);
-        }
+    void Awake() {
+        SyncListIntScores.Callback = Test;
     }
 
-    private void MatchStart() {
+    void Test(SyncList<int>.Operation op, int itemIndex) {
+        Debug.Log("Score " + itemIndex + " changed: " + op);
+    }
+
+    private void MatchStart() {       
         players = GameObject.FindGameObjectsWithTag("Player");
-        Score = new int[players.Length];
-        for (int i = 0; i < players.Length; i++) {
-            Score[i] = 0;
-            if (isServer) GetPlayerIndices();
-        }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void GetPlayerIndices() {
-        /*
-        for (int i = 0; i < players.Length; i++) {
-            if (NetworkManager.singleton.client.connection.playerControllers[0].gameObject == players[i]) {
-                RpcAssignPlayerIndex(i);     
+        if (isServer) {
+            for (int i = 0; i < players.Length; i++) {
+                SyncListIntScores.Add(0);
             }
         }
-        */
-    }
-
-    [ClientRpc]
-    private void RpcAssignPlayerIndex(int i) {  
-        players[i].GetComponent<Score>().GetPlayerIndex(i);
     }
 
     public void UpdateScore(int index, int value) {
-        if (isServer) {
-            Score[index] = value;
-        } /*else {
-            CmdUpdateScore(index, value);
-        } */
+        //SyncListIntScores[index] = value;
+          SyncListIntScores.RemoveAt(index);
+          SyncListIntScores.Insert(index, value);
+        scoreboard.UpdateScores();
+        RpcUpdateScore(index);
     }
 
     [Command]
-    private void CmdUpdateScore(int index, int value) {
-        Score[index] = value;
+    public void CmdUpdateScore(int index, int value) {
+        Debug.Log("Cmd: " + index + ", " + value);
+        Debug.Log("sync1: " + SyncListIntScores[index]);
+        SyncListIntScores.RemoveAt(index);
+        SyncListIntScores.Insert(index, value);
+        SyncListIntScores.Dirty(index);
+        
+        Debug.Log("sync2: " + SyncListIntScores[index]);
+    }
+
+    [ClientRpc]
+    private void RpcUpdateScore(int index) {//, int value) {
+        Debug.Log("Rpc: " + index);// + ", " + value);
+        Debug.Log("sync1: " + SyncListIntScores[index]);
+        //SyncListIntScores[index] = value;
+        SyncListIntScores.Dirty(index);
+        scoreboard.UpdateScores();
+        Debug.Log("sync2: " + SyncListIntScores[index]);
     }
 }

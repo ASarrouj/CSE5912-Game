@@ -32,6 +32,7 @@ public class UIManager : MonoBehaviour
         NavHUD.SetActive(false);
         MenuHUD.SetActive(false);
         GunHUD.SetActive(false);
+        ScoreboardUI(false);
 
         Cursor.visible = false;
     }
@@ -86,7 +87,7 @@ public class UIManager : MonoBehaviour
 
     public void ScoreboardUI(bool show)
     {
-        ScoreHUD.SetActive(show);
+        ScoreHUD.GetComponent<Canvas>().enabled = show;
     }
 
     public void DisableDynamicUI()

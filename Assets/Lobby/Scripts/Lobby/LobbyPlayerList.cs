@@ -66,5 +66,9 @@ namespace Prototype.NetworkLobby
                 ++i;
             }
         }
+
+        public int GetPlayerIndex(LobbyPlayer player) {
+            return _players.IndexOf(player);
+        }
     }
 }
