@@ -11,12 +11,6 @@ namespace Prototype.NetworkLobby
         public GameObject victoryText;
 
         private bool destroyed;
-        private RoundsManager roundsManager;
-
-        private void Awake()
-        {
-            roundsManager = GameObject.Find("RoundsManager").GetComponent<RoundsManager>();
-        }
 
         public bool Destroyed
         {
@@ -35,7 +29,7 @@ namespace Prototype.NetworkLobby
 
         public void OnDestroyed()
         {
-            roundsManager.CheckRoundOver();
+            GameObject.Find("RoundsManager").GetComponent<RoundsManager>().CheckRoundOver();
         }
 
         [ClientRpc]

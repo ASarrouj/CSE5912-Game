@@ -458,7 +458,10 @@ namespace Prototype.NetworkLobby
             }
 
             ServerChangeScene(playScene);
-            DontDestroyOnLoad(GameObject.Instantiate(roundsManagerPrefab));
+            GameObject roundManager = GameObject.Instantiate(roundsManagerPrefab);
+            roundManager.name = "RoundsManager";
+            DontDestroyOnLoad(roundManager);
+            
         }
 
         // ----------------- Client callbacks ------------------
