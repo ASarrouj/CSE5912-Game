@@ -562,7 +562,7 @@ namespace Prototype.NetworkLobby
 
         public void CreateScoreManager() {
             if (GameObject.Find("ScoreManager") == null) {
-                GameObject sm = Instantiate(spawnPrefabs[1]);
+                GameObject sm = Instantiate(spawnPrefabs[2]);
                 NetworkServer.Spawn(sm);
                 sm.name = "ScoreManager";
                 sm.SetActive(true);

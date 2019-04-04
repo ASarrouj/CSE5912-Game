@@ -18,6 +18,7 @@ public class Score : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        CmdSpawnSM();
         score = 0;
         UpdateScoreText();       
         playerStatus = transform.root.GetComponent<PlayerStatus>();
@@ -53,6 +54,11 @@ public class Score : NetworkBehaviour
 
     private void UpdateScoreText() {
         scoreText.text = "Score: " + score.ToString();
+    }
+
+    [Command]
+    private void CmdSpawnSM() {
+        GameObject.Find("LobbyManager").GetComponent<LobbyManager>().CreateScoreManager();
     }
 
 }

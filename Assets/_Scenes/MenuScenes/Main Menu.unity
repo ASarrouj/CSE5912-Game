@@ -8801,6 +8801,7 @@ MonoBehaviour:
   m_SpawnPrefabs:
   - {fileID: 319536895269049431, guid: 6123532ebe6b5e54fa6b1a01da8c0aa5, type: 3}
   - {fileID: 2777939086679988639, guid: c607f0ffc704ca7489fa348c373cc37e, type: 3}
+  - {fileID: 3730385914984413709, guid: 9234a7ae65db59d4caeba18db8c216bb, type: 3}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
@@ -8883,6 +8884,7 @@ MonoBehaviour:
   statusInfo: {fileID: 1562853022}
   hostInfo: {fileID: 1562840228}
   numRounds: 3
+  roundLengthSeconds: 180
   _playerNumber: 0
   _isMatchmaking: 0
 --- !u!114 &1562781862
