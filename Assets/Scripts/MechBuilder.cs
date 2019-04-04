@@ -35,6 +35,12 @@ public class MechBuilder : MonoBehaviour
         toAttach.AttachGunInOrder(guns[gun]);
     }
 
+    public void AddAntiGravity(int gun)
+    {
+        toAttach.AttachGunInOrder(guns[gun]);
+        playerPrefab.GetComponent<MechDriver>().canJump = true;
+    }
+
     public void moveToGunScreen(int screen)
     {
         currentScreen.SetActive(false);
