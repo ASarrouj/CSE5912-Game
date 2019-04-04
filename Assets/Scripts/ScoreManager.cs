@@ -20,11 +20,10 @@ public class ScoreManager : NetworkBehaviour
         name = "ScoreManager";
         DontDestroyOnLoad(gameObject);
         Invoke("MatchStart", 1);
-
     }
 
     void Awake() {
-        SyncListIntScores.Callback = Test;
+        //SyncListIntScores.Callback = Test;
     }
 
     void Test(SyncList<int>.Operation op, int itemIndex) {
@@ -41,31 +40,13 @@ public class ScoreManager : NetworkBehaviour
     }
 
     public void UpdateScore(int index, int value) {
-        //SyncListIntScores[index] = value;
-          SyncListIntScores.RemoveAt(index);
-          SyncListIntScores.Insert(index, value);
-        scoreboard.UpdateScores();
-        RpcUpdateScore(index);
-    }
-
-    [Command]
-    public void CmdUpdateScore(int index, int value) {
-        Debug.Log("Cmd: " + index + ", " + value);
-        Debug.Log("sync1: " + SyncListIntScores[index]);
-        SyncListIntScores.RemoveAt(index);
-        SyncListIntScores.Insert(index, value);
-        SyncListIntScores.Dirty(index);
-        
-        Debug.Log("sync2: " + SyncListIntScores[index]);
+        SyncListIntScores[index] = value;
+        scoreboard.UpdateScore(index, value);
+        RpcUpdateScoreboard(index, value);
     }
 
     [ClientRpc]
-    private void RpcUpdateScore(int index) {//, int value) {
-        Debug.Log("Rpc: " + index);// + ", " + value);
-        Debug.Log("sync1: " + SyncListIntScores[index]);
-        //SyncListIntScores[index] = value;
-        SyncListIntScores.Dirty(index);
-        scoreboard.UpdateScores();
-        Debug.Log("sync2: " + SyncListIntScores[index]);
+    private void RpcUpdateScoreboard(int index, int value) {
+        scoreboard.UpdateScore(index, value);
     }
 }

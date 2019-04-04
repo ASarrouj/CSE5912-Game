@@ -13,7 +13,7 @@ public class Scoreboard : MonoBehaviour
     private int pCount;
 
     void Start() {
-        Invoke("MatchStart", 3);
+        Invoke("MatchStart", 2);
     }
 
     void MatchStart()
@@ -40,17 +40,6 @@ public class Scoreboard : MonoBehaviour
 
     public void UpdateScore(int i, int sc) {
         scoreText[i].text = sc.ToString();
-    }
-
-
-    public void UpdateScores() {
-        for (int i = 0; i < pCount; i++) {
-            scoreText[i].text = scoreManager.SyncListIntScores[i].ToString();
-        }
-    }
-
-    private void Update() {
-        
     }
 }
 
