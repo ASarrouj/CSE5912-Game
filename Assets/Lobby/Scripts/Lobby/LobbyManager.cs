@@ -15,6 +15,8 @@ namespace Prototype.NetworkLobby
 
         static public LobbyManager s_Singleton;
 
+        private List<PlayerStatus> statuses;
+        public List<PlayerStatus> Statuses { get { return statuses; } }
 
         [Header("Unity UI Lobby")]
         [Tooltip("Time in second between all players ready & match start")]
@@ -47,6 +49,9 @@ namespace Prototype.NetworkLobby
         [Header("Match Settings")]
         public int numRounds = 3;
 
+        [Header("Object References")]
+        public GameObject roundsManagerPrefab;
+
         //Client numPlayers from NetworkManager is always 0, so we count (throught connect/destroy in LobbyPlayer) the number
         //of players, so that even client know how many player there is.
         [HideInInspector]
@@ -61,11 +66,6 @@ namespace Prototype.NetworkLobby
         protected ulong _currentMatchID;
 
         protected LobbyHook _lobbyHooks;
-
-        private List<PlayerStatus> playerStatuses;
-        private int roundCount;
-
-        private int totalPlayersEver = 0;
 
         void Start()
         {
@@ -82,7 +82,7 @@ namespace Prototype.NetworkLobby
 
             SetServerInfo("Offline", "None");
 
-            playerStatuses = new List<PlayerStatus>();
+            statuses = new List<PlayerStatus>();
         }
 
 
@@ -340,8 +340,8 @@ namespace Prototype.NetworkLobby
             GameObject obj = Instantiate(gamePlayerPrefab.gameObject) as GameObject;
 
             PlayerStatus status = obj.GetComponent<PlayerStatus>();
-            playerStatuses.Add(status);
-            Debug.Log(playerStatuses);
+            statuses.Add(status);
+            Debug.Log(statuses);
 
             // get start position from base class
             Transform startPos = GetStartPosition();
@@ -356,106 +356,7 @@ namespace Prototype.NetworkLobby
                 obj.transform.rotation = startPos.rotation;
             }
 
-            totalPlayersEver++;
-
             return obj;
-        }
-
-        public void CheckRoundOver()
-        {
-            if (totalPlayersEver < 2)
-            {
-                return;
-            }
-
-            int destroyedPlayerCount = 0;
-            foreach (PlayerStatus s in playerStatuses)
-            {
-                if (s.Destroyed == true)
-                {
-                    destroyedPlayerCount++;
-                }
-            }
-
-            if (destroyedPlayerCount >= numPlayers - 1)
-            {
-                roundCount++;
-                if (roundCount >= numRounds)
-                {
-                    foreach (PlayerStatus s in playerStatuses)
-                    {
-                        if (s.Destroyed == false)
-                        {
-                            s.RpcSetVictoryText("Victory");
-                        }
-                        else
-                        {
-                            s.RpcSetVictoryText("Defeat");
-                        }
-                        s.RpcSetTextActive(true);
-                        StartCoroutine(EndMatch());
-                    }
-                }
-                else
-                {
-                    foreach (PlayerStatus s in playerStatuses)
-                    {
-                        if (s.Destroyed == false)
-                        {
-                            s.RpcSetVictoryText("Round Win");
-                        }
-                        else
-                        {
-                            s.RpcSetVictoryText("Round Loss");
-                        }
-                        s.RpcSetTextActive(true);
-                    }
-                    StartCoroutine(NewRound());
-                }
-            }
-        }
-        
-        private IEnumerator NewRound()
-        {
-            yield return new WaitForSecondsRealtime(3);
-            foreach (PlayerStatus s in playerStatuses)
-            {
-                s.RpcSetTextActive(false);
-            }
-            Debug.Log("coroutine");
-            List<GameObject> newPlayers = new List<GameObject>();
-            for (int i = 0; i < playerStatuses.Count; i++)
-            {
-                GameObject obj = Instantiate(gamePlayerPrefab.gameObject) as GameObject;
-                newPlayers.Add(obj);
-
-                // get start position from base class
-                Transform startPos = GetStartPosition();
-                if (startPos != null)
-                {
-                    obj.transform.position = startPos.transform.position;
-                    obj.transform.rotation = startPos.rotation;
-                }
-                else
-                {
-                    obj.transform.position = startPos.transform.position;
-                    obj.transform.rotation = startPos.rotation;
-                }
-                NetworkServer.ReplacePlayerForConnection(playerStatuses[i].connectionToClient, obj, playerStatuses[i].playerControllerId);
-                Destroy(playerStatuses[i].gameObject);
-            }
-            playerStatuses.Clear();
-
-            foreach (GameObject o in newPlayers)
-            {
-                playerStatuses.Add(o.GetComponent<PlayerStatus>());
-            }
-        }
-
-        private IEnumerator EndMatch()
-        {
-            yield return new WaitForSecondsRealtime(3);
-            SendReturnToLobby();
         }
 
         public override void OnLobbyServerPlayerRemoved(NetworkConnection conn, short playerControllerId)
@@ -557,6 +458,7 @@ namespace Prototype.NetworkLobby
             }
 
             ServerChangeScene(playScene);
+            DontDestroyOnLoad(GameObject.Instantiate(roundsManagerPrefab));
         }
 
         // ----------------- Client callbacks ------------------
