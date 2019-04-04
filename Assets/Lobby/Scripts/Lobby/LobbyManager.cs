@@ -46,6 +46,7 @@ namespace Prototype.NetworkLobby
         [Space]
         [Header("Match Settings")]
         public int numRounds = 3;
+        public int roundLengthSeconds = 180;
 
         //Client numPlayers from NetworkManager is always 0, so we count (throught connect/destroy in LobbyPlayer) the number
         //of players, so that even client know how many player there is.
@@ -66,6 +67,7 @@ namespace Prototype.NetworkLobby
         private int roundCount;
 
         private int totalPlayersEver = 0;
+        private float roundStartTime;
 
         void Start()
         {
@@ -85,6 +87,13 @@ namespace Prototype.NetworkLobby
             playerStatuses = new List<PlayerStatus>();
         }
 
+        private void Update()
+        {
+            if (Time.time > roundStartTime + roundLengthSeconds)
+            {
+                CheckRoundOver();
+            }
+        }
 
         public override void OnLobbyClientSceneChanged(NetworkConnection conn)
         {
@@ -377,7 +386,9 @@ namespace Prototype.NetworkLobby
                 }
             }
 
-            if (destroyedPlayerCount >= numPlayers - 1)
+            bool roundTimeout = Time.time > roundStartTime + roundLengthSeconds;
+
+            if (destroyedPlayerCount >= numPlayers - 1 || roundTimeout)
             {
                 roundCount++;
                 if (roundCount >= numRounds)
@@ -402,7 +413,14 @@ namespace Prototype.NetworkLobby
                     {
                         if (s.Destroyed == false)
                         {
-                            s.RpcSetVictoryText("Round Win");
+                            if (roundTimeout)
+                            {
+                                s.RpcSetVictoryText("Round Tie");
+                            }
+                            else
+                            {
+                                s.RpcSetVictoryText("Round Win");
+                            }
                         }
                         else
                         {
@@ -450,6 +468,8 @@ namespace Prototype.NetworkLobby
             {
                 playerStatuses.Add(o.GetComponent<PlayerStatus>());
             }
+
+            roundStartTime = Time.time;
         }
 
         private IEnumerator EndMatch()
@@ -557,6 +577,7 @@ namespace Prototype.NetworkLobby
             }
 
             ServerChangeScene(playScene);
+            roundStartTime = Time.time;
         }
 
         // ----------------- Client callbacks ------------------
