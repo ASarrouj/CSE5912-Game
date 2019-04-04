@@ -123,6 +123,14 @@ namespace Prototype.NetworkLobby
         {
             yield return new WaitForSecondsRealtime(3);
             lobbyManager.SendReturnToLobby();
+            RpcEnableCursor();
+            Destroy(gameObject);
+        }
+
+        [ClientRpc]
+        void RpcEnableCursor()
+        {
+            Cursor.visible = true;
         }
     }
 }
