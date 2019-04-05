@@ -28,10 +28,6 @@ public class ProjectileShoot : MonoBehaviour, IWeapon
         {
             Plot(gameObject.transform.position, projectileForce * bulletSpawn.forward, .1f, 3f);
         }
-        if(Input.GetKeyDown("space"))
-        {
-            Shoot();
-        }
     }
 
     public void ToggleActive()
@@ -72,23 +68,6 @@ public class ProjectileShoot : MonoBehaviour, IWeapon
     }
 
     void IWeapon.Shoot()
-    {
-        if (Time.time > nextFireTime)
-        {
-            nextFireTime = Time.time + fireRate;
-
-            GameObject projectile = roundPool.GetObject();
-            projectile.transform.position = bulletSpawn.position+bulletSpawn.forward*.4f;
-            projectile.transform.rotation = bulletSpawn.rotation;
-            projectile.transform.Rotate(new Vector3(90, 0, 0));
-            projectile.SetActive(true);
-            projectile.GetComponent<Rigidbody>().velocity=new Vector3(0f,0f,0f);
-            projectile.GetComponent<Rigidbody>().AddForce(bulletSpawn.forward * projectileForce,ForceMode.Impulse);
-            //projectile.GetComponent<ProjectileCollider>().Force(bulletSpawn.forward * projectileForce);
-            StartCoroutine(ShotEffect());
-        }
-    }
-        void Shoot()
     {
         if (Time.time > nextFireTime)
         {
