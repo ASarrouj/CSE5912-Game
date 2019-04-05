@@ -18,7 +18,7 @@ public class MineController : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collision collision)
     {
         if (collision.transform.tag == "Player" && armed == true)
         {
