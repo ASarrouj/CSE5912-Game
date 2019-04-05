@@ -24,7 +24,7 @@ namespace Prototype.NetworkLobby
 
         private void Start()
         {
-            Destroyed = false;
+            destroyed = false;
         }
 
         public void OnDestroyed()
