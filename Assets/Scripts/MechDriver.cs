@@ -7,10 +7,10 @@ public class MechDriver : MonoBehaviour
 {
     private const float wheelTorque = 1000;
     private float maxVelocity = 10;
-    private float velLimit;
+    public float velLimit;
     private const float velDelta = 2;
 
-    private float turnAngle;
+    public float turnAngle;
     private const float maxTurnAngle = 25;
     private const float turnDelta = 0.5f;
     private float maxEngineVolume;

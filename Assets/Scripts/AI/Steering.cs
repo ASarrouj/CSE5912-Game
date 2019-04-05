@@ -7,7 +7,7 @@ namespace AI {
     {
         public bool ShowDebugTarget = false;
 
-        private MoveTest mechStats;
+        private MechDriver mechDriver;
         private readonly int rotateStep = 5;
         private readonly int speedStep = 4;
         private readonly float angleThreshold = 10;
@@ -23,7 +23,7 @@ namespace AI {
         void Awake()
         {
             rb = gameObject.GetComponent<Rigidbody>();
-            mechStats = GetComponent<MoveTest>();
+            mechDriver = GetComponent<MechDriver>();
             avoid = GetComponent<Avoidance>();;      
         }
 
@@ -54,30 +54,22 @@ namespace AI {
             } else if (angle < - angleThreshold) {
                 SteerLeft();
             } else {
-                mechStats.rotateSpeed = 0;
-                if (mechStats.moveSpeed < maxSpeed) {
-                    mechStats.moveSpeed += speedStep;
-                }
+                mechDriver.turnAngle = 0;
+                mechDriver.Accelerate();
             }
         }
 
         private void SteerRight() {
-            if (mechStats.rotateSpeed < maxAngle) {
-                mechStats.moveSpeed = speedStep;
-                mechStats.rotateSpeed += rotateStep;
-            }
+            mechDriver.TurnRight();
         }
 
         private void SteerLeft() {
-            if (mechStats.rotateSpeed > - maxAngle) {
-                mechStats.moveSpeed = speedStep;
-                mechStats.rotateSpeed -= rotateStep;
-            }
+            mechDriver.TurnLeft();
         }
 
         public void Stop() {
-            mechStats.moveSpeed = 0;
-            mechStats.rotateSpeed = 0;
+            mechDriver.velLimit = 0;
+            mechDriver.turnAngle = 0;
         }   
 
         public Vector3 Arrive(Vector3 targetposition) {

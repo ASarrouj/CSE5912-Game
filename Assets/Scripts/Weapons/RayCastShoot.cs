@@ -12,8 +12,8 @@ public class RayCastShoot : MonoBehaviour, IWeapon
     public Transform gunEnd;
     public ParticleSystem gunSmoke;
     public GameObject muzzleFlash;
+    public Camera gunCamera;
 
-    private Camera gunCamera;
     private ObjectPooler hitEffectPool;
     private LineRenderer lineRenderer;
     private WaitForSeconds shotLength = new WaitForSeconds(0.05f);
@@ -34,7 +34,7 @@ public class RayCastShoot : MonoBehaviour, IWeapon
         score = transform.root.GetComponent<Score>();
     }
 
-    public void GetCameraAndScore(Camera cam, Text toGetScore)
+    public void GetCameraAndScore(Camera cam)
     {
         gunCamera = cam;
         //score = toGetScore.GetComponent<Score>();

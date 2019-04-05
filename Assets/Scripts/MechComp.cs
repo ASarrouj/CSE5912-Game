@@ -55,7 +55,7 @@ public class MechComp : MonoBehaviour
             selfInput.addGun(trackSpot);
             if (guns[trackSpot].name.Equals("MachineGun(Clone)"))
             {
-                guns[trackSpot].GetComponent<RayCastShoot>().GetCameraAndScore(viewCam, scoreStuff);
+                guns[trackSpot].GetComponent<RayCastShoot>().GetCameraAndScore(viewCam);
             }
             trackSpot++;
         }
