@@ -11,7 +11,7 @@ public class UIManager : MonoBehaviour
     private List<GameObject> slotImages;
     public GameObject slotImageTemplate;
     private Vector3 slotPos, slotPosDelta;
-    public Sprite mechSprite, repairSprite, machineGunSprite, artillerySprite, mineSprite;
+    public Sprite mechSprite, repairSprite, machineGunSprite, artillerySprite;
 
     // Start is called before the first frame update
     void Start()
@@ -59,10 +59,6 @@ public class UIManager : MonoBehaviour
             else if (input.slots[i - 1].tag == "RepairTool")
             {
                 slotImages[i].transform.Find("SlotSprite").GetComponent<Image>().sprite = repairSprite;
-            }
-            else if (input.slots[i - 1].tag == "MineDeployer")
-            {
-                slotImages[i].transform.Find("SlotSprite").GetComponent<Image>().sprite = mineSprite;
             }
 
             slotPos += slotPosDelta;
