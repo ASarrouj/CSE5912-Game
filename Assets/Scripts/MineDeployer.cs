@@ -28,9 +28,9 @@ public class MineDeployer : MonoBehaviour
             RaycastHit hit;
             Physics.Raycast(transform.position, Vector3.down, out hit);
 
-            if (hit.collider.gameObject.tag == "Ground")
+            if (hit.collider.gameObject.layer == 8)
             {
-                Instantiate(minePrefab, hit.transform.position, Quaternion.identity);
+                Instantiate(minePrefab, hit.point, Quaternion.identity);
             }
 
             timeStamp = Time.time + reloadTime;

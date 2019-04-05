@@ -33,6 +33,12 @@ public class MineState : IInputState
             playerInput.ToggleMenu();
         }
 
+
+        if (Input.GetButton("Fire1"))
+        {
+            mineDeployer.DeployMine();
+        }
+
         switch (inputType)
         {
 
@@ -115,11 +121,6 @@ public class MineState : IInputState
                 }
 
                 break;
-        }
-
-        if (Input.GetButton("Fire1"))
-        {
-            mineDeployer.DeployMine();
         }
     }
 }
