@@ -10,14 +10,14 @@ public class ArtilleryRotation
     float sensitive=1.0f;
         public ArtilleryRotation(Transform weapon)
     {
-        this.weapon = weapon;
-        Rigidbody rb = weapon.GetComponent<Rigidbody>();
+        //this.weapon = weapon;
+        /*Rigidbody rb = weapon.GetComponent<Rigidbody>();
         if (rb)
             rb.freezeRotation = true;
-        originalRotation = weapon.localRotation;
+        originalRotation = weapon.localRotation;*/
     }
     public void Update(PlayerInput.InputType inputType)
     {
-        weaponBase.Rotate();
+        //weaponBase.Rotate();
     }
 }
