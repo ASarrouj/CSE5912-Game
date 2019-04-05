@@ -83,7 +83,7 @@ public class UIManager : MonoBehaviour
     public void MenuUI()
     {
         MenuHUD.SetActive(!MenuHUD.activeSelf);
-        //Cursor.visible = !Cursor.visible;
+        Cursor.visible = MenuHUD.activeSelf;
         GunHUD.SetActive(false);
     }
 
