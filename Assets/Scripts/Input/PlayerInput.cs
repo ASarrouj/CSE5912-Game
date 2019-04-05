@@ -148,8 +148,14 @@ public class PlayerInput : NetworkBehaviour
         inputState = new DisabledState();
     }
 
-    public void ToggleMenu() {
-        uiManager.MenuUI();
+    public void CheckUI() {
+        if (Input.GetButtonDown("Tab")) {
+            uiManager.ScoreboardUI(true);
+        } else if (Input.GetButtonUp("Tab")) {
+            uiManager.ScoreboardUI(false);
+        } else if (Input.GetButtonDown("Escape")) {
+            uiManager.MenuUI();
+        }
     }
 
     public void DragCamera()

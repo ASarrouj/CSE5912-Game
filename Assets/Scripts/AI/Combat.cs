@@ -6,7 +6,8 @@ namespace AI {
     public class Combat : MonoBehaviour
     {
         private Transform mech;
-        public Transform[] weapons;
+
+        private Transform[] weapons;
 
         private Transform currentWep;
         private IWeapon input;
@@ -31,7 +32,7 @@ namespace AI {
         private int wepIndex = -1;
         private int updateCount = 0, wepCheckTime = 10;
 
-        void Awake()
+        void Start()
         {
             targeting = GetComponent<PlayerTargeting>();
 
@@ -43,10 +44,14 @@ namespace AI {
                     break;
                 }
             }
+            Invoke("GetWeapons", 0);
+        }
 
+        private void GetWeapons() {
             weapons[1] = (mech.Find("FrontGun").GetChild(0));
             weapons[2] = (mech.Find("LeftGun").GetChild(0));
-            //weapons.Add(mech.Find("RightGun").GetChild(0));
+            //weapons[3] = (mech.Find("RightGun").GetChild(0));
+            //weapons[4] = (mech.Find("RearGun").GetChild(0));
 
 
             SelectWeapon(1);
@@ -55,7 +60,6 @@ namespace AI {
             //currentWep.GetComponent<LineRenderer>().enabled = true;
 
             GetCurrentWeaponType();
-
         }
 
         // Update is called once per frame

@@ -5537,7 +5537,6 @@ MonoBehaviour:
   gunEnd: {fileID: 3980076580784771681}
   gunSmoke: {fileID: 198000011441735220, guid: 85a8865d1bf4a63478038fae23776de8, type: 3}
   muzzleFlash: {fileID: 847175624113218449}
-  scoreText: {fileID: 0}
 --- !u!1 &1629614697000898089
 GameObject:
   m_ObjectHideFlags: 0
@@ -15931,7 +15930,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8232608009927797723
 Transform:
   m_ObjectHideFlags: 0
@@ -15969,6 +15968,9 @@ MonoBehaviour:
   guns: []
   positions: []
   self: {fileID: 4537626250507772418}
+  selfInput: {fileID: 0}
+  viewCam: {fileID: 0}
+  scoreStuff: {fileID: 0}
   coreHealth: 100
   healthValues: 64000000640000006400000064000000
   maxSpeed: 8

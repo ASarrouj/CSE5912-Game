@@ -10,7 +10,7 @@ public class SpawnButton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameObject spawnerObj = GameObject.Find("AI_Spawner");
+        GameObject spawnerObj = GameObject.Find("AISpawner");
         if (spawnerObj != null) spawner = spawnerObj.GetComponent<AI_Spawner>();
     }
 

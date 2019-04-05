@@ -30,7 +30,7 @@ public class MineState : IInputState
     {
         if (Input.GetButtonDown("Escape"))
         {
-            playerInput.ToggleMenu();
+            //playerInput.ToggleMenu();
         }
 
         switch (inputType)

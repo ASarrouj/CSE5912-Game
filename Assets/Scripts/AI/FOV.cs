@@ -11,7 +11,7 @@ namespace AI {
         private GameObject leftFOV, rightFOV; 
         private Mesh leftMesh, rightMesh;
         private readonly float visionAngle = 90;
-        private readonly float visionDepth = 5;
+        private readonly float visionDepth = 10;
 
         void Awake()
         {

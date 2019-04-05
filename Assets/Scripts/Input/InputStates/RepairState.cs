@@ -28,10 +28,7 @@ public class RepairState : IInputState
 
     public void Update(PlayerInput.InputType inputType)
     {
-        if (Input.GetButtonDown("Escape"))
-        {
-            playerInput.ToggleMenu();
-        }
+        playerInput.CheckUI();
 
         switch (inputType)
         {

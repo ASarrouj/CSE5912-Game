@@ -7,10 +7,10 @@ public class MechDriver : MonoBehaviour
 {
     private const float wheelTorque = 1000;
     private float maxVelocity = 10;
-    private float velLimit;
+    public float velLimit;
     private const float velDelta = 2;
 
-    private float turnAngle;
+    public float turnAngle;
     private const float maxTurnAngle = 25;
     private const float turnDelta = 0.5f;
     private float maxEngineVolume;
@@ -28,17 +28,19 @@ public class MechDriver : MonoBehaviour
     public bool canJump = false;
     public bool canShield = false;
     private GameObject future;
-
     private float nextJump;
     private float jumpCoolDown = 5.0f;
+
+    private void Awake() {
+        allColliders = new List<WheelCollider>();
+        allWheels = new List<Transform>();
+    }
 
     void Start()
     {
         turnAngle = 0;
         velLimit = 0;
 
-        allColliders = new List<WheelCollider>();
-        allWheels = new List<Transform>();
         rb = GetComponent<Rigidbody>();
         mechSounds = GetComponents<AudioSource>();
         maxEngineVolume = mechSounds[0].volume;
@@ -71,6 +73,10 @@ public class MechDriver : MonoBehaviour
 
         frontLeftCollider.steerAngle = turnAngle;
         frontRightCollider.steerAngle = turnAngle;
+
+        //frontLeftWheel.rotation = Quaternion.Euler(frontLeftWheel.localRotation.eulerAngles.x, frontLeftWheel.localRotation.eulerAngles.y, turnAngle);
+        //frontRightWheel.rotation = Quaternion.Euler(frontRightWheel.localRotation.eulerAngles.x, frontRightWheel.localRotation.eulerAngles.y, turnAngle);
+
         //Debug.Log(rb.velocity.magnitude * Mathf.Sign(velLimit));
 
         for (int i = 0; i < allColliders.Count; i++)

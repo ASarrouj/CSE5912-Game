@@ -82,7 +82,6 @@ namespace Prototype.NetworkLobby
             DontDestroyOnLoad(gameObject);
 
             SetServerInfo("Offline", "None");
-
             statuses = new List<PlayerStatus>();
         }
 
@@ -133,6 +132,8 @@ namespace Prototype.NetworkLobby
                 //backDelegate = StopGameClbk;
                 topPanel.isInGame = true;
                 topPanel.ToggleVisibility(false);
+
+                //Invoke("CreateScoreManager", 1);
             }
         }
 
@@ -404,6 +405,11 @@ namespace Prototype.NetworkLobby
 
             if (_lobbyHooks)
                 _lobbyHooks.OnLobbyServerSceneLoadedForPlayer(this, lobbyPlayer, gamePlayer);
+            
+            LobbyPlayer l = lobbyPlayer.GetComponent<LobbyPlayer>();
+            PlayerStatus s = gamePlayer.GetComponent<PlayerStatus>();
+            s.OnMyIndex(LobbyPlayerList._instance.GetPlayerIndex(l));
+            s.OnMyName(l.playerName);
 
             return true;
         }
@@ -415,16 +421,37 @@ namespace Prototype.NetworkLobby
             bool allready = true;
             for (int i = 0; i < lobbySlots.Length; ++i)
             {
-                if (lobbySlots[i] != null)
+                if (lobbySlots[i] != null) {
                     allready &= lobbySlots[i].readyToBegin;
+                }
             }
 
-            if (allready)
-                StartCoroutine(ServerCountdownCoroutine());
+            if (allready) {
+                for (int i = 0; i < lobbySlots.Length; i++) {
+                    if (lobbySlots[i] != null) {
+                        //playerStatuses[i].playerName = (lobbySlots[i] as LobbyPlayer).playerName;
+                        //Debug.Log(i);
+                        //Debug.Log(lobbySlots[i]);
+                        // Debug.Log(lobbySlots[i].gameObject.GetComponent<PlayerStatus>());
+                        //(lobbySlots[i] as LobbyPlayer).playerName = (lobbySlots[i] as LobbyPlayer).playerName;
+                    }
+                }
+            }
+            StartCoroutine(ServerCountdownCoroutine());
+        }
+
+        public void CreateScoreManager() {
+            if (GameObject.Find("ScoreManager") == null) {
+                GameObject sm = Instantiate(spawnPrefabs[2]);
+                NetworkServer.Spawn(sm);
+                sm.name = "ScoreManager";
+                sm.SetActive(true);
+            }
         }
 
         public IEnumerator ServerCountdownCoroutine()
         {
+            
             float remainingTime = prematchCountdown;
             int floorTime = Mathf.FloorToInt(remainingTime);
 
