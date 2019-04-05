@@ -8598,11 +8598,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: CoreBar
       objectReference: {fileID: 0}
-    - target: {fileID: 8963902717116864593, guid: 4ce40eb0d1da14be68c087e6a485b60e,
-        type: 3}
-      propertyPath: m_Name
-      value: RearBar
-      objectReference: {fileID: 0}
     - target: {fileID: 2791865709358068480, guid: 4ce40eb0d1da14be68c087e6a485b60e,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -8663,21 +8658,6 @@ PrefabInstance:
       propertyPath: m_Color.g
       value: 0.9803922
       objectReference: {fileID: 0}
-    - target: {fileID: 6659164443099831004, guid: 4ce40eb0d1da14be68c087e6a485b60e,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 0.6627451
-      objectReference: {fileID: 0}
-    - target: {fileID: 6659164443099831004, guid: 4ce40eb0d1da14be68c087e6a485b60e,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 0.97647065
-      objectReference: {fileID: 0}
-    - target: {fileID: 6659164443099831004, guid: 4ce40eb0d1da14be68c087e6a485b60e,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 0.97647065
-      objectReference: {fileID: 0}
     - target: {fileID: 6589078816120188818, guid: 4ce40eb0d1da14be68c087e6a485b60e,
         type: 3}
       propertyPath: m_Color.r
@@ -8693,6 +8673,11 @@ PrefabInstance:
       propertyPath: m_Color.b
       value: 0.9803922
       objectReference: {fileID: 0}
+    - target: {fileID: 8963902717116864593, guid: 4ce40eb0d1da14be68c087e6a485b60e,
+        type: 3}
+      propertyPath: m_Name
+      value: RearBar
+      objectReference: {fileID: 0}
     - target: {fileID: 7701763951485001809, guid: 4ce40eb0d1da14be68c087e6a485b60e,
         type: 3}
       propertyPath: m_Color.b
@@ -8782,6 +8767,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.b
       value: 0.19215688
+      objectReference: {fileID: 0}
+    - target: {fileID: 6659164443099831004, guid: 4ce40eb0d1da14be68c087e6a485b60e,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.6627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 6659164443099831004, guid: 4ce40eb0d1da14be68c087e6a485b60e,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.97647065
+      objectReference: {fileID: 0}
+    - target: {fileID: 6659164443099831004, guid: 4ce40eb0d1da14be68c087e6a485b60e,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.97647065
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ce40eb0d1da14be68c087e6a485b60e, type: 3}
