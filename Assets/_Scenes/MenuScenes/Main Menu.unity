@@ -8883,6 +8883,8 @@ MonoBehaviour:
   statusInfo: {fileID: 1562853022}
   hostInfo: {fileID: 1562840228}
   numRounds: 3
+  roundsManagerPrefab: {fileID: 3061610968443225320, guid: 67b2c5db991fb454eaa466828cfedd19,
+    type: 3}
   _playerNumber: 0
   _isMatchmaking: 0
 --- !u!114 &1562781862

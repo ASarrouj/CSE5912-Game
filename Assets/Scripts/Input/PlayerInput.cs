@@ -69,7 +69,7 @@ public class PlayerInput : NetworkBehaviour
     {
         if (isLocalPlayer)
         {
-            inputState.Update(input);
+             inputState.Update(input);
         }
     }
 

@@ -68,6 +68,15 @@ namespace Prototype.NetworkLobby
 
         protected LobbyHook _lobbyHooks;
 
+<<<<<<< HEAD
+        private List<PlayerStatus> playerStatuses;
+        private int roundCount;
+
+        private int totalPlayersEver = 0;
+        private float roundStartTime;
+
+=======
+>>>>>>> EndOfMatch2
         void Start()
         {
             s_Singleton = this;
@@ -84,6 +93,14 @@ namespace Prototype.NetworkLobby
             SetServerInfo("Offline", "None");
 
             statuses = new List<PlayerStatus>();
+        }
+
+        private void Update()
+        {
+            if (Time.time > roundStartTime + roundLengthSeconds)
+            {
+                CheckRoundOver();
+            }
         }
 
         public override void OnLobbyClientSceneChanged(NetworkConnection conn)
@@ -359,6 +376,117 @@ namespace Prototype.NetworkLobby
             return obj;
         }
 
+<<<<<<< HEAD
+        public void CheckRoundOver()
+        {
+            if (totalPlayersEver < 2)
+            {
+                return;
+            }
+
+            int destroyedPlayerCount = 0;
+            foreach (PlayerStatus s in playerStatuses)
+            {
+                if (s.Destroyed == true)
+                {
+                    destroyedPlayerCount++;
+                }
+            }
+
+            bool roundTimeout = Time.time > roundStartTime + roundLengthSeconds;
+
+            if (destroyedPlayerCount >= numPlayers - 1 || roundTimeout)
+            {
+                roundCount++;
+                if (roundCount >= numRounds)
+                {
+                    foreach (PlayerStatus s in playerStatuses)
+                    {
+                        if (s.Destroyed == false)
+                        {
+                            s.RpcSetVictoryText("Victory");
+                        }
+                        else
+                        {
+                            s.RpcSetVictoryText("Defeat");
+                        }
+                        s.RpcSetTextActive(true);
+                        StartCoroutine(EndMatch());
+                    }
+                }
+                else
+                {
+                    foreach (PlayerStatus s in playerStatuses)
+                    {
+                        if (s.Destroyed == false)
+                        {
+                            if (roundTimeout)
+                            {
+                                s.RpcSetVictoryText("Round Tie");
+                            }
+                            else
+                            {
+                                s.RpcSetVictoryText("Round Win");
+                            }
+                        }
+                        else
+                        {
+                            s.RpcSetVictoryText("Round Loss");
+                        }
+                        s.RpcSetTextActive(true);
+                    }
+                    StartCoroutine(NewRound());
+                }
+            }
+        }
+        
+        private IEnumerator NewRound()
+        {
+            yield return new WaitForSecondsRealtime(3);
+            foreach (PlayerStatus s in playerStatuses)
+            {
+                s.RpcSetTextActive(false);
+            }
+            Debug.Log("coroutine");
+            List<GameObject> newPlayers = new List<GameObject>();
+            for (int i = 0; i < playerStatuses.Count; i++)
+            {
+                GameObject obj = Instantiate(gamePlayerPrefab.gameObject) as GameObject;
+                newPlayers.Add(obj);
+
+                // get start position from base class
+                Transform startPos = GetStartPosition();
+                if (startPos != null)
+                {
+                    obj.transform.position = startPos.transform.position;
+                    obj.transform.rotation = startPos.rotation;
+                }
+                else
+                {
+                    obj.transform.position = startPos.transform.position;
+                    obj.transform.rotation = startPos.rotation;
+                }
+                NetworkServer.ReplacePlayerForConnection(playerStatuses[i].connectionToClient, obj, playerStatuses[i].playerControllerId);
+                Destroy(playerStatuses[i].gameObject);
+            }
+            playerStatuses.Clear();
+
+            foreach (GameObject o in newPlayers)
+            {
+                playerStatuses.Add(o.GetComponent<PlayerStatus>());
+            }
+
+            roundStartTime = Time.time;
+        }
+
+        private IEnumerator EndMatch()
+        {
+            yield return new WaitForSecondsRealtime(3);
+            SendReturnToLobby();
+        }
+
+=======
+>>>>>>> EndOfMatch2
         public override void OnLobbyServerPlayerRemoved(NetworkConnection conn, short playerControllerId)
         {
             for (int i = 0; i < lobbySlots.Length; ++i)
@@ -458,10 +586,14 @@ namespace Prototype.NetworkLobby
             }
 
             ServerChangeScene(playScene);
+<<<<<<< HEAD
+            roundStartTime = Time.time;
+=======
             GameObject roundManager = GameObject.Instantiate(roundsManagerPrefab);
             roundManager.name = "RoundsManager";
             DontDestroyOnLoad(roundManager);
             
+>>>>>>> EndOfMatch2
         }
 
         // ----------------- Client callbacks ------------------
