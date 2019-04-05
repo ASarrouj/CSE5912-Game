@@ -370,7 +370,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 540246734}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2, y: 2, z: -5}
+  m_LocalPosition: {x: -2, y: 1, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -887,6 +887,11 @@ PrefabInstance:
         type: 3}
       propertyPath: projectileForce
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5699816000568081145, guid: 9363323f536b5fd458fe08d36bfef4bb,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9363323f536b5fd458fe08d36bfef4bb, type: 3}
