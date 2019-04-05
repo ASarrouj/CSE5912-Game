@@ -10,6 +10,11 @@ namespace Prototype.NetworkLobby
     {
         public GameObject victoryText;
 
+        [SyncVar(hook = "OnMyName")]
+        public string playerName = "";
+        [SyncVar(hook = "OnMyIndex")]
+        public int index = 0;
+
         private bool destroyed;
 
         public bool Destroyed
@@ -42,6 +47,14 @@ namespace Prototype.NetworkLobby
         public void RpcSetTextActive(bool active)
         {
             victoryText.SetActive(active);
+        }
+
+        public void OnMyName(string newName) {
+            playerName = newName;
+        }
+
+        public void OnMyIndex(int i) {
+            index = i;
         }
     }
 }

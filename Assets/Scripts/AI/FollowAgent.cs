@@ -16,7 +16,7 @@ namespace AI
         private Combat combat;
         private PlayerTargeting targeting;
 
-        private readonly float targetRadius = 20f;
+        private readonly float targetRadius = 10f;
 
         private void Awake() {
             follow = GetComponent<Follow>();

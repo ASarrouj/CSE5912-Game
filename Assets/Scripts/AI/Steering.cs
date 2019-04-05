@@ -7,12 +7,12 @@ namespace AI {
     {
         public bool ShowDebugTarget = false;
 
-        private MoveTest mechStats;
+        private MechDriver mechDriver;
         private readonly int rotateStep = 5;
         private readonly int speedStep = 4;
-        private readonly float angleThreshold = 10;
+        private readonly float angleThreshold = 25;
         private readonly int maxSpeed = 12;
-        private readonly int maxAngle = 30;
+        private readonly int maxAngle = 45;
 
         Rigidbody rb;
 
@@ -23,11 +23,12 @@ namespace AI {
         void Awake()
         {
             rb = gameObject.GetComponent<Rigidbody>();
-            mechStats = GetComponent<MoveTest>();
+            mechDriver = GetComponent<MechDriver>();
             avoid = GetComponent<Avoidance>();;      
         }
 
         void Start() {
+            GetComponent<MechDriver>().findColliders();
             if (ShowDebugTarget) {
                 debugTar = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 debugTar.GetComponent<Renderer>().material.color = Color.red;
@@ -46,38 +47,52 @@ namespace AI {
             float angle = Vector3.SignedAngle(transform.forward, linearAcceleration, Vector3.up);
 
             if (avoid.AvoidRight) {
+                BackUp();
                 SteerLeft();
             } else if (avoid.AvoidLeft) {
+                BackUp();
                 SteerRight();
             } else if (angle > angleThreshold) {
                 SteerRight();
             } else if (angle < - angleThreshold) {
                 SteerLeft();
             } else {
-                mechStats.rotateSpeed = 0;
-                if (mechStats.moveSpeed < maxSpeed) {
-                    mechStats.moveSpeed += speedStep;
+                mechDriver.turnAngle = 0;
+                mechDriver.Accelerate();
+                if (mechDriver.velLimit < maxSpeed) {
+                    mechDriver.velLimit += speedStep;
                 }
             }
         }
 
+        IEnumerator BackUp() {
+            mechDriver.turnAngle = 0;
+            mechDriver.velLimit = -speedStep;
+            yield return new WaitForSeconds(2f);
+        }
+
         private void SteerRight() {
-            if (mechStats.rotateSpeed < maxAngle) {
-                mechStats.moveSpeed = speedStep;
-                mechStats.rotateSpeed += rotateStep;
+            if (mechDriver.turnAngle < maxAngle) {
+                mechDriver.velLimit = speedStep;
+                mechDriver.turnAngle += rotateStep;
             }
+           // mechDriver.velLimit = 2;
+            //mechDriver.TurnRight();
         }
 
         private void SteerLeft() {
-            if (mechStats.rotateSpeed > - maxAngle) {
-                mechStats.moveSpeed = speedStep;
-                mechStats.rotateSpeed -= rotateStep;
+            if (mechDriver.turnAngle > -maxAngle) {
+                mechDriver.velLimit = speedStep;
+                mechDriver.turnAngle -= rotateStep;
             }
+            //mechDriver.velLimit = 2;
+            //mechDriver.TurnLeft();
         }
 
         public void Stop() {
-            mechStats.moveSpeed = 0;
-            mechStats.rotateSpeed = 0;
+            mechDriver.velLimit = 0;
+            //if (mechDriver.velLimit > 1) mechDriver.Decelerate();
+            mechDriver.turnAngle = 0;
         }   
 
         public Vector3 Arrive(Vector3 targetposition) {

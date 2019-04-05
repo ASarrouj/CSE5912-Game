@@ -12,9 +12,8 @@ public class RayCastShoot : MonoBehaviour, IWeapon
     public Transform gunEnd;
     public ParticleSystem gunSmoke;
     public GameObject muzzleFlash;
-    public Text scoreText;
+    public Camera gunCamera;
 
-    private Camera gunCamera;
     private ObjectPooler hitEffectPool;
     private LineRenderer lineRenderer;
     private WaitForSeconds shotLength = new WaitForSeconds(0.05f);
@@ -32,12 +31,13 @@ public class RayCastShoot : MonoBehaviour, IWeapon
     {
         lineRenderer = GetComponent<LineRenderer>();
         hitEffectPool = GameObject.Find("MGImpactPool").GetComponent<ObjectPooler>();
+        score = transform.root.GetComponent<Score>();
     }
 
-    public void GetCameraAndScore(Camera cam, Text toGetScore)
+    public void GetCameraAndScore(Camera cam)
     {
         gunCamera = cam;
-        score = toGetScore.GetComponent<Score>();
+        //score = toGetScore.GetComponent<Score>();
     }
 
     void IWeapon.Shoot()
@@ -74,7 +74,7 @@ public class RayCastShoot : MonoBehaviour, IWeapon
                         hit.rigidbody.AddForce(-hit.normal * 100f);
                         dmgOverNet.DamagePlayer(10, hit.collider.gameObject.name, hit.collider.transform.root.GetComponent<NetworkIdentity>());
                         if (player.GetComponent<PlayerHealth>().coreDestroyed) {
-                            score.scoreUp(scoreNum);
+                            score.ScoreUp(scoreNum);
                         }
                     }
                 }

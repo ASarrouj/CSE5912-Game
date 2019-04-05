@@ -25,7 +25,7 @@ namespace AI {
             hideAgent = GetComponent<HideAgent>();    
             followAgent = GetComponent<FollowAgent>();
             GetState();
-            coreDamage = transform.Find("NewMechWithGuns").Find("CoreHitbox").GetComponent<MechTakeDamage>();
+            coreDamage = transform.Find("NewMechWithSlots").Find("CoreHitbox").GetComponent<MechTakeDamage>();
             maxHP = coreDamage.health;
             defenseHP = maxHP / 2;
         }
