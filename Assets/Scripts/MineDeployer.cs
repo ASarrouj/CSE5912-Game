@@ -6,6 +6,7 @@ public class MineDeployer : MonoBehaviour
 {
 
     public GameObject minePrefab;
+    private Transform deployer;
     private float reloadTime, timeStamp;
 
     // Start is called before the first frame update
@@ -13,6 +14,7 @@ public class MineDeployer : MonoBehaviour
     {
         reloadTime = 2;
         timeStamp = 0;
+        deployer = transform.Find("Gun3");
     }
 
     // Update is called once per frame
@@ -26,7 +28,7 @@ public class MineDeployer : MonoBehaviour
         if (timeStamp <= Time.time)
         {
             RaycastHit hit;
-            Physics.Raycast(transform.position, Vector3.down, out hit);
+            Physics.Raycast(deployer.position, Vector3.down, out hit);
 
             if (hit.collider.gameObject.tag == "Ground")
             {

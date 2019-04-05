@@ -26,7 +26,10 @@ public class MechDriver : MonoBehaviour
     public int pathPredictorLength = 600;
     public float thrust = 150000;
     public bool canJump = false;
+    public bool canShield = false;
     private GameObject future;
+    private float nextJump;
+    private float jumpCoolDown = 5.0f;
 
     private void Awake() {
         allColliders = new List<WheelCollider>();
@@ -162,8 +165,17 @@ public class MechDriver : MonoBehaviour
 
     public void jump()
     {
-        if (canJump) { rb.AddRelativeForce(new Vector3(0, 1, 9) * thrust, ForceMode.Impulse); }
+        if (canJump && Time.time > nextJump) 
+        {
+            nextJump = Time.time + jumpCoolDown;
+            rb.AddRelativeForce(new Vector3(0, 1, 9) * thrust, ForceMode.Impulse);  
+        }
     }
+
+    public void shield() {
+        if (canShield) { GetComponent<DamageOverNetwork>().turnInvincible(); }
+    }
+
 
     private void UpdateWheelPositions(WheelCollider collider, Transform wheel)
     {

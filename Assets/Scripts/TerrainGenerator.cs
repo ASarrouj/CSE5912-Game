@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class TerrainGenerator : MonoBehaviour
+public class TerrainGenerator : NetworkBehaviour
 {
 
     private TerrainData terrainData;
@@ -23,9 +23,17 @@ public class TerrainGenerator : MonoBehaviour
 
     private int playersSpawnedCount;
 
+    [SyncVar]
+    private int randomSeed = 0;
+
     // Start is called before the first frame update
     void Awake()
     {
+        if (randomSeed == 0)
+        {
+            randomSeed = Random.Range(1, 9999);
+        }
+
         terrain = GetComponent<Terrain>();
         terrainData = terrain.terrainData;
         maxIndex = terrainData.heightmapWidth - 1;
@@ -48,7 +56,7 @@ public class TerrainGenerator : MonoBehaviour
         spawnRadius = glassDome.localScale.x / 2 - 30;
         playersSpawnedCount = 0;
 
-        Random.InitState(1);
+        Random.InitState(randomSeed);
         int instancePerBuilding = 6;
         for (int i = 0; i < instancePerBuilding; i++)
         {
@@ -71,7 +79,7 @@ public class TerrainGenerator : MonoBehaviour
 
     private void DiamondSquareAlgo()
     {
-        Random.InitState(1);
+        Random.InitState(randomSeed);
         for (int i = maxIndex; i > 1; i = i / 2)
         {
             int midpoint = i / 2;

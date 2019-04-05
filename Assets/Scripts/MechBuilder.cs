@@ -41,6 +41,12 @@ public class MechBuilder : MonoBehaviour
         playerPrefab.GetComponent<MechDriver>().canJump = true;
     }
 
+    public void AddShield(int gun)
+    {
+        toAttach.AttachGunInOrder(guns[gun]);
+        playerPrefab.GetComponent<MechDriver>().canShield = true;
+    }
+
     public void moveToGunScreen(int screen)
     {
         currentScreen.SetActive(false);
