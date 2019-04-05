@@ -6,7 +6,7 @@ public class MineDeployer : MonoBehaviour
 {
 
     public GameObject minePrefab;
-    private Transform gunEnd;
+    private Transform deployer;
     private float reloadTime, timeStamp;
 
     // Start is called before the first frame update
@@ -14,7 +14,7 @@ public class MineDeployer : MonoBehaviour
     {
         reloadTime = 2;
         timeStamp = 0;
-        gunEnd = transform.Find("GunEnd");
+        deployer = transform.Find("Gun3");
     }
 
     // Update is called once per frame
@@ -28,11 +28,11 @@ public class MineDeployer : MonoBehaviour
         if (timeStamp <= Time.time)
         {
             RaycastHit hit;
-            Physics.Raycast(gunEnd.position, Vector3.down, out hit);
+            Physics.Raycast(deployer.position, Vector3.down, out hit);
 
-            if (hit.collider.gameObject.layer == 8)
+            if (hit.collider.gameObject.tag == "Ground")
             {
-                Instantiate(minePrefab, hit.point, Quaternion.identity);
+                Instantiate(minePrefab, hit.transform.position, Quaternion.identity);
             }
 
             timeStamp = Time.time + reloadTime;

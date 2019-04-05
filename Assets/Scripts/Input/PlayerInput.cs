@@ -103,10 +103,12 @@ public class PlayerInput : NetworkBehaviour
         DisableInput();
         lastKeyIndex = slots.IndexOf(slot);
         uiManager.ChangeSlotHighlight(lastKeyIndex);
+        Debug.Log("ok");
 
         if (slot.tag == "Weapon")
         {
             camManager.AttachToWeapon(slot);
+            Debug.Log("ok");
         }
         else if (slot.tag == "RepairTool")
         {
@@ -138,7 +140,6 @@ public class PlayerInput : NetworkBehaviour
         else if (slots[lastKeyIndex].tag == "MineDeployer")
         {
             inputState = new MineState(transform);
-            uiManager.MechUI();
         }
     }
 

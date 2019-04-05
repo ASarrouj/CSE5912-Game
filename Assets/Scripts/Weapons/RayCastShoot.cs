@@ -78,10 +78,6 @@ public class RayCastShoot : MonoBehaviour, IWeapon
                         }
                     }
                 }
-                if (hit.collider.gameObject.tag == "Mine")
-                {
-                    hit.collider.gameObject.GetComponent<MineController>().BlowUpMine();
-                }
                 lineRenderer.SetPosition(0, gunEnd.position);
                 lineRenderer.SetPosition(1, hit.point);
 
