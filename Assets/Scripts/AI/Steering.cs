@@ -10,9 +10,9 @@ namespace AI {
         private MechDriver mechDriver;
         private readonly int rotateStep = 5;
         private readonly int speedStep = 4;
-        private readonly float angleThreshold = 10;
+        private readonly float angleThreshold = 25;
         private readonly int maxSpeed = 12;
-        private readonly int maxAngle = 30;
+        private readonly int maxAngle = 45;
 
         Rigidbody rb;
 
@@ -28,6 +28,7 @@ namespace AI {
         }
 
         void Start() {
+            GetComponent<MechDriver>().findColliders();
             if (ShowDebugTarget) {
                 debugTar = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 debugTar.GetComponent<Renderer>().material.color = Color.red;
@@ -46,8 +47,10 @@ namespace AI {
             float angle = Vector3.SignedAngle(transform.forward, linearAcceleration, Vector3.up);
 
             if (avoid.AvoidRight) {
+                BackUp();
                 SteerLeft();
             } else if (avoid.AvoidLeft) {
+                BackUp();
                 SteerRight();
             } else if (angle > angleThreshold) {
                 SteerRight();
@@ -56,19 +59,39 @@ namespace AI {
             } else {
                 mechDriver.turnAngle = 0;
                 mechDriver.Accelerate();
+                if (mechDriver.velLimit < maxSpeed) {
+                    mechDriver.velLimit += speedStep;
+                }
             }
         }
 
+        IEnumerator BackUp() {
+            mechDriver.turnAngle = 0;
+            mechDriver.velLimit = -speedStep;
+            yield return new WaitForSeconds(2f);
+        }
+
         private void SteerRight() {
-            mechDriver.TurnRight();
+            if (mechDriver.turnAngle < maxAngle) {
+                mechDriver.velLimit = speedStep;
+                mechDriver.turnAngle += rotateStep;
+            }
+           // mechDriver.velLimit = 2;
+            //mechDriver.TurnRight();
         }
 
         private void SteerLeft() {
-            mechDriver.TurnLeft();
+            if (mechDriver.turnAngle > -maxAngle) {
+                mechDriver.velLimit = speedStep;
+                mechDriver.turnAngle -= rotateStep;
+            }
+            //mechDriver.velLimit = 2;
+            //mechDriver.TurnLeft();
         }
 
         public void Stop() {
             mechDriver.velLimit = 0;
+            //if (mechDriver.velLimit > 1) mechDriver.Decelerate();
             mechDriver.turnAngle = 0;
         }   
 

@@ -528,6 +528,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd300021ecc78954e80729eeab5b2fd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  velLimit: 0
+  turnAngle: 0
   pathPredictorLength: 600
   thrust: 150000
   canJump: 0
@@ -743,7 +745,7 @@ PrefabInstance:
     - target: {fileID: 4537626250507772418, guid: 4f3ad8190074715489ad5fdb0d511c10,
         type: 3}
       propertyPath: m_Name
-      value: NewMechWithGuns
+      value: NewMechWithSlots
       objectReference: {fileID: 0}
     - target: {fileID: 8232608009927797723, guid: 4f3ad8190074715489ad5fdb0d511c10,
         type: 3}

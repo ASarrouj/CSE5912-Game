@@ -28,13 +28,16 @@ public class MechDriver : MonoBehaviour
     public bool canJump = false;
     private GameObject future;
 
+    private void Awake() {
+        allColliders = new List<WheelCollider>();
+        allWheels = new List<Transform>();
+    }
+
     void Start()
     {
         turnAngle = 0;
         velLimit = 0;
 
-        allColliders = new List<WheelCollider>();
-        allWheels = new List<Transform>();
         rb = GetComponent<Rigidbody>();
         mechSounds = GetComponents<AudioSource>();
         maxEngineVolume = mechSounds[0].volume;
