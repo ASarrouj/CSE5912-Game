@@ -11,12 +11,6 @@ namespace Prototype.NetworkLobby
         public GameObject victoryText;
 
         private bool destroyed;
-        private LobbyManager lobbyManager;
-
-        private void Awake()
-        {
-            lobbyManager = LobbyManager.s_Singleton;
-        }
 
         public bool Destroyed
         {
@@ -35,7 +29,7 @@ namespace Prototype.NetworkLobby
 
         public void OnDestroyed()
         {
-            lobbyManager.CheckRoundOver();
+            GameObject.Find("RoundsManager").GetComponent<RoundsManager>().CheckRoundOver();
         }
 
         [ClientRpc]
