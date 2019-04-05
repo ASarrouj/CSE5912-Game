@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4363283, g: 0.47471118, b: 0.514713, a: 1}
+  m_IndirectSpecularColor: {r: 0.4363283, g: 0.47471088, b: 0.5147126, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5816,7 +5816,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.494
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -8883,6 +8883,7 @@ MonoBehaviour:
   statusInfo: {fileID: 1562853022}
   hostInfo: {fileID: 1562840228}
   numRounds: 3
+  roundLengthSeconds: 180
   roundsManagerPrefab: {fileID: 3061610968443225320, guid: 67b2c5db991fb454eaa466828cfedd19,
     type: 3}
   _playerNumber: 0
