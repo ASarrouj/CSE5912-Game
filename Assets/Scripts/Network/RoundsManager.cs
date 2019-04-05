@@ -8,12 +8,14 @@ namespace Prototype.NetworkLobby
     public class RoundsManager : NetworkBehaviour
     {
         public int numRounds;
+        public int roundLengthSeconds = 180;
         public LobbyManager lobbyManager;
 
         private int roundCount;
         private int totalPlayersEver = 0;
         private List<PlayerStatus> playerStatuses;
         private int numPlayers;
+        private float roundStartTime;
 
         private void Awake()
         {
@@ -26,6 +28,34 @@ namespace Prototype.NetworkLobby
             totalPlayersEver = lobbyManager.numPlayers;
             roundCount = 0;
             playerStatuses = lobbyManager.Statuses;
+            roundStartTime = Time.time;
+
+        }
+
+        private void Update()
+        {
+            if (Time.time > roundStartTime + roundLengthSeconds)
+            {
+                roundCount++;
+                if (roundCount >= numRounds)
+                {
+                    foreach (PlayerStatus s in playerStatuses)
+                    {
+                        s.RpcSetVictoryText("Tie");
+                        s.RpcSetTextActive(true);
+                    }
+                    StartCoroutine(EndMatch());
+                }
+                else
+                {
+                    foreach (PlayerStatus s in playerStatuses)
+                    {
+                        s.RpcSetVictoryText("Round Over");
+                        s.RpcSetTextActive(true);
+                    }
+                    StartCoroutine(NewRound());
+                }
+            }
         }
 
         public void CheckRoundOver()
@@ -43,6 +73,7 @@ namespace Prototype.NetworkLobby
                     destroyedPlayerCount++;
                 }
             }
+
 
             if (destroyedPlayerCount >= numPlayers - 1)
             {
