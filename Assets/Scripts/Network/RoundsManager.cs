@@ -122,15 +122,12 @@ namespace Prototype.NetworkLobby
         private IEnumerator EndMatch()
         {
             yield return new WaitForSecondsRealtime(3);
-            lobbyManager.SendReturnToLobby();
-            RpcEnableCursor();
-            Destroy(gameObject);
-        }
-
-        [ClientRpc]
-        void RpcEnableCursor()
-        {
+            lobbyManager.StopClient();
+            lobbyManager.StopHost();
+            lobbyManager.StopMatchMaker();
+            lobbyManager.ChangeTo(lobbyManager.gamesPanel);
             Cursor.visible = true;
+            Destroy(gameObject);
         }
     }
 }
