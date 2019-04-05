@@ -8042,6 +8042,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: RearBar
       objectReference: {fileID: 0}
+    - target: {fileID: 8866445606082771520, guid: 4ce40eb0d1da14be68c087e6a485b60e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7354132736586217145, guid: 4ce40eb0d1da14be68c087e6a485b60e,
+        type: 3}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3715365206878543336, guid: 4ce40eb0d1da14be68c087e6a485b60e,
         type: 3}
       propertyPath: mechSprite
@@ -8250,11 +8260,6 @@ PrefabInstance:
       propertyPath: m_Color.b
       value: 0.19215688
       objectReference: {fileID: 0}
-    - target: {fileID: 8866445606082771520, guid: 4ce40eb0d1da14be68c087e6a485b60e,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3774051925194731423, guid: 4ce40eb0d1da14be68c087e6a485b60e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4ce40eb0d1da14be68c087e6a485b60e, type: 3}
@@ -8319,6 +8324,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3507068825816244284}
     m_Modifications:
+    - target: {fileID: 3688640868494074517, guid: c9be72ee16cf7a741b0b606f6f6481e9,
+        type: 3}
+      propertyPath: m_Name
+      value: PlayerCamera
+      objectReference: {fileID: 0}
     - target: {fileID: 7791518885367056111, guid: c9be72ee16cf7a741b0b606f6f6481e9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8373,11 +8383,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3688640868494074517, guid: c9be72ee16cf7a741b0b606f6f6481e9,
-        type: 3}
-      propertyPath: m_Name
-      value: PlayerCamera
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9be72ee16cf7a741b0b606f6f6481e9, type: 3}
