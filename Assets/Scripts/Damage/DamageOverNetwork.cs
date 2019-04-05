@@ -5,8 +5,17 @@ using UnityEngine.Networking;
 
 public class DamageOverNetwork : NetworkBehaviour
 {
+    [SyncVar]
+    public bool invincible = false;
+    public GameObject barrier;
+    private WaitForSeconds BarrierLength = new WaitForSeconds(2f);
     private GameObject flameEffect;
     private PlayerHealth pHealth;
+    private float shieldEndTime;
+    private float nextShieldTime;
+    private float shieldCoolDown = 10f;
+    private float shieldLastingTime = 2f;
+
 
     // Start is called before the first frame update
     void Start()
@@ -18,7 +27,23 @@ public class DamageOverNetwork : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (invincible && Time.time > shieldEndTime)
+        {
+            invincible = false;
+        }
+    }
+
+    public void turnInvincible()
+    {
+        if (Time.time > nextShieldTime)
+        {
+            shieldEndTime = Time.time + shieldLastingTime;
+            nextShieldTime = Time.time + shieldCoolDown;
+            invincible = true;
+            createBarrier();
+            StartCoroutine(BarrierEffect());
+        }
+
     }
 
     public void DamagePlayer(int dmg, string hb, NetworkIdentity mechID) {
@@ -30,34 +55,12 @@ public class DamageOverNetwork : NetworkBehaviour
         CmdDamagePlayer(heal, hb, mechID);
     }
 
-    [Command]
-    void CmdDamagePlayer(int dmg, string hb, NetworkIdentity id) {
-        NetworkServer.FindLocalObject(id.netId).GetComponent<DamageOverNetwork>().RpcHitboxTakeDamage(dmg, hb);
-    }
-
-    [Command]
-    void CmdHealPlayer(int dmg, string hb, NetworkIdentity id)
-    {
-        NetworkServer.FindLocalObject(id.netId).GetComponent<DamageOverNetwork>().RpcHitboxRepairDamage(dmg, hb);
-    }
-
-    private Transform GetHitBox(GameObject mech, string hitboxName) {
-        Transform hitbox = null;
-        MechTakeDamage[] t = mech.GetComponentsInChildren<MechTakeDamage>();
-        foreach (MechTakeDamage m in t) {
-            if (m.gameObject.name == hitboxName) {
-                hitbox = m.transform;
-                break;
-            }
-        }
-        return hitbox;
-    }
-
     [ClientRpc]
     public void RpcHitboxTakeDamage(int dmgAmount, string hbName) {
         Transform hitbox = GetHitBox(gameObject, hbName);
         MechTakeDamage m = hitbox.GetComponent<MechTakeDamage>();
         if (gameObject == null) return;
+        if (invincible) return;
         if (m.Invincible) return;
         if (hbName == "FrontHitbox") {
             pHealth.dmgFront(dmgAmount, m);
@@ -107,5 +110,71 @@ public class DamageOverNetwork : NetworkBehaviour
             pHealth.healRear(healAmount);
         }
 
+
+
+    }
+
+
+    [Command]
+    void CmdDamagePlayer(int dmg, string hb, NetworkIdentity id)
+    {
+        NetworkServer.FindLocalObject(id.netId).GetComponent<DamageOverNetwork>().RpcHitboxTakeDamage(dmg, hb);
+    }
+
+    [Command]
+    void CmdHealPlayer(int dmg, string hb, NetworkIdentity id)
+    {
+        NetworkServer.FindLocalObject(id.netId).GetComponent<DamageOverNetwork>().RpcHitboxRepairDamage(dmg, hb);
+    }
+
+    private Transform GetHitBox(GameObject mech, string hitboxName)
+    {
+        Transform hitbox = null;
+        MechTakeDamage[] t = mech.GetComponentsInChildren<MechTakeDamage>();
+        foreach (MechTakeDamage m in t)
+        {
+            if (m.gameObject.name == hitboxName)
+            {
+                hitbox = m.transform;
+                break;
+            }
+        }
+        return hitbox;
+    }
+
+    public void createBarrier()
+    {
+        if (isServer)
+        {
+            RpcDrawBarrier(gameObject);
+        }
+        else
+        {
+            CmdDrawBarrier(gameObject);
+        }
+    }
+
+    [Command]
+    void CmdDrawBarrier(GameObject mech)
+    {
+        RpcDrawBarrier(mech);
+    }
+
+    [ClientRpc]
+    void RpcDrawBarrier(GameObject mech)
+    {
+        if (!isLocalPlayer)
+        {
+            StartCoroutine(BarrierEffect());
+        }
+    }
+    public IEnumerator BarrierEffect()
+    {
+        //lineRenderer.enabled = true;
+        barrier.SetActive(true);
+
+        yield return BarrierLength;
+        //lineRenderer.enabled = false;
+        barrier.SetActive(false);
     }
 }

@@ -99,6 +99,17 @@ public class RepairState : IInputState
                 {
                     driver.ResetRotation();
                 }
+                if (Input.GetButtonDown("Jump"))
+                {
+                    driver.jump();
+
+                }
+
+                if (Input.GetButtonDown("Shield"))
+                {
+                    driver.shield();
+
+                }
 
                 break;
 
