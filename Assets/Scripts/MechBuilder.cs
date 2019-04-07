@@ -21,7 +21,7 @@ public class MechBuilder : NetworkBehaviour
 
     private void Start()
     {
-        if (!isLocalPlayer)
+        if (!transform.root.GetComponent<NetworkIdentity>().isLocalPlayer)
         {
             self.SetActive(false);
         }
