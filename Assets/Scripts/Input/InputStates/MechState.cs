@@ -29,6 +29,11 @@ public class MechState : IInputState
 
             case PlayerInput.InputType.MouseKeyboard:
 
+                if (Input.GetButtonDown("Perspective1"))
+                {
+                    playerInput.PrepareMechPerspec();
+                }
+
                 for (int i = 0; i < slots.Count; i++)
                 {
                     if (Input.GetButtonDown(slotInputs[i]))

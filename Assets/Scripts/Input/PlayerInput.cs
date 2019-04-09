@@ -137,6 +137,11 @@ public class PlayerInput : NetworkBehaviour
             inputState = new MineState(transform);
             uiManager.MechUI();
         }
+        else
+        {
+            inputState = new MechState(transform);
+            uiManager.MechUI();
+        }
     }
 
     public void DisableInput()
