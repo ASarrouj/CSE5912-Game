@@ -38,7 +38,7 @@ public class CameraManager : MonoBehaviour
     {
         offsetPos = new Vector3(-10.5f, 4f, -2); // X multiplier determines distance behind, Y for above, Z for right
         offsetRot = Quaternion.Euler(25, 0, 0); // X value determines level of downward tilt
-        if (target != player)
+        if (target != player) // If target is already the mech, skip the interpolation
         {
             PrepareInterp();
             target = player;
