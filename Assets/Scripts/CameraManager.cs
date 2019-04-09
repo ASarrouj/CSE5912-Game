@@ -36,10 +36,17 @@ public class CameraManager : MonoBehaviour
 
     public void FollowMech(Transform player)
     {
-        PrepareInterp();
         offsetPos = new Vector3(-10.5f, 4f, -2); // X multiplier determines distance behind, Y for above, Z for right
         offsetRot = Quaternion.Euler(25, 0, 0); // X value determines level of downward tilt
-        target = player;
+        if (target != player)
+        {
+            PrepareInterp();
+            target = player;
+        }
+        else
+        {
+            SkipInterp();
+        }
     }
 
     public void AttachToWeapon(Transform weapon)
@@ -67,6 +74,11 @@ public class CameraManager : MonoBehaviour
         transform.parent = null;
     }
 
+    private void SkipInterp()
+    {
+        playerInput.FinalizePerspective();
+    }
+
     private void InterpolateCamera()
     {
         transform.position = Vector3.Lerp(originalPos, target.position + (offsetPos.x * target.forward + offsetPos.y * target.up + offsetPos.z * target.right), ComputeArcLengthFromTime(transitionTime));
@@ -76,7 +88,7 @@ public class CameraManager : MonoBehaviour
         {
             interpolating = false;
             transform.parent = target;
-            playerInput.FinalizePerspective(target);
+            playerInput.FinalizePerspective();
         }
 
         transitionTime += DT;

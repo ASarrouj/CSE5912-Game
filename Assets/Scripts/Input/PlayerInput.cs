@@ -108,17 +108,14 @@ public class PlayerInput : NetworkBehaviour
         {
             camManager.AttachToWeapon(slot);
         }
-        else if (slot.tag == "RepairTool")
+        else
         {
             camManager.FollowMech(transform);
         }
-        else if (slot.tag == "MineDeployer")
-        {
-            camManager.FollowMech(transform);
-        }
+
     }
 
-    public void FinalizePerspective(Transform currentTransform)
+    public void FinalizePerspective()
     {
         if (lastKeyIndex == -1)
         {
