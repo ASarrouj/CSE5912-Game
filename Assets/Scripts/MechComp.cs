@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
-public class MechComp : MonoBehaviour
+public class MechComp : NetworkBehaviour
 {
     public GameObject[] guns;
     public GameObject[] positions;
@@ -52,6 +53,8 @@ public class MechComp : MonoBehaviour
         {
             guns[trackSpot] = Instantiate(gun, positions[trackSpot].transform, false);
             guns[trackSpot].transform.SetParent(positions[trackSpot].transform);
+            NetworkServer.Spawn(guns[trackSpot]);
+
             selfInput.addGun(trackSpot);
             if (guns[trackSpot].name.Equals("MachineGun(Clone)"))
             {
