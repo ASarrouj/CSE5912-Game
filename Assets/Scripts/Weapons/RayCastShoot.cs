@@ -62,10 +62,6 @@ public class RayCastShoot : MonoBehaviour, IWeapon
                     }
                     hit.collider.gameObject.GetComponent<TargetTakeDamage>().Damage(10);
                 }
-                if (hit.collider.gameObject.tag == "Building")
-                {
-                    hit.collider.gameObject.GetComponent<TargetTakeDamage>().Damage(10);
-                }
                 if (hit.collider.gameObject.tag == "Mech")
                 {
                     if (hit.rigidbody != null)
