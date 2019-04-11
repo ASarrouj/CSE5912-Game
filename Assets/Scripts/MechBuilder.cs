@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
 
-public class MechBuilder : NetworkBehaviour
+public class MechBuilder : MonoBehaviour
 {
 
     public GameObject self;
@@ -14,13 +14,19 @@ public class MechBuilder : NetworkBehaviour
     public GameObject[] partScreens;
     public GameObject[] guns;
     private GameObject currentScreen;
+    private GunAttacher gunAttacher;
 
 
     public GameObject mech;
     private MechComp toAttach;
 
+    private int trackSpot;
+
     private void Start()
     {
+        gunAttacher = gameObject.GetComponentInParent<GunAttacher>();
+        trackSpot = 0;
+
         if (!transform.root.GetComponent<NetworkIdentity>().isLocalPlayer)
         {
             self.SetActive(false);
@@ -40,18 +46,18 @@ public class MechBuilder : NetworkBehaviour
 
     public void AddGun(int gun)
     {
-        toAttach.AttachGunInOrder(guns[gun]);
+        AttachGunInOrder(guns[gun]);
     }
 
     public void AddAntiGravity(int gun)
     {
-        toAttach.AttachGunInOrder(guns[gun]);
+        AttachGunInOrder(guns[gun]);
         playerPrefab.GetComponent<MechDriver>().canJump = true;
     }
 
     public void AddShield(int gun)
     {
-        toAttach.AttachGunInOrder(guns[gun]);
+        AttachGunInOrder(guns[gun]);
         playerPrefab.GetComponent<MechDriver>().canShield = true;
     }
 
@@ -64,7 +70,7 @@ public class MechBuilder : NetworkBehaviour
 
     public void removeLastGun()
     {
-        toAttach.RemoveGunInOrder();
+        RemoveGunInOrder();
     }
 
     public void finishBuilding()
@@ -72,6 +78,52 @@ public class MechBuilder : NetworkBehaviour
         Cursor.visible = false;
         playerUI.SetActive(true);
         self.SetActive(false);
+    }
+
+
+    public void AttachGun(GameObject gun, int location)
+    {
+        if (location < toAttach.guns.Length)
+        {
+            toAttach.guns[location] = gun;
+            toAttach.guns[location].transform.SetParent(toAttach.positions[location].transform, false);
+        }
+        else
+        {
+            print("This location is not available on the mech.");
+        }
+    }
+
+    public void AttachGunInOrder(GameObject gun)
+    {
+        if (trackSpot < guns.Length)
+        {
+            toAttach.guns[trackSpot] = Instantiate(gun, toAttach.positions[trackSpot].transform, false);
+            gunAttacher.CmdAttachGun(toAttach.guns[trackSpot], toAttach.positions[trackSpot].name);
+            toAttach.selfInput.addGun(trackSpot);
+
+            if (toAttach.guns[trackSpot].name.Equals("MachineGun(Clone)"))
+            {
+                toAttach.guns[trackSpot].GetComponent<RayCastShoot>().GetCameraAndScore(toAttach.viewCam);
+            }
+
+            trackSpot++;
+        }
+        else
+        {
+            print("This location is not available on the mech.");
+        }
+    }
+
+    public void RemoveGun(int spot)
+    {
+        Destroy(toAttach.guns[spot]);
+    }
+
+    public void RemoveGunInOrder()
+    {
+        Destroy(toAttach.guns[trackSpot - 1]);
+        trackSpot--;
     }
 }
 

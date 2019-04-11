@@ -34,51 +34,6 @@ public class MechComp : NetworkBehaviour
         
     }
 
-    public void AttachGun(GameObject gun, int location)
-    {
-        if(location < guns.Length)
-        {
-            guns[location] = gun;
-            guns[location].transform.SetParent(positions[location].transform, false);
-        }
-        else
-        {
-            print("This location is not available on the mech.");
-        }
-    }
-
-    public void AttachGunInOrder(GameObject gun)
-    {
-        if (trackSpot < guns.Length)
-        {
-            guns[trackSpot] = Instantiate(gun, positions[trackSpot].transform, false);
-            guns[trackSpot].transform.SetParent(positions[trackSpot].transform);
-            NetworkServer.Spawn(guns[trackSpot]);
-
-            selfInput.addGun(trackSpot);
-            if (guns[trackSpot].name.Equals("MachineGun(Clone)"))
-            {
-                guns[trackSpot].GetComponent<RayCastShoot>().GetCameraAndScore(viewCam);
-            }
-            trackSpot++;
-        }
-        else
-        {
-            print("This location is not available on the mech.");
-        }
-    }
-
-    public void RemoveGun(int spot)
-    {
-        Destroy(guns[spot]);
-    }
-
-    public void RemoveGunInOrder()
-    {
-        Destroy(guns[trackSpot - 1]);
-        trackSpot--;
-    }
-
     public void EndOfMatch()
     {
         Destroy(self);
