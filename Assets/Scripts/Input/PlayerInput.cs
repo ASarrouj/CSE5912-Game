@@ -116,7 +116,7 @@ public class PlayerInput : NetworkBehaviour
         }
     }
 
-    public void FinalizePerspective()
+    public void SetInputState()
     {
         if (lastKeyIndex == -1)
         {

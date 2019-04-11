@@ -9,7 +9,7 @@ public class CameraManager : MonoBehaviour
     private float transitionTime, dragSpeed, dragOrigin, lastMousePosX;
     private const float transitionMaxTime = 0.2f;
     private const float DT = 0.005f;
-    private bool interpolating;
+    private bool interpolating, interpolatingBuilder;
     private Transform target;
     private PlayerInput playerInput;
     private int joystickLookSpeed = 5;
@@ -27,6 +27,8 @@ public class CameraManager : MonoBehaviour
     {
         if (interpolating)
             InterpolateCamera();
+        else if (interpolatingBuilder)
+            InterpolateCameraBuilder();
     }
 
     public void SetInput(PlayerInput input)
@@ -57,6 +59,11 @@ public class CameraManager : MonoBehaviour
         target = weapon;
     }
 
+    public void MoveToSlot(Transform slot)
+    {
+
+    }
+
     public void ResetPosition()
     {
         PrepareInterp();
@@ -76,7 +83,7 @@ public class CameraManager : MonoBehaviour
 
     private void SkipInterp()
     {
-        playerInput.FinalizePerspective();
+        playerInput.SetInputState();
     }
 
     private void InterpolateCamera()
@@ -88,7 +95,20 @@ public class CameraManager : MonoBehaviour
         {
             interpolating = false;
             transform.parent = target;
-            playerInput.FinalizePerspective();
+            playerInput.SetInputState();
+        }
+
+        transitionTime += DT;
+    }
+
+    private void InterpolateCameraBuilder()
+    {
+        transform.position = Vector3.Lerp(originalPos, target.position + (offsetPos.x * target.forward + offsetPos.y * target.up + offsetPos.z * target.right), ComputeArcLengthFromTime(transitionTime));
+        transform.rotation = Quaternion.Slerp(originalRot, target.rotation * offsetRot, ComputeArcLengthFromTime(transitionTime));
+
+        if (transitionTime >= transitionMaxTime)
+        {
+            interpolatingBuilder = false;
         }
 
         transitionTime += DT;

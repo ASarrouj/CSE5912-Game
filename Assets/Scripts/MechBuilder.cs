@@ -15,7 +15,7 @@ public class MechBuilder : MonoBehaviour
     public GameObject[] guns;
     private GameObject currentScreen;
     private GunAttacher gunAttacher;
-
+    private CameraManager camManager;
 
     public GameObject mech;
     private MechComp toAttach;
@@ -35,6 +35,7 @@ public class MechBuilder : MonoBehaviour
         {
             currentScreen = partScreens[0];
             toAttach = mech.GetComponent<MechComp>();
+            camManager = transform.parent.Find("PlayerCamera").GetComponent<CameraManager>();
             playerPrefab.GetComponent<MechDriver>().findColliders();
         }
     }
