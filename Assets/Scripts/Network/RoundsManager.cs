@@ -16,6 +16,7 @@ namespace Prototype.NetworkLobby
         private List<PlayerStatus> playerStatuses;
         private int numPlayers;
         private float roundStartTime;
+        private bool newRoundStarting = false;
 
         private void Awake()
         {
@@ -34,7 +35,7 @@ namespace Prototype.NetworkLobby
 
         private void Update()
         {
-            if (Time.time > roundStartTime + roundLengthSeconds)
+            if (Time.time > roundStartTime + roundLengthSeconds && !newRoundStarting)
             {
                 roundCount++;
                 if (roundCount >= numRounds)
@@ -115,6 +116,7 @@ namespace Prototype.NetworkLobby
 
         private IEnumerator NewRound()
         {
+            newRoundStarting = true;
             yield return new WaitForSecondsRealtime(3);
             foreach (PlayerStatus s in playerStatuses)
             {
@@ -149,6 +151,7 @@ namespace Prototype.NetworkLobby
                 playerStatuses.Add(o.GetComponent<PlayerStatus>());
             }
             roundStartTime = Time.time;
+            newRoundStarting = false;
         }
 
         private IEnumerator EndMatch()
