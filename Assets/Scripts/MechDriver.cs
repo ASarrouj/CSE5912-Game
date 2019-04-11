@@ -54,7 +54,7 @@ public class MechDriver : MonoBehaviour
     {
         foreach (WheelCollider collider in allColliders)
         {
-            if (rb.velocity.magnitude <= Mathf.Abs(velLimit))
+            if (rb.velocity.magnitude < Mathf.Abs(velLimit))
             {
                 collider.motorTorque = Mathf.Sign(velLimit) * wheelTorque;
             }

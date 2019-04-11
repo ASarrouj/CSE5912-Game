@@ -100,19 +100,20 @@ public class PlayerInput : NetworkBehaviour
 
     public void PrepareSlotPerspec(Transform slot)
     {
-        DisableInput();
-        lastKeyIndex = slots.IndexOf(slot);
-        uiManager.ChangeSlotHighlight(lastKeyIndex);
-
         if (slot.tag == "Weapon")
         {
+            DisableInput();
+            lastKeyIndex = slots.IndexOf(slot);
+            uiManager.ChangeSlotHighlight(lastKeyIndex);
             camManager.AttachToWeapon(slot);
         }
-        else
+        else if (slot.tag == "RepairTool" || slot.tag == "MineDeployer")
         {
+            DisableInput();
+            lastKeyIndex = slots.IndexOf(slot);
+            uiManager.ChangeSlotHighlight(lastKeyIndex);
             camManager.FollowMech(transform);
         }
-
     }
 
     public void FinalizePerspective()
