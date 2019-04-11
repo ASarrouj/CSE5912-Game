@@ -148,6 +148,7 @@ namespace Prototype.NetworkLobby
             {
                 playerStatuses.Add(o.GetComponent<PlayerStatus>());
             }
+            roundStartTime = Time.time;
         }
 
         private IEnumerator EndMatch()
