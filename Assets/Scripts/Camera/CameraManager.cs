@@ -70,7 +70,6 @@ public class CameraManager : MonoBehaviour
         offsetRot = customOffsetRots[buildSlotIndex];
         interpolatingBuilder = true;
         buildSlotIndex++;
-        Debug.Log(buildSlotIndex);
     }
 
     public void AttachToWeapon(Transform weapon)
