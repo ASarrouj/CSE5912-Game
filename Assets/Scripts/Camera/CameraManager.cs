@@ -13,6 +13,9 @@ public class CameraManager : MonoBehaviour
     private Transform target;
     private PlayerInput playerInput;
     private int joystickLookSpeed = 5;
+    private Vector3[] customOffsetPoses;
+    private Quaternion[] customOffsetRots;
+    private int buildSlotIndex;
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +39,12 @@ public class CameraManager : MonoBehaviour
         playerInput = input;
     }
 
+    public void SetBuilderLocations(Vector3[] poses, Quaternion[] rots)
+    {
+        customOffsetPoses = poses;
+        customOffsetRots = rots;
+    }
+
     public void FollowMech(Transform player)
     {
         offsetPos = new Vector3(-10.5f, 4f, -2); // X multiplier determines distance behind, Y for above, Z for right
@@ -51,17 +60,25 @@ public class CameraManager : MonoBehaviour
         }
     }
 
+    public void MoveToNextBuildSlot(Transform player)
+    {
+        originalPos = transform.position;
+        originalRot = transform.rotation;
+        target = player;
+        transitionTime = 0.0f;
+        offsetPos = customOffsetPoses[buildSlotIndex];
+        offsetRot = customOffsetRots[buildSlotIndex];
+        interpolatingBuilder = true;
+        buildSlotIndex++;
+        Debug.Log(buildSlotIndex);
+    }
+
     public void AttachToWeapon(Transform weapon)
     {
         PrepareInterp();
         offsetPos = new Vector3(0, 1, 0); // X multiplier determines distance behind, Y for above
         offsetRot = Quaternion.identity;
         target = weapon;
-    }
-
-    public void MoveToSlot(Transform slot)
-    {
-
     }
 
     public void ResetPosition()
@@ -109,6 +126,7 @@ public class CameraManager : MonoBehaviour
         if (transitionTime >= transitionMaxTime)
         {
             interpolatingBuilder = false;
+            target = null;
         }
 
         transitionTime += DT;

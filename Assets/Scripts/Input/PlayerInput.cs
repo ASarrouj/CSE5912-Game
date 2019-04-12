@@ -47,14 +47,17 @@ public class PlayerInput : NetworkBehaviour
         if (trackSpot == 0)
         {
             slots.Add(playerMech.Find("FrontGun").GetChild(1));
+            camManager.MoveToNextBuildSlot(transform);
         }
         else if (trackSpot == 1)
         {
             slots.Add(playerMech.Find("LeftGun").GetChild(1));
+            camManager.MoveToNextBuildSlot(transform);
         }
         else if (trackSpot == 2)
         {
             slots.Add(playerMech.Find("RightGun").GetChild(1));
+            camManager.MoveToNextBuildSlot(transform);
         }
         else if (trackSpot == 3)
         {
