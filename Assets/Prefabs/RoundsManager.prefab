@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numRounds: 3
-  roundLengthSeconds: 20
+  roundLengthSeconds: 180
   lobbyManager: {fileID: 0}
 --- !u!114 &9105125728556015457
 MonoBehaviour:
