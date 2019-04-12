@@ -26,10 +26,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3359932346176587193}
   m_LocalRotation: {x: 0.00000025949953, y: -0.92387956, z: 0.38268343, w: 0.000000107488226}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0.5}
-  m_LocalScale: {x: 10, y: 10, z: 1}
+  m_LocalPosition: {x: -0, y: 1.41, z: 1.41}
+  m_LocalScale: {x: 10, y: 10, z: 3.4750972}
   m_Children:
-  - {fileID: 6871256310603083230}
+  - {fileID: 6869588983514568573}
   - {fileID: 8201123358037370395}
   m_Father: {fileID: 3602648951565858868}
   m_RootOrder: 0
@@ -235,7 +235,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8640002006536919825}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children:
   - {fileID: 3359932346176690585}
@@ -408,8 +408,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b605d47cbc738e24c8c1a9cdfa8535a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSpawn: {fileID: 6871256310603083230}
-  smoke: {fileID: 6871256310603082960}
+  bulletSpawn: {fileID: 6869588983514568573}
+  smoke: {fileID: 6870266194228576541}
   projectileForce: 25
   fireRate: 2
 --- !u!114 &6516192656357096717
@@ -499,13 +499,13 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 4439680460321027180, guid: 85a8865d1bf4a63478038fae23776de8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 85a8865d1bf4a63478038fae23776de8, type: 3}
---- !u!1 &6871256310603082960 stripped
+--- !u!1 &6870266194228576541 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1000012560919920, guid: 85a8865d1bf4a63478038fae23776de8,
     type: 3}
   m_PrefabInstance: {fileID: 6871256310603082861}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &6871256310603083230 stripped
+--- !u!4 &6869588983514568573 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000011112872720, guid: 85a8865d1bf4a63478038fae23776de8,
     type: 3}
