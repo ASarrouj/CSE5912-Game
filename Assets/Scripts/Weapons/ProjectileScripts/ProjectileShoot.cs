@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEditor;
-using UnityEngine.Networking;
 
-public class ProjectileShoot : NetworkBehaviour, IWeapon
+public class ProjectileShoot : MonoBehaviour, IWeapon
 {
     public Transform bulletSpawn;
     public GameObject smoke;
@@ -85,16 +84,7 @@ public class ProjectileShoot : NetworkBehaviour, IWeapon
             StartCoroutine(ShotEffect());
         }
     }
-[Command]
-void CmdShoot()
-{
 
-}
-[ClientRpc]
-void RpcShoot()
-{
-
-}
     private IEnumerator ShotEffect()
     {
         smoke.SetActive(true);
