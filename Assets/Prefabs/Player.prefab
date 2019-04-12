@@ -9185,7 +9185,7 @@ PrefabInstance:
         type: 3}
       propertyPath: self
       value: 
-      objectReference: {fileID: 1887021503928744034}
+      objectReference: {fileID: 3294451426184804338}
     - target: {fileID: 3715365206878543336, guid: 4ce40eb0d1da14be68c087e6a485b60e,
         type: 3}
       propertyPath: mineSprite
