@@ -14,6 +14,13 @@ public class ObjectPooler : NetworkBehaviour
 
     private void Start()
     {
+        if(!isLocalPlayer)
+        return;
+        CmdCreate();
+    }
+    [Command]
+    void CmdCreate()
+    {
         objects = new List<GameObject>();
         for (int i = 0; i < pooledAmount; i++)
         {
