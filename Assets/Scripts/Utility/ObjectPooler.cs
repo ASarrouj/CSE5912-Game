@@ -20,19 +20,28 @@ public class ObjectPooler : NetworkBehaviour
             if(NetworkServer.active)
             {
             GameObject obj = Instantiate(pooledObject) as GameObject;
-            NetworkServer.Spawn(obj);
             obj.SetActive(false);
             objects.Add(obj);
             }
         }
     }
-
+[Command]
+void CmdSpawn(GameObject obj)
+{
+    NetworkServer.Spawn(obj);
+}
+[ClientRpc]
+void RpcSpawn()
+{
+    
+}
     public GameObject GetObject()
     {
         for (int i = 0; i < objects.Count; i++)
         {
             if (!objects[i].activeInHierarchy)
             {
+                CmdSpawn(objects[i]);
                 return objects[i];
             }
         }
@@ -42,6 +51,7 @@ public class ObjectPooler : NetworkBehaviour
             GameObject obj = Instantiate(pooledObject) as GameObject;
             obj.SetActive(false);
             objects.Add(obj);
+            CmdSpawn(obj);
             return obj;
         }
 

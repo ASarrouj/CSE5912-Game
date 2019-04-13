@@ -54,13 +54,16 @@ public class MechDriver : MonoBehaviour
     {
         foreach (WheelCollider collider in allColliders)
         {
-            if (rb.velocity.magnitude < Mathf.Abs(velLimit))
+            if (collider.isGrounded)
             {
-                collider.motorTorque = Mathf.Sign(velLimit) * wheelTorque;
-            }
-            else
-            {
-                rb.velocity = rb.velocity.normalized * Mathf.Abs(velLimit);
+                if (rb.velocity.magnitude < Mathf.Abs(velLimit))
+                {
+                    collider.motorTorque = Mathf.Sign(velLimit) * wheelTorque;
+                }
+                else
+                {
+                    rb.velocity = rb.velocity.normalized * Mathf.Abs(velLimit);
+                }
             }
         }
 
