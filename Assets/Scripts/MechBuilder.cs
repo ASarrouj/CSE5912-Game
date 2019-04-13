@@ -36,7 +36,7 @@ public class MechBuilder : MonoBehaviour
             currentScreen = partScreens[0];
             toAttach = mech.GetComponent<MechComp>();
             camManager = transform.parent.Find("PlayerCamera").GetComponent<CameraManager>();
-            camManager.SetBuilderLocations(new Vector3[4] { new Vector3(5f, 1f, 0f), new Vector3(0f, 1f, -5f), new Vector3(0f, 1f, 5f), new Vector3(-10.5f, 1f, 0f) },
+            camManager.SetBuilderLocations(new Vector3[4] { new Vector3(5f, 1f, 0f), new Vector3(0f, 1f, -5f), new Vector3(0f, 1f, 5f), new Vector3(-8f, 1f, 0f) },
                 new Quaternion[4] { Quaternion.Euler(0, 180, 0), Quaternion.Euler(0, 90, 0), Quaternion.Euler(0, -90, 0), Quaternion.identity });
             camManager.MoveToNextBuildSlot(playerPrefab.transform);
             playerPrefab.GetComponent<MechDriver>().findColliders();
