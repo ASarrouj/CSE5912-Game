@@ -26,7 +26,7 @@ public class UIManager : MonoBehaviour
 
         slotImages = new List<GameObject>();
         slotPos = slotHighlightTransform.anchoredPosition;
-        slotPosDelta = new Vector3(80, 0, 0);
+        slotPosDelta = new Vector3(90, 0, 0);
 
         MechHUD.SetActive(false);
         SwitcherHUD.SetActive(true);
@@ -64,13 +64,19 @@ public class UIManager : MonoBehaviour
             {
                 slotImages[i].transform.Find("SlotSprite").GetComponent<Image>().sprite = mineSprite;
             }
-            else if (input.slots[i - 1].tag == "INSERTBARRIERTAG")
+            else if (input.slots[i - 1].tag == "Barrier")
             {
                 slotImages[i].transform.Find("SlotSprite").GetComponent<Image>().sprite = barrierSprite;
+                slotImages[i].transform.Find("SlotNum").GetComponent<Text>().text = "P";
+                slotImages[i].transform.Find("SlotNum").GetComponent<Text>().fontStyle = FontStyle.Bold;
+                slotImages[i].transform.Find("SlotNum").GetComponent<Text>().color = Color.blue;
             }
-            else if (input.slots[i - 1].tag == "INSERTGRAVTAG")
+            else if (input.slots[i - 1].tag == "AntiGravity")
             {
                 slotImages[i].transform.Find("SlotSprite").GetComponent<Image>().sprite = gravSprite;
+                slotImages[i].transform.Find("SlotNum").GetComponent<Text>().text = "P";
+                slotImages[i].transform.Find("SlotNum").GetComponent<Text>().fontStyle = FontStyle.Bold;
+                slotImages[i].transform.Find("SlotNum").GetComponent<Text>().color = Color.blue;
             }
 
             slotPos += slotPosDelta;
