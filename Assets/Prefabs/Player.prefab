@@ -569,6 +569,7 @@ MonoBehaviour:
   slotInputs: []
   lastKeyIndex: 0
   slots: []
+  blowtorchSprite: {fileID: 2800000, guid: 36ec63d1baf4b28439e59805851a06c3, type: 3}
 --- !u!54 &3227839355828598611
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -11698,6 +11699,36 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3507068825816244284}
     m_Modifications:
+    - target: {fileID: 1286359735795316794, guid: 4ce40eb0d1da14be68c087e6a485b60e,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.19215688
+      objectReference: {fileID: 0}
+    - target: {fileID: 1286359735795316794, guid: 4ce40eb0d1da14be68c087e6a485b60e,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.19215688
+      objectReference: {fileID: 0}
+    - target: {fileID: 1286359735795316794, guid: 4ce40eb0d1da14be68c087e6a485b60e,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.19215688
+      objectReference: {fileID: 0}
+    - target: {fileID: 1286359735795316794, guid: 4ce40eb0d1da14be68c087e6a485b60e,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.19215688
+      objectReference: {fileID: 0}
+    - target: {fileID: 1286359735795316794, guid: 4ce40eb0d1da14be68c087e6a485b60e,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.19215688
+      objectReference: {fileID: 0}
+    - target: {fileID: 1286359735795316794, guid: 4ce40eb0d1da14be68c087e6a485b60e,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.19215688
+      objectReference: {fileID: 0}
     - target: {fileID: 4054200082010207340, guid: 4ce40eb0d1da14be68c087e6a485b60e,
         type: 3}
       propertyPath: m_Name
@@ -11707,36 +11738,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1286359735795316794, guid: 4ce40eb0d1da14be68c087e6a485b60e,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 0.19215688
-      objectReference: {fileID: 0}
-    - target: {fileID: 1286359735795316794, guid: 4ce40eb0d1da14be68c087e6a485b60e,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 0.19215688
-      objectReference: {fileID: 0}
-    - target: {fileID: 1286359735795316794, guid: 4ce40eb0d1da14be68c087e6a485b60e,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 0.19215688
-      objectReference: {fileID: 0}
-    - target: {fileID: 1286359735795316794, guid: 4ce40eb0d1da14be68c087e6a485b60e,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 0.19215688
-      objectReference: {fileID: 0}
-    - target: {fileID: 1286359735795316794, guid: 4ce40eb0d1da14be68c087e6a485b60e,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 0.19215688
-      objectReference: {fileID: 0}
-    - target: {fileID: 1286359735795316794, guid: 4ce40eb0d1da14be68c087e6a485b60e,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 0.19215688
       objectReference: {fileID: 0}
     - target: {fileID: 7571350385332720813, guid: 4ce40eb0d1da14be68c087e6a485b60e,
         type: 3}
@@ -12184,11 +12185,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3507068825816244284}
     m_Modifications:
-    - target: {fileID: 3688640868494074517, guid: c9be72ee16cf7a741b0b606f6f6481e9,
-        type: 3}
-      propertyPath: m_Name
-      value: PlayerCamera
-      objectReference: {fileID: 0}
     - target: {fileID: 7791518885367056111, guid: c9be72ee16cf7a741b0b606f6f6481e9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12244,6 +12240,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3688640868494074517, guid: c9be72ee16cf7a741b0b606f6f6481e9,
+        type: 3}
+      propertyPath: m_Name
+      value: PlayerCamera
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9be72ee16cf7a741b0b606f6f6481e9, type: 3}
 --- !u!20 &4685737122202990852 stripped
@@ -12265,14 +12266,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3507068825816244284}
     m_Modifications:
-    - target: {fileID: 134636, guid: beb58944c117ee44398cbcf8ef39d242, type: 3}
-      propertyPath: m_Name
-      value: BlueSparkleShield
-      objectReference: {fileID: 0}
-    - target: {fileID: 134636, guid: beb58944c117ee44398cbcf8ef39d242, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 402700, guid: beb58944c117ee44398cbcf8ef39d242, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -12328,6 +12321,14 @@ PrefabInstance:
     - target: {fileID: 402700, guid: beb58944c117ee44398cbcf8ef39d242, type: 3}
       propertyPath: m_LocalScale.z
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 134636, guid: beb58944c117ee44398cbcf8ef39d242, type: 3}
+      propertyPath: m_Name
+      value: BlueSparkleShield
+      objectReference: {fileID: 0}
+    - target: {fileID: 134636, guid: beb58944c117ee44398cbcf8ef39d242, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: beb58944c117ee44398cbcf8ef39d242, type: 3}

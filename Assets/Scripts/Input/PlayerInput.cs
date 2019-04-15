@@ -16,6 +16,7 @@ public class PlayerInput : NetworkBehaviour
     private Transform playerMech;
     public List<Transform> slots;
     private Dictionary<string, int> hitboxMap;
+    public Texture2D blowtorchSprite;
 
     public enum InputType
     {
@@ -149,6 +150,7 @@ public class PlayerInput : NetworkBehaviour
         else if (slots[lastKeyIndex].tag == "RepairTool")
         {
             inputState = new RepairState(transform, repairEffect);
+            ToggleRepairCursor();
             uiManager.MechUI();
         }
         else if (slots[lastKeyIndex].tag == "MineDeployer")
@@ -202,10 +204,26 @@ public class PlayerInput : NetworkBehaviour
         return camManager.CreateRayFromMouseClick();
     }
 
+    public void ToggleRepairCursor()
+    {
+        if (Cursor.visible)
+        {
+            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+            Cursor.visible = false;
+        }
+        else
+        {
+            Cursor.SetCursor(blowtorchSprite, Vector2.zero, CursorMode.Auto);
+            Cursor.visible = true;
+        }
+    }
+
+
     public void HandleDeadSlot(string hitboxName)
     {
         if (lastKeyIndex == hitboxMap[hitboxName])
         {
+            Cursor.visible = false;
             PrepareMechPerspec();
         }
         uiManager.DisableSlot(hitboxMap[hitboxName] + 1);

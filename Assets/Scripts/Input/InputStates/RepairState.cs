@@ -44,12 +44,14 @@ public class RepairState : IInputState
 
                 if (Input.GetButtonDown("Perspective1"))
                 {
+                    playerInput.ToggleRepairCursor();
                     playerInput.PrepareMechPerspec();
                 }
                 for (int i = 0; i < otherSlots.Count; i++)
                 {
                     if (Input.GetButtonDown(otherSlotInputs[i]))
                     {
+                        playerInput.ToggleRepairCursor();
                         playerInput.PrepareSlotPerspec(otherSlots[i]);
                     }
                 }
