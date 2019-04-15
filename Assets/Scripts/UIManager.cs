@@ -123,4 +123,9 @@ public class UIManager : MonoBehaviour
         slotHighlightTransform.anchoredPosition = slotImages[index].GetComponent<RectTransform>().anchoredPosition;
         DisableDynamicUI();
     }
+
+    public void DisableSlot(int index)
+    {
+        slotImages[index].transform.Find("RedX").gameObject.SetActive(true);
+    }
 }

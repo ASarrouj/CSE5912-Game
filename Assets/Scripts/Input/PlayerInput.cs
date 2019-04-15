@@ -15,6 +15,7 @@ public class PlayerInput : NetworkBehaviour
     public int lastKeyIndex;
     private Transform playerMech;
     public List<Transform> slots;
+    private Dictionary<string, int> hitboxMap;
 
     public enum InputType
     {
@@ -40,6 +41,14 @@ public class PlayerInput : NetworkBehaviour
             camManager.SetInput(this);
 
             uiManager = transform.Find("UI").GetComponent<UIManager>();
+            hitboxMap = new Dictionary<string, int>
+            {
+                {"FrontHitbox", 0},
+                {"LeftHitbox", 1},
+                {"RightHitbox", 2},
+                {"RearHitbox", 3},
+                {"CoreHitbox", 4}
+            };
 
             DisableInput();
         }
@@ -106,19 +115,22 @@ public class PlayerInput : NetworkBehaviour
 
     public void PrepareSlotPerspec(Transform slot)
     {
-        if (slot.tag == "Weapon")
+        if (slot.parent.gameObject.activeSelf == true)
         {
-            DisableInput();
-            lastKeyIndex = slots.IndexOf(slot);
-            uiManager.ChangeSlotHighlight(lastKeyIndex);
-            camManager.AttachToWeapon(slot);
-        }
-        else if (slot.tag == "RepairTool" || slot.tag == "MineDeployer")
-        {
-            DisableInput();
-            lastKeyIndex = slots.IndexOf(slot);
-            uiManager.ChangeSlotHighlight(lastKeyIndex);
-            camManager.FollowMech(transform);
+            if (slot.tag == "Weapon")
+            {
+                DisableInput();
+                lastKeyIndex = slots.IndexOf(slot);
+                uiManager.ChangeSlotHighlight(lastKeyIndex);
+                camManager.AttachToWeapon(slot);
+            }
+            else if (slot.tag == "RepairTool" || slot.tag == "MineDeployer")
+            {
+                DisableInput();
+                lastKeyIndex = slots.IndexOf(slot);
+                uiManager.ChangeSlotHighlight(lastKeyIndex);
+                camManager.FollowMech(transform);
+            }
         }
     }
 
@@ -188,6 +200,15 @@ public class PlayerInput : NetworkBehaviour
     public Ray CreateRayFromMouseClick()
     {
         return camManager.CreateRayFromMouseClick();
+    }
+
+    public void HandleDeadSlot(string hitboxName)
+    {
+        if (lastKeyIndex == hitboxMap[hitboxName])
+        {
+            PrepareMechPerspec();
+        }
+        uiManager.DisableSlot(hitboxMap[hitboxName] + 1);
     }
 
     private bool IsMouseKeyboard() {

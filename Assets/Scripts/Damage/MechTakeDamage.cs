@@ -39,9 +39,10 @@ public class MechTakeDamage : MonoBehaviour, IDamagable
         explosion.AddComponent<NetworkIdentity>();
         NetworkServer.Spawn(explosion);
         ForceCameraSwitch();
-        Destroy(transform.parent.gameObject);
-        DestroyNetChild();
         Destroy(explosion, 3f);
+        //DestroyNetChild();
+        transform.parent.gameObject.SetActive(false);
+        //Destroy(transform.parent.gameObject);
     }
 
     public void ExplodingCore() {
@@ -52,8 +53,9 @@ public class MechTakeDamage : MonoBehaviour, IDamagable
         NetworkServer.Spawn(explosion);
         ForceCameraSwitch();
         Destroy(explosion, 3f);
-        DestroyNetChild();
-        Destroy(transform.parent.gameObject);
+        //DestroyNetChild();
+        transform.parent.gameObject.SetActive(false);
+        //Destroy(transform.parent.gameObject);
     }
 
     public void ExplodingFront() {
@@ -63,8 +65,9 @@ public class MechTakeDamage : MonoBehaviour, IDamagable
         NetworkServer.Spawn(explosion);
         ForceCameraSwitch();
         Destroy(explosion, 3f);
-        DestroyNetChild();
-        Destroy(transform.parent.gameObject);
+        //DestroyNetChild();
+        transform.parent.gameObject.SetActive(false);
+        //Destroy(transform.parent.gameObject);
     }
 
     private void DestroyNetChild() {
@@ -88,12 +91,8 @@ public class MechTakeDamage : MonoBehaviour, IDamagable
     }
 
     private void ForceCameraSwitch() {
-        Transform cam = null;
-        foreach (Transform c in transform.parent) {
-            cam = c.Find("PlayerCamera");
-            if (cam != null) break;
-        }
-        if (cam != null) cam.parent = transform.root;
+        PlayerInput PI = transform.root.GetComponent<PlayerInput>();
+        PI.HandleDeadSlot(transform.name);
     }
 
 }
