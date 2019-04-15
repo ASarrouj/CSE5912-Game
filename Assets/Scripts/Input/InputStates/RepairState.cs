@@ -5,6 +5,7 @@ using UnityEngine.Networking;
 
 public class RepairState : IInputState
 {
+    private GameObject repairEffect;
     private PlayerInput playerInput;
     private List<string> otherSlotInputs;
     private ObjectPooler hitEffectPool;
@@ -12,7 +13,7 @@ public class RepairState : IInputState
     private MechDriver driver;
     private int maxSpeed, speedStep, lastKeyIndex;
 
-    public RepairState(Transform playerTransform)
+    public RepairState(Transform playerTransform, GameObject effect)
     {
         playerInput = playerTransform.GetComponent<PlayerInput>();
         lastKeyIndex = playerInput.lastKeyIndex;
@@ -24,6 +25,12 @@ public class RepairState : IInputState
         driver = playerInput.transform.GetComponent<MechDriver>();
 
         hitEffectPool = GameObject.Find("MGImpactPool").GetComponent<ObjectPooler>();
+        repairEffect = GameObject.Find("YellowSparklerMissile");
+        if (repairEffect == null)
+        {
+            repairEffect = GameObject.Instantiate(effect);
+            repairEffect.SetActive(false);
+        }
     }
 
     public void Update(PlayerInput.InputType inputType)
@@ -47,7 +54,7 @@ public class RepairState : IInputState
                     }
                 }
 
-                if (Input.GetButtonDown("RightClick"))
+                if (Input.GetButton("RightClick"))
                 {
                     Ray ray = playerInput.CreateRayFromMouseClick();
                     RaycastHit hit;
@@ -56,14 +63,22 @@ public class RepairState : IInputState
                     {
                         if (hit.collider.gameObject.tag == "Mech")
                         {
-                            GameObject hitEffect = hitEffectPool.GetObject();
-                            hitEffect.transform.position = hit.point;
-                            hitEffect.transform.rotation = Quaternion.identity;
-                            hitEffect.SetActive(true);
+                            repairEffect.transform.position = hit.point;
+                            repairEffect.transform.rotation = Quaternion.identity;
+                            repairEffect.SetActive(true);
 
-                            hit.collider.gameObject.GetComponent<DamageOverNetwork>().HealPlayer(1, hit.collider.gameObject.name, playerInput.transform.GetComponent<NetworkIdentity>());
+                            Debug.Log(hit.collider.gameObject.name);
+                            hit.collider.gameObject.GetComponentInParent<DamageOverNetwork>().HealPlayer(1, hit.collider.gameObject.name, playerInput.transform.GetComponent<NetworkIdentity>());
+                        }
+                        else
+                        {
+                            repairEffect.SetActive(false);
                         }
                     }
+                }
+                else
+                {
+                    repairEffect.SetActive(false);
                 }
 
                 if (Input.GetButtonDown("Left Click"))

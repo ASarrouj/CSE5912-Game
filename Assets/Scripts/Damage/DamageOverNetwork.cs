@@ -52,7 +52,7 @@ public class DamageOverNetwork : NetworkBehaviour
 
     public void HealPlayer(int heal, string hb, NetworkIdentity mechID)
     {
-        CmdDamagePlayer(heal, hb, mechID);
+        CmdHealPlayer(heal, hb, mechID);
     }
 
     [ClientRpc]

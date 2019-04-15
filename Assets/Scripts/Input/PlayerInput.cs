@@ -5,6 +5,9 @@ using UnityEngine.Networking;
 
 public class PlayerInput : NetworkBehaviour
 {
+
+    public GameObject repairEffect;
+
     private CameraManager camManager;
     private UIManager uiManager;
     private IInputState inputState;
@@ -133,7 +136,7 @@ public class PlayerInput : NetworkBehaviour
         }
         else if (slots[lastKeyIndex].tag == "RepairTool")
         {
-            inputState = new RepairState(transform);
+            inputState = new RepairState(transform, repairEffect);
             uiManager.MechUI();
         }
         else if (slots[lastKeyIndex].tag == "MineDeployer")
