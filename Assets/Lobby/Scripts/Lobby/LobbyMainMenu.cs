@@ -28,5 +28,11 @@ namespace Prototype.NetworkLobby
             lobbyManager.backDelegate = lobbyManager.BackToMainClbk;
             lobbyManager.backButton.gameObject.GetComponentInChildren<Text>().text = "Back";
         }
+
+        public void OnClickQuit()
+        {
+            Application.Quit();
+        }
+        
     }
 }
