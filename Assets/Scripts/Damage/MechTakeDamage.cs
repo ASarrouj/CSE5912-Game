@@ -41,7 +41,7 @@ public class MechTakeDamage : MonoBehaviour, IDamagable
         ForceCameraSwitch();
         Destroy(explosion, 3f);
         //DestroyNetChild();
-        transform.parent.gameObject.SetActive(false);
+        RpcDisableParent();
         //Destroy(transform.parent.gameObject);
     }
 
@@ -54,7 +54,7 @@ public class MechTakeDamage : MonoBehaviour, IDamagable
         ForceCameraSwitch();
         Destroy(explosion, 3f);
         //DestroyNetChild();
-        transform.parent.gameObject.SetActive(false);
+        RpcDisableParent();
         //Destroy(transform.parent.gameObject);
     }
 
@@ -66,7 +66,7 @@ public class MechTakeDamage : MonoBehaviour, IDamagable
         ForceCameraSwitch();
         Destroy(explosion, 3f);
         //DestroyNetChild();
-        transform.parent.gameObject.SetActive(false);
+        RpcDisableParent();
         //Destroy(transform.parent.gameObject);
     }
 
@@ -95,4 +95,9 @@ public class MechTakeDamage : MonoBehaviour, IDamagable
         PI.HandleDeadSlot(transform.name);
     }
 
+    [ClientRpc]
+    void RpcDisableParent()
+    {
+        transform.parent.gameObject.SetActive(false);
+    }
 }
