@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3022329224430592139}
   - component: {fileID: 5547304998019707279}
   - component: {fileID: 1848354616454948092}
+  - component: {fileID: 1916377453627851142}
   m_Layer: 0
   m_Name: PlayerCamera
   m_TagString: MainCamera
@@ -95,3 +96,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 831c90044248bdd4aa526dcffe411e38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1916377453627851142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3688640868494074517}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a870c870e9ec4734db26116b5556124b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraSensitivity: 90
+  climbSpeed: 4
+  normalMoveSpeed: 10
+  slowMoveFactor: 0.25
+  fastMoveFactor: 3
