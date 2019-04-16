@@ -16,7 +16,7 @@ public class SpawnButton : MonoBehaviour
 
     public void SpawnAI() {
         if (spawner != null && transform.root.GetComponent<NetworkIdentity>().isServer) {
-            spawner.SpawnAI(Vector3.zero);
+            spawner.SpawnAI(0);
         }
     }
 }

@@ -10,6 +10,20 @@ public class AI_Spawner : NetworkBehaviour
     public GameObject prefabAI;
     public int numStartAI;
 
+    public Vector3[] SpawnPoints;
+
+    private Vector3[] citySpawnPoints = {
+        new Vector3(-3.2f, 0, -16.1f),
+        new Vector3(-16.5f, 0, -34.6f),
+        new Vector3(-3.2f, 0, -34.5f),
+        new Vector3(-15.5f, 0, -16.1f)};
+
+    private Vector3[] moonSpawnPoints = {
+        new Vector3(990, 100, 990),
+        new Vector3(990, 100, 1010),
+        new Vector3(1010, 100, 1010),
+        new Vector3(1010, 100, 990)};
+
     [Header("Debug")]
     public bool ShowFOV = false;
     public bool ShowTarget = false;
@@ -19,17 +33,25 @@ public class AI_Spawner : NetworkBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void SpawnAI(Vector3 startPos) {
+    public void SpawnAI(int startPos) {
         //NetworkManager man = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
         //prefabAI = man.spawnPrefabs[0];
 
-        GameObject newAI = Instantiate(prefabAI, startPos, Quaternion.identity);
+        GameObject newAI = Instantiate(prefabAI, SpawnPoints[startPos], Quaternion.identity);
 
         if (ShowFOV) newAI.GetComponent<AI.FOV>().showFOV = true;
         if (ShowTarget) newAI.GetComponent<AI.Steering>().ShowDebugTarget = true;
         if (ShowPath) newAI.GetComponent<LineRenderer>().enabled = true;     
 
         CmdSpawn(newAI);
+    }
+
+    public void SetSpawnPoints(int sceneNum) {
+        if (sceneNum == 1) {
+            SpawnPoints = citySpawnPoints;
+        } else if (sceneNum == 2) {
+            SpawnPoints = moonSpawnPoints;
+        }
     }
 
     [Command]
@@ -41,15 +63,14 @@ public class AI_Spawner : NetworkBehaviour
         NetworkServer.Spawn(g);
     }
 
-    public void AddStartAI(InputField num) {
-        numStartAI = int.Parse(num.text);
+    public void AddStartAI(int num) {
+        numStartAI = num;
     }
 
     private void OnLevelWasLoaded(int level) {
-        if (level == 1) {
-            for (int i = 0; i < numStartAI; i++) {
-                SpawnAI(new Vector3(-50 - i * 10, 0, -20 - i * 10));
-            }
+        SetSpawnPoints(level);
+        for (int i = 0; i < numStartAI; i++) {
+            SpawnAI(i);
         }
     }
 }
