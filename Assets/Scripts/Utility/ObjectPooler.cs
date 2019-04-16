@@ -49,6 +49,7 @@ void RpcSpawn()
         if (willGrow)
         {
             GameObject obj = Instantiate(pooledObject) as GameObject;
+            obj.AddComponent<ObjectDestroy>();
             obj.SetActive(false);
             objects.Add(obj);
             CmdSpawn(obj);
