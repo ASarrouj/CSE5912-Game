@@ -35,6 +35,15 @@ public class MineController : NetworkBehaviour
             NetworkIdentity id = other.attachedRigidbody.gameObject.GetComponent<NetworkIdentity>();
             string hitboxName = other.gameObject.name;
             dmgHandler.DamagePlayer(30, hitboxName, id);
+            Vector3 explosionPos = transform.position;
+            Collider[] colliders = Physics.OverlapSphere(explosionPos, 8f);
+            foreach (Collider hit in colliders)
+            {
+                Rigidbody rb = hit.GetComponent<Rigidbody>();
+
+                if (rb != null)
+                    rb.AddExplosionForce(500, explosionPos, 1.0f);
+            }
         }
     }
 
