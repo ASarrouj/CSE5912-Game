@@ -5,10 +5,13 @@ using UnityEngine.Networking;
 
 public class GunAttacher : NetworkBehaviour
 {
+    public GameObject artillery;
+
     [Command]
     public void CmdAttachGun(GameObject gun, string parentName)
     {
-        NetworkServer.Spawn(gun);
+        GameObject g = Instantiate(artillery);
+        NetworkServer.Spawn(g);
         RpcAttachGun(gun, parentName);
     }
 
