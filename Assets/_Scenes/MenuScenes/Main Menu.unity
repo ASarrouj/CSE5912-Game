@@ -1239,16 +1239,6 @@ MonoBehaviour:
   prefabAI: {fileID: 319536895269049431, guid: 6123532ebe6b5e54fa6b1a01da8c0aa5, type: 3}
   numStartAI: 0
   SpawnPoints: []
-  citySpawnPoints:
-  - {x: -3.2, y: 0, z: -16.1}
-  - {x: -16.5, y: 0, z: -34.6}
-  - {x: -3.2, y: 0, z: -34.5}
-  - {x: -15.5, y: 0, z: -16.1}
-  moonSpawnPoints:
-  - {x: -3.2, y: 20, z: -16.1}
-  - {x: -16.5, y: 20, z: -34.6}
-  - {x: -3.2, y: 20, z: -34.5}
-  - {x: -15.5, y: 20, z: -16.1}
   ShowFOV: 0
   ShowTarget: 0
   ShowPath: 0
@@ -9461,6 +9451,7 @@ MonoBehaviour:
   - {fileID: 4827841766346917697, guid: 26dc83374b9c145c8b2a2913941225df, type: 3}
   - {fileID: 207405950796102609, guid: 8acd09d9e5603c545b18325d2e17ff82, type: 3}
   - {fileID: 1865281220332709313, guid: 2a2b7074caf41fb4f926106d961b5019, type: 3}
+  - {fileID: 1000011797152326, guid: acf39d9f4addf294d93fa56fa373961b, type: 3}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
