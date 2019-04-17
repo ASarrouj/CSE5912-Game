@@ -39,7 +39,8 @@ public class ProjectileCollider : NetworkBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        Instantiate(explosion, transform.position, transform.rotation);
+        GameObject explosionInstance = Instantiate(explosion, transform.position, transform.rotation);
+        NetworkServer.Spawn(explosionInstance);
         GameObject sound = GameObject.Find("SoundManager");
         AudioSource source = sound.GetComponent<AudioSource>();
         source.PlayOneShot(clip, 1f);
