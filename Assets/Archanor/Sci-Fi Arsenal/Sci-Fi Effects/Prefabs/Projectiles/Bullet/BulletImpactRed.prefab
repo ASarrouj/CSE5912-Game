@@ -4716,7 +4716,7 @@ GameObject:
   - component: {fileID: 19855376}
   - component: {fileID: 6893118085283288928}
   - component: {fileID: 2168198500944839584}
-  - component: {fileID: 8768965148034642447}
+  - component: {fileID: 4123869180381291794}
   m_Layer: 0
   m_Name: BulletImpactRed
   m_TagString: Untagged
@@ -9473,7 +9473,7 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
---- !u!114 &8768965148034642447
+--- !u!114 &4123869180381291794
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9482,7 +9482,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 136416}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98097b1d967588b4b9662f3e72fa6d37, type: 3}
+  m_Script: {fileID: 11500000, guid: 9add59ac796c1f144bcec3d876082148, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   existTime: 1

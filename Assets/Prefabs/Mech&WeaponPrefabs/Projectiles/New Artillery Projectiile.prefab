@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 4098223500776496732}
   - component: {fileID: 9043173926125789600}
   - component: {fileID: 2662381802524588562}
-  - component: {fileID: 4275061348303119460}
   - component: {fileID: 5967665125436725558}
+  - component: {fileID: 1615926087826176794}
   - component: {fileID: 8494800077384084510}
   - component: {fileID: 2452422966832724702}
   m_Layer: 0
@@ -128,19 +128,6 @@ MonoBehaviour:
   explosion: {fileID: 1000011797152326, guid: acf39d9f4addf294d93fa56fa373961b, type: 3}
   clip: {fileID: 8300000, guid: 9caaffa2c14eddf44928418382cb4ecf, type: 3}
   damage: 50
---- !u!114 &4275061348303119460
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2287083176919119801}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98097b1d967588b4b9662f3e72fa6d37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  existTime: 20
 --- !u!82 &5967665125436725558
 AudioSource:
   m_ObjectHideFlags: 0
@@ -238,6 +225,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1615926087826176794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2287083176919119801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9add59ac796c1f144bcec3d876082148, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  existTime: 20
 --- !u!114 &8494800077384084510
 MonoBehaviour:
   m_ObjectHideFlags: 0

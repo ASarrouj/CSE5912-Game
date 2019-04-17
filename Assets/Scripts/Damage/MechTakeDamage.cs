@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class MechTakeDamage : MonoBehaviour, IDamagable
+public class MechTakeDamage : NetworkBehaviour, IDamagable
 {
     public bool Invincible;
     public enum Hitbox { FrontHitbox, LeftHitbox, RightHitbox, RearHitbox, CoreHitbox}
