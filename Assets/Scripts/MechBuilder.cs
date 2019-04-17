@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
 
-public class MechBuilder : NetworkBehaviour
+public class MechBuilder : MonoBehaviour
 {
 
     public GameObject self;
@@ -103,7 +103,6 @@ public class MechBuilder : NetworkBehaviour
         if (trackSpot < guns.Length)
         {
             toAttach.guns[trackSpot] = Instantiate(gun, toAttach.positions[trackSpot].transform, false);
-            NetworkServer.Spawn(toAttach.guns[trackSpot]);
             gunAttacher.CmdAttachGun(toAttach.guns[trackSpot], toAttach.positions[trackSpot].name);
             toAttach.selfInput.addGun(trackSpot);
 
