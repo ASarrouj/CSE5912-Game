@@ -70,7 +70,7 @@ public class ProjectileCollider : NetworkBehaviour
                 Rigidbody rb = hit.GetComponent<Rigidbody>();
 
                 if (rb != null)
-                    rb.AddExplosionForce(1000, explosionPos, 1.8f);
+                    rb.AddExplosionForce(2000, explosionPos, 5f);
             }
         }
     }

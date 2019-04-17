@@ -35,6 +35,7 @@ namespace Prototype.NetworkLobby
         public void OnDestroyed()
         {
             GameObject.Find("RoundsManager").GetComponent<RoundsManager>().CheckRoundOver();
+            GameObject.Find("PlayerCamera").GetComponent<ExtendedFlycam>().enabled = true;
         }
 
         [ClientRpc]

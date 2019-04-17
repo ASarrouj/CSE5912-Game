@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class MechTakeDamage : MonoBehaviour, IDamagable
+public class MechTakeDamage : NetworkBehaviour, IDamagable
 {
     public bool Invincible;
     public enum Hitbox { FrontHitbox, LeftHitbox, RightHitbox, RearHitbox, CoreHitbox}
@@ -36,12 +36,10 @@ public class MechTakeDamage : MonoBehaviour, IDamagable
 
     public void Exploding() {
         GameObject explosion = Instantiate(particleEffects[0], transform.position, Quaternion.identity);
-        explosion.AddComponent<NetworkIdentity>();
         NetworkServer.Spawn(explosion);
         ForceCameraSwitch();
-        Destroy(explosion, 3f);
         //DestroyNetChild();
-        transform.parent.gameObject.SetActive(false);
+        RpcDisableParent();
         //Destroy(transform.parent.gameObject);
     }
 
@@ -49,24 +47,20 @@ public class MechTakeDamage : MonoBehaviour, IDamagable
         coreDestroyed = true;
         GameObject explosion = Instantiate(particleEffects[1], transform.position, Quaternion.identity);
         explosion.transform.localScale += new Vector3(1f, 1f, 1f);
-        explosion.AddComponent<NetworkIdentity>();
         NetworkServer.Spawn(explosion);
         ForceCameraSwitch();
-        Destroy(explosion, 3f);
         //DestroyNetChild();
-        transform.parent.gameObject.SetActive(false);
+        RpcDisableParent();
         //Destroy(transform.parent.gameObject);
     }
 
     public void ExplodingFront() {
         GameObject explosion = Instantiate(particleEffects[0], transform.position, Quaternion.identity);
         explosion.transform.localScale -= new Vector3(1f, 1f, 1f);
-        explosion.AddComponent<NetworkIdentity>();
         NetworkServer.Spawn(explosion);
         ForceCameraSwitch();
-        Destroy(explosion, 3f);
         //DestroyNetChild();
-        transform.parent.gameObject.SetActive(false);
+        RpcDisableParent();
         //Destroy(transform.parent.gameObject);
     }
 
@@ -95,4 +89,9 @@ public class MechTakeDamage : MonoBehaviour, IDamagable
         PI.HandleDeadSlot(transform.name);
     }
 
+    [ClientRpc]
+    void RpcDisableParent()
+    {
+        transform.parent.gameObject.SetActive(false);
+    }
 }
