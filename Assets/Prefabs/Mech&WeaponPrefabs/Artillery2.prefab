@@ -29,7 +29,7 @@ Transform:
   m_LocalPosition: {x: -0, y: 0, z: 2}
   m_LocalScale: {x: 10, y: 10, z: 3.4750972}
   m_Children:
-  - {fileID: 6869588983514568573}
+  - {fileID: 6871256310603083359}
   - {fileID: 8201123358037370395}
   m_Father: {fileID: 3602648951565858868}
   m_RootOrder: 0
@@ -410,9 +410,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b605d47cbc738e24c8c1a9cdfa8535a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSpawn: {fileID: 6869588983514568573}
-  smoke: {fileID: 6870266194228576541}
-  projectileForce: 25
+  bulletSpawn: {fileID: 6871256310603083359}
+  smoke: {fileID: 6871256310603082895}
+  projectileForce: 30
   fireRate: 2
 --- !u!114 &6516192656357096717
 MonoBehaviour:
@@ -556,13 +556,13 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 4439680460321027180, guid: 85a8865d1bf4a63478038fae23776de8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 85a8865d1bf4a63478038fae23776de8, type: 3}
---- !u!1 &6870266194228576541 stripped
+--- !u!1 &6871256310603082895 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1000012560919920, guid: 85a8865d1bf4a63478038fae23776de8,
     type: 3}
   m_PrefabInstance: {fileID: 6871256310603082861}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &6869588983514568573 stripped
+--- !u!4 &6871256310603083359 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000011112872720, guid: 85a8865d1bf4a63478038fae23776de8,
     type: 3}
