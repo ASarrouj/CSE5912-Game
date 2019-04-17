@@ -39,8 +39,7 @@ public class ProjectileCollider : NetworkBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        GameObject explosionInstance = Instantiate(explosion, transform.position, transform.rotation);
-        NetworkServer.Spawn(explosionInstance);
+        CmdSpawnExplosion();
         GameObject sound = GameObject.Find("SoundManager");
         AudioSource source = sound.GetComponent<AudioSource>();
         source.PlayOneShot(clip, 1f);
@@ -74,5 +73,12 @@ public class ProjectileCollider : NetworkBehaviour
                     rb.AddExplosionForce(1000, explosionPos, 1.8f);
             }
         }
+    }
+
+    [Command]
+    void CmdSpawnExplosion()
+    {
+        GameObject explosionInstance = Instantiate(explosion, transform.position, transform.rotation);
+        NetworkServer.Spawn(explosionInstance);
     }
 }
