@@ -36,7 +36,6 @@ public class MechTakeDamage : MonoBehaviour, IDamagable
 
     public void Exploding() {
         GameObject explosion = Instantiate(particleEffects[0], transform.position, Quaternion.identity);
-        explosion.AddComponent<NetworkIdentity>();
         NetworkServer.Spawn(explosion);
         ForceCameraSwitch();
         Destroy(explosion, 3f);
@@ -49,7 +48,6 @@ public class MechTakeDamage : MonoBehaviour, IDamagable
         coreDestroyed = true;
         GameObject explosion = Instantiate(particleEffects[1], transform.position, Quaternion.identity);
         explosion.transform.localScale += new Vector3(1f, 1f, 1f);
-        explosion.AddComponent<NetworkIdentity>();
         NetworkServer.Spawn(explosion);
         ForceCameraSwitch();
         Destroy(explosion, 3f);
@@ -61,7 +59,6 @@ public class MechTakeDamage : MonoBehaviour, IDamagable
     public void ExplodingFront() {
         GameObject explosion = Instantiate(particleEffects[0], transform.position, Quaternion.identity);
         explosion.transform.localScale -= new Vector3(1f, 1f, 1f);
-        explosion.AddComponent<NetworkIdentity>();
         NetworkServer.Spawn(explosion);
         ForceCameraSwitch();
         Destroy(explosion, 3f);
