@@ -69,6 +69,10 @@ public class AI_Spawner : NetworkBehaviour
 
     private void OnLevelWasLoaded(int level) {
         SetSpawnPoints(level);
+        Invoke("SpawnStartAI", 1);
+    }
+
+    private void SpawnStartAI() {
         for (int i = 0; i < numStartAI; i++) {
             SpawnAI(i);
         }

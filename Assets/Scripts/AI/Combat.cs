@@ -67,8 +67,7 @@ namespace AI {
         {
             updateCount++;
             if (updateCount > 100) {
-
-                WeaponCheck();
+                if (targeting.Target) WeaponCheck();
                 updateCount = 0;
             }
         }

@@ -10,9 +10,12 @@ namespace AI {
         private MechDriver mechDriver;
         private readonly int rotateStep = 5;
         private readonly int speedStep = 4;
-        private readonly float angleThreshold = 25;
+        private readonly float angleThreshold = 45;
         private readonly int maxSpeed = 12;
         private readonly int maxAngle = 45;
+
+        private int turnCounter = 0;
+        private int turnWait = 20;
 
         Rigidbody rb;
 
@@ -72,19 +75,23 @@ namespace AI {
         }
 
         private void SteerRight() {
+            if (++turnCounter < turnWait) return;
             if (mechDriver.turnAngle < maxAngle) {
                 mechDriver.velLimit = speedStep;
                 mechDriver.turnAngle += rotateStep;
             }
+            turnCounter = 0;
            // mechDriver.velLimit = 2;
             //mechDriver.TurnRight();
         }
 
         private void SteerLeft() {
+            if (++turnCounter < turnWait) return;
             if (mechDriver.turnAngle > -maxAngle) {
                 mechDriver.velLimit = speedStep;
                 mechDriver.turnAngle -= rotateStep;
             }
+            turnCounter = 0;
             //mechDriver.velLimit = 2;
             //mechDriver.TurnLeft();
         }
