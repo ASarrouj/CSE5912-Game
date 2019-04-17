@@ -12,7 +12,7 @@ public class GunAttacher : NetworkBehaviour
     {
         GameObject g = Instantiate(artillery);
         NetworkServer.Spawn(g);
-        RpcAttachGun(gun, parentName);
+        RpcAttachGun(g, parentName);
     }
 
     [ClientRpc]
