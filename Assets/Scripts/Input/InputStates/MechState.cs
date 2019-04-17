@@ -64,17 +64,13 @@ public class MechState : IInputState
                     driver.ResetRotation();
                 }
 
-                if (Input.GetButtonDown("Jump"))
+                if (Input.GetButtonDown("Space"))
                 {
                     driver.jump();
-
-                }
-
-                if (Input.GetButtonDown("Shield"))
-                {
                     driver.shield();
 
                 }
+
 
                 if (Input.GetButtonDown("Left Click"))
                 {
