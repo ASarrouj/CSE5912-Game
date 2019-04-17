@@ -18,9 +18,9 @@ public class MechBuilder : MonoBehaviour
     private CameraManager camManager;
 
     public GameObject mech;
-    private MechComp toAttach;
+    public MechComp toAttach;
 
-    private int trackSpot;
+    public int trackSpot;
 
     private void Start()
     {
@@ -102,21 +102,28 @@ public class MechBuilder : MonoBehaviour
     {
         if (trackSpot < guns.Length)
         {
-            toAttach.guns[trackSpot] = Instantiate(gun, toAttach.positions[trackSpot].transform, false);
-            gunAttacher.CmdAttachGun(toAttach.guns[trackSpot], toAttach.positions[trackSpot].name);
-            toAttach.selfInput.addGun(trackSpot);
-
-            if (toAttach.guns[trackSpot].name.Equals("MachineGun(Clone)"))
-            {
-                toAttach.guns[trackSpot].GetComponent<RayCastShoot>().GetCameraAndScore(toAttach.viewCam);
-            }
-
-            trackSpot++;
+            //Debug.Log("gun name: " + gun.name);
+            //Debug.Log("position name: " + toAttach.positions[trackSpot].name);
+            gunAttacher.CmdAttachGun(gun.name, toAttach.positions[trackSpot].name);
         }
         else
         {
             print("This location is not available on the mech.");
         }
+    }
+
+    public void finishAttachGunInOrder()
+    {
+        //Debug.Log("gun added name: " + gameObject.transform.parent.GetChild(0).transform.Find(toAttach.positions[trackSpot].name).transform.GetChild(1).gameObject.name);
+        toAttach.guns[trackSpot] = gameObject.transform.parent.GetChild(0).transform.Find(toAttach.positions[trackSpot].name).transform.GetChild(1).gameObject;
+        toAttach.selfInput.addGun(trackSpot);
+        
+        if (toAttach.guns[trackSpot].name.Equals("MachineGun(Clone)"))
+        {
+            toAttach.guns[trackSpot].GetComponent<RayCastShoot>().GetCameraAndScore(toAttach.viewCam);
+        }
+        
+        trackSpot++;
     }
 
     public void RemoveGun(int spot)
