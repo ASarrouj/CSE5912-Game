@@ -38,7 +38,6 @@ public class MechTakeDamage : NetworkBehaviour, IDamagable
         GameObject explosion = Instantiate(particleEffects[0], transform.position, Quaternion.identity);
         NetworkServer.Spawn(explosion);
         ForceCameraSwitch();
-        Destroy(explosion, 3f);
         //DestroyNetChild();
         RpcDisableParent();
         //Destroy(transform.parent.gameObject);
@@ -50,7 +49,6 @@ public class MechTakeDamage : NetworkBehaviour, IDamagable
         explosion.transform.localScale += new Vector3(1f, 1f, 1f);
         NetworkServer.Spawn(explosion);
         ForceCameraSwitch();
-        Destroy(explosion, 3f);
         //DestroyNetChild();
         RpcDisableParent();
         //Destroy(transform.parent.gameObject);
@@ -61,7 +59,6 @@ public class MechTakeDamage : NetworkBehaviour, IDamagable
         explosion.transform.localScale -= new Vector3(1f, 1f, 1f);
         NetworkServer.Spawn(explosion);
         ForceCameraSwitch();
-        Destroy(explosion, 3f);
         //DestroyNetChild();
         RpcDisableParent();
         //Destroy(transform.parent.gameObject);
