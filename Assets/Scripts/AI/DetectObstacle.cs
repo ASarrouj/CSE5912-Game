@@ -5,6 +5,9 @@ using UnityEngine;
 namespace AI {
     public class DetectObstacle : MonoBehaviour
     {
+        public bool blockedLeft, blockedRight;
+        public bool isShort;
+
         private Avoidance av;
         private BoxCollider col;
         private RectTransform detectRect;
@@ -25,10 +28,14 @@ namespace AI {
             if (towardObst < 0) {
                 towardObst += 360;
             }
-            if (towardObst > transform.rotation.y) {
-                av.AvoidLeft = true;
+            if (isShort) {
+                av.Stuck = true;
             } else {
-                av.AvoidRight = true;
+                if (towardObst > transform.rotation.y) {
+                    av.AvoidLeft = true;
+                } else {
+                    av.AvoidRight = true;
+                }
             }
         }
     }

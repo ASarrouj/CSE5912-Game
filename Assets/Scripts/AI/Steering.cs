@@ -55,15 +55,11 @@ namespace AI {
 
             float angle = Vector3.SignedAngle(transform.forward, linearAcceleration, Vector3.up);
 
-            if (avoid.AvoidRight) {
-                if (turning) SteerRight();
-                else BackUp();
-            } else if (avoid.AvoidLeft) {
-                if(turning) SteerLeft();
-                else BackUp();
-            } else if (angle > angleThreshold) {
-                SteerRight();
-            } else if (angle < - angleThreshold) {
+            if (avoid.Stuck) {
+                BackUp();
+            } else if (avoid.AvoidRight || angle > angleThreshold) {
+                SteerRight(); 
+            } else if (avoid.AvoidLeft || angle < -angleThreshold) {
                 SteerLeft();
             } else {
                 mechDriver.turnAngle = 0;
@@ -78,21 +74,22 @@ namespace AI {
 
         private void BackUp() {
             backup = true;
-            mechDriver.turnAngle = 0;
+            if (avoid.AvoidLeft) mechDriver.turnAngle = maxAngle;
+            else mechDriver.turnAngle = -maxAngle;
             mechDriver.velLimit = -4 * speedStep;
-            Invoke("DoneBackingUp", 0.5f);
+            Invoke("DoneBackingUp", 1f);
         }
 
         private void DoneBackingUp() {
-            backup = false;
-            turning = true;
-            Invoke("DoneTurning", 0.5f);
+            mechDriver.turnAngle = - mechDriver.turnAngle;
+            mechDriver.velLimit = 2 * speedStep;
+           // backup = false;
+            Invoke("DoneTurning", 1f);
         }
 
         private void DoneTurning() {
-            avoid.AvoidLeft = false;
-            avoid.AvoidRight = false;
-            turning = false;
+            backup = false;
+            avoid.Stuck = false;
         }
 
         private void SteerRight() {

@@ -12,7 +12,7 @@ namespace AI
 
         private Steering steering;
 
-        private readonly float targetRadius = 5f;
+        private readonly float targetRadius = 10f;
         private bool init;
 
         private Vector2 posXZ, targetPosXZ;

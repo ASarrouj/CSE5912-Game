@@ -7,11 +7,12 @@ namespace AI {
     {
         public bool showFOV = false;
 
-        public GameObject fov;
+        public GameObject shortFOV, longFOV;
         private GameObject leftFOV, rightFOV; 
         private Mesh leftMesh, rightMesh;
         private readonly float visionAngle = 90;
-        private readonly float visionDepth = 5;
+        private readonly float visionDepth = 10;
+        private readonly float stuckThreshold = 5;
 
         void Awake()
         {
@@ -19,22 +20,29 @@ namespace AI {
         }
 
         void CreateFOV() {
-            fov = new GameObject("FOV");
-            fov.transform.parent = transform;
-            fov.transform.localPosition = new Vector3(0, 1, 4);
+            shortFOV = new GameObject("shortFOV");
+            shortFOV.transform.parent = transform;
+            shortFOV.transform.localPosition = new Vector3(0, 1, 4);
 
-            leftFOV = new GameObject("leftFOV");
-            leftFOV.transform.parent = fov.transform;
-            leftFOV.transform.localPosition = new Vector3(0, 0, 0);
+            longFOV = new GameObject("longFOV");
+            longFOV.transform.parent = transform;
+            longFOV.transform.localPosition = new Vector3(0, 1, 4);
 
-            rightFOV = new GameObject("rightFOV"); 
-            rightFOV.transform.parent = fov.transform;
-            rightFOV.transform.localPosition = new Vector3(0, 0, 0);
-
-            GenerateMeshes();
-            AddBoxCollider();
+            AddBoxColliders();
 
             if (showFOV) {
+                leftFOV = new GameObject("leftFOV");
+                leftFOV.transform.parent = shortFOV.transform;
+                leftFOV.transform.localPosition = new Vector3(0, 0, 0);
+                leftFOV.layer = LayerMask.NameToLayer("Trigger");
+
+
+                rightFOV = new GameObject("rightFOV");
+                rightFOV.transform.parent = shortFOV.transform;
+                rightFOV.transform.localPosition = new Vector3(0, 0, 0);
+                rightFOV.layer = LayerMask.NameToLayer("Trigger");
+
+                GenerateMeshes();
                 DebugRender();
             }
         }
@@ -50,11 +58,18 @@ namespace AI {
             rightFOV.GetComponent<Renderer>().material.color = Color.red;
         }  
 
-        private void AddBoxCollider() {
-            BoxCollider col = fov.AddComponent<BoxCollider>();
+        private void AddBoxColliders() {
+            BoxCollider col = shortFOV.AddComponent<BoxCollider>();
+            col.isTrigger = true;
+            col.center = new Vector3(0, 0, stuckThreshold / 2);
+            col.size = new Vector3(8, 1, stuckThreshold);
+
+            col = longFOV.AddComponent<BoxCollider>();
             col.isTrigger = true;
             col.center = new Vector3(0, 0, visionDepth / 2);
-            col.size = new Vector3(5, 1, visionDepth);
+            col.size = new Vector3(8, 1, visionDepth);
+
+            
         }
 
         public void GenerateMeshes() {
@@ -63,32 +78,32 @@ namespace AI {
             Vector3[] leftVertices = {
                 new Vector3(0, 0, 0),
 
-                new Vector3(Mathf.Cos(VisionAngleRadians / 2 + Mathf.PI / 2) * visionDepth, 0, Mathf.Sin(VisionAngleRadians / 2 + Mathf.PI / 2) * visionDepth),
-                new Vector3(Mathf.Cos(VisionAngleRadians * 7 / 16 + Mathf.PI / 2) * visionDepth, 0, Mathf.Sin(VisionAngleRadians * 7 / 16 + Mathf.PI / 2) * visionDepth),
-                new Vector3(Mathf.Cos(VisionAngleRadians * 3 / 8 + Mathf.PI / 2) * visionDepth, 0, Mathf.Sin(VisionAngleRadians * 3 / 8 + Mathf.PI / 2) * visionDepth),
-                new Vector3(Mathf.Cos(VisionAngleRadians * 5 / 16 + Mathf.PI / 2) * visionDepth, 0, Mathf.Sin(VisionAngleRadians * 5 / 16 + Mathf.PI / 2) * visionDepth),
-                new Vector3(Mathf.Cos(VisionAngleRadians / 4 + Mathf.PI / 2) * visionDepth, 0, Mathf.Sin(VisionAngleRadians / 4 + Mathf.PI / 2) * visionDepth),
-                new Vector3(Mathf.Cos(VisionAngleRadians * 3 / 16 + Mathf.PI / 2) * visionDepth, 0, Mathf.Sin(VisionAngleRadians * 3 / 16 + Mathf.PI / 2) * visionDepth),
-                new Vector3(Mathf.Cos(VisionAngleRadians / 8 + Mathf.PI / 2) * visionDepth, 0, Mathf.Sin(VisionAngleRadians / 8 + Mathf.PI / 2) * visionDepth),
-                new Vector3(Mathf.Cos(VisionAngleRadians / 16 + Mathf.PI / 2) * visionDepth, 0, Mathf.Sin(VisionAngleRadians / 16 + Mathf.PI / 2) * visionDepth),
+                new Vector3(Mathf.Cos(VisionAngleRadians / 2 + Mathf.PI / 2) * stuckThreshold, 0, Mathf.Sin(VisionAngleRadians / 2 + Mathf.PI / 2) * stuckThreshold),
+                new Vector3(Mathf.Cos(VisionAngleRadians * 7 / 16 + Mathf.PI / 2) * stuckThreshold, 0, Mathf.Sin(VisionAngleRadians * 7 / 16 + Mathf.PI / 2) * stuckThreshold),
+                new Vector3(Mathf.Cos(VisionAngleRadians * 3 / 8 + Mathf.PI / 2) * stuckThreshold, 0, Mathf.Sin(VisionAngleRadians * 3 / 8 + Mathf.PI / 2) * stuckThreshold),
+                new Vector3(Mathf.Cos(VisionAngleRadians * 5 / 16 + Mathf.PI / 2) * stuckThreshold, 0, Mathf.Sin(VisionAngleRadians * 5 / 16 + Mathf.PI / 2) * stuckThreshold),
+                new Vector3(Mathf.Cos(VisionAngleRadians / 4 + Mathf.PI / 2) * stuckThreshold, 0, Mathf.Sin(VisionAngleRadians / 4 + Mathf.PI / 2) * stuckThreshold),
+                new Vector3(Mathf.Cos(VisionAngleRadians * 3 / 16 + Mathf.PI / 2) * stuckThreshold, 0, Mathf.Sin(VisionAngleRadians * 3 / 16 + Mathf.PI / 2) * stuckThreshold),
+                new Vector3(Mathf.Cos(VisionAngleRadians / 8 + Mathf.PI / 2) * stuckThreshold, 0, Mathf.Sin(VisionAngleRadians / 8 + Mathf.PI / 2) * stuckThreshold),
+                new Vector3(Mathf.Cos(VisionAngleRadians / 16 + Mathf.PI / 2) * stuckThreshold, 0, Mathf.Sin(VisionAngleRadians / 16 + Mathf.PI / 2) * stuckThreshold),
 
-                new Vector3(0, 0, visionDepth),
+                new Vector3(0, 0, stuckThreshold),
 
                 };
 
             Vector3[] rightVertices = {
                 new Vector3(0, 0, 0),
 
-                new Vector3(0, 0, visionDepth),
+                new Vector3(0, 0, stuckThreshold),
 
-                new Vector3(Mathf.Cos(-VisionAngleRadians / 16 + Mathf.PI / 2) * visionDepth, 0, Mathf.Sin(-VisionAngleRadians / 16 + Mathf.PI / 2) * visionDepth),
-                new Vector3(Mathf.Cos(-VisionAngleRadians / 8 + Mathf.PI / 2) * visionDepth, 0, Mathf.Sin(-VisionAngleRadians / 8 + Mathf.PI / 2) * visionDepth),
-                new Vector3(Mathf.Cos(-VisionAngleRadians * 3 / 16 + Mathf.PI / 2) * visionDepth, 0, Mathf.Sin(-VisionAngleRadians * 3 / 16 + Mathf.PI / 2) * visionDepth),
-                new Vector3(Mathf.Cos(-VisionAngleRadians / 4 + Mathf.PI / 2) * visionDepth, 0, Mathf.Sin(-VisionAngleRadians / 4 + Mathf.PI / 2) * visionDepth),
-                new Vector3(Mathf.Cos(-VisionAngleRadians * 5 / 16 + Mathf.PI / 2) * visionDepth, 0, Mathf.Sin(-VisionAngleRadians * 5 / 16 + Mathf.PI / 2) * visionDepth),
-                new Vector3(Mathf.Cos(-VisionAngleRadians * 3 / 8 + Mathf.PI / 2) * visionDepth, 0, Mathf.Sin(-VisionAngleRadians * 3 / 8 + Mathf.PI / 2) * visionDepth),
-                new Vector3(Mathf.Cos(-VisionAngleRadians * 7 / 16 + Mathf.PI / 2) * visionDepth, 0, Mathf.Sin(-VisionAngleRadians * 7 / 16 + Mathf.PI / 2) * visionDepth),
-                new Vector3(Mathf.Cos(-VisionAngleRadians / 2 + Mathf.PI / 2) * visionDepth, 0, Mathf.Sin(-VisionAngleRadians / 2 + Mathf.PI / 2) * visionDepth),
+                new Vector3(Mathf.Cos(-VisionAngleRadians / 16 + Mathf.PI / 2) * stuckThreshold, 0, Mathf.Sin(-VisionAngleRadians / 16 + Mathf.PI / 2) * stuckThreshold),
+                new Vector3(Mathf.Cos(-VisionAngleRadians / 8 + Mathf.PI / 2) * stuckThreshold, 0, Mathf.Sin(-VisionAngleRadians / 8 + Mathf.PI / 2) * stuckThreshold),
+                new Vector3(Mathf.Cos(-VisionAngleRadians * 3 / 16 + Mathf.PI / 2) * stuckThreshold, 0, Mathf.Sin(-VisionAngleRadians * 3 / 16 + Mathf.PI / 2) * stuckThreshold),
+                new Vector3(Mathf.Cos(-VisionAngleRadians / 4 + Mathf.PI / 2) * stuckThreshold, 0, Mathf.Sin(-VisionAngleRadians / 4 + Mathf.PI / 2) * stuckThreshold),
+                new Vector3(Mathf.Cos(-VisionAngleRadians * 5 / 16 + Mathf.PI / 2) * stuckThreshold, 0, Mathf.Sin(-VisionAngleRadians * 5 / 16 + Mathf.PI / 2) * stuckThreshold),
+                new Vector3(Mathf.Cos(-VisionAngleRadians * 3 / 8 + Mathf.PI / 2) * stuckThreshold, 0, Mathf.Sin(-VisionAngleRadians * 3 / 8 + Mathf.PI / 2) * stuckThreshold),
+                new Vector3(Mathf.Cos(-VisionAngleRadians * 7 / 16 + Mathf.PI / 2) * stuckThreshold, 0, Mathf.Sin(-VisionAngleRadians * 7 / 16 + Mathf.PI / 2) * stuckThreshold),
+                new Vector3(Mathf.Cos(-VisionAngleRadians / 2 + Mathf.PI / 2) * stuckThreshold, 0, Mathf.Sin(-VisionAngleRadians / 2 + Mathf.PI / 2) * stuckThreshold),
             };
 
             int[] triangles = {
