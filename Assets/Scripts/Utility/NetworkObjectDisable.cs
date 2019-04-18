@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class NetworkObjectDisable : MonoBehaviour
+public class NetworkObjectDisable : NetworkBehaviour
 {
     public float existTime = 2f;
 
