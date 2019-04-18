@@ -39,7 +39,7 @@ public class MechTakeDamage : NetworkBehaviour, IDamagable
         NetworkServer.Spawn(explosion);
         ForceCameraSwitch();
         //DestroyNetChild();
-        RpcDisableParent();
+        transform.parent.gameObject.SetActive(false);
         //Destroy(transform.parent.gameObject);
     }
 
@@ -50,7 +50,7 @@ public class MechTakeDamage : NetworkBehaviour, IDamagable
         NetworkServer.Spawn(explosion);
         ForceCameraSwitch();
         //DestroyNetChild();
-        RpcDisableParent();
+        transform.parent.gameObject.SetActive(false);
         //Destroy(transform.parent.gameObject);
     }
 
@@ -60,7 +60,7 @@ public class MechTakeDamage : NetworkBehaviour, IDamagable
         NetworkServer.Spawn(explosion);
         ForceCameraSwitch();
         //DestroyNetChild();
-        RpcDisableParent();
+        transform.parent.gameObject.SetActive(false);
         //Destroy(transform.parent.gameObject);
     }
 
@@ -89,9 +89,4 @@ public class MechTakeDamage : NetworkBehaviour, IDamagable
         PI.HandleDeadSlot(transform.name);
     }
 
-    [ClientRpc]
-    void RpcDisableParent()
-    {
-        transform.parent.gameObject.SetActive(false);
-    }
 }

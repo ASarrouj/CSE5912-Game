@@ -52,6 +52,7 @@ public class MechDriver : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!frontLeftCollider) return;
         foreach (WheelCollider collider in allColliders)
         {
             if (collider.isGrounded)
