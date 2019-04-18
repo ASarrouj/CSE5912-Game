@@ -5,11 +5,12 @@ using UnityEngine.Networking;
 
 public class MachineGunSync : NetworkBehaviour
 {
-    private ObjectPooler roundPool;
+    public GameObject artilleryPrefab;
+    //private ObjectPooler roundPool;
     // Start is called before the first frame update
     void Start()
     {
-        roundPool = GameObject.Find("ArtProjectilePool").GetComponent<ObjectPooler>();
+        //roundPool = GameObject.Find("ArtProjectilePool").GetComponent<ObjectPooler>();
     }
 
     // Update is called once per frame
@@ -75,7 +76,8 @@ public class MachineGunSync : NetworkBehaviour
     [Command]
     public void CmdSpawnProjectile(Vector3 position, Quaternion rotation, Vector3 forward, float projectileForce)
     {
-        GameObject newProjectile = roundPool.GetObject();
+        //GameObject newProjectile = roundPool.GetObject();
+        GameObject newProjectile = Instantiate(artilleryPrefab);
 
         newProjectile.transform.position = position + forward * .4f;
         newProjectile.transform.rotation = rotation;
