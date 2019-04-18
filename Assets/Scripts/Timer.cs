@@ -17,6 +17,9 @@ public class Timer : MonoBehaviour
 
     void Update()
     {
-        timerText.text = "Time: " + ((int)Mathf.Ceil(roundLength - Time.time) / 60).ToString() + ":" + ((int)Mathf.Ceil(roundLength - Time.time) % 60).ToString();
+        string seconds = ((int)Mathf.Ceil(roundLength - Time.time) % 60).ToString();
+        if (seconds.Length == 1) seconds = "0" + seconds;
+
+        timerText.text = "Time: " + ((int)Mathf.Ceil(roundLength - Time.time) / 60).ToString() + ":" + seconds;
     }
 }
