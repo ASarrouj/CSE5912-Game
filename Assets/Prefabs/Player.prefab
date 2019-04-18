@@ -906,6 +906,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   artilleryPrefab: {fileID: 2287083176919119801, guid: f0cd41a2e27211b46af61d75ba123e87,
     type: 3}
+  minePrefab: {fileID: 749017729352336002, guid: 2a8b1507398fa1e4c86b2d4861367345,
+    type: 3}
 --- !u!114 &6386651799729106782
 MonoBehaviour:
   m_ObjectHideFlags: 0

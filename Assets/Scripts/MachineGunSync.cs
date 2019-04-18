@@ -6,6 +6,7 @@ using UnityEngine.Networking;
 public class MachineGunSync : NetworkBehaviour
 {
     public GameObject artilleryPrefab;
+    public GameObject minePrefab;
     //private ObjectPooler roundPool;
     // Start is called before the first frame update
     void Start()
@@ -93,5 +94,13 @@ public class MachineGunSync : NetworkBehaviour
     public void CmdArtilleryExplosion(Vector3 position)
     {
         ;
+    }
+
+    [Command]
+    public void CmdDeployMine(Vector3 position)
+    {
+        GameObject mine = Instantiate(minePrefab);
+        mine.transform.position = position;
+        NetworkServer.Spawn(mine);
     }
 }
