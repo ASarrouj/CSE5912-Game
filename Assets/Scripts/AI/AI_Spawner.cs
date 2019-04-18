@@ -32,7 +32,11 @@ public class AI_Spawner : NetworkBehaviour
     public bool ShowPath = false;
 
     public void Start() {
-        DontDestroyOnLoad(gameObject);
+        if (GameObject.FindGameObjectsWithTag("AISpawner").Length > 1) {
+            Destroy(gameObject);
+        } else {
+            DontDestroyOnLoad(gameObject);
+        }
     }
 
     public void SpawnAI(int startPos) {
