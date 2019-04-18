@@ -7,7 +7,7 @@ using Prototype.NetworkLobby;
 public class PlayerHealth : NetworkBehaviour
 {
     // Start is called before the first frame update
-    
+
     public int maxHealth;
     [SyncVar] public int coreHealth, rearHealth, leftHealth, rightHealth, frontHealth;
     [SerializeField] HealthBar[] healthbars;
@@ -23,25 +23,27 @@ public class PlayerHealth : NetworkBehaviour
         status = gameObject.GetComponent<PlayerStatus>();
     }
 
-    public bool dmgCore(int dmg, MechTakeDamage hitbox) {
+    public bool dmgCore(int dmg, MechTakeDamage hitbox)
+    {
         Debug.Log("Core takes " + dmg + " damage");
-        coreHealth -=dmg;
-        if(coreHealth<0)
-        {   
+        coreHealth -= dmg;
+        if (coreHealth < 0)
+        {
             coreHealth = 0;
             //eSync.Explode("CoreHitbox", MechTakeDamage.Hitbox.CoreHitbox);
             hitbox.ExplodingCore();
             status.Destroyed = true;
         }
         coreDestroyed = (coreHealth == 0);
-        if (isPlayer) healthbars[0].setHealthBar((float)coreHealth / (float)maxHealth);   
+        if (isPlayer) healthbars[0].setHealthBar((float)coreHealth / (float)maxHealth);
         return coreDestroyed;
     }
 
-    public void dmgFront(int dmg, MechTakeDamage hitbox) {
+    public void dmgFront(int dmg, MechTakeDamage hitbox)
+    {
         Debug.Log("Front takes damage");
-        frontHealth -=dmg;
-        if (frontHealth<0)
+        frontHealth -= dmg;
+        if (frontHealth < 0)
         {
             frontHealth = 0;
             //eSync.Explode("FrontHitbox", MechTakeDamage.Hitbox.FrontHitbox);
@@ -50,10 +52,11 @@ public class PlayerHealth : NetworkBehaviour
         if (isPlayer) healthbars[1].setHealthBar((float)frontHealth / (float)maxHealth);
     }
 
-    public void dmgRear(int dmg, MechTakeDamage hitbox) {
+    public void dmgRear(int dmg, MechTakeDamage hitbox)
+    {
         Debug.Log("Rear takes damage");
-        rearHealth -=dmg;
-        if (rearHealth<0)
+        rearHealth -= dmg;
+        if (rearHealth < 0)
         {
             rearHealth = 0;
             hitbox.Exploding();
@@ -61,21 +64,23 @@ public class PlayerHealth : NetworkBehaviour
         if (isPlayer) healthbars[4].setHealthBar((float)rearHealth / (float)maxHealth);
     }
 
-    public void dmgLeft(int dmg, MechTakeDamage hitbox) {
+    public void dmgLeft(int dmg, MechTakeDamage hitbox)
+    {
         Debug.Log("Left takes damage");
-        leftHealth -=dmg;
+        leftHealth -= dmg;
 
-            if (leftHealth<0)
+        if (leftHealth < 0)
         {
-                leftHealth = 0;
+            leftHealth = 0;
             hitbox.Exploding();
         }
-            if (isPlayer) healthbars[2].setHealthBar((float)leftHealth / (float)maxHealth);
-        }
+        if (isPlayer) healthbars[2].setHealthBar((float)leftHealth / (float)maxHealth);
+    }
 
-    public void dmgRight(int dmg, MechTakeDamage hitbox) {
-        rightHealth-=dmg;
-        if (rightHealth<0)
+    public void dmgRight(int dmg, MechTakeDamage hitbox)
+    {
+        rightHealth -= dmg;
+        if (rightHealth < 0)
         {
             rightHealth = 0;
             hitbox.Exploding();
@@ -84,53 +89,54 @@ public class PlayerHealth : NetworkBehaviour
     }
 
     // Testing health bars
-        public void healCore(int heal)
+    public void healCore(int heal)
+    {
+        coreHealth += heal;
+        if (coreHealth > maxHealth)
         {
-            coreHealth+=heal;
-            if(coreHealth>maxHealth)
-            {
-                coreHealth=maxHealth;
-            }
+            coreHealth = maxHealth;
         }
-        public void healFront(int heal)
+    }
+    public void healFront(int heal)
+    {
+        frontHealth += heal;
+        if (frontHealth > maxHealth)
         {
-        frontHealth+=heal;
-            if(frontHealth>maxHealth)
-            {
-                frontHealth=maxHealth;
-            }
+            frontHealth = maxHealth;
         }
-        public void healRear(int heal)
+    }
+    public void healRear(int heal)
+    {
+        rearHealth += heal;
+        if (rearHealth > maxHealth)
         {
-            rearHealth+=heal;
-            if(rearHealth>maxHealth)
-            {
-                rearHealth=maxHealth;
-            }
+            rearHealth = maxHealth;
         }
-        public void healLeft(int heal)
+    }
+    public void healLeft(int heal)
+    {
+        leftHealth += heal;
+        if (leftHealth > maxHealth)
         {
-        leftHealth+=heal;
-            if(leftHealth>maxHealth)
-            {
-                leftHealth=maxHealth;
-            }
+            leftHealth = maxHealth;
         }
-        public void healRight(int heal)
+    }
+    public void healRight(int heal)
+    {
+        rightHealth += heal;
+        if (rightHealth > maxHealth)
         {
-           rightHealth+=heal; 
-                if(rightHealth>maxHealth)
-            {
-                rightHealth=maxHealth;
-            }
+            rightHealth = maxHealth;
         }
+    }
 
 
-   
+
 
     void Update()
     {
-        if (isPlayer) {
+        if (isPlayer)
+        {
             healthbars[0].setHealthBar((float)coreHealth / (float)maxHealth);
             healthbars[1].setHealthBar((float)frontHealth / (float)maxHealth);
             healthbars[2].setHealthBar((float)leftHealth / (float)maxHealth);
