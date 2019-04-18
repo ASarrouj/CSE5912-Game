@@ -10,7 +10,7 @@ public class AI_Spawner : NetworkBehaviour
     public GameObject prefabAI;
     public int numStartAI;
 
-    public Transform[] SpawnPoints;
+    public Vector3[] SpawnPoints;
 
     /*
     private Vector3[] citySpawnPoints = {
@@ -39,7 +39,7 @@ public class AI_Spawner : NetworkBehaviour
         //NetworkManager man = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
         //prefabAI = man.spawnPrefabs[0];
 
-        GameObject newAI = Instantiate(prefabAI, SpawnPoints[startPos].position, Quaternion.identity);
+        GameObject newAI = Instantiate(prefabAI, SpawnPoints[startPos], Quaternion.identity);
 
         if (ShowFOV) newAI.GetComponent<AI.FOV>().showFOV = true;
         if (ShowTarget) newAI.GetComponent<AI.Steering>().ShowDebugTarget = true;
@@ -59,11 +59,11 @@ public class AI_Spawner : NetworkBehaviour
     */
 
     private void GetSpawnPoints() {
-        Transform parent = GameObject.Find("PatrolPoints").transform;
-        SpawnPoints = new Transform[parent.childCount];
+        Transform parent = GameObject.Find("AISpawnPoints").transform;
+        SpawnPoints = new Vector3[parent.childCount];
         int i = 0;
         foreach (Transform t in parent) {
-            SpawnPoints[i] = t;
+            SpawnPoints[i] = t.position;
             i++;
         }
     }
