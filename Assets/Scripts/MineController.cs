@@ -65,7 +65,7 @@ public class MineController : NetworkBehaviour
             if (rb != null)
             {
                 rb.transform.Translate(new Vector3(0, .5f, 0));
-                rb.AddExplosionForce(200000, explosionPos, 3.0f);
+                rb.AddExplosionForce(100000, explosionPos, 3.0f);
             }
         }
         Invoke("DeleteMine", 1);

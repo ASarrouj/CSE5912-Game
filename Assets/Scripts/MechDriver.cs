@@ -12,7 +12,7 @@ public class MechDriver : MonoBehaviour
 
     public float turnAngle;
     private const float maxTurnAngle = 25;
-    private const float turnDelta = 0.5f;
+    private const float turnDelta = 0.6f;
     private float maxEngineVolume;
 
     private WheelCollider frontLeftCollider, frontRightCollider;
@@ -68,15 +68,20 @@ public class MechDriver : MonoBehaviour
             }
         }
 
+        frontLeftCollider.steerAngle = turnAngle;
+        frontRightCollider.steerAngle = turnAngle;
+
         if (rb.velocity.magnitude <= 0.5f && rb.velocity.magnitude >= -0.5f && (velLimit >= 5 || velLimit <= -5))
         {
             velLimit = Mathf.Sign(velLimit) * 5;
         }
 
-        mechSounds[0].volume = (rb.velocity.magnitude / maxVelocity) * maxEngineVolume;
+        if (velLimit == 0)
+        {
+            turnAngle = 0;
+        }
 
-        frontLeftCollider.steerAngle = turnAngle;
-        frontRightCollider.steerAngle = turnAngle;
+        mechSounds[0].volume = (rb.velocity.magnitude / maxVelocity) * maxEngineVolume;
 
         for (int i = 0; i < allColliders.Count; i++)
         {
