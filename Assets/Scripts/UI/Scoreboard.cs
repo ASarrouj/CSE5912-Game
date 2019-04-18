@@ -25,7 +25,7 @@ public class Scoreboard : MonoBehaviour
         panels = new GameObject[pCount];
         scoreText = new Text[pCount];
 
-        Debug.Log(pCount);
+        //Debug.Log(pCount);
 
         for (int i = 0; i < pCount; i++) {
             panels[i] = Instantiate(panelPrefab, transform);
