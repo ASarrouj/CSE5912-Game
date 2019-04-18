@@ -4264,16 +4264,16 @@ Transform:
   - {fileID: 1974366290}
   - {fileID: 609602319}
   - {fileID: 769826723}
+  - {fileID: 1360056388}
   - {fileID: 1419419070}
   - {fileID: 4979485034834192062}
-  - {fileID: 1360056388}
-  - {fileID: 5213781868955470110}
   - {fileID: 1857510614}
+  - {fileID: 5213781868955470110}
   - {fileID: 2076128902}
   - {fileID: 1816289216}
   - {fileID: 1146263194}
-  - {fileID: 510228900}
   - {fileID: 1118604457}
+  - {fileID: 510228900}
   - {fileID: 1386109014}
   - {fileID: 991280281}
   - {fileID: 1086078798}
@@ -4283,12 +4283,12 @@ Transform:
   - {fileID: 1081384386}
   - {fileID: 1203190163}
   - {fileID: 324655785}
-  - {fileID: 1203152875}
   - {fileID: 705079493}
   - {fileID: 1271367133}
   - {fileID: 593604771}
   - {fileID: 947120531}
   - {fileID: 1205779983}
+  - {fileID: 1203152875}
   - {fileID: 888318280}
   - {fileID: 126936678}
   - {fileID: 1664743108}
@@ -10069,7 +10069,6 @@ GameObject:
   - component: {fileID: 1053060240}
   - component: {fileID: 1053060239}
   - component: {fileID: 1053060238}
-  - component: {fileID: 1053060242}
   m_Layer: 8
   m_Name: Game Terrain
   m_TagString: Untagged
@@ -10150,22 +10149,6 @@ Transform:
   m_Father: {fileID: 159617567}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &1053060242
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1053060237}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!4 &1053741252 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: e82d51af3001ba4459ecef674d42303a,
@@ -12330,7 +12313,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 450880375}
-  m_RootOrder: 27
+  m_RootOrder: 32
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1203190162
 PrefabInstance:
@@ -13780,7 +13763,7 @@ Transform:
   - {fileID: 1401472609}
   - {fileID: 1156298398}
   m_Father: {fileID: 450880375}
-  m_RootOrder: 10
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1362665001 stripped
 Transform:
@@ -19247,7 +19230,7 @@ Transform:
   - {fileID: 898276587}
   - {fileID: 665197003}
   m_Father: {fileID: 450880375}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1859098294 stripped
 Transform:
