@@ -8,6 +8,7 @@ public class MineDeployer : MonoBehaviour
     public GameObject minePrefab;
     private Transform gunEnd;
     private float reloadTime, timeStamp;
+    private MachineGunSync mg;
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +21,7 @@ public class MineDeployer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void DeployMine()
@@ -32,7 +33,12 @@ public class MineDeployer : MonoBehaviour
 
             if (hit.collider.gameObject.layer == 8)
             {
-                Instantiate(minePrefab, hit.point, Quaternion.identity);
+                if (!mg)
+                {
+                    mg = gameObject.transform.parent.parent.parent.gameObject.GetComponent<MachineGunSync>();
+                }
+
+                mg.CmdDeployMine(hit.point);
             }
 
             timeStamp = Time.time + reloadTime;
