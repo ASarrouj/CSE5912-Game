@@ -35,15 +35,6 @@ public class MineController : NetworkBehaviour
             NetworkIdentity id = other.attachedRigidbody.gameObject.GetComponent<NetworkIdentity>();
             string hitboxName = other.gameObject.name;
             dmgHandler.DamagePlayer(30, hitboxName, id);
-            Vector3 explosionPos = transform.position;
-            Collider[] colliders = Physics.OverlapSphere(explosionPos, 8f);
-            foreach (Collider hit in colliders)
-            {
-                Rigidbody rb = hit.GetComponent<Rigidbody>();
-
-                if (rb != null)
-                    rb.AddExplosionForce(500, explosionPos, 1.0f);
-            }
         }
     }
 
@@ -64,6 +55,19 @@ public class MineController : NetworkBehaviour
         source.Play();
         gameObject.GetComponent<MeshRenderer>().enabled = false;
         gameObject.GetComponent<CapsuleCollider>().enabled = false;
+        Vector3 explosionPos = transform.position;
+        Collider[] colliders = Physics.OverlapSphere(explosionPos, 8f);
+        foreach (Collider hit in colliders)
+        {
+            
+            Rigidbody rb = hit.attachedRigidbody;
+
+            if (rb != null)
+            {
+                rb.transform.Translate(new Vector3(0, .5f, 0));
+                rb.AddExplosionForce(200000, explosionPos, 3.0f);
+            }
+        }
         Invoke("DeleteMine", 1);
     }
 }
