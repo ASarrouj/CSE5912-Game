@@ -12,6 +12,7 @@ public class AI_Spawner : NetworkBehaviour
 
     public Vector3[] SpawnPoints;
 
+    /*
     private Vector3[] citySpawnPoints = {
         new Vector3(-3.2f, 0, -16.1f),
         new Vector3(-16.5f, 0, -34.6f),
@@ -19,10 +20,11 @@ public class AI_Spawner : NetworkBehaviour
         new Vector3(-15.5f, 0, -16.1f)};
 
     private Vector3[] moonSpawnPoints = {
-        new Vector3(990, 100, 990),
-        new Vector3(990, 100, 1010),
-        new Vector3(1010, 100, 1010),
-        new Vector3(1010, 100, 990)};
+        new Vector3(990, 300, 990),
+        new Vector3(990, 300, 1010),
+        new Vector3(1010, 300, 1010),
+        new Vector3(1010, 300, 990)};
+        */
 
     [Header("Debug")]
     public bool ShowFOV = false;
@@ -30,7 +32,11 @@ public class AI_Spawner : NetworkBehaviour
     public bool ShowPath = false;
 
     public void Start() {
-        DontDestroyOnLoad(gameObject);
+        if (GameObject.FindGameObjectsWithTag("AISpawner").Length > 1) {
+            Destroy(gameObject);
+        } else {
+            DontDestroyOnLoad(gameObject);
+        }
     }
 
     public void SpawnAI(int startPos) {
@@ -46,11 +52,23 @@ public class AI_Spawner : NetworkBehaviour
         CmdSpawn(newAI);
     }
 
+    /*
     public void SetSpawnPoints(int sceneNum) {
         if (sceneNum == 1) {
             SpawnPoints = citySpawnPoints;
         } else if (sceneNum == 2) {
             SpawnPoints = moonSpawnPoints;
+        }
+    }
+    */
+
+    private void GetSpawnPoints() {
+        Transform parent = GameObject.Find("AISpawnPoints").transform;
+        SpawnPoints = new Vector3[parent.childCount];
+        int i = 0;
+        foreach (Transform t in parent) {
+            SpawnPoints[i] = t.position;
+            i++;
         }
     }
 
@@ -67,8 +85,12 @@ public class AI_Spawner : NetworkBehaviour
         numStartAI = num;
     }
 
-    private void OnLevelWasLoaded(int level) {
-        SetSpawnPoints(level);
+    private void OnLevelWasLoaded() {
+        GetSpawnPoints();
+        Invoke("SpawnStartAI", 1);
+    }
+
+    private void SpawnStartAI() {
         for (int i = 0; i < numStartAI; i++) {
             SpawnAI(i);
         }

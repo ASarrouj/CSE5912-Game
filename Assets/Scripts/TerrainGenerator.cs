@@ -53,16 +53,16 @@ public class TerrainGenerator : NetworkBehaviour
 
         CreateGlassDome();
 
-        spawnRadius = glassDome.localScale.x / 2 - 30;
+        spawnRadius = glassDome.localScale.x / 2 - 40;
         playersSpawnedCount = 0;
 
         Random.InitState(randomSeed);
-        int instancePerBuilding = 6;
+        int instancePerBuilding = 4;
         for (int i = 0; i < instancePerBuilding; i++)
         {
             for (int j = 0; j < buildingPrefabs.Length; j++)
             {
-                Vector3 buildingPos = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)) * (spawnRadius - 40) + glassDome.transform.position;
+                Vector3 buildingPos = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)) * (spawnRadius - 45) + glassDome.transform.position;
                 buildingPos.y = terrain.SampleHeight(buildingPos) + 1;
                 Quaternion buildingRot = Quaternion.Euler(0, Random.Range(-180, 180), 0);
                 Instantiate(buildingPrefabs[j], buildingPos, buildingRot, transform);

@@ -37,7 +37,7 @@ namespace AI {
             targeting = GetComponent<PlayerTargeting>();
 
             cam = transform.Find("PlayerCamera");
-            weapons = new Transform[3];
+            weapons = new Transform[4];
             foreach (Transform t in transform) {
                 if (t.tag == "Mech") {
                     mech = t;
@@ -50,7 +50,7 @@ namespace AI {
         private void GetWeapons() {
             weapons[1] = (mech.Find("FrontGun").GetChild(0));
             weapons[2] = (mech.Find("LeftGun").GetChild(0));
-            //weapons[3] = (mech.Find("RightGun").GetChild(0));
+            weapons[3] = (mech.Find("RightGun").GetChild(0));
             //weapons[4] = (mech.Find("RearGun").GetChild(0));
 
 
@@ -67,8 +67,7 @@ namespace AI {
         {
             updateCount++;
             if (updateCount > 100) {
-
-                WeaponCheck();
+                if (targeting.Target) WeaponCheck();
                 updateCount = 0;
             }
         }
@@ -132,6 +131,8 @@ namespace AI {
                 SelectWeapon(1);
             } else if (angle < -45 + leftFOV) {
                 SelectWeapon(2);
+            } else if (angle > 45 + rightFOV) {
+                SelectWeapon(3);
             }
         }
 

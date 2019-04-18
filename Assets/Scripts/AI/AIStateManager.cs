@@ -7,8 +7,9 @@ namespace AI {
     {
         public enum BehaviorState
         {
+            Patrol,
             Hide,
-            Follow
+            Follow,
         }
 
         public BehaviorState selectState;
@@ -16,6 +17,9 @@ namespace AI {
 
         private HideAgent hideAgent;
         private FollowAgent followAgent;
+        private PatrolAgent patrolAgent;
+
+        private PlayerTargeting pTargeting;
 
         private MechTakeDamage coreDamage;
         private float maxHP, defenseHP;
@@ -24,6 +28,8 @@ namespace AI {
         {
             hideAgent = GetComponent<HideAgent>();    
             followAgent = GetComponent<FollowAgent>();
+            patrolAgent = GetComponent<PatrolAgent>();
+            pTargeting = GetComponent<PlayerTargeting>();
             GetState();
             coreDamage = transform.Find("NewMechWithSlots").Find("CoreHitbox").GetComponent<MechTakeDamage>();
             maxHP = coreDamage.health;
@@ -32,19 +38,25 @@ namespace AI {
 
         void Update()
         {
-            if (coreDamage.health > defenseHP) {
-                selectState = BehaviorState.Follow;
-            } else {
-                selectState = BehaviorState.Hide;
+            if (!pTargeting.Target) {
+                selectState = BehaviorState.Patrol;
+            }
+            else {
+                if (coreDamage.health > defenseHP) {
+                    selectState = BehaviorState.Follow;
+                } else {
+                    selectState = BehaviorState.Hide;
+                }
             }
 
             if (selectState != currentState) {         
                 GetState();
                 currentState = selectState;
-            }    
+            }  
         }
 
         void DisableAgents() {
+            patrolAgent.enabled = false;
             hideAgent.enabled = false;
             followAgent.enabled = false;
         }
@@ -52,6 +64,9 @@ namespace AI {
         void GetState() {
             DisableAgents();
             switch (selectState) {
+                case BehaviorState.Patrol:
+                    patrolAgent.enabled = true;
+                    break;
                 case BehaviorState.Hide:
                     hideAgent.enabled = true;
                     break;

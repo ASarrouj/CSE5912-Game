@@ -14,12 +14,14 @@ public class ProjectileShoot : MonoBehaviour, IWeapon
     private ObjectPooler roundPool;
     private AudioSource source;
     private WaitForSeconds shotLength = new WaitForSeconds(0.7f);
+    private MachineGunSync mg;
 
     void OnEnable()
     {
         source = GetComponent<AudioSource>();
         line = GetComponentInChildren<LineRenderer>(true);
         roundPool = GameObject.Find("ArtProjectilePool").GetComponent<ObjectPooler>();
+        mg = gameObject.transform.parent.parent.parent.gameObject.GetComponent<MachineGunSync>();
     }
 
     void Update()
@@ -72,15 +74,8 @@ public class ProjectileShoot : MonoBehaviour, IWeapon
         if (Time.time > nextFireTime)
         {
             nextFireTime = Time.time + fireRate;
-
-            GameObject projectile = roundPool.GetObject();
-            projectile.transform.position = bulletSpawn.position+bulletSpawn.forward*.4f;
-            projectile.transform.rotation = bulletSpawn.rotation;
-            projectile.transform.Rotate(new Vector3(90, 0, 0));
-            projectile.SetActive(true);
-            projectile.GetComponent<Rigidbody>().velocity=new Vector3(0f,0f,0f);
-            projectile.GetComponent<Rigidbody>().AddForce(bulletSpawn.forward * projectileForce,ForceMode.Impulse);
-            //projectile.GetComponent<ProjectileCollider>().Force(bulletSpawn.forward * projectileForce);
+            
+            mg.CmdSpawnProjectile(bulletSpawn.position + bulletSpawn.forward * .4f, bulletSpawn.rotation, bulletSpawn.forward, projectileForce);
             StartCoroutine(ShotEffect());
         }
     }

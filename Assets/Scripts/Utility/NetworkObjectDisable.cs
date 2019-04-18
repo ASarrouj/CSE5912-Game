@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class NetworkObjectDestroy : NetworkBehaviour
+public class NetworkObjectDisable : NetworkBehaviour
 {
     public float existTime = 2f;
 
@@ -27,7 +27,7 @@ public class NetworkObjectDestroy : NetworkBehaviour
 
     private void Destroy()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     private void OnDisable()

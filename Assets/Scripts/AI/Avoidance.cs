@@ -8,10 +8,14 @@ namespace AI {
     {
         public bool AvoidLeft { get; set; }
         public bool AvoidRight { get; set; }
+        public bool Stuck { get; set; }
+
+        private DetectObstacle shortDetect, longDetect;
 
         void Start()
         {
-            GetComponent<FOV>().fov.AddComponent<DetectObstacle>();
+            shortDetect = GetComponent<FOV>().shortFOV.AddComponent<DetectObstacle>();
+            longDetect = GetComponent<FOV>().longFOV.AddComponent<DetectObstacle>();
         }
 
         void FixedUpdate()
