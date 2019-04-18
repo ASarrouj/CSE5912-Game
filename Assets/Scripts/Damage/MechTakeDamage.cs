@@ -13,6 +13,7 @@ public class MechTakeDamage : NetworkBehaviour, IDamagable
     [SerializeField] GameObject[] particleEffects;
 
     private PlayerHealth pHealth;
+    private PlayerInput pInput;
     //private DestroyMod destroyMod;
 
     // Start is called before the first frame update
@@ -20,6 +21,7 @@ public class MechTakeDamage : NetworkBehaviour, IDamagable
     {
         coreDestroyed = false;
         pHealth = transform.root.GetComponent<PlayerHealth>();
+        pInput = GetComponentInParent<PlayerInput>();
     }
 
     // Update is called once per frame
@@ -105,5 +107,6 @@ public class MechTakeDamage : NetworkBehaviour, IDamagable
             if (cam != null) break;
         }
         if (cam != null) cam.parent = transform.root;
+        pInput.PrepareMechPerspec();
     }
 }
