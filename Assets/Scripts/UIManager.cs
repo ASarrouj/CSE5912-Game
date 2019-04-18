@@ -81,7 +81,7 @@ public class UIManager : MonoBehaviour
 
             slotPos += slotPosDelta;
         }
-        self.SetActive(false);
+        self.SetActive(true);
     }
 
     public void MechUI()
