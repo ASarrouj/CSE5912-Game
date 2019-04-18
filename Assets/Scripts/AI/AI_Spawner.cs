@@ -19,10 +19,10 @@ public class AI_Spawner : NetworkBehaviour
         new Vector3(-15.5f, 0, -16.1f)};
 
     private Vector3[] moonSpawnPoints = {
-        new Vector3(990, 100, 990),
-        new Vector3(990, 100, 1010),
-        new Vector3(1010, 100, 1010),
-        new Vector3(1010, 100, 990)};
+        new Vector3(990, 300, 990),
+        new Vector3(990, 300, 1010),
+        new Vector3(1010, 300, 1010),
+        new Vector3(1010, 300, 990)};
 
     [Header("Debug")]
     public bool ShowFOV = false;

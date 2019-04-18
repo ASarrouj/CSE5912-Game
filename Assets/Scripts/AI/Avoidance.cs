@@ -16,8 +16,8 @@ namespace AI {
 
         void FixedUpdate()
         {
-            AvoidLeft = false;
-            AvoidRight = false;      
+            //AvoidLeft = false;
+            //AvoidRight = false;      
         }
 
     }

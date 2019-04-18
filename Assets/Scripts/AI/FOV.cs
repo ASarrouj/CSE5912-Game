@@ -11,7 +11,7 @@ namespace AI {
         private GameObject leftFOV, rightFOV; 
         private Mesh leftMesh, rightMesh;
         private readonly float visionAngle = 90;
-        private readonly float visionDepth = 10;
+        private readonly float visionDepth = 5;
 
         void Awake()
         {
@@ -54,7 +54,7 @@ namespace AI {
             BoxCollider col = fov.AddComponent<BoxCollider>();
             col.isTrigger = true;
             col.center = new Vector3(0, 0, visionDepth / 2);
-            col.size = new Vector3(14, 1, visionDepth);
+            col.size = new Vector3(5, 1, visionDepth);
         }
 
         public void GenerateMeshes() {

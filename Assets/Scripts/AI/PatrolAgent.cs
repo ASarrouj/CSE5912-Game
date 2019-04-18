@@ -12,8 +12,10 @@ namespace AI
 
         private Steering steering;
 
-        private readonly float targetRadius = 10f;
+        private readonly float targetRadius = 5f;
         private bool init;
+
+        private Vector2 posXZ, targetPosXZ;
 
         private void OnEnable() {
             if (init) FindClosestPoint();
@@ -21,6 +23,8 @@ namespace AI
 
         private void Awake() {
             steering = GetComponent<Steering>();
+            posXZ = Vector2.zero;
+            targetPosXZ = Vector2.zero;
         }
 
         private void Start() {
@@ -36,7 +40,11 @@ namespace AI
         }
 
         void FixedUpdate() {
-            if (Vector3.Magnitude(transform.position - targetPoint.transform.position) > targetRadius) {
+            posXZ.x = transform.position.x;
+            posXZ.y = transform.position.z;
+            targetPosXZ.x = targetPoint.transform.position.x;
+            targetPosXZ.y = targetPoint.transform.position.z;
+            if (Vector2.Distance(posXZ, targetPosXZ) > targetRadius) {
                 steering.Steer(steering.Arrive(targetPoint.transform.position));
             } else {
                 GetNextPoint();

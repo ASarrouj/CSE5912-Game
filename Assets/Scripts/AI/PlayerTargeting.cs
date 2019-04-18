@@ -10,7 +10,7 @@ namespace AI
         private int updateCount = 0;
 
         public GameObject Target { get; set; }
-        public float detectionRadius = 50f;
+        public float detectionRadius = 200f;
 
 
         // Start is called before the first frame update
@@ -24,7 +24,7 @@ namespace AI
         void Update()
         {
             updateCount++;
-            if (updateCount > 99) {
+            if (updateCount > 50) {
                 GetPlayers();
                 FindClosestPlayer();
                 updateCount = 0;
