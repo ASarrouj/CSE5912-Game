@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 9043173926125789600}
   - component: {fileID: 2662381802524588562}
   - component: {fileID: 5967665125436725558}
-  - component: {fileID: 1615926087826176794}
   - component: {fileID: 8494800077384084510}
   - component: {fileID: 2452422966832724702}
+  - component: {fileID: 7478293524815959412}
   m_Layer: 0
   m_Name: New Artillery Projectiile
   m_TagString: Untagged
@@ -225,19 +225,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1615926087826176794
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2287083176919119801}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9add59ac796c1f144bcec3d876082148, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  existTime: 20
 --- !u!114 &8494800077384084510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,3 +280,15 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
+--- !u!114 &7478293524815959412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2287083176919119801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6a26a8fb70be3544871265b99a1de7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
