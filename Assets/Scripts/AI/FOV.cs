@@ -34,13 +34,11 @@ namespace AI {
                 leftFOV = new GameObject("leftFOV");
                 leftFOV.transform.parent = shortFOV.transform;
                 leftFOV.transform.localPosition = new Vector3(0, 0, 0);
-                leftFOV.layer = LayerMask.NameToLayer("Trigger");
 
 
                 rightFOV = new GameObject("rightFOV");
                 rightFOV.transform.parent = shortFOV.transform;
                 rightFOV.transform.localPosition = new Vector3(0, 0, 0);
-                rightFOV.layer = LayerMask.NameToLayer("Trigger");
 
                 GenerateMeshes();
                 DebugRender();
