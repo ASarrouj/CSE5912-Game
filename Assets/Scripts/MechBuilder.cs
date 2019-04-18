@@ -24,6 +24,7 @@ public class MechBuilder : MonoBehaviour
 
     private void Start()
     {
+        Cursor.visible = true;
         gunAttacher = gameObject.GetComponentInParent<GunAttacher>();
         trackSpot = 0;
 
