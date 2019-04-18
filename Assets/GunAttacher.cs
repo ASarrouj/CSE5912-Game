@@ -21,9 +21,8 @@ public class GunAttacher : NetworkBehaviour
     [ClientRpc]
     public void RpcAttachGun(GameObject gun, string parentName)
     {
-        gun.transform.SetParent(gameObject.transform.GetChild(0).transform.Find(parentName));
-        gun.transform.position = gun.transform.parent.position;
-        gun.transform.rotation = gun.transform.parent.rotation;
+        gun.transform.position = Vector3.zero;
+        gun.transform.SetParent(gameObject.transform.GetChild(0).transform.Find(parentName), false);
 
         if (isLocalPlayer)
         {
