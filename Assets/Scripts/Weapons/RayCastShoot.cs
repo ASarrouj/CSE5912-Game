@@ -68,7 +68,7 @@ public class RayCastShoot : MonoBehaviour, IWeapon
                     {
                         Transform player = hit.collider.gameObject.transform.root;
                         hit.rigidbody.AddForce(-hit.normal * 100f);
-                        dmgOverNet.DamagePlayer(10, hit.collider.gameObject.name, hit.collider.transform.root.GetComponent<NetworkIdentity>());
+                        hit.collider.gameObject.GetComponentInParent<DamageOverNetwork>().RpcHitboxTakeDamage(10, hit.collider.gameObject.name);
                         if (player.GetComponent<PlayerHealth>().coreDestroyed) {
                             score.ScoreUp(scoreNum);
                         }
