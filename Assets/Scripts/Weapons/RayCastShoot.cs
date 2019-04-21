@@ -23,7 +23,8 @@ public class RayCastShoot : MonoBehaviour, IWeapon
     private int scoreNum = 50;
     private DamageOverNetwork dmgOverNet;
 
-    void Start() {
+    void Start()
+    {
         dmgOverNet = transform.root.GetComponent<DamageOverNetwork>();
     }
 
@@ -54,22 +55,18 @@ public class RayCastShoot : MonoBehaviour, IWeapon
 
             if (Physics.Raycast(rayOrigin, gunCamera.transform.forward, out hit, range))
             {
-                if (hit.collider.gameObject.tag == "Target")
+                if (hit.rigidbody != null)
                 {
-                    if (hit.rigidbody != null)
+                    if (hit.rigidbody.gameObject.tag == "Player")
                     {
-                        hit.rigidbody.AddForce(-hit.normal * 100f);
-                    }
-                    hit.collider.gameObject.GetComponent<TargetTakeDamage>().Damage(10);
-                }
-                if (hit.collider.gameObject.tag == "Mech")
-                {
-                    if (hit.rigidbody != null)
-                    {
-                        Transform player = hit.collider.gameObject.transform.root;
-                        hit.rigidbody.AddForce(-hit.normal * 100f);
-                        hit.collider.gameObject.GetComponentInParent<DamageOverNetwork>().RpcHitboxTakeDamage(10, hit.collider.gameObject.name);
-                        if (player.GetComponent<PlayerHealth>().coreDestroyed) {
+                        Debug.Log(hit.rigidbody.gameObject.name);
+                        DamageOverNetwork dmgHandler = hit.rigidbody.gameObject.GetComponent<DamageOverNetwork>();
+                        NetworkIdentity id = hit.rigidbody.gameObject.GetComponent<NetworkIdentity>();
+                        string hitBoxName = hit.collider.gameObject.name;
+                        Debug.Log(hitBoxName);
+                        dmgHandler.DamagePlayer(5, hitBoxName, id);
+                        if (hit.rigidbody.gameObject.GetComponent<PlayerHealth>().coreDestroyed)
+                        {
                             score.ScoreUp(scoreNum);
                         }
                     }
@@ -86,9 +83,9 @@ public class RayCastShoot : MonoBehaviour, IWeapon
             }
 
             StartCoroutine(ShotEffect());
-            
+
             gunScript.Shoot();
-            
+
         }
     }
 
