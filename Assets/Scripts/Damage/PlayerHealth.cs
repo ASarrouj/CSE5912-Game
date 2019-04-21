@@ -31,7 +31,7 @@ public class PlayerHealth : NetworkBehaviour
         {
             coreHealth = 0;
             //eSync.Explode("CoreHitbox", MechTakeDamage.Hitbox.CoreHitbox);
-            hitbox.ExplodingCore();
+            hitbox.Exploding();
             status.Destroyed = true;
         }
         coreDestroyed = (coreHealth == 0);
@@ -47,7 +47,7 @@ public class PlayerHealth : NetworkBehaviour
         {
             frontHealth = 0;
             //eSync.Explode("FrontHitbox", MechTakeDamage.Hitbox.FrontHitbox);
-            hitbox.ExplodingFront();
+            hitbox.Exploding();
         }
         if (isPlayer) healthbars[1].setHealthBar((float)frontHealth / (float)maxHealth);
     }

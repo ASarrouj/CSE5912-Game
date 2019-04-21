@@ -10,7 +10,7 @@ public class MechTakeDamage : NetworkBehaviour, IDamagable
     public Hitbox hitboxType;
     public bool coreDestroyed;
     public int health = 30;
-    [SerializeField] GameObject[] particleEffects;
+    public GameObject explosionEffect;
 
     private PlayerHealth pHealth;
     private PlayerInput pInput;
@@ -38,39 +38,37 @@ public class MechTakeDamage : NetworkBehaviour, IDamagable
 
     public void Exploding()
     {
-        GameObject explosion = Instantiate(particleEffects[0], transform.position, Quaternion.identity);
-        explosion.AddComponent<NetworkIdentity>();
+        GameObject explosion = Instantiate(explosionEffect, transform.position, Quaternion.identity);
         NetworkServer.Spawn(explosion);
         ForceCameraSwitch();
         Destroy(transform.parent.gameObject);
         DestroyNetChild();
-        Destroy(explosion, 3f);
     }
 
-    public void ExplodingCore()
-    {
-        coreDestroyed = true;
-        GameObject explosion = Instantiate(particleEffects[1], transform.position, Quaternion.identity);
-        explosion.transform.localScale += new Vector3(1f, 1f, 1f);
-        explosion.AddComponent<NetworkIdentity>();
-        NetworkServer.Spawn(explosion);
-        ForceCameraSwitch();
-        Destroy(explosion, 3f);
-        DestroyNetChild();
-        Destroy(transform.parent.gameObject);
-    }
+    //public void ExplodingCore()
+    //{
+    //    coreDestroyed = true;
+    //    GameObject explosion = Instantiate(particleEffects[1], transform.position, Quaternion.identity);
+    //    explosion.transform.localScale += new Vector3(1f, 1f, 1f);
+    //    explosion.AddComponent<NetworkIdentity>();
+    //    NetworkServer.Spawn(explosion);
+    //    ForceCameraSwitch();
+    //    Destroy(explosion, 3f);
+    //    DestroyNetChild();
+    //    Destroy(transform.parent.gameObject);
+    //}
 
-    public void ExplodingFront()
-    {
-        GameObject explosion = Instantiate(particleEffects[0], transform.position, Quaternion.identity);
-        explosion.transform.localScale -= new Vector3(1f, 1f, 1f);
-        explosion.AddComponent<NetworkIdentity>();
-        NetworkServer.Spawn(explosion);
-        ForceCameraSwitch();
-        Destroy(explosion, 3f);
-        DestroyNetChild();
-        Destroy(transform.parent.gameObject);
-    }
+    //public void ExplodingFront()
+    //{
+    //    GameObject explosion = Instantiate(particleEffects[0], transform.position, Quaternion.identity);
+    //    explosion.transform.localScale -= new Vector3(1f, 1f, 1f);
+    //    explosion.AddComponent<NetworkIdentity>();
+    //    NetworkServer.Spawn(explosion);
+    //    ForceCameraSwitch();
+    //    Destroy(explosion, 3f);
+    //    DestroyNetChild();
+    //    Destroy(transform.parent.gameObject);
+    //}
 
     private void DestroyNetChild()
     {
