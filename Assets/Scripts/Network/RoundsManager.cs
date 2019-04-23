@@ -15,7 +15,7 @@ namespace Prototype.NetworkLobby
         private int totalPlayersEver = 0;
         private List<PlayerStatus> playerStatuses;
         private int numPlayers;
-        private float roundStartTime;
+        public float roundStartTime;
         private bool newRoundStarting = false;
 
         private void Awake()
@@ -30,7 +30,6 @@ namespace Prototype.NetworkLobby
             roundCount = 0;
             playerStatuses = lobbyManager.Statuses;
             roundStartTime = Time.time;
-
         }
 
         private void Update()
@@ -146,11 +145,15 @@ namespace Prototype.NetworkLobby
             }
             playerStatuses.Clear();
 
+            roundStartTime = Time.time;
             foreach (GameObject o in newPlayers)
             {
                 playerStatuses.Add(o.GetComponent<PlayerStatus>());
+                Timer t = o.GetComponent<Timer>();
+                t.startTime = roundStartTime;
+                t.roundLength = roundLengthSeconds;
             }
-            roundStartTime = Time.time;
+
             newRoundStarting = false;
         }
 
