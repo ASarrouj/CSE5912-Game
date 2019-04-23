@@ -114,6 +114,11 @@ public class RayCastShoot : MonoBehaviour, IWeapon
             hitEffectPool = GameObject.Find("MGImpactPool").GetComponent<ObjectPooler>();
         }
 
-        gunScript.CmdSpawnBullet(point, targetID); //hitEffectPool.GetObject();
+        GameObject newBullet = hitEffectPool.GetObject();
+        newBullet.transform.position = point;
+        newBullet.transform.rotation = Quaternion.identity;
+        newBullet.SetActive(true);
+
+        NetworkServer.Spawn(newBullet);
     }
 }
