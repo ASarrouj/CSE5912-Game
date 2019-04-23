@@ -8,7 +8,13 @@ public class ProjectileCollider : NetworkBehaviour
     public GameObject explosion;
     public AudioClip clip;
     public int damage;
-    
+
+    private ScoreManager scoreManager;
+
+    private void Start() {
+        scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
+    }
+
     public void Force(Vector3 direct)
     {
         if (isServer)
@@ -53,6 +59,7 @@ public class ProjectileCollider : NetworkBehaviour
             string hitBoxName = collision.GetContact(0).otherCollider.gameObject.name;
             Debug.Log(hitBoxName);
             dmgHandler.DamagePlayer(damage, hitBoxName, id);
+            //scoreManager.scoreCheck();
         }
 
         if (collision.gameObject.CompareTag("Building"))
