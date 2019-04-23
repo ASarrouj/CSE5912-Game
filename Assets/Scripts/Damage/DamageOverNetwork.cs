@@ -47,7 +47,8 @@ public class DamageOverNetwork : NetworkBehaviour
     }
 
     public void DamagePlayer(int dmg, string hb, NetworkIdentity mechID) {
-        CmdDamagePlayer(dmg, hb, mechID);
+        if (isServer) NetworkServer.FindLocalObject(mechID.netId).GetComponent<DamageOverNetwork>().RpcHitboxTakeDamage(dmg, hb);
+        else CmdDamagePlayer(dmg, hb, mechID);
     }
 
     public void HealPlayer(int heal, string hb, NetworkIdentity mechID)
@@ -58,6 +59,7 @@ public class DamageOverNetwork : NetworkBehaviour
     [ClientRpc]
     public void RpcHitboxTakeDamage(int dmgAmount, string hbName) {
         Transform hitbox = GetHitBox(gameObject, hbName);
+        if (hitbox == null) return;
         MechTakeDamage m = hitbox.GetComponent<MechTakeDamage>();
         if (gameObject == null) return;
         if (invincible) return;

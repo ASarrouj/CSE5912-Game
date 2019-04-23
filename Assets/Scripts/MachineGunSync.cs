@@ -5,6 +5,7 @@ using UnityEngine.Networking;
 
 public class MachineGunSync : NetworkBehaviour
 {
+    public GameObject bulletPrefab;
     public GameObject artilleryPrefab;
     public GameObject minePrefab;
     //private ObjectPooler roundPool;
@@ -32,15 +33,15 @@ public class MachineGunSync : NetworkBehaviour
         }
     }
 
-    public void Hit(Vector3 hit_point)
+    public void Hit(Vector3 hit_point, NetworkIdentity targetID)
     {
         if (isServer)
         {
-            RpcDrawHit(hit_point);
+            RpcDrawHit(hit_point, targetID);
         }
         else
         {
-            CmdDrawHit(hit_point);
+            CmdDrawHit(hit_point, targetID);
         }
     }
 
@@ -60,18 +61,28 @@ public class MachineGunSync : NetworkBehaviour
     }
 
     [Command]
-    void CmdDrawHit(Vector3 hit_point)
+    void CmdDrawHit(Vector3 hit_point, NetworkIdentity targetID)
     {
-        RpcDrawHit(hit_point);
+        RpcDrawHit(hit_point, targetID);
     }
 
     [ClientRpc]
-    void RpcDrawHit(Vector3 hit_point)
+    void RpcDrawHit(Vector3 hit_point, NetworkIdentity targetID)
     {
         if (!isLocalPlayer)
         {
-            gameObject.GetComponentInChildren<RayCastShoot>().ShotHit(hit_point);
+            gameObject.GetComponentInChildren<RayCastShoot>().ShotHit(hit_point, targetID);
         }
+    }
+
+    [Command]
+    public void CmdSpawnBullet(Vector3 position, NetworkIdentity targetID) {
+        GameObject newBullet = Instantiate(bulletPrefab);
+        newBullet.transform.position = position;
+        newBullet.transform.rotation = Quaternion.identity;
+        //newBullet.SetActive(true);
+
+        NetworkServer.Spawn(newBullet);
     }
 
     [Command]

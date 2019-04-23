@@ -32,6 +32,6 @@ public class NetworkObjectDestroy : NetworkBehaviour
 
     private void OnDisable()
     {
-        CancelInvoke();
+        //CancelInvoke();
     }
 }

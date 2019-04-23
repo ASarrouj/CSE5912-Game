@@ -46,7 +46,7 @@ public class ProjectileCollider : NetworkBehaviour
         this.gameObject.SetActive(false);
         Debug.Log(collision.gameObject.tag);
 
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.layer == 10)
         {
             DamageOverNetwork dmgHandler = collision.gameObject.GetComponent<DamageOverNetwork>();
             NetworkIdentity id = collision.gameObject.GetComponent<NetworkIdentity>();

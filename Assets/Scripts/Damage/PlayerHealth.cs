@@ -27,7 +27,7 @@ public class PlayerHealth : NetworkBehaviour
     {
         Debug.Log("Core takes " + dmg + " damage");
         coreHealth -= dmg;
-        if (coreHealth < 0)
+        if (coreHealth <= 0)
         {
             coreHealth = 0;
             //eSync.Explode("CoreHitbox", MechTakeDamage.Hitbox.CoreHitbox);
@@ -43,7 +43,7 @@ public class PlayerHealth : NetworkBehaviour
     {
         Debug.Log("Front takes damage");
         frontHealth -= dmg;
-        if (frontHealth < 0)
+        if (frontHealth <= 0)
         {
             frontHealth = 0;
             //eSync.Explode("FrontHitbox", MechTakeDamage.Hitbox.FrontHitbox);
@@ -56,7 +56,7 @@ public class PlayerHealth : NetworkBehaviour
     {
         Debug.Log("Rear takes damage");
         rearHealth -= dmg;
-        if (rearHealth < 0)
+        if (rearHealth <= 0)
         {
             rearHealth = 0;
             hitbox.Exploding();
@@ -69,7 +69,7 @@ public class PlayerHealth : NetworkBehaviour
         Debug.Log("Left takes damage");
         leftHealth -= dmg;
 
-        if (leftHealth < 0)
+        if (leftHealth <= 0)
         {
             leftHealth = 0;
             hitbox.Exploding();
@@ -80,7 +80,7 @@ public class PlayerHealth : NetworkBehaviour
     public void dmgRight(int dmg, MechTakeDamage hitbox)
     {
         rightHealth -= dmg;
-        if (rightHealth < 0)
+        if (rightHealth <= 0)
         {
             rightHealth = 0;
             hitbox.Exploding();

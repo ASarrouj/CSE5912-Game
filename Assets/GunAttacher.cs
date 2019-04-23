@@ -29,4 +29,18 @@ public class GunAttacher : NetworkBehaviour
             gameObject.transform.Find("MechPicking").transform.GetComponent<MechBuilder>().finishAttachGunInOrder();
         }
     }
+
+    [Command]
+    public void CmdDestroyGun(string gunSlot) {
+        Debug.Log(gunSlot);
+        RpcDestroyGun(gunSlot);
+    }
+
+    [ClientRpc]
+    public void RpcDestroyGun(string gunSlot) {
+        Debug.Log(gunSlot);
+        Transform mech = gameObject.transform.GetChild(0);
+        if (gunSlot.Equals(mech.name)) Destroy(mech.gameObject);
+        else Destroy(mech.Find(gunSlot).gameObject);
+    }
 }

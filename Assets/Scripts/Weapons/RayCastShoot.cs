@@ -22,14 +22,17 @@ public class RayCastShoot : MonoBehaviour, IWeapon
     private bool ifScore;
     private int scoreNum = 50;
     private DamageOverNetwork dmgOverNet;
+    private MachineGunSync gunScript;
 
     void Start()
     {
         dmgOverNet = transform.root.GetComponent<DamageOverNetwork>();
+        gunScript = transform.root.GetComponent<MachineGunSync>();
     }
 
     void OnEnable()
     {
+        
         lineRenderer = GetComponent<LineRenderer>();
         hitEffectPool = GameObject.Find("MGImpactPool").GetComponent<ObjectPooler>();
         score = transform.root.GetComponent<Score>();
@@ -43,9 +46,7 @@ public class RayCastShoot : MonoBehaviour, IWeapon
 
     void IWeapon.Shoot()
     {
-        GameObject mech = transform.parent.parent.parent.gameObject;
-        MachineGunSync gunScript = mech.GetComponent<MachineGunSync>();
-
+        gunScript = transform.root.GetComponent<MachineGunSync>();
         RaycastHit hit;
         //Vector3 rayOrigin = gunCamera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
         Vector3 rayOrigin = gunEnd.position;
@@ -55,16 +56,18 @@ public class RayCastShoot : MonoBehaviour, IWeapon
 
             if (Physics.Raycast(rayOrigin, gunCamera.transform.forward, out hit, range))
             {
+                NetworkIdentity targetID = null;
                 if (hit.rigidbody != null)
                 {
-                    if (hit.rigidbody.gameObject.tag == "Player")
+                    if (hit.collider.gameObject.layer == 10) //player object
                     {
                         Debug.Log(hit.rigidbody.gameObject.name);
-                        DamageOverNetwork dmgHandler = hit.rigidbody.gameObject.GetComponent<DamageOverNetwork>();
-                        NetworkIdentity id = hit.rigidbody.gameObject.GetComponent<NetworkIdentity>();
+                        dmgOverNet = transform.root.GetComponent<DamageOverNetwork>();
+                        //DamageOverNetwork dmgHandler = hit.rigidbody.gameObject.GetComponent<DamageOverNetwork>();
+                        targetID = hit.rigidbody.gameObject.GetComponent<NetworkIdentity>();
                         string hitBoxName = hit.collider.gameObject.name;
                         Debug.Log(hitBoxName);
-                        dmgHandler.DamagePlayer(5, hitBoxName, id);
+                        dmgOverNet.DamagePlayer(5, hitBoxName, targetID);
                         if (hit.rigidbody.gameObject.GetComponent<PlayerHealth>().coreDestroyed)
                         {
                             score.ScoreUp(scoreNum);
@@ -78,8 +81,8 @@ public class RayCastShoot : MonoBehaviour, IWeapon
                 lineRenderer.SetPosition(0, gunEnd.position);
                 lineRenderer.SetPosition(1, hit.point);
 
-                ShotHit(new Vector3(hit.point.x, hit.point.y, hit.point.z));
-                gunScript.Hit(new Vector3(hit.point.x, hit.point.y, hit.point.z));
+                ShotHit(new Vector3(hit.point.x, hit.point.y, hit.point.z), targetID);
+                gunScript.Hit(new Vector3(hit.point.x, hit.point.y, hit.point.z), targetID);
             }
 
             StartCoroutine(ShotEffect());
@@ -104,16 +107,13 @@ public class RayCastShoot : MonoBehaviour, IWeapon
         muzzleFlash.SetActive(false);
     }
 
-    public void ShotHit(Vector3 point)
+    public void ShotHit(Vector3 point, NetworkIdentity targetID)
     {
         if (hitEffectPool == null)
         {
             hitEffectPool = GameObject.Find("MGImpactPool").GetComponent<ObjectPooler>();
         }
 
-        GameObject hitEffect = hitEffectPool.GetObject();
-        hitEffect.transform.position = point;
-        hitEffect.transform.rotation = Quaternion.identity;
-        hitEffect.SetActive(true);
+        gunScript.CmdSpawnBullet(point, targetID); //hitEffectPool.GetObject();
     }
 }

@@ -14,6 +14,7 @@ public class MechTakeDamage : NetworkBehaviour, IDamagable
 
     private PlayerHealth pHealth;
     private PlayerInput pInput;
+    private bool exploding = false;
     //private DestroyMod destroyMod;
 
     // Start is called before the first frame update
@@ -38,11 +39,18 @@ public class MechTakeDamage : NetworkBehaviour, IDamagable
 
     public void Exploding()
     {
-        GameObject explosion = Instantiate(explosionEffect, transform.position, Quaternion.identity);
+        if (!exploding) {
+            exploding = true;
+            Explode(transform.position);
+            ForceCameraSwitch();
+            DestroyNetChild();
+            transform.root.GetComponent<GunAttacher>().CmdDestroyGun(transform.parent.name);
+        }
+    }
+
+    private void Explode(Vector3 pos) {
+        GameObject explosion = Instantiate(explosionEffect, pos, Quaternion.identity);
         NetworkServer.Spawn(explosion);
-        ForceCameraSwitch();
-        Destroy(transform.parent.gameObject);
-        DestroyNetChild();
     }
 
     //public void ExplodingCore()
@@ -105,6 +113,6 @@ public class MechTakeDamage : NetworkBehaviour, IDamagable
             if (cam != null) break;
         }
         if (cam != null) cam.parent = transform.root;
-        pInput.PrepareMechPerspec();
+        if (transform.root.CompareTag("Player")) pInput.PrepareMechPerspec();
     }
 }
