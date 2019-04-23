@@ -116,6 +116,7 @@ namespace Prototype.NetworkLobby
         private IEnumerator NewRound()
         {
             newRoundStarting = true;
+            Cursor.lockState = CursorLockMode.None;
             yield return new WaitForSecondsRealtime(3);
             foreach (PlayerStatus s in playerStatuses)
             {

@@ -25,6 +25,7 @@ public class MechBuilder : MonoBehaviour
     private void Start()
     {
         Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         gunAttacher = gameObject.GetComponentInParent<GunAttacher>();
         trackSpot = 0;
 
@@ -42,6 +43,11 @@ public class MechBuilder : MonoBehaviour
             camManager.MoveToNextBuildSlot(playerPrefab.transform);
             playerPrefab.GetComponent<MechDriver>().findColliders();
         }
+    }
+
+    private void OnEnable() {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void createMech(int selection)
