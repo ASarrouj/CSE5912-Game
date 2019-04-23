@@ -11,7 +11,7 @@ public class ProjectileCollider : NetworkBehaviour
     
     public void Force(Vector3 direct)
     {
-        if (!isServer)
+        if (isServer)
         {
             RpcForce(direct);
         }
@@ -58,6 +58,7 @@ public class ProjectileCollider : NetworkBehaviour
         if (collision.gameObject.CompareTag("Building"))
         {
             collision.gameObject.GetComponent<IDamagable>().Damage(damage);
+            CmdExplodeBuilding(collision.gameObject.name);
             SwapToBroken toSwitch = collision.gameObject.GetComponentInParent<SwapToBroken>();
             if (toSwitch != null)
             {
@@ -72,6 +73,33 @@ public class ProjectileCollider : NetworkBehaviour
                 if (rb != null)
                     rb.AddExplosionForce(2000, explosionPos, 5f);
             }
+        }
+    }
+
+    [Command]
+    void CmdExplodeBuilding(string buildingName)
+    {
+        RpcExplodeBuilding(buildingName);
+    }
+
+    [ClientRpc]
+    void RpcExplodeBuilding(string buildingName)
+    {
+        GameObject building = GameObject.Find(buildingName);
+        if (!building) return;
+        SwapToBroken toSwitch = building.GetComponentInParent<SwapToBroken>();
+        if (toSwitch != null)
+        {
+            toSwitch.swapToBroken();
+        }
+        Vector3 explosionPos = transform.position;
+        Collider[] colliders = Physics.OverlapSphere(explosionPos, 8f);
+        foreach (Collider hit in colliders)
+        {
+            Rigidbody rb = hit.GetComponent<Rigidbody>();
+
+            if (rb != null)
+                rb.AddExplosionForce(2000, explosionPos, 5f);
         }
     }
 }
