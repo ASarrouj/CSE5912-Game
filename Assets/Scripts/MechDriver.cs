@@ -24,12 +24,14 @@ public class MechDriver : MonoBehaviour
 
     private LineRenderer lr;
     public int pathPredictorLength = 600;
-    public float thrust = 150000;
+    private float thrust = 8000;
+    private Vector3 jumpDirection = new Vector3(0,2,4);
     public bool canJump = false;
     public bool canShield = false;
     private GameObject future;
     private float nextJump;
     private float jumpCoolDown = 5.0f;
+    bool jumping;
 
     private void Awake() {
         allColliders = new List<WheelCollider>();
@@ -38,6 +40,7 @@ public class MechDriver : MonoBehaviour
 
     void Start()
     {
+        jumping = false;
         turnAngle = 0;
         velLimit = 0;
 
@@ -57,13 +60,17 @@ public class MechDriver : MonoBehaviour
         {
             if (collider.isGrounded)
             {
-                if (rb.velocity.magnitude < Mathf.Abs(velLimit))
+                // don't speed limit if we just jumped
+                if (nextJump - Time.time < 0.1)
                 {
-                    collider.motorTorque = Mathf.Sign(velLimit) * wheelTorque;
-                }
-                else
-                {
-                    rb.velocity = rb.velocity.normalized * Mathf.Abs(velLimit);
+                    if (rb.velocity.magnitude < Mathf.Abs(velLimit))
+                    {
+                        collider.motorTorque = Mathf.Sign(velLimit) * wheelTorque;
+                    }
+                    else
+                    {
+                        rb.velocity = rb.velocity.normalized * Mathf.Abs(velLimit);
+                    }
                 }
             }
         }
@@ -171,8 +178,11 @@ public class MechDriver : MonoBehaviour
     {
         if (canJump && Time.time > nextJump) 
         {
+            jumping = true;
             nextJump = Time.time + jumpCoolDown;
-            rb.AddRelativeForce(new Vector3(0, 1, 9) * thrust, ForceMode.Impulse);  
+            Debug.Log(rb.velocity);
+            rb.AddRelativeForce(jumpDirection * thrust, ForceMode.Impulse);
+            Debug.Log(rb.velocity);
         }
     }
 
