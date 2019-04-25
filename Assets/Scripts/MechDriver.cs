@@ -12,7 +12,7 @@ public class MechDriver : MonoBehaviour
 
     public float turnAngle;
     private const float maxTurnAngle = 25;
-    private const float turnDelta = 0.1f;
+    private const float turnDelta = 0.3f;
     private float maxEngineVolume;
 
     private WheelCollider frontLeftCollider, frontRightCollider;
