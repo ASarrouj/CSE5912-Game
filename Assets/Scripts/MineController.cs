@@ -11,12 +11,19 @@ public class MineController : NetworkBehaviour
     private GameObject light;
     private AudioSource source;
 
+    private int scoreIndex;
+
     void Start()
     {
         armed = false;
         Invoke("ArmMine", 2);
         source = GetComponent<AudioSource>();
         //light = transform.parent.Find("Area Light").gameObject;
+        if (transform.root.GetComponent<PlayerHealth>().isPlayer) {
+            scoreIndex = transform.root.GetComponent<Prototype.NetworkLobby.PlayerStatus>().index;
+        } else {
+            scoreIndex = -1;
+        }
     }
 
     // Update is called once per frame
@@ -34,7 +41,7 @@ public class MineController : NetworkBehaviour
             DamageOverNetwork dmgHandler = other.attachedRigidbody.gameObject.GetComponent<DamageOverNetwork>();
             NetworkIdentity id = other.attachedRigidbody.gameObject.GetComponent<NetworkIdentity>();
             string hitboxName = other.gameObject.name;
-            dmgHandler.DamagePlayer(30, hitboxName, id);
+            dmgHandler.DamagePlayer(30, hitboxName, id, scoreIndex);
         }
     }
 

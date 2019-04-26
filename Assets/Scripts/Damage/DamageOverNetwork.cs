@@ -16,12 +16,18 @@ public class DamageOverNetwork : NetworkBehaviour
     private float shieldCoolDown = 10f;
     private float shieldLastingTime = 2f;
 
+    private ScoreManager scoreManager;
 
     // Start is called before the first frame update
     void Start()
     {
         pHealth = GetComponent<PlayerHealth>();
         flameEffect = Resources.Load("FlamesParticleEffect") as GameObject;
+        Invoke("MatchStart", 2);
+    }
+
+    private void MatchStart() {
+        scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
     }
 
     // Update is called once per frame
@@ -46,9 +52,9 @@ public class DamageOverNetwork : NetworkBehaviour
 
     }
 
-    public void DamagePlayer(int dmg, string hb, NetworkIdentity mechID) {
-        if (isServer) NetworkServer.FindLocalObject(mechID.netId).GetComponent<DamageOverNetwork>().RpcHitboxTakeDamage(dmg, hb);
-        else CmdDamagePlayer(dmg, hb, mechID);
+    public void DamagePlayer(int dmg, string hb, NetworkIdentity targetID, int scoreIndex) {
+        if (isServer) NetworkServer.FindLocalObject(targetID.netId).GetComponent<DamageOverNetwork>().RpcHitboxTakeDamage(dmg, hb, scoreIndex);
+        else CmdDamagePlayer(dmg, hb, targetID, scoreIndex);
     }
 
     public void HealPlayer(int heal, string hb, NetworkIdentity mechID)
@@ -57,30 +63,41 @@ public class DamageOverNetwork : NetworkBehaviour
     }
 
     [ClientRpc]
-    public void RpcHitboxTakeDamage(int dmgAmount, string hbName) {
+    public void RpcHitboxTakeDamage(int dmgAmount, string hbName, int scoreIndex) {
         Transform hitbox = GetHitBox(gameObject, hbName);
         if (hitbox == null) return;
         MechTakeDamage m = hitbox.GetComponent<MechTakeDamage>();
         if (gameObject == null) return;
         if (invincible) return;
         if (m.Invincible) return;
+
+        int scoreVal = 0;
+
         if (hbName == "FrontHitbox") {
-            pHealth.dmgFront(dmgAmount, m);
+            scoreVal = pHealth.dmgFront(dmgAmount, m);
         } else if (hbName == "LeftHitbox") {
-            pHealth.dmgLeft(dmgAmount, m);
+            scoreVal = pHealth.dmgLeft(dmgAmount, m);
         } else if (hbName == "RightHitbox") {
             Debug.Log("Right takes damage");
-            pHealth.dmgRight(dmgAmount, m);
+            scoreVal = pHealth.dmgRight(dmgAmount, m);
         } else if (hbName == "CoreHitbox") {
             Debug.Log("Core takes " + dmgAmount + " damage");
-            pHealth.dmgCore(dmgAmount, m);
+            scoreVal = pHealth.dmgCore(dmgAmount, m);
             GameObject flames = Instantiate(flameEffect, hitbox.transform.position, Quaternion.identity, hitbox.transform);
             flames.transform.localScale += new Vector3(1f, 1f, 1f);
         } else if (hbName == "RearHitbox") {
             Debug.Log("Rear takes damage");
-            pHealth.dmgRear(dmgAmount, m);
+            scoreVal = pHealth.dmgRear(dmgAmount, m);
         }
 
+        if (scoreVal > 0 && scoreIndex >= 0) {
+            CmdAddScore(scoreIndex, scoreVal);
+        }
+    }
+
+    [Command]
+    private void CmdAddScore(int index, int sc) {
+        scoreManager.AddScore(index, sc);
     }
 
     [ClientRpc]
@@ -118,9 +135,10 @@ public class DamageOverNetwork : NetworkBehaviour
 
 
     [Command]
-    void CmdDamagePlayer(int dmg, string hb, NetworkIdentity id)
+    void CmdDamagePlayer(int dmg, string hb, NetworkIdentity targetID, int scoreIndex)
     {
-        NetworkServer.FindLocalObject(id.netId).GetComponent<DamageOverNetwork>().RpcHitboxTakeDamage(dmg, hb);
+        GameObject target = NetworkServer.FindLocalObject(targetID.netId);
+        target.GetComponent<DamageOverNetwork>().RpcHitboxTakeDamage(dmg, hb, scoreIndex);
     }
 
     [Command]

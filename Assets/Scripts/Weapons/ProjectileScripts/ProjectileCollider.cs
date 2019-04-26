@@ -9,11 +9,8 @@ public class ProjectileCollider : NetworkBehaviour
     public AudioClip clip;
     public int damage;
 
-    private ScoreManager scoreManager;
-
-    private void Start() {
-        scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
-    }
+    public int scoreIndex;
+    public NetworkInstanceId netID;
 
     public void Force(Vector3 direct)
     {
@@ -55,11 +52,10 @@ public class ProjectileCollider : NetworkBehaviour
         if (collision.gameObject.layer == 10)
         {
             DamageOverNetwork dmgHandler = collision.gameObject.GetComponent<DamageOverNetwork>();
-            NetworkIdentity id = collision.gameObject.GetComponent<NetworkIdentity>();
+            NetworkIdentity targetID = collision.gameObject.GetComponent<NetworkIdentity>();
             string hitBoxName = collision.GetContact(0).otherCollider.gameObject.name;
             Debug.Log(hitBoxName);
-            dmgHandler.DamagePlayer(damage, hitBoxName, id);
-            //scoreManager.scoreCheck();
+            dmgHandler.DamagePlayer(damage, hitBoxName, targetID, scoreIndex);
         }
 
         if (collision.gameObject.CompareTag("Building"))
@@ -78,8 +74,9 @@ public class ProjectileCollider : NetworkBehaviour
                 Rigidbody rb = hit.GetComponent<Rigidbody>();
 
                 if (rb != null)
-                    rb.AddExplosionForce(2000, explosionPos, 5f);
+                    rb.AddExplosionForce(2000, explosionPos, 5f);    
             }
+            NetworkServer.FindLocalObject(netID).GetComponent<Score>().ScoreUp(25);
         }
     }
 

@@ -14,16 +14,19 @@ public class ScoreManager : NetworkBehaviour
     public delegate void OnMatchStart();
     public event OnMatchStart onMatchStart;
 
+    private NetworkIdentity networkIdentity;
+
     // Start is called before the first frame update
     void Start()
     {
         name = "ScoreManager";
         DontDestroyOnLoad(gameObject);
         Invoke("MatchStart", 1);
+        networkIdentity = GetComponent<NetworkIdentity>();
     }
 
     void Awake() {
-        //SyncListIntScores.Callback = Test;
+        SyncListIntScores.Callback = Test;
     }
 
     void Test(SyncList<int>.Operation op, int itemIndex) {
@@ -43,6 +46,10 @@ public class ScoreManager : NetworkBehaviour
         SyncListIntScores[index] = value;
         scoreboard.UpdateScore(index, value);
         RpcUpdateScoreboard(index, value);
+    }
+
+    public void AddScore(int index, int value) {
+        UpdateScore(index, SyncListIntScores[index] + value);
     }
 
     [ClientRpc]

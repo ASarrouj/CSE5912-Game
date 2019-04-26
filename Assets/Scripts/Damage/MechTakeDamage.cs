@@ -8,21 +8,19 @@ public class MechTakeDamage : NetworkBehaviour, IDamagable
     public bool Invincible;
     public enum Hitbox { FrontHitbox, LeftHitbox, RightHitbox, RearHitbox, CoreHitbox }
     public Hitbox hitboxType;
-    public bool coreDestroyed;
     public int health = 30;
     public GameObject explosionEffect;
 
-    private PlayerHealth pHealth;
     private PlayerInput pInput;
     private bool exploding = false;
-    //private DestroyMod destroyMod;
+
+    private NetworkIdentity networkIdentity;
 
     // Start is called before the first frame update
     void Start()
     {
-        coreDestroyed = false;
-        pHealth = transform.root.GetComponent<PlayerHealth>();
         pInput = GetComponentInParent<PlayerInput>();
+        networkIdentity = transform.root.GetComponent<NetworkIdentity>();
     }
 
     // Update is called once per frame
@@ -41,7 +39,7 @@ public class MechTakeDamage : NetworkBehaviour, IDamagable
     {
         if (!exploding) {
             exploding = true;
-            Explode(transform.position);
+            if (networkIdentity.isServer) Explode(transform.position);
             ForceCameraSwitch();
             DestroyNetChild();
             transform.root.GetComponent<GunAttacher>().CmdDestroyGun(transform.parent.name);

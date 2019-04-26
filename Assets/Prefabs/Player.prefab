@@ -948,7 +948,6 @@ MonoBehaviour:
   - {fileID: 3030867988319612539}
   - {fileID: 7577901177858819089}
   isPlayer: 1
-  coreDestroyed: 0
 --- !u!114 &504371969936222608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -964,7 +963,6 @@ MonoBehaviour:
   velLimit: 0
   turnAngle: 0
   pathPredictorLength: 600
-  thrust: 150000
   canJump: 0
   canShield: 0
 --- !u!114 &5547363178857729403
@@ -1591,7 +1589,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Invincible: 0
   hitboxType: 1
-  coreDestroyed: 0
   health: 100
   explosionEffect: {fileID: 1000013462590818, guid: ecdd96beb7f93494880c052dfccf9dc1,
     type: 3}
@@ -10643,7 +10640,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Invincible: 0
   hitboxType: 2
-  coreDestroyed: 0
   health: 100
   explosionEffect: {fileID: 1000013462590818, guid: ecdd96beb7f93494880c052dfccf9dc1,
     type: 3}
@@ -12127,7 +12123,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Invincible: 0
   hitboxType: 3
-  coreDestroyed: 0
   health: 100
   explosionEffect: {fileID: 1000013462590818, guid: ecdd96beb7f93494880c052dfccf9dc1,
     type: 3}
@@ -12589,7 +12584,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Invincible: 0
   hitboxType: 0
-  coreDestroyed: 0
   health: 100
   explosionEffect: {fileID: 1000013462590818, guid: ecdd96beb7f93494880c052dfccf9dc1,
     type: 3}
@@ -13770,7 +13764,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Invincible: 0
   hitboxType: 4
-  coreDestroyed: 0
   health: 100
   explosionEffect: {fileID: 1000011797152326, guid: acf39d9f4addf294d93fa56fa373961b,
     type: 3}

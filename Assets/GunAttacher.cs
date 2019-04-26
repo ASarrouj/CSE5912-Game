@@ -40,7 +40,10 @@ public class GunAttacher : NetworkBehaviour
     public void RpcDestroyGun(string gunSlot) {
         Debug.Log(gunSlot);
         Transform mech = gameObject.transform.GetChild(0);
-        if (gunSlot.Equals(mech.name)) Destroy(mech.gameObject);
+        if (gunSlot.Equals(mech.name)) {
+            Destroy(mech.gameObject);
+            mech.parent.gameObject.SetActive(false);
+        }
         else Destroy(mech.Find(gunSlot).gameObject);
     }
 }

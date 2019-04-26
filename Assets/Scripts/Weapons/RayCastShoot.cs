@@ -14,28 +14,30 @@ public class RayCastShoot : MonoBehaviour, IWeapon
     public GameObject muzzleFlash;
     public Camera gunCamera;
 
-    private ObjectPooler hitEffectPool;
     private LineRenderer lineRenderer;
     private WaitForSeconds shotLength = new WaitForSeconds(0.05f);
-    private Score score;
     private float nextFireTime;
     private bool ifScore;
     private int scoreNum = 50;
     private DamageOverNetwork dmgOverNet;
     private MachineGunSync gunScript;
 
+    private int scoreIndex;
+
     void Start()
     {
         dmgOverNet = transform.root.GetComponent<DamageOverNetwork>();
         gunScript = transform.root.GetComponent<MachineGunSync>();
+        if (transform.root.GetComponent<PlayerHealth>().isPlayer) {
+            scoreIndex = transform.root.GetComponent<Prototype.NetworkLobby.PlayerStatus>().index;
+        } else {
+            scoreIndex = -1;
+        }
     }
 
     void OnEnable()
     {
-        
         lineRenderer = GetComponent<LineRenderer>();
-        hitEffectPool = GameObject.Find("MGImpactPool").GetComponent<ObjectPooler>();
-        score = transform.root.GetComponent<Score>();
     }
 
     public void GetCameraAndScore(Camera cam)
@@ -67,11 +69,7 @@ public class RayCastShoot : MonoBehaviour, IWeapon
                         targetID = hit.rigidbody.gameObject.GetComponent<NetworkIdentity>();
                         string hitBoxName = hit.collider.gameObject.name;
                         Debug.Log(hitBoxName);
-                        dmgOverNet.DamagePlayer(5, hitBoxName, targetID);
-                        if (hit.rigidbody.gameObject.GetComponent<PlayerHealth>().coreDestroyed)
-                        {
-                            score.ScoreUp(scoreNum);
-                        }
+                        dmgOverNet.DamagePlayer(5, hitBoxName, targetID, scoreIndex);
                     }
                 }
                 if (hit.collider.gameObject.tag == "Mine")
@@ -81,7 +79,7 @@ public class RayCastShoot : MonoBehaviour, IWeapon
                 lineRenderer.SetPosition(0, gunEnd.position);
                 lineRenderer.SetPosition(1, hit.point);
 
-                ShotHit(new Vector3(hit.point.x, hit.point.y, hit.point.z), targetID);
+                gunScript.CmdSpawnBullet(new Vector3(hit.point.x, hit.point.y, hit.point.z));
                 gunScript.Hit(new Vector3(hit.point.x, hit.point.y, hit.point.z), targetID);
             }
 
@@ -105,20 +103,5 @@ public class RayCastShoot : MonoBehaviour, IWeapon
         yield return shotLength;
         //lineRenderer.enabled = false;
         muzzleFlash.SetActive(false);
-    }
-
-    public void ShotHit(Vector3 point, NetworkIdentity targetID)
-    {
-        if (hitEffectPool == null)
-        {
-            hitEffectPool = GameObject.Find("MGImpactPool").GetComponent<ObjectPooler>();
-        }
-
-        GameObject newBullet = hitEffectPool.GetObject();
-        newBullet.transform.position = point;
-        newBullet.transform.rotation = Quaternion.identity;
-        newBullet.SetActive(true);
-
-        NetworkServer.Spawn(newBullet);
     }
 }

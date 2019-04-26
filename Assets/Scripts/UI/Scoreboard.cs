@@ -12,6 +12,9 @@ public class Scoreboard : MonoBehaviour
     private Text[] scoreText;
     private int pCount;
 
+    private Score localPlayerScore;
+    private int localPlayerIndex;
+
     void Start() {
         Invoke("MatchStart", 2);
     }
@@ -24,6 +27,10 @@ public class Scoreboard : MonoBehaviour
         pCount = players.Length;
         panels = new GameObject[pCount];
         scoreText = new Text[pCount];
+
+        localPlayerScore = transform.root.GetComponent<Score>();
+        localPlayerIndex = transform.root.GetComponent<Prototype.NetworkLobby.PlayerStatus>().index;
+
 
         //Debug.Log(pCount);
 
@@ -40,6 +47,9 @@ public class Scoreboard : MonoBehaviour
 
     public void UpdateScore(int i, int sc) {
         scoreText[i].text = sc.ToString();
+        if (i == localPlayerIndex) {
+            localPlayerScore.UpdateScoreText(sc);
+        }
     }
 }
 

@@ -16,12 +16,23 @@ public class ProjectileShoot : MonoBehaviour, IWeapon
     private WaitForSeconds shotLength = new WaitForSeconds(0.7f);
     private MachineGunSync mg;
 
+    private int scoreIndex;
+
+
     void OnEnable()
     {
         source = GetComponent<AudioSource>();
         line = GetComponentInChildren<LineRenderer>(true);
         roundPool = GameObject.Find("ArtProjectilePool").GetComponent<ObjectPooler>();
         mg = gameObject.transform.parent.parent.parent.gameObject.GetComponent<MachineGunSync>();
+    }
+
+    void Start() {
+        if (transform.root.GetComponent<PlayerHealth>().isPlayer) {
+            scoreIndex = transform.root.GetComponent<Prototype.NetworkLobby.PlayerStatus>().index;
+        } else {
+            scoreIndex = -1;
+        }
     }
 
     void Update()
@@ -75,7 +86,7 @@ public class ProjectileShoot : MonoBehaviour, IWeapon
         {
             nextFireTime = Time.time + fireRate;
             
-            mg.CmdSpawnProjectile(bulletSpawn.position + bulletSpawn.forward * .4f, bulletSpawn.rotation, bulletSpawn.forward, projectileForce);
+            mg.CmdSpawnProjectile(bulletSpawn.position + bulletSpawn.forward * .4f, bulletSpawn.rotation, bulletSpawn.forward, projectileForce, scoreIndex);
             StartCoroutine(ShotEffect());
         }
     }

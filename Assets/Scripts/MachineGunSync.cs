@@ -8,11 +8,15 @@ public class MachineGunSync : NetworkBehaviour
     public GameObject bulletPrefab;
     public GameObject artilleryPrefab;
     public GameObject minePrefab;
-    //private ObjectPooler roundPool;
+    private ObjectPooler hitEffectPool;
     // Start is called before the first frame update
     void Start()
     {
-        //roundPool = GameObject.Find("ArtProjectilePool").GetComponent<ObjectPooler>();
+        Invoke("MatchStart", 1);
+    }
+
+    private void MatchStart() {
+        hitEffectPool = GameObject.Find("MGImpactPool").GetComponent<ObjectPooler>();
     }
 
     // Update is called once per frame
@@ -37,11 +41,11 @@ public class MachineGunSync : NetworkBehaviour
     {
         if (isServer)
         {
-            RpcDrawHit(hit_point, targetID);
+            RpcDrawHit(hit_point);
         }
         else
         {
-            CmdDrawHit(hit_point, targetID);
+            CmdDrawHit(hit_point);
         }
     }
 
@@ -61,23 +65,23 @@ public class MachineGunSync : NetworkBehaviour
     }
 
     [Command]
-    void CmdDrawHit(Vector3 hit_point, NetworkIdentity targetID)
+    void CmdDrawHit(Vector3 hit_point)
     {
-        RpcDrawHit(hit_point, targetID);
+        RpcDrawHit(hit_point);
     }
 
     [ClientRpc]
-    void RpcDrawHit(Vector3 hit_point, NetworkIdentity targetID)
+    void RpcDrawHit(Vector3 hit_point)
     {
         if (!isLocalPlayer)
         {
-            gameObject.GetComponentInChildren<RayCastShoot>().ShotHit(hit_point, targetID);
+            CmdSpawnBullet(hit_point);
         }
     }
 
     [Command]
-    public void CmdSpawnBullet(Vector3 position, NetworkIdentity targetID) {
-        GameObject newBullet = Instantiate(bulletPrefab);
+    public void CmdSpawnBullet(Vector3 position) {
+        GameObject newBullet = Instantiate(bulletPrefab);//.GetObject();
         newBullet.transform.position = position;
         newBullet.transform.rotation = Quaternion.identity;
         //newBullet.SetActive(true);
@@ -86,7 +90,7 @@ public class MachineGunSync : NetworkBehaviour
     }
 
     [Command]
-    public void CmdSpawnProjectile(Vector3 position, Quaternion rotation, Vector3 forward, float projectileForce)
+    public void CmdSpawnProjectile(Vector3 position, Quaternion rotation, Vector3 forward, float projectileForce, int scoreIndex)
     {
         //GameObject newProjectile = roundPool.GetObject();
         GameObject newProjectile = Instantiate(artilleryPrefab);
@@ -97,6 +101,10 @@ public class MachineGunSync : NetworkBehaviour
         newProjectile.SetActive(true);
         newProjectile.GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 0f);
         newProjectile.GetComponent<Rigidbody>().AddForce(forward * projectileForce, ForceMode.Impulse);
+
+        ProjectileCollider proj = newProjectile.GetComponent<ProjectileCollider>();
+        proj.scoreIndex = scoreIndex;
+        proj.netID = netId;
 
         NetworkServer.Spawn(newProjectile);
     }

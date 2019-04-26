@@ -18,10 +18,11 @@ public class Score : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        CmdSpawnSM();
+        if (isLocalPlayer) CmdSpawnSM();
         score = 0;
-        UpdateScoreText();       
+        UpdateScoreText(0);       
         playerStatus = transform.root.GetComponent<PlayerStatus>();
+        scoreID = playerStatus.index;
         Invoke("MatchStart", 2);
     }
 
@@ -31,17 +32,12 @@ public class Score : NetworkBehaviour
         scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
         if (!isLocalPlayer) transform.GetComponent<Score>().enabled = false;
     }
- 
+
     public void ScoreUp(int value) 
     {
         if (!isLocalPlayer) return;
         score += value;
-        Invoke("UpdateScore", 1);
-    }
-
-    private void UpdateScore() {
-        if (isLocalPlayer) CmdUpdateScore(playerStatus.index, score);
-        UpdateScoreText();
+        scoreManager.AddScore(scoreID, value);
     }
 
     [Command]
@@ -52,7 +48,8 @@ public class Score : NetworkBehaviour
         smID.RemoveClientAuthority(connectionToClient);
     }
 
-    private void UpdateScoreText() {
+    public void UpdateScoreText(int sc) {
+        score = sc;
         scoreText.text = "Score: " + score.ToString();
     }
 
