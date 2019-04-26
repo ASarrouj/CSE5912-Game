@@ -10,7 +10,6 @@ public class ProjectileCollider : NetworkBehaviour
     public int damage;
 
     public int scoreIndex;
-    public NetworkInstanceId netID;
 
     public void Force(Vector3 direct)
     {
@@ -60,46 +59,38 @@ public class ProjectileCollider : NetworkBehaviour
 
         if (collision.gameObject.CompareTag("Building"))
         {
-            collision.gameObject.GetComponent<IDamagable>().Damage(damage);
-            CmdExplodeBuilding(collision.gameObject.name);
+            //collision.gameObject.GetComponent<IDamagable>().Damage(damage);
+            if (isServer)  {
+                RpcExplodeBuilding(collision.gameObject.name);
+                GameObject.Find("ScoreManager").GetComponent<ScoreManager>().AddScore(scoreIndex, 25);
+            }
+            
             SwapToBroken toSwitch = collision.gameObject.GetComponentInParent<SwapToBroken>();
-            if (toSwitch != null)
-            {
+            if (toSwitch != null) {
                 toSwitch.swapToBroken();
             }
             Vector3 explosionPos = transform.position;
             Collider[] colliders = Physics.OverlapSphere(explosionPos, 8f);
-            foreach (Collider hit in colliders)
-            {
+            foreach (Collider hit in colliders) {
                 Rigidbody rb = hit.GetComponent<Rigidbody>();
 
                 if (rb != null)
-                    rb.AddExplosionForce(2000, explosionPos, 5f);    
+                    rb.AddExplosionForce(2000, explosionPos, 5f);
             }
-            NetworkServer.FindLocalObject(netID).GetComponent<Score>().ScoreUp(25);
         }
     }
 
-    [Command]
-    void CmdExplodeBuilding(string buildingName)
-    {
-        RpcExplodeBuilding(buildingName);
-    }
-
     [ClientRpc]
-    void RpcExplodeBuilding(string buildingName)
-    {
+    void RpcExplodeBuilding(string buildingName) {
         GameObject building = GameObject.Find(buildingName);
         if (!building) return;
         SwapToBroken toSwitch = building.GetComponentInParent<SwapToBroken>();
-        if (toSwitch != null)
-        {
+        if (toSwitch != null) {
             toSwitch.swapToBroken();
         }
         Vector3 explosionPos = transform.position;
         Collider[] colliders = Physics.OverlapSphere(explosionPos, 8f);
-        foreach (Collider hit in colliders)
-        {
+        foreach (Collider hit in colliders) {
             Rigidbody rb = hit.GetComponent<Rigidbody>();
 
             if (rb != null)

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEditor;
+using UnityEngine.Networking;
 
 public class ProjectileShoot : MonoBehaviour, IWeapon
 {
@@ -17,7 +18,6 @@ public class ProjectileShoot : MonoBehaviour, IWeapon
     private MachineGunSync mg;
 
     private int scoreIndex;
-
 
     void OnEnable()
     {
@@ -85,7 +85,6 @@ public class ProjectileShoot : MonoBehaviour, IWeapon
         if (Time.time > nextFireTime)
         {
             nextFireTime = Time.time + fireRate;
-            
             mg.CmdSpawnProjectile(bulletSpawn.position + bulletSpawn.forward * .4f, bulletSpawn.rotation, bulletSpawn.forward, projectileForce, scoreIndex);
             StartCoroutine(ShotEffect());
         }

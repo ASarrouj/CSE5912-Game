@@ -23,7 +23,7 @@ public class Score : NetworkBehaviour
         UpdateScoreText(0);       
         playerStatus = transform.root.GetComponent<PlayerStatus>();
         scoreID = playerStatus.index;
-        Invoke("MatchStart", 2);
+        Invoke("MatchStart", 4);
     }
 
     // Update is called once per frame

@@ -17,13 +17,15 @@ public class DamageOverNetwork : NetworkBehaviour
     private float shieldLastingTime = 2f;
 
     private ScoreManager scoreManager;
+    private int playerIndex;
 
     // Start is called before the first frame update
     void Start()
     {
         pHealth = GetComponent<PlayerHealth>();
         flameEffect = Resources.Load("FlamesParticleEffect") as GameObject;
-        Invoke("MatchStart", 2);
+        Invoke("MatchStart", 4);
+        playerIndex = GetComponent<Prototype.NetworkLobby.PlayerStatus>().index;
     }
 
     private void MatchStart() {

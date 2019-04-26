@@ -93,8 +93,10 @@ public class MachineGunSync : NetworkBehaviour
     public void CmdSpawnProjectile(Vector3 position, Quaternion rotation, Vector3 forward, float projectileForce, int scoreIndex)
     {
         //GameObject newProjectile = roundPool.GetObject();
+
         GameObject newProjectile = Instantiate(artilleryPrefab);
 
+        
         newProjectile.transform.position = position + forward * .4f;
         newProjectile.transform.rotation = rotation;
         newProjectile.transform.Rotate(new Vector3(90, 0, 0));
@@ -102,11 +104,14 @@ public class MachineGunSync : NetworkBehaviour
         newProjectile.GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 0f);
         newProjectile.GetComponent<Rigidbody>().AddForce(forward * projectileForce, ForceMode.Impulse);
 
-        ProjectileCollider proj = newProjectile.GetComponent<ProjectileCollider>();
-        proj.scoreIndex = scoreIndex;
-        proj.netID = netId;
-
         NetworkServer.Spawn(newProjectile);
+
+        RpcSetScoreIndex(newProjectile, scoreIndex);
+    }
+
+    [ClientRpc]
+    private void RpcSetScoreIndex(GameObject proj, int scoreIndex) {
+        proj.GetComponent<ProjectileCollider>().scoreIndex = scoreIndex;
     }
 
     [Command]

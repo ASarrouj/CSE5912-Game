@@ -21,7 +21,7 @@ public class ScoreManager : NetworkBehaviour
     {
         name = "ScoreManager";
         DontDestroyOnLoad(gameObject);
-        Invoke("MatchStart", 1);
+        Invoke("MatchStart", 3);
         networkIdentity = GetComponent<NetworkIdentity>();
     }
 
@@ -49,6 +49,7 @@ public class ScoreManager : NetworkBehaviour
     }
 
     public void AddScore(int index, int value) {
+        Debug.Log(index);
         UpdateScore(index, SyncListIntScores[index] + value);
     }
 
