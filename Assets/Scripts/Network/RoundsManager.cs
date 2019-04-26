@@ -25,6 +25,8 @@ namespace Prototype.NetworkLobby
 
         private void Start()
         {
+            name = "RoundsManager";
+            DontDestroyOnLoad(gameObject);
             numPlayers = lobbyManager.numPlayers;
             totalPlayersEver = lobbyManager.numPlayers;
             roundCount = 0;

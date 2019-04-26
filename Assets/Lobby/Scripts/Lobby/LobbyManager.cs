@@ -486,9 +486,12 @@ namespace Prototype.NetworkLobby
             }
 
             ServerChangeScene(playScene);
-            GameObject roundManager = GameObject.Instantiate(roundsManagerPrefab);
-            roundManager.name = "RoundsManager";
-            DontDestroyOnLoad(roundManager);
+            if (GameObject.Find("RoundsManager") == null) {
+                GameObject roundManager = Instantiate(roundsManagerPrefab);
+                NetworkServer.Spawn(roundManager);
+                roundManager.name = "RoundsManager";
+                roundManager.SetActive(true);
+            }
             
         }
 
